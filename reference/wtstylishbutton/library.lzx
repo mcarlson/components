@@ -1,0 +1,217 @@
+<!-- Copyright 2001-2007 Laszlo Systems, Inc.  All Rights Reserved. -->
+<library>
+    
+    <include href="incubator/tooltip/tooltip.lzx"/>
+
+    <stylesheet>
+        wtstylishbutton {
+            leftresource : "button_login_left_rsc";
+            middleresource : "button_login_middle_rsc";
+            rightresource : "button_login_right_rsc";
+            }
+    </stylesheet>
+    
+    <class name="wtstylishbutton" extends="basebutton" 
+           focusable="true" doesenter="true" pixellock="true">
+        
+        <!--- Control the look of the button. These attributes can and should
+            be controlled with css. --> 
+        <attribute name="tint"      value="null" />
+        <attribute name="font"      value="$style{'font'}" />
+        <attribute name="fontsize"  value="$style{'fontsize'}" /> 
+        <attribute name="fontstyle" value="$style{'fontstyle'}" /> 
+        <attribute name="fontcolor" value="$style{'fontcolor'}" />
+        <attribute name="stylable"  value="false"/>
+        
+        <!--- text to display in the button (can leave empty) -->
+        <attribute name="text"      value=""  />
+        <!--- y position of text, for fine tuning -->
+        <attribute name="texty"       value="0"  />
+        
+        <!--- icon resource name prefix -->
+        <attribute name="iconname"       value="$style{'iconname'}"  type="string" />
+        <!--- y position of icon, for fine tuning.
+            if not specified, center the icon vertically. -->
+        <attribute name="icony"       value="0"  />
+        
+        <!-- whether to show left resource view, to make a visual edge -->
+        <attribute name="showleftedge"  value="true" />
+        
+        <!-- whether to show right resource view, to make a visual edge -->
+        <attribute name="showrightedge"  value="true"  />
+        
+        <!--- whether to show highlight on left side of button --> 
+        <attribute name="showrightborder" value="false" type="boolean" />
+        
+        <!-- the resource name for the middle view --> 
+        <attribute name="leftresource" type="string" value="$style{'leftresource'}" />
+        
+        <!-- the resource name for the middle view --> 
+        <attribute name="middleresource" type="string" value="$style{'middleresource'}"/>
+        
+        <!-- the resource name for the middle view --> 
+        <attribute name="rightresource" type="string" value="$style{'rightresource'}"/>
+        
+        <!--- whether to show shadow on right side of button -->         
+        <attribute name="showleftborder" value="false" type="boolean" />
+
+        <!-- horizontal padding for left and right side of button-->
+        <attribute name="xpadding" value="0" type="number"/>
+
+        <!--- tooltip text to be shown for button, if any -->
+        <attribute name="tooltip" value="" type="text" />
+        
+        <tooltip text="${classroot.tooltip}"/>
+        
+        <view name="middle" stretches="width" />
+        
+        <!-- TODO: review this for optimization 
+                   in case this fires multiple times at startup [Bret: 12/19/06] -->
+        <handler name="onwidth">
+            if(this.isinited){
+               updatePositions();
+            }
+        </handler>
+        
+        <method name="updatePositions">
+            
+            if (this["txt"]) txt.setText(this.text); 
+            
+            var lw = (this["left"] ? left.width : 0) + (this["showleftborder"] ? 1 : 0); 
+            var rw = (this["right"] ? right.width : 0) + (this["showrightborder"] ? 1 : 0);
+            var iw = (this["icon"] ? icon.width : 0);
+            var tw = (this["txt"] ? txt.width : 0);         
+            // used to offset the icon - 0 for no offset
+            var nside=0;
+            
+            var curX = 0;
+            var spacing = 0; 
+            var needsWidth = lw + rw + iw + tw; 
+            var extraWidth = Math.max(0, Math.round( (width - needsWidth  + (xpadding * 2)) / 2)); 
+            
+            if (this["leftborder"]) {
+            leftborder.setX(curX); 
+            curX += 1; 
+            }
+            
+            // show the left resource
+            if (this["left"]) {
+            left.setX(curX);
+            curX += left.width;
+            // add to offset left
+            nside+=1;
+            }
+            
+            // check if this is the right side of the set and adjust icon layout
+            if (this["right"]) {
+            // subtract to offset right
+            nside-=1;
+            } 
+            
+            // position the middle view.
+            // it goes behind the icon and text
+            middle.setX(curX);
+            
+            curX += extraWidth; 
+            
+            // position the icon
+            if (this["icon"]) {
+            icon.setX(Math.round(curX-(.25*iw*(nside)))); 
+            curX += icon.width;
+            // Center icon vertically unless icony has been set explicitly
+            icon.setY( (icony != 0) ? icony : Math.round(height-icon.height )/2);
+            }
+            
+            if (this["txt"]) {
+            // position the text
+            txt.setX(curX);
+            txt.setText(this.text); 
+            // Center text vertically unless texty was set explicitly
+            txt.setY( (texty != 0) ? texty : (height-txt.height )/2);
+            curX += txt.width;
+            curX += spacing;
+            }
+            
+            curX += extraWidth; 
+            middle.setWidth(curX - middle.x);           
+            
+            // position the right thingy
+            if (this["right"]) {
+            right.setX(curX);
+            curX += right.width;
+            } 
+            
+            if (this["rightborder"]) {
+            rightborder.setX(curX - 1);
+            }
+            
+            this.setWidth(curX); 
+        </method>
+        
+        <method name="init"><![CDATA[
+            super.init();
+            
+            if (showleftedge) {
+                new LzView(this, {name: "left", resource: this.leftresource, pixellock: true}); 
+                if(this.tint != null ){
+                    this.setTint(this.left, this.tint);
+                }
+                this.left.sendToBack();
+            } 
+            
+            if (showrightedge) {
+                new LzView(this, {name: "right", resource: this.rightresource, pixellock: true}); 
+                if(this.tint != null ){
+                    this.setTint(this.right, this.tint);
+                }
+                this.right.sendToBack(); 
+            } 
+            
+            if (iconname) { 
+                new LzView(this, {name: "icon", resource: iconname + "_icon_rsc", pixellock: true});
+            }                        
+
+            // We always have a middle. 
+            middle.setResource(middleresource);
+                        
+            if (showleftborder) {
+                new LzView(this,    {name: "leftborder", bgcolor: white, 
+                                     width: 1, y : 1, height: this.height-2, 
+                                    pixellock: true});                 
+            }
+
+            if (showrightborder) {
+                new LzView(this,    {name: "rightborder", bgcolor: black, 
+                                    width: 1, y : 0, height: this.height-2,
+                                    pixellock: true})
+            }
+
+            if (text != "") {
+                new LzText(this, {name: "txt", text: text, fgcolor: fontcolor, resize: true, fontsize: fontsize});
+            }
+
+            if(this.tint != null ){
+                this.setTint(this.middle, this.tint); 
+            }
+            
+            this.updatePositions(); 
+            
+            // Force the superclass to notice that the zeroth subview has some frames;
+            // This is necessary to get up/over/down/disable to work.
+            this.setResourceViewCount(middle.totalframes);
+            
+            if (! this.enabled && this.frame != this.disabledResourceNumber) {
+                this.setAttribute('frame', this.disabledResourceNumber);
+            }
+
+        ]]> 
+        </method>
+        
+    </class>
+</library>
+<!-- * X_LZ_COPYRIGHT_BEGIN ***************************************************
+    * Copyright 2005-2006 Laszlo Systems, Inc. All Rights Reserved.                    *
+    * Use is subject to license terms.                                            *
+    * X_LZ_COPYRIGHT_END ****************************************************** -->
+    <!-- @LZX_VERSION@                                                         -->
+    

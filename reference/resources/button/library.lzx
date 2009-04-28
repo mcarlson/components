@@ -1,0 +1,24 @@
+<!-- Copyright (c) 2002-2007 Laszlo Systems, Inc. All Rights Reserved.
+     This software is the proprietary information of Laszlo Systems, Inc.
+     Use is subject to license terms. -->
+<library>
+
+    <resource name="gloss_silver_button_left_rsc">
+        <frame src="btn_lft_up.png" />
+        <frame src="btn_lft_mo.png" />
+        <frame src="btn_lft_dn.png" />
+    </resource>
+    
+    <resource name="gloss_silver_button_middle_rsc">
+        <frame src="btn_mid_up.png" />
+        <frame src="btn_mid_mo.png" />
+        <frame src="btn_mid_dn.png" />
+    </resource>   
+
+    <resource name="gloss_silver_button_right_rsc" >
+        <frame src="btn_rt_up.png" />
+        <frame src="btn_rt_mo.png" />
+        <frame src="btn_rt_dn.png" />
+    </resource>
+    
+</library>
