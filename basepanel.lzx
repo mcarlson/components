@@ -1,0 +1,817 @@
+<canvas>
+
+    <stylesheet>
+        basepanel {
+            fontsize : 11;
+            fontstyle : 'bold';
+            fontcolor : 0x3c3c3c;
+            bordercolor: 0x6c6c6c;
+            
+            interiorbordercolorup:   0xbababa;
+            interiorfillcolorup:     0xf2f2f2;
+            interiorbordercolorover: 0x6c6c6c;
+            interiorfillcolorover:   0x6c6c6c;
+            interiorbordercolordown: 0x8b8b8b;
+            interiorfillcolordown:   0x6c6c6c;
+            
+            gradientfillupstart:     0xd6d6d6;
+            gradientfillupstop:      0xf2f2f2;
+            gradientfilloverstart:   0xe6e6e6;
+            gradientfilloverstop:    0xf1f1f1;
+            gradientfilldownstart:   0xdcdcdc;
+            gradientfilldownstop:    0xbfbfbf;
+        }
+    </stylesheet> 
+
+    <class name="basepanel" extends="drawview" 
+           oncontext="this.draw()"  
+           focusable="true" 
+           onmouseover="this.drawmouseover()"
+           onmouseout="this.drawmouseup()"
+           onmousedown="this.drawmousedown()" >
+        
+        <!-- use LzColorUtils.tohsv(rgb) and a basecolor later ? -->
+
+        
+        <attribute name="bordercolor"              value="$style{'bordercolor'}" />
+        <attribute name="interiorbordercolorup"    value="$style{'interiorbordercolorup'}" />
+        <attribute name="interiorfillcolorup"      value="$style{'interiorfillcolorup'}" />
+        <attribute name="interiorbordercolorover"  value="$style{'interiorbordercolorover'}" />
+        <attribute name="interiorfillcolorover"    value="$style{'interiorfillcolorover'}" />
+        <attribute name="interiorbordercolordown"  value="$style{'interiorbordercolordown'}" />
+        <attribute name="interiorfillcolordown"    value="$style{'interiorfillcolordown'}" />
+        
+        <attribute name="gradientfillupstart"      value="$style{'gradientfillupstart'}" />
+        <attribute name="gradientfillupstop"       value="$style{'gradientfillupstop'}" />
+        <attribute name="gradientfilloverstart"    value="$style{'gradientfilloverstart'}" />
+        <attribute name="gradientfilloverstop"     value="$style{'gradientfilloverstop'}" />
+        <attribute name="gradientfilldownstart"    value="$style{'gradientfilldownstart'}" />
+        <attribute name="gradientfilldownstop"     value="$style{'gradientfilldownstop'}" />
+        
+        
+        <attribute name="draw_delegate"   value="$once{ new LzDelegate( this, 'draw' ) }" />
+
+        <attribute name="font"      value="$style{'font'}" />
+        <attribute name="fontsize"  value="$style{'fontsize'}" /> 
+        <attribute name="fontstyle" value="$style{'fontstyle'}" /> 
+        <attribute name="fontcolor" value="$style{'fontcolor'}" />
+       
+
+
+        <!--- text to display in the button (can leave empty) -->
+        <attribute name="text" value="" type="string" />
+        <!--- y position of text, for fine tuning -->
+        <attribute name="texty"       value="0"  />
+        
+ 
+       <?ignore
+
+        <!--- icon resource name prefix -->
+        <attribute name="iconname"       value="$style{'iconname'}"  type="string" />
+        <!--- y position of icon, for fine tuning.
+            if not specified, center the icon vertically. -->
+        <attribute name="icony"       value="0"  />
+        
+        <!-- whether to show left resource view, to make a visual edge -->
+        <attribute name="showleftedge"  value="true" />
+        
+        <!-- whether to show right resource view, to make a visual edge -->
+        <attribute name="showrightedge"  value="true"  />
+        
+        <!--- whether to show highlight on left side of button --> 
+        <attribute name="showrightborder" value="false" type="boolean" />
+        
+        <!-- the resource name for the middle view --> 
+        <attribute name="leftresource" type="string" value="$style{'leftresource'}" />
+        
+        <!-- the resource name for the middle view --> 
+        <attribute name="middleresource" type="string" value="$style{'middleresource'}"/>
+        
+        <!-- the resource name for the middle view --> 
+        <attribute name="rightresource" type="string" value="$style{'rightresource'}"/>
+        
+        <!--- whether to show shadow on right side of button -->         
+        <attribute name="showleftborder" value="false" type="boolean" />
+
+        <!-- horizontal padding for left and right side of button-->
+        <attribute name="xpadding" value="0" type="number"/>
+
+        <!--- tooltip text to be shown for button, if any -->
+        <attribute name="tooltip" value="" type="text" />
+          ?>
+        
+        <handler name="oninit" >
+          // this.draw_delegate.register(this,'onbordersize');
+          // this.draw_delegate.register(this,'onfillcolor');
+           this.draw_delegate.register(this,'onheight');
+          // this.draw_delegate.register(this,'ongradpercentage');
+           this.draw_delegate.register(this,'onwidth');
+           //this.draw_delegate.register(this,'onfillcolor');
+        </handler>
+
+        <text text="${classroot.text}" y="${classroot.texty}" resize="true" fgcolor="${classroot.fontcolor}"        
+              align="center"  fontstyle="${classroot.fontstyle}" fontsize="${classroot.fontsize}" />  
+        
+        <method name="draw" args="r" >            
+            this.drawmouseup();
+        </method>
+        
+        <method name="drawmouseup" >
+        
+            this.clear();
+                        
+            // DRAW  BORDER
+            this.beginPath();
+            this.moveTo(0,0);
+            
+            this.lineTo(this.width - 1,0);
+            this.lineTo(this.width - 1,this.height - 1);
+            this.lineTo(0, this.height - 1);
+            this.lineTo(0, 0);
+            this.endPath();
+
+            this.strokeStyle = this.bordercolor;
+            this.lineWidth = 1;           
+            this.stroke();
+            
+            
+
+            // DRAW INTERIOR BORDER AND FILL
+            this.beginPath();
+            this.moveTo(1,1);
+            
+            this.lineTo(this.width - 2,1);
+            this.lineTo(this.width - 2,this.height - 2);
+            this.lineTo(1, this.height - 2);
+            this.lineTo(1, 1);
+            this.endPath();
+
+            this.fillStyle = this.interiorfillcolorup;
+            this.fill();
+
+            this.strokeStyle = this.interiorbordercolorup;
+            this.lineWidth = 1;           
+            this.stroke();
+            
+            
+            
+            // DRAW GRADIENT
+            this.beginPath();
+            this.moveTo(1,Math.round(height*0.5));
+            
+            this.lineTo(this.width - 2,Math.round( height*0.5 ));
+            this.lineTo(this.width - 2,this.height - 2);
+            this.lineTo(1, this.height - 2);
+            this.lineTo(1, Math.round(height*0.5));
+           
+            var g = this.createLinearGradient(0,Math.round( 0.5*height),0,height);
+            g.addColorStop(0, this.gradientfillupstart );
+            g.addColorStop(1, this.interiorfillcolorup);
+            this.fillStyle = g;
+            this.fill();
+            
+        </method>
+        
+
+        <method name="drawmouseover" >
+      
+            this.clear();
+                        
+            // draw border 1
+            this.beginPath();
+            this.moveTo(0,0);
+            
+            this.lineTo(this.width - 1,0);
+            this.lineTo(this.width - 1,this.height - 1);
+            this.lineTo(0, this.height - 1);
+            this.lineTo(0, 0);
+            this.endPath();
+
+            this.strokeStyle = this.bordercolor;
+            this.lineWidth = 1;           
+            this.stroke();
+
+            // draw border 2
+            this.beginPath();
+            this.moveTo(1,1);
+            
+            this.lineTo(this.width - 2,1);
+            this.lineTo(this.width - 2,this.height - 2);
+            this.lineTo(1, this.height - 2);
+            this.lineTo(1, 1);
+            this.endPath();
+
+            this.fillStyle = this.interiorfillcolorup;
+            this.fill();
+
+            this.strokeStyle = this.interiorbordercolorup;
+            this.lineWidth = 1;           
+            this.stroke();
+            
+            // draw shape 3  
+            this.beginPath();
+            this.moveTo(1,Math.round(height*0.5));
+            
+            this.lineTo(this.width - 2,Math.round( height*0.5 ));
+            this.lineTo(this.width - 2,this.height - 2);
+            this.lineTo(1, this.height - 2);
+            this.lineTo(1, Math.round(height*0.5));
+           
+            var g = this.createLinearGradient(0,Math.round( 0.5*height),0,height);
+            g.addColorStop(0, this.gradientfilloverstart  ); 
+            g.addColorStop(1, this.gradientfilloverstop ); 
+            this.fillStyle = g;
+            this.fill();
+         </method>
+        
+        <method name="drawmousedown" >
+
+            this.clear();
+
+            // DRAW INTERIOR BORDER
+            this.beginPath();
+            this.moveTo(1,1);
+            
+            this.lineTo(this.width - 1,1);
+            this.lineTo(this.width -1 ,this.height - 1);
+            this.lineTo(1, this.height - 1);
+            this.lineTo(1, 1);
+            this.endPath();
+
+
+            this.fillStyle = this.interiorfillcolorup;
+            this.fill();
+
+            this.strokeStyle = this.interiorbordercolordown;
+            this.lineWidth = 1;           
+            this.stroke();
+
+                        
+            // DRAW EXTERIOR BORDER
+            this.beginPath();
+            this.moveTo(0,0);
+            
+            this.lineTo(this.width - 1,0);
+            this.lineTo(this.width - 1,this.height - 1);
+            this.lineTo(0, this.height - 1);
+            this.lineTo(0, 0);
+            this.endPath();
+
+            this.strokeStyle = this.bordercolor;
+            this.lineWidth = 1;           
+            this.stroke();
+
+
+            
+            // draw shape 3  
+            this.beginPath();
+            this.moveTo(2,2);
+            
+            this.lineTo(this.width - 1,2);
+            this.lineTo(this.width - 1,Math.round( height*0.5 ));
+            this.lineTo(2, Math.round( height*0.5 ));
+            this.lineTo(2, 2);
+           
+            var g = this.createLinearGradient( 0, 0, 0, Math.round( 0.5*height) );
+            g.addColorStop(0, this.gradientfilldownstart ); 
+            g.addColorStop(1, this.gradientfilldownstop ); 
+            this.fillStyle = g;
+            this.fill();
+        
+        </method>
+             
+    </class>
+    
+    
+    <view x="20" y="20" width="${parent.width - 20}" >
+    <wrappinglayout axis="x" spacing="5" />
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="18"  onclick="this.setAttribute('width', 100 )" text="test"/>
+        <basepanel width="100" height="18"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="18"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100"  >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="18"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="30"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="30"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="40"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="40"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="40"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    </view>
+</canvas>
