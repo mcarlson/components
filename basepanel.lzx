@@ -1,256 +1,184 @@
 <library>
-    <class name="basepanel" extends="drawview" 
-           oncontext="this.draw()"  
-           focusable="true" 
-           onmouseover="this.drawmouseover()"
-           onmouseout="this.drawmouseup()"
-           onmousedown="this.drawmousedown()" >
-        
-        <!-- use LzColorUtils.tohsv(rgb) and a basecolor later ? -->
+    <include href="mixins/boxmodel.lzx"/>
+    <include href="lib/"/>
 
-        
-        <attribute name="bordercolor"              value="$style{'bordercolor'}" type="color"/>
-        <attribute name="interiorbordercolorup"    value="$style{'interiorbordercolorup'}" type="color"/>
-        <attribute name="interiorfillcolorup"      value="$style{'interiorfillcolorup'}" type="color"/>
-        <attribute name="interiorbordercolorover"  value="$style{'interiorbordercolorover'}" type="color"/>
-        <attribute name="interiorfillcolorover"    value="$style{'interiorfillcolorover'}" type="color"/>
-        <attribute name="interiorbordercolordown"  value="$style{'interiorbordercolordown'}" type="color"/>
-        <attribute name="interiorfillcolordown"    value="$style{'interiorfillcolordown'}" type="color"/>
-        
-        <attribute name="gradientfillupstart"      value="$style{'gradientfillupstart'}" type="color"/>
-        <attribute name="gradientfillupstop"       value="$style{'gradientfillupstop'}" type="color"/>
-        <attribute name="gradientfilloverstart"    value="$style{'gradientfilloverstart'}" type="color"/>
-        <attribute name="gradientfilloverstop"     value="$style{'gradientfilloverstop'}" type="color"/>
-        <attribute name="gradientfilldownstart"    value="$style{'gradientfilldownstart'}" type="color"/>
-        <attribute name="gradientfilldownstop"     value="$style{'gradientfilldownstop'}" type="color"/>
-        
-        
-        <attribute name="font"      value="$style{'font'}" />
-        <attribute name="fontsize"  value="$style{'fontsize'}" /> 
-        <attribute name="fontstyle" value="$style{'fontstyle'}" /> 
-        <attribute name="fontcolor" value="$style{'fontcolor'}" />
-       
-        <!--- text to display in the button (can leave empty) -->
-        <attribute name="text" value="" type="string" />
-        <!--- y position of text, for fine tuning -->
-        <attribute name="texty"       value="0"  />
-        
- 
-       <?ignore
+    <mixin name="drawbutton">
+        <attribute name="basecolor"      value="-1" style="base-color" type="color"/>
+        <attribute name="cornerradius"   style="corner-radius" type="number" value="0"/>
+        <attribute name="borderwidth"    style="border-width" type="number"/>
+        <attribute name="bordercolor"    value="-1" style="border-color" type="color"/>
 
-        <!--- icon resource name prefix -->
-        <attribute name="iconname"       value="$style{'iconname'}"  type="string" />
-        <!--- y position of icon, for fine tuning.
-            if not specified, center the icon vertically. -->
-        <attribute name="icony"       value="0"  />
-        
-        <!-- whether to show left resource view, to make a visual edge -->
-        <attribute name="showleftedge"  value="true" />
-        
-        <!-- whether to show right resource view, to make a visual edge -->
-        <attribute name="showrightedge"  value="true"  />
-        
-        <!--- whether to show highlight on left side of button --> 
-        <attribute name="showrightborder" value="false" type="boolean" />
-        
-        <!-- the resource name for the middle view --> 
-        <attribute name="leftresource" type="string" value="$style{'leftresource'}" />
-        
-        <!-- the resource name for the middle view --> 
-        <attribute name="middleresource" type="string" value="$style{'middleresource'}"/>
-        
-        <!-- the resource name for the middle view --> 
-        <attribute name="rightresource" type="string" value="$style{'rightresource'}"/>
-        
-        <!--- whether to show shadow on right side of button -->         
-        <attribute name="showleftborder" value="false" type="boolean" />
+        <handler name="oninit">
+            this.setAttribute('basecolor', this.basecolor);
+        </handler>
+        <handler name="onbasecolor" args="basecolor">
+            if (! this.isinited) return;
 
-        <!-- horizontal padding for left and right side of button-->
-        <attribute name="xpadding" value="0" type="number"/>
+            if (basecolor == -1) return;
+            // derive other colors from the basecolor if not set already
+            var hsv = LzColorUtils.tohsv(basecolor);
+            if (! this.bordercolor) {
+                this.setAttribute('bordercolor', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v - .4));
+            }
+            if (! this.interiorfillcolor) {
+                this.setAttribute('interiorfillcolor', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v));
+            }
+            if (! this.interiorbordercolor) {
+                this.setAttribute('interiorbordercolor', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v - .2196));
+            }
+            if (! this.gradientfillstartup) {
+                this.setAttribute('gradientfillstartup', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v - .1098));
+            }
+            if (! this.gradientfillstopup) {
+                this.setAttribute('gradientfillstopup', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v));
+            }
+            if (! this.gradientfillstartover) {
+                this.setAttribute('gradientfillstartover', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v - .047));
+            }
+            if (! this.gradientfillstopover) {
+                this.setAttribute('gradientfillstopover', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v - .0039));
+            }
+            if (! this.gradientfillstartdown) {
+                this.setAttribute('gradientfillstartdown', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v - .0862));
+            }
+            if (! this.gradientfillstopdown) {
+                this.setAttribute('gradientfillstopdown', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v - .1999));
+            }
+            this.draw();
+        </handler>
 
-        <!--- tooltip text to be shown for button, if any -->
-        <attribute name="tooltip" value="" type="text" />
-          ?>
-        
-        <handler name="onwidth" method="draw"/>
-        <handler name="onheight" method="draw"/>
-        <handler name="oninit" method="draw"/>
-
-        <text text="${classroot.text}" y="${classroot.texty}" resize="true" fgcolor="${classroot.fontcolor}"        
-              align="center"  fontstyle="${classroot.fontstyle}" fontsize="${classroot.fontsize}" />  
-        
-        <method name="draw" args="r" >            
-            this.drawmouseup();
+        <handler name="onframe" method="draw"/>
+        <method name="draw" args="ignore=null" >            
+            if (! this.context || ! this.isinited) return;
+            switch(this.frame) {
+                case 1:
+                    var state = 'up';
+                    break;
+                case 2:
+                    var state = 'over';
+                    break;
+                case 3:
+                    var state = 'down';
+                    break;
+                case 4:
+                    var state = 'up';
+                    break;
+                default:
+                    return;
+            }
+            //Debug.info('draw', state);
+            this.clear();
+            this.globalAlpha = this.disabled ? .5 : 1;
+            this.lineWidth = this.borderwidth;
+            this.drawinteriorborder(state);
+            this.drawgradient(state);
+            this.drawborder();
         </method>
         
-        <method name="drawmouseup" >
-            if (! this.context || ! this.isinited) return;
-        
-            this.clear();
-                        
-            // DRAW  BORDER
-            this.beginPath();
-            this.moveTo(0,0);
-            
-            this.lineTo(this.width - 1,0);
-            this.lineTo(this.width - 1,this.height - 1);
-            this.lineTo(0, this.height - 1);
-            this.lineTo(0, 0);
-            this.closePath();
+        <method name="drawborder">
+            if (this.borderwidth > 0) {
+                // DRAW  BORDER
+                this.beginPath();
+                this.rect(0, 0, this.width, this.height, this.cornerradius);
+                this.closePath();
 
-            this.strokeStyle = this.bordercolor;
-            this.lineWidth = 1;           
-            this.stroke();
-            
-            
+                this.strokeStyle = this.bordercolor;
+                this.stroke();
+            }
+        </method>
 
+        <handler name="oninteriorbordercolor" args="b">
+            //Debug.debug('oninteriorbordercolor', b, (LzColorUtils.tohsv(b)).v - (LzColorUtils.tohsv(LzColorUtils.hextoint('#f2f2f2'))).v);
+        </handler>
+        <attribute name="interiorbordercolor"    value="null" style="interior-border-color" type="color"/>
+        <attribute name="interiorfillcolor"      value="null" style="interior-fill-color" type="color"/>
+        <attribute name="interiorbordercolorup"    value="${this.interiorbordercolor}" style="interior-border-color-up" type="color"/>
+        <attribute name="interiorfillcolorup"      value="${this.interiorfillcolor}" style="interior-fill-color-up" type="color"/>
+        <attribute name="interiorbordercolorover"  value="${this.interiorbordercolor}" style="interior-border-color-over" type="color"/>
+        <attribute name="interiorfillcolorover"    value="${this.interiorfillcolor}" style="interior-fill-color-over" type="color"/>
+        <attribute name="interiorbordercolordown"  value="${this.interiorbordercolor}" style="interior-border-color-down" type="color"/>
+        <attribute name="interiorfillcolordown"    value="${this.interiorfillcolor}" style="interior-fill-color-down" type="color"/>
+
+        <method name="drawinteriorborder" args="state='up'">
             // DRAW INTERIOR BORDER AND FILL
             this.beginPath();
-            this.moveTo(1,1);
-            
-            this.lineTo(this.width - 2,1);
-            this.lineTo(this.width - 2,this.height - 2);
-            this.lineTo(1, this.height - 2);
-            this.lineTo(1, 1);
+            this.rect(1, 1, this.width - 2, this.height - 2, this.cornerradius);
             this.closePath();
 
-            this.fillStyle = this.interiorfillcolorup;
+            this.fillStyle = this['interiorfillcolor' + state];
             this.fill();
 
-            this.strokeStyle = this.interiorbordercolorup;
-            this.lineWidth = 1;           
-            this.stroke();
-            
-            
-            
+            if (this.borderwidth > 0) {
+                this.strokeStyle = this['interiorbordercolor' + state];
+                this.stroke();
+            }
+        </method>
+
+        <handler name="ongradientfillstartup" args="b">
+            //Debug.debug('ongradientfillstartup', b, (LzColorUtils.tohsv(b)).v - (LzColorUtils.tohsv(LzColorUtils.hextoint('#f2f2f2'))).v);
+        </handler>
+        <attribute name="gradientfillstartup"      value="null" style="gradientfill-start-up" type="color"/>
+        <handler name="ongradientfillstopup" args="b">
+            //Debug.debug('ongradientfillstopup', b, (LzColorUtils.tohsv(b)).v - (LzColorUtils.tohsv(LzColorUtils.hextoint('#f2f2f2'))).v);
+        </handler>
+        <attribute name="gradientfillstopup"       value="null" style="gradientfill-stop-up" type="color"/>
+        <handler name="ongradientfillstartover" args="b">
+            //Debug.debug('ongradientfillstartover', b, (LzColorUtils.tohsv(b)).v - (LzColorUtils.tohsv(LzColorUtils.hextoint('#f2f2f2'))).v);
+        </handler>
+        <attribute name="gradientfillstartover"    value="null" style="gradientfill-start-over" type="color"/>
+        <handler name="ongradientfillstopover" args="b">
+            //Debug.debug('ongradientfillstopover', b, (LzColorUtils.tohsv(b)).v - (LzColorUtils.tohsv(LzColorUtils.hextoint('#f2f2f2'))).v);
+        </handler>
+        <attribute name="gradientfillstopover"     value="null" style="gradientfill-stop-over" type="color"/>
+        <handler name="ongradientfillstartdown" args="b">
+            //Debug.debug('ongradientfillstartdown', b, (LzColorUtils.tohsv(b)).v - (LzColorUtils.tohsv(LzColorUtils.hextoint('#f2f2f2'))).v);
+        </handler>
+        <attribute name="gradientfillstartdown"    value="null" style="gradientfill-start-down" type="color"/>
+        <handler name="ongradientfillstopdown" args="b">
+            //Debug.debug('ongradientfillstopdown', b, (LzColorUtils.tohsv(b)).v - (LzColorUtils.tohsv(LzColorUtils.hextoint('#f2f2f2'))).v);
+        </handler>
+        <attribute name="gradientfillstopdown"     value="null" style="gradientfill-stop-down" type="color"/>
+
+        <handler name="gradientfillstartup" method="_resetgradientcache"/>
+        <handler name="gradientfillstopup" method="_resetgradientcache"/>
+        <handler name="gradientfillstartover" method="_resetgradientcache"/>
+        <handler name="gradientfillstopover" method="_resetgradientcache"/>
+        <handler name="gradientfillstartdown" method="_resetgradientcache"/>
+        <handler name="gradientfillstopdown" method="_resetgradientcache"/>
+        <method name="_resetgradientcache" args="ignore">
+            this._gradientfills = [];
+        </method>
+
+        <method name="drawgradient" args="state='up'">
             // DRAW GRADIENT
             this.beginPath();
-            this.moveTo(1,Math.round(height*0.5));
-            
-            this.lineTo(this.width - 2,Math.round( height*0.5 ));
-            this.lineTo(this.width - 2,this.height - 2);
-            this.lineTo(1, this.height - 2);
-            this.lineTo(1, Math.round(height*0.5));
-           
-            var g = this.createLinearGradient(0,Math.round( 0.5*height),0,height);
-            g.addColorStop(0, this.gradientfillupstart );
-            g.addColorStop(1, this.interiorfillcolorup);
-            this.fillStyle = g;
+            if (state == 'down') {
+                this.rect(2, 2, this.width - 4, (this.height - 4) * .5);
+            } else {
+                this.rect(2, height * .5, this.width - 4, (this.height - 4) * .5);
+            }
+            this.closePath();
+
+            // cache gradient fills
+            if (! this._gradientfills) this._gradientfills = [];
+            if (! this._gradientfills[this.frame]) {
+                var g = this.createLinearGradient(0,Math.round( 0.5*height),0,height);
+                if (! this['gradientfillstart' + state] || ! this['gradientfillstop' + state]) return;
+                g.addColorStop(0, this['gradientfillstart' + state] );
+                g.addColorStop(1, this['gradientfillstop' + state] );
+                this._gradientfills[this.frame] = g;
+            }
+            this.fillStyle = this._gradientfills[this.frame];
             this.fill();
-            
         </method>
-        
+    </mixin>
 
-        <method name="drawmouseover" >
-            if (! this.context || ! this.isinited) return;
-      
-            this.clear();
-                        
-            // draw border 1
-            this.beginPath();
-            this.moveTo(0,0);
-            
-            this.lineTo(this.width - 1,0);
-            this.lineTo(this.width - 1,this.height - 1);
-            this.lineTo(0, this.height - 1);
-            this.lineTo(0, 0);
-            this.closePath();
+    <class name="bsbtn" extends="basepanel" with="boxmodel,buttonmodel,buttonevents,drawbutton,buttonfocus" margin="10"/>
 
-            this.strokeStyle = this.bordercolor;
-            this.lineWidth = 1;           
-            this.stroke();
-
-            // draw border 2
-            this.beginPath();
-            this.moveTo(1,1);
-            
-            this.lineTo(this.width - 2,1);
-            this.lineTo(this.width - 2,this.height - 2);
-            this.lineTo(1, this.height - 2);
-            this.lineTo(1, 1);
-            this.closePath();
-
-            this.fillStyle = this.interiorfillcolorup;
-            this.fill();
-
-            this.strokeStyle = this.interiorbordercolorup;
-            this.lineWidth = 1;           
-            this.stroke();
-            
-            // draw shape 3  
-            this.beginPath();
-            this.moveTo(1,Math.round(height*0.5));
-            
-            this.lineTo(this.width - 2,Math.round( height*0.5 ));
-            this.lineTo(this.width - 2,this.height - 2);
-            this.lineTo(1, this.height - 2);
-            this.lineTo(1, Math.round(height*0.5));
-           
-            var g = this.createLinearGradient(0,Math.round( 0.5*height),0,height);
-            g.addColorStop(0, this.gradientfilloverstart  ); 
-            g.addColorStop(1, this.gradientfilloverstop ); 
-            this.fillStyle = g;
-            this.fill();
-         </method>
-        
-        <method name="drawmousedown" >
-            if (! this.context || ! this.isinited) return;
-
-            this.clear();
-
-            // DRAW INTERIOR BORDER
-            this.beginPath();
-            this.moveTo(1,1);
-            
-            this.lineTo(this.width - 1,1);
-            this.lineTo(this.width -1 ,this.height - 1);
-            this.lineTo(1, this.height - 1);
-            this.lineTo(1, 1);
-            this.closePath();
-
-
-            this.fillStyle = this.interiorfillcolorup;
-            this.fill();
-
-            this.strokeStyle = this.interiorbordercolordown;
-            this.lineWidth = 1;           
-            this.stroke();
-
-                        
-            // DRAW EXTERIOR BORDER
-            this.beginPath();
-            this.moveTo(0,0);
-            
-            this.lineTo(this.width - 1,0);
-            this.lineTo(this.width - 1,this.height - 1);
-            this.lineTo(0, this.height - 1);
-            this.lineTo(0, 0);
-            this.closePath();
-
-            this.strokeStyle = this.bordercolor;
-            this.lineWidth = 1;           
-            this.stroke();
-
-
-            
-            // draw shape 3  
-            this.beginPath();
-            this.moveTo(2,2);
-            
-            this.lineTo(this.width - 1,2);
-            this.lineTo(this.width - 1,Math.round( height*0.5 ));
-            this.lineTo(2, Math.round( height*0.5 ));
-            this.lineTo(2, 2);
-           
-            var g = this.createLinearGradient( 0, 0, 0, Math.round( 0.5*height) );
-            g.addColorStop(0, this.gradientfilldownstart ); 
-            g.addColorStop(1, this.gradientfilldownstop ); 
-            this.fillStyle = g;
-            this.fill();
-        
-        </method>
-             
+    <class name="btn" extends="bsbtn" height="${this.txt.height + 2}" width="${this.txt.width + 4}">
+        <!--- text to display in the button (can leave empty) -->
+        <attribute name="text" value="" type="string" />
+        <text name="txt" text="${classroot.text}" align="center" valign="middle" />  
     </class>
-</library>
     
-   
+</library>

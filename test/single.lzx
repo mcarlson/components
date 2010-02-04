@@ -1,0 +1,33 @@
+<canvas font="Helvetica,Sans" fontsize="12">
+    <include href="../basepanel.lzx"/>
+
+    <stylesheet>
+        basepanel {
+            border-width: .5;
+            corner-radius: 3;
+            base-color: #f2f2f2;
+        }
+    </stylesheet> 
+
+    <!--These are replaced by base-color
+        stylesheet>
+        basepanel {
+            border-color: #6c6c6c;
+            interior-border-color:   #bababa;
+            interior-fill-color:     #f2f2f2;
+            gradientfill-start-up:     #d6d6d6;
+            gradientfill-stop-up:      #f2f2f2;
+            gradientfill-start-over:   #e6e6e6;
+            gradientfill-stop-over:    #f1f1f1;
+            gradientfill-start-down:   #dcdcdc;
+            gradientfill-stop-down:    #bfbfbf;
+        }
+    </stylesheet--> 
+
+    <vbox x="100" y="100">
+        <bsbtn width="50" height="50"/>
+        <bsbtn width="50" height="50" disabled="true"/>
+        <btn onclick="this.animate('width', 100, 500)" text="ok"/>
+        <btn onclick="this.animate('width', 100, 500)" text="cancel"/>
+    </vbox>
+</canvas>

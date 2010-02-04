@@ -4,24 +4,24 @@
     <stylesheet>
         basepanel {
             font: '';
-            fontsize : 11;
-            fontstyle : 'bold';
-            fontcolor : #3c3c3c;
-            bordercolor: #6c6c6c;
+            font-size : 11;
+            font-style : 'bold';
+            font-color : #3c3c3c;
+            border-color: #6c6c6c;
             
-            interiorbordercolorup:   #bababa;
-            interiorfillcolorup:     #f2f2f2;
-            interiorbordercolorover: #6c6c6c;
-            interiorfillcolorover:   #6c6c6c;
-            interiorbordercolordown: #8b8b8b;
-            interiorfillcolordown:   #6c6c6c;
+            interior-border-color-up:   #bababa;
+            interior-fill-color-up:     #f2f2f2;
+            interior-border-color-over: #6c6c6c;
+            interior-fill-color-over:   #6c6c6c;
+            interior-border-color-down: #8b8b8b;
+            interior-fill-color-down:   #6c6c6c;
             
-            gradientfillupstart:     #d6d6d6;
-            gradientfillupstop:      #f2f2f2;
-            gradientfilloverstart:   #e6e6e6;
-            gradientfilloverstop:    #f1f1f1;
-            gradientfilldownstart:   #dcdcdc;
-            gradientfilldownstop:    #bfbfbf;
+            gradientfill-start-up:     #d6d6d6;
+            gradientfill-stop-up:      #f2f2f2;
+            gradientfill-start-over:   #e6e6e6;
+            gradientfill-stop-over:    #f1f1f1;
+            gradientfill-start-down:   #dcdcdc;
+            gradientfill-stop-down:    #bfbfbf;
         }
     </stylesheet> 
 
@@ -29,531 +29,531 @@
     <wrappinglayout axis="x" spacing="5" />
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="18"  onclick="this.setAttribute('width', 100 )" text="test"/>
-        <basepanel width="100" height="18"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="18"  onclick="this.setAttribute('width', 100 )"  />
+        <btn width="100" height="18"  onclick="this.setAttribute('width', 100 )" text="test"/>
+        <bsbtn width="100" height="18"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="18"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100"  >
         <simplelayout axis="x" />
-        <basepanel width="100" height="18"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="30"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="30"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="18"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="30"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="30"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="40"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="40"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="40"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="40"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="40"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="40"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     <view x="100" y="100" >
         <simplelayout axis="x" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
-        <basepanel width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <bsbtn width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
     </view>
     </view>
 </canvas>
