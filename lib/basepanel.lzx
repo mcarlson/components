@@ -1,0 +1,14 @@
+<library>
+    <include href="extensions/drawview.lzx"/>
+
+    <class name="basepanel" extends="drawview">
+        <handler name="onwidth" method="draw"/>
+        <handler name="onheight" method="draw"/>
+        <handler name="oncontext" method="draw"/>
+
+        <method name="draw" args="ignore=null" >            
+            if (! this.context || ! this.isinited) return;
+            // override me
+        </method>
+    </class>
+</library>

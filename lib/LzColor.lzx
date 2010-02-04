@@ -1,0 +1,17 @@
+<class name="LzColor">
+    <attribute name="color" value="0" type="number"/>
+    <attribute name="h" value="0" type="number"/>
+    <attribute name="s" value="0" type="number"/>
+    <attribute name="v" value="0" type="number"/>
+    <setter name="color" args="colorint">
+        this.color = colorint;
+        var hsv = LzColorUtils.tohsv(colorint);
+        this.h = hsv.h;
+        this.s = hsv.s;
+        this.v = hsv.v;
+        if (this.oncolor.ready) this.oncolor.sendEvent('color', colorint);
+    </setter>
+    <method name="darken" args="by">
+        // reduce the value to darken
+    </method>
+</class>

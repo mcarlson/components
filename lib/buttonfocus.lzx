@@ -1,0 +1,12 @@
+<library>
+    <mixin name="buttonfocus" shadowcolor="#0000cc" shadowdistance="0" shadowblurradius="0">
+        <method name="doFocus" args="ignore=null">
+            if (! this.disabled) this.animate('shadowblurradius', 10, 500);
+        </method>
+        <method name="doBlur" args="ignore=null">
+            this.animate('shadowblurradius', 0, 500);
+        </method>
+        <handler name="onfocus" method="doFocus"/>
+        <handler name="onblur" method="doBlur"/>
+    </mixin>
+</library>
