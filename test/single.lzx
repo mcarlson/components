@@ -24,7 +24,7 @@
         }
     </stylesheet--> 
 
-    <vbox x="100" y="100">
+    <vbox x="100" y="100" spacing="10">
         <bsbtn width="50" height="50"/>
         <bsbtn width="50" height="50" disabled="true"/>
         <btn onclick="this.animate('width', 100, 500)" text="ok"/>

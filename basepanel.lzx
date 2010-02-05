@@ -3,10 +3,10 @@
     <include href="lib/"/>
 
     <mixin name="drawbutton">
-        <attribute name="basecolor"      value="-1" style="base-color" type="color"/>
+        <attribute name="basecolor"      style="base-color" type="color"/>
         <attribute name="cornerradius"   style="corner-radius" type="number" value="0"/>
         <attribute name="borderwidth"    style="border-width" type="number"/>
-        <attribute name="bordercolor"    value="-1" style="border-color" type="color"/>
+        <attribute name="bordercolor"    style="border-color" type="color"/>
 
         <handler name="oninit">
             this.setAttribute('basecolor', this.basecolor);
@@ -14,10 +14,10 @@
         <handler name="onbasecolor" args="basecolor">
             if (! this.isinited) return;
 
-            if (basecolor == -1) return;
+            if (! basecolor) return;
             // derive other colors from the basecolor if not set already
             var hsv = LzColorUtils.tohsv(basecolor);
-            if (! this.bordercolor) {
+            if (this.bordercolor) {
                 this.setAttribute('bordercolor', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v - .4));
             }
             if (! this.interiorfillcolor) {
@@ -77,6 +77,7 @@
         
         <method name="drawborder">
             if (this.borderwidth > 0) {
+                if (! this.bordercolor) return;
                 // DRAW  BORDER
                 this.beginPath();
                 this.rect(0, 0, this.width, this.height, this.cornerradius);
@@ -100,6 +101,7 @@
         <attribute name="interiorfillcolordown"    value="${this.interiorfillcolor}" style="interior-fill-color-down" type="color"/>
 
         <method name="drawinteriorborder" args="state='up'">
+            if (! this['interiorfillcolor' + state]) return;
             // DRAW INTERIOR BORDER AND FILL
             this.beginPath();
             this.rect(1, 1, this.width - 2, this.height - 2, this.cornerradius);
@@ -109,6 +111,7 @@
             this.fill();
 
             if (this.borderwidth > 0) {
+                if (! this['interiorbordercolor' + state]) return;
                 this.strokeStyle = this['interiorbordercolor' + state];
                 this.stroke();
             }
@@ -151,6 +154,7 @@
 
         <method name="drawgradient" args="state='up'">
             // DRAW GRADIENT
+            if (! this['gradientfillstart' + state] || ! this['gradientfillstop' + state]) return;
             this.beginPath();
             if (state == 'down') {
                 this.rect(2, 2, this.width - 4, (this.height - 4) * .5);
@@ -163,7 +167,6 @@
             if (! this._gradientfills) this._gradientfills = [];
             if (! this._gradientfills[this.frame]) {
                 var g = this.createLinearGradient(0,Math.round( 0.5*height),0,height);
-                if (! this['gradientfillstart' + state] || ! this['gradientfillstop' + state]) return;
                 g.addColorStop(0, this['gradientfillstart' + state] );
                 g.addColorStop(1, this['gradientfillstop' + state] );
                 this._gradientfills[this.frame] = g;
@@ -173,7 +176,7 @@
         </method>
     </mixin>
 
-    <class name="bsbtn" extends="basepanel" with="boxmodel,buttonmodel,buttonevents,drawbutton,buttonfocus" margin="10"/>
+    <class name="bsbtn" extends="basepanel" with="buttonmodel,buttonevents,drawbutton,buttonfocus"/>
 
     <class name="btn" extends="bsbtn" height="${this.txt.height + 2}" width="${this.txt.width + 4}">
         <!--- text to display in the button (can leave empty) -->
