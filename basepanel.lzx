@@ -17,8 +17,8 @@
             if (! basecolor) return;
             // derive other colors from the basecolor if not set already
             var hsv = LzColorUtils.tohsv(basecolor);
-            if (this.bordercolor) {
-                this.setAttribute('bordercolor', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v - .4));
+            if (! this.bordercolor) {
+                this.setAttribute('bordercolor', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v - .4039));
             }
             if (! this.interiorfillcolor) {
                 this.setAttribute('interiorfillcolor', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v));
@@ -176,7 +176,7 @@
         </method>
     </mixin>
 
-    <class name="bsbtn" extends="basepanel" with="buttonmodel,buttonevents,drawbutton,buttonfocus"/>
+    <class name="bsbtn" extends="basepanel" with="boxmodel,buttonmodel,buttonevents,drawbutton,buttonfocus"/>
 
     <class name="btn" extends="bsbtn" height="${this.txt.height + 2}" width="${this.txt.width + 4}">
         <!--- text to display in the button (can leave empty) -->
