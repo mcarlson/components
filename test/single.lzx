@@ -1,5 +1,5 @@
 <canvas font="Helvetica,Sans" fontsize="12">
-    <include href="../basepanel.lzx"/>
+    <include href="../lib/"/>
 
     <stylesheet>
         basepanel {

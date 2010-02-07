@@ -1,5 +1,5 @@
 <canvas>
-    <include href="../basepanel.lzx"/>
+    <include href="../lib/"/>
 
     <stylesheet>
         basepanel {
