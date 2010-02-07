@@ -1,5 +1,5 @@
 <library>
-    <mixin name="buttonmodel">
+    <mixin name="componentmodel">
         <attribute name="value" value="" type="string"/>
         <attribute name="disabled" value="false" type="boolean"/>
         <attribute name="focusable" value="${! disabled}" type="boolean"/>

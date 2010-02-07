@@ -1,6 +1,6 @@
 <library>
     <include href="basepanel.lzx"/>
-    <include href="buttonmodel.lzx"/>
+    <include href="componentmodel.lzx"/>
     <include href="buttonevents.lzx"/>
-    <include href="buttonfocus.lzx"/>
+    <include href="componentfocus.lzx"/>
 </library>
