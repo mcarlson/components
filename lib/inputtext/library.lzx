@@ -1,0 +1,21 @@
+<library>
+    <include href="extensions/drawview.lzx"/>
+    <include href="../componentfocus.lzx"/>
+
+    <mixin name="drawinputtext">
+        <handler name="onwidth" method="draw"/>
+        <handler name="onheight" method="draw"/>
+        <handler name="oncontext" method="draw"/>
+        <handler name="onframe" method="draw"/>
+        <method name="draw" args="ignore=null" >            
+            if (! this.context || ! this.isinited) return;
+            this.rect(1,1,this.width - 3,this.height - 5,3);
+            this.strokeStyle = 0x999999;
+            this.stroke();
+            this.fillStyle = 0xf2f2f2;
+            this.fill();
+        </method>
+    </mixin>
+
+    <class name="inpt" extends="inputtext" with="drawable,drawinputtext,componentfocus"/>
+</library>
