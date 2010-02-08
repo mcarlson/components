@@ -7,6 +7,13 @@
             corner-radius: 3;
             base-color: #f2f2f2;
         }
+        scrlbr {
+            size: 16;
+            corner-radius: 16;
+        }
+        scrlthmb {
+            corner-radius: 20;
+        }
     </stylesheet> 
 
     <!--These are replaced by base-color
@@ -24,10 +31,44 @@
         }
     </stylesheet--> 
 
-    <vbox x="100" y="100" spacing="10">
+    <vbox x="10" y="10" spacing="10">
         <bsbtn width="50" height="50"/>
         <bsbtn width="50" height="50" disabled="true"/>
         <btn onclick="this.animate('width', 100, 500)" text="ok"/>
         <btn onclick="this.animate('width', 100, 500)" text="cancel"/>
+        <view bgcolor="white" width="200" height="200" clip="true">
+            <text multiline="true" width="180">
+                Man through his scientific genius has been able to draw distance and
+                save time and space. He has been able to carry highways through the
+                stratosphere. We read just the other day that a rocket plane went 1900
+                miles in one hour. Twice as fast as the speed of sound. This is the
+                new age. Bob Hope has described this new age, this jet age; it is an
+                age in which planes will be moving so fast that we will have a
+                non-stop flight from New York to Los Angeles, when you start out you
+                might develop the hiccups and you will hic in New York and cup in Los
+                Angeles. This is an age in which it will be possible to leave Tokyo on
+                a Sunday morning and arrive in Seattle, Washington on the preceding
+                Saturday night. When your friends meet you at the airport and ask what
+                time did you leave Tokyo, you will have to say I left tomorrow. That
+                is this new age.  We live in one world geographically. We face the
+                great problem of making it one spiritually.
+                <br/>
+                Through our scientific means we have made of the world a
+                neighborhood and now the challenge confronts us through our
+                moral and spiritual means to make of it a brotherhood. We must
+                live together, we are not independent we are interdependent. We
+                are all involved in a single process. Whatever affects one
+                directly affects all indirectly for we are tied together in a
+                single progress. We are all linked in the great chain of
+                humanity.
+                <br/>
+                Martin Luther King, Jr.
+                <br/>
+                11 August 1956
+            </text>
+            <scrlbr/>
+        </view>
     </vbox>
+
+    
 </canvas>

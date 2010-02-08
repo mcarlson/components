@@ -1,87 +1,38 @@
 <mixin name="drawbutton">
-    <attribute name="basecolor"      style="base-color" type="color"/>
-    <attribute name="cornerradius"   style="corner-radius" type="number" value="0"/>
-    <attribute name="borderwidth"    style="border-width" type="number"/>
-    <attribute name="bordercolor"    style="border-color" type="color"/>
-
-    <handler name="oninit">
-        this.setAttribute('basecolor', this.basecolor);
-    </handler>
-
-    <handler name="onbasecolor" args="basecolor">
-        if (! this.isinited) return;
-
-        if (! basecolor) return;
-        // derive other colors from the basecolor if not set already
-        var hsv = LzColorUtils.tohsv(basecolor);
-        if (! this.bordercolor) {
-            this.setAttribute('bordercolor', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v - .4039));
-        }
-        if (! this.interiorfillcolor) {
-            this.setAttribute('interiorfillcolor', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v));
-        }
-        if (! this.interiorbordercolor) {
-            this.setAttribute('interiorbordercolor', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v - .2196));
-        }
-        if (! this.gradientfillstartup) {
-            this.setAttribute('gradientfillstartup', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v - .1098));
-        }
-        if (! this.gradientfillstopup) {
-            this.setAttribute('gradientfillstopup', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v));
-        }
-        if (! this.gradientfillstartover) {
-            this.setAttribute('gradientfillstartover', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v - .047));
-        }
-        if (! this.gradientfillstopover) {
-            this.setAttribute('gradientfillstopover', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v - .0039));
-        }
-        if (! this.gradientfillstartdown) {
-            this.setAttribute('gradientfillstartdown', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v - .0862));
-        }
-        if (! this.gradientfillstopdown) {
-            this.setAttribute('gradientfillstopdown', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v - .1999));
-        }
-        this.draw();
-    </handler>
-
-    <handler name="onframe" method="draw"/>
-    <method name="draw" args="ignore=null" >            
-        if (! this.context || ! this.isinited) return;
+    <handler name="onframe" method="redraw"/>
+    <method name="getDrawState">            
         switch(this.frame) {
             case 1:
-                var state = 'up';
-                break;
+                return 'up';
             case 2:
-                var state = 'over';
-                break;
+                return 'over';
             case 3:
-                var state = 'down';
-                break;
+                return 'down';
             case 4:
-                var state = 'up';
-                break;
-            default:
-                return;
+                return 'up';
         }
+    </method>
+
+    <method name="draw" args="context">
+        var state = this.getDrawState();
+        if (! state) return;
         //Debug.info('draw', state);
-        this.clear();
         this.globalAlpha = this.disabled ? .5 : 1;
         this.lineWidth = this.borderwidth;
-        this.drawinteriorborder(state);
-        this.drawgradient(state);
-        this.drawborder();
+        this.drawinteriorborder(this);
+        this.drawgradient(this);
+        this.drawborder(this);
     </method>
     
-    <method name="drawborder">
+    <method name="drawborder" args="context">
         if (this.borderwidth > 0) {
             if (! this.bordercolor) return;
-            // DRAW  BORDER
-            this.beginPath();
-            this.rect(0, 0, this.width, this.height, this.cornerradius);
-            this.closePath();
+            context.beginPath();
+            context.rect(0, 0, this.width, this.height, this.cornerradius);
+            context.closePath();
 
-            this.strokeStyle = this.bordercolor;
-            this.stroke();
+            context.strokeStyle = this.bordercolor;
+            context.stroke();
         }
     </method>
 
@@ -97,78 +48,80 @@
     <attribute name="interiorbordercolordown"  value="${this.interiorbordercolor}" style="interior-border-color-down" type="color"/>
     <attribute name="interiorfillcolordown"    value="${this.interiorfillcolor}" style="interior-fill-color-down" type="color"/>
 
-    <method name="drawinteriorborder" args="state='up'">
+    <method name="drawinteriorborder" args="context">
+        var state = this.getDrawState();
+        if (! state) return;
         if (! this['interiorfillcolor' + state]) return;
         // DRAW INTERIOR BORDER AND FILL
-        this.beginPath();
-        this.rect(1, 1, this.width - 2, this.height - 2, this.cornerradius);
-        this.closePath();
+        context.beginPath();
+        context.rect(1, 1, this.width - 2, this.height - 2, this.cornerradius);
+        context.closePath();
 
-        this.fillStyle = this['interiorfillcolor' + state];
-        this.fill();
+        context.fillStyle = this['interiorfillcolor' + state];
+        context.fill();
 
         if (this.borderwidth > 0) {
             if (! this['interiorbordercolor' + state]) return;
-            this.strokeStyle = this['interiorbordercolor' + state];
-            this.stroke();
+            context.strokeStyle = this['interiorbordercolor' + state];
+            context.stroke();
         }
     </method>
 
-    <handler name="ongradientfillstartup" args="b">
-        //Debug.debug('ongradientfillstartup', b, (LzColorUtils.tohsv(b)).v - (LzColorUtils.tohsv(LzColorUtils.hextoint('#f2f2f2'))).v);
-    </handler>
+    <attribute name="vertical"         value="false" type="boolean"/>
     <attribute name="gradientfillstartup"      value="null" style="gradientfill-start-up" type="color"/>
-    <handler name="ongradientfillstopup" args="b">
-        //Debug.debug('ongradientfillstopup', b, (LzColorUtils.tohsv(b)).v - (LzColorUtils.tohsv(LzColorUtils.hextoint('#f2f2f2'))).v);
-    </handler>
     <attribute name="gradientfillstopup"       value="null" style="gradientfill-stop-up" type="color"/>
-    <handler name="ongradientfillstartover" args="b">
-        //Debug.debug('ongradientfillstartover', b, (LzColorUtils.tohsv(b)).v - (LzColorUtils.tohsv(LzColorUtils.hextoint('#f2f2f2'))).v);
-    </handler>
     <attribute name="gradientfillstartover"    value="null" style="gradientfill-start-over" type="color"/>
-    <handler name="ongradientfillstopover" args="b">
-        //Debug.debug('ongradientfillstopover', b, (LzColorUtils.tohsv(b)).v - (LzColorUtils.tohsv(LzColorUtils.hextoint('#f2f2f2'))).v);
-    </handler>
     <attribute name="gradientfillstopover"     value="null" style="gradientfill-stop-over" type="color"/>
-    <handler name="ongradientfillstartdown" args="b">
-        //Debug.debug('ongradientfillstartdown', b, (LzColorUtils.tohsv(b)).v - (LzColorUtils.tohsv(LzColorUtils.hextoint('#f2f2f2'))).v);
-    </handler>
     <attribute name="gradientfillstartdown"    value="null" style="gradientfill-start-down" type="color"/>
-    <handler name="ongradientfillstopdown" args="b">
-        //Debug.debug('ongradientfillstopdown', b, (LzColorUtils.tohsv(b)).v - (LzColorUtils.tohsv(LzColorUtils.hextoint('#f2f2f2'))).v);
-    </handler>
     <attribute name="gradientfillstopdown"     value="null" style="gradientfill-stop-down" type="color"/>
 
-    <handler name="gradientfillstartup" method="_resetgradientcache"/>
-    <handler name="gradientfillstopup" method="_resetgradientcache"/>
-    <handler name="gradientfillstartover" method="_resetgradientcache"/>
-    <handler name="gradientfillstopover" method="_resetgradientcache"/>
-    <handler name="gradientfillstartdown" method="_resetgradientcache"/>
-    <handler name="gradientfillstopdown" method="_resetgradientcache"/>
-    <method name="_resetgradientcache" args="ignore">
+    <handler name="ongradientfillstartup" method="__resetgradientcache"/>
+    <handler name="ongradientfillstopup" method="__resetgradientcache"/>
+    <handler name="ongradientfillstartover" method="__resetgradientcache"/>
+    <handler name="ongradientfillstopover" method="__resetgradientcache"/>
+    <handler name="ongradientfillstartdown" method="__resetgradientcache"/>
+    <handler name="ongradientfillstopdown" method="__resetgradientcache"/>
+    <handler name="ongradientsideways" method="__resetgradientcache"/>
+    <method name="__resetgradientcache" args="ignore">
         this._gradientfills = [];
     </method>
 
-    <method name="drawgradient" args="state='up'">
-        // DRAW GRADIENT
+    <method name="drawgradient" args="context">
+        var state = this.getDrawState();
+        if (! state) return;
         if (! this['gradientfillstart' + state] || ! this['gradientfillstop' + state]) return;
-        this.beginPath();
+
+        context.beginPath();
+        var bevel = 1;
+        var width = this.width - (bevel * 2);
+        var height = this.height - (bevel * 2);
         if (state == 'down') {
-            this.rect(2, 2, this.width - 4, (this.height - 4) * .5);
+            if (this.vertical) {
+                context.rect(bevel, bevel, width * .5, height);
+            } else {
+                context.rect(bevel, bevel, width, height * .5);
+            }
         } else {
-            this.rect(2, height * .5, this.width - 4, (this.height - 4) * .5);
+            if (this.vertical) {
+                context.rect(bevel, bevel, width * .5, height);
+            } else {
+                context.rect(bevel, height * .5, width, height * .5);
+            }
         }
-        this.closePath();
 
         // cache gradient fills
         if (! this._gradientfills) this._gradientfills = [];
         if (! this._gradientfills[this.frame]) {
-            var g = this.createLinearGradient(0,Math.round( 0.5*height),0,height);
+            if (this.vertical) {
+                var g = context.createLinearGradient(0,0,width,0);
+            } else {
+                var g = context.createLinearGradient(0,Math.round( 0.5*height),0,height);
+            }
             g.addColorStop(0, this['gradientfillstart' + state] );
             g.addColorStop(1, this['gradientfillstop' + state] );
             this._gradientfills[this.frame] = g;
         }
-        this.fillStyle = this._gradientfills[this.frame];
-        this.fill();
+        context.fillStyle = this._gradientfills[this.frame];
+        context.fill();
     </method>
 </mixin>

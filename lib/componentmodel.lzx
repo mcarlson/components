@@ -3,13 +3,6 @@
         <attribute name="value" value="" type="string"/>
         <attribute name="disabled" value="false" type="boolean"/>
         <attribute name="focusable" value="${! disabled}" type="boolean"/>
-        <setter name="disabled" args="disabled">
-            this.disabled = disabled;
-            this.setAttribute('focusable', ! disabled);
-            this.setAttribute('clickable', ! disabled);
-            if (this.ondisabled.ready) {
-                this.ondisabled.sendEvent(disabled);
-            }
-        </setter>
+        <attribute name="clickable" value="${! disabled}" type="boolean"/>
     </mixin>
 </library>

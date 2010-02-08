@@ -1,0 +1,59 @@
+<mixin name="mousedownrepeater">
+    <!---  @keywords private -->
+    <attribute name="__mousedowntime" value="0" type="number" />
+    <!---  @keywords private -->
+    <attribute name="__mousestillDownDelegate" value="null" type="expression" />
+    <!---  @keywords private -->
+    <attribute name="__mousedownrepeatinterval" value="50" type="number" />
+    <!---  @keywords private -->
+    <attribute name="__mousedowninitialinterval" value="600" type="number" />
+
+    <!--- @keywords public -->
+    <event name="onmousestilldown" />
+
+    <method name="init">
+        super.init();
+        this.__mousestillDownDelegate = new LzDelegate( this, "__ismousestilldown" );
+    </method> 
+
+    <!---  @keywords private -->
+    <method name="__ismousestilldown" args="now">
+        var diff = now - this.__mousedowntime;
+        this.__mousedowntime = now;
+
+        if (this.mouseisdown) {
+            var next;
+            if (diff > 600) {
+                next = this.__mousedowninitialinterval;
+            } else {
+                next = this.__mousedownrepeatinterval;
+                this.onmousestilldown.sendEvent();
+            }
+            lz.Timer.resetTimer( this.__mousestillDownDelegate, next );
+        }
+    </method>
+
+    <!--- @keywords private -->
+    <handler name="onmousedown">
+        this.__mousedowntime = (new Date()).getTime();
+        lz.Timer.addTimer( this.__mousestillDownDelegate, 500 );
+    </handler>
+
+    <!--- @keywords private -->
+    <handler name="onmouseup">
+        lz.Timer.removeTimer( this.__mousestillDownDelegate );
+    </handler>
+
+    <doc>
+        <tag name="shortdesc"><text>a mixin for use with buttonevents that sends an event if the mouse is held down.</text></tag>
+        <text>
+        <p>This class is a simple extension of
+        <classname>basebutton</classname>.  If the user holds the mouse button
+        down over the button (for more than a half second), then an event
+        <event>onmousestilldown</event> will be sent.  The
+        <event>onmousestilldown</event> event will continue to be sent every
+        50 milliseconds until the mouse button is released.</p>
+        </text>
+    </doc>
+</mixin>
+

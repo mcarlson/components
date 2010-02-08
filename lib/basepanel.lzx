@@ -2,13 +2,24 @@
     <include href="extensions/drawview.lzx"/>
 
     <class name="basepanel" extends="drawview">
-        <handler name="onwidth" method="draw"/>
-        <handler name="onheight" method="draw"/>
-        <handler name="oncontext" method="draw"/>
+        <attribute name="borderwidth" style="border-width" type="number" value="0"/>
+        <attribute name="bordercolor" style="border-color" type="color"/>
+        <attribute name="cornerradius"   style="corner-radius" type="number" value="0"/>
+        <attribute name="interiorbordercolor" style="interior-border-color" type="color"/>
+        <attribute name="interiorfillcolor" style="interior-fill-color" type="color"/>
 
-        <method name="draw" args="ignore=null" >            
-            if (! this.context || ! this.isinited) return;
-            // override me
+        <attribute name="lockredraw" value="false" type="boolean"/>
+        <handler name="onwidth" method="redraw"/>
+        <handler name="onheight" method="redraw"/>
+        <handler name="oncontext" method="redraw"/>
+
+        <method name="redraw" args="ignore=null" >            
+            if (! this.context || ! this.isinited || this.lockredraw) return;
+            this.clear();
+            this.draw();
+        </method>
+        <method name="draw">            
+            return false;
         </method>
     </class>
 </library>

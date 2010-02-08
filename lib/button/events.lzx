@@ -27,20 +27,22 @@
     <handler name="onmouseup">
         this.setAttribute('mouseisdown', false );
     </handler>
+    <handler name="onfocus">
+        this.onmouseover.sendEvent();
+    </handler>
+    <handler name="onblur">
+        this.onmouseout.sendEvent();
+    </handler>
 
     <handler name="onkeydown" args="key">
         if (key == 32 || key == 13) {
-            this.mouseisover = true;
-            this.mouseisdown = true;
-            this._updateFrame();
-            if (this.onclick.ready) this.onclick.sendEvent();
+            this.onmousedown.sendEvent();
         }
     </handler>
     <handler name="onkeyup" args="key">
         if (key == 32 || key == 13) {
-            this.mouseisover = false;
-            this.mouseisdown = false;
-            this._updateFrame();
+            this.onmouseup.sendEvent();
+            if (this.onclick.ready) this.onclick.sendEvent();
         }
     </handler>
 
