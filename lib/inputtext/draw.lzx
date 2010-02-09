@@ -1,0 +1,30 @@
+<mixin name="drawinputtext">
+    <method name="init">
+        super.init();
+        var basepanel = this.immediateparent;
+        if (basepanel is lz.basepanel) {
+            this.drawtarget = basepanel;
+            basepanel.addScope(this);
+        }
+    </method>
+    <handler name="onfocus">
+        this.focused = true;
+        //console.log('focus', lz.Focus.getFocus());
+        //this.drawtarget.redraw();
+    </handler>
+    <handler name="onblur">
+        this.focused = false;
+        //console.log('blur', lz.Focus.getFocus());
+        //this.drawtarget.redraw();
+    </handler>
+    <method name="draw" args="scope">            
+        //console.log('draw', this, this.focused);
+        scope.clear();
+        scope.rect(this.x + 1,this.y,this.width - 1,this.height,scope.cornerradius);
+        scope.lineWidth = scope.borderwidth;
+        scope.lineStyle = scope.interiorbordercolor;
+        scope.fillStyle = scope.interiorfillcolor;
+        scope.stroke();
+        scope.fill();
+    </method>
+</mixin>

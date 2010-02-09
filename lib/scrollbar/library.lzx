@@ -13,22 +13,26 @@
         <!--- @keywords private -->
         <handler name="onmousedown">
             this.classroot.step(this.direction);
+            this.classroot.setAttribute('activated', true);
         </handler>
         <!--- @keywords private -->
         <handler name="onmousestilldown">
             this.classroot.step(this.direction);
+            this.classroot.setAttribute('activated', true);
         </handler>
         <handler name="onkeydown" args="key">
             if (key == 37 || key == 38) {
                 // if left or up
                 this.classroot.step(-1);
+                this.classroot.setAttribute('activated', true);
             } else if (key == 39 || key == 40) {
                 // if right or down
                 this.classroot.step(1);
+                this.classroot.setAttribute('activated', true);
             }
         </handler>
 
-        <method name="draw">
+        <method name="draw" args="context">
             <![CDATA[
             //super.draw();
             // draw arrow
@@ -75,10 +79,12 @@
         <!--- @keywords private -->
         <handler name="onmousedown">
             this.classroot.page(this.direction);
+            this.classroot.setAttribute('activated', true);
         </handler>
         <!--- @keywords private -->
         <handler name="onmousestilldown">
             this.classroot.page(this.direction);
+            this.classroot.setAttribute('activated', true);
         </handler>
     </class>
 
@@ -99,6 +105,7 @@
         <!--- @keywords private -->
         <method name="init">
             super.init();
+            var croot = this.classroot;
             this.classroot.thumb = this;
         </method>
 
@@ -196,10 +203,10 @@
         </setter>
 
         <!--- @keywords private -->
-        <attribute name="sizeAxis" type="string" />
+        <attribute name="sizeAxis" type="string" value="height"/>
     
         <!--- @keywords private -->
-        <attribute name="otherSizeAxis" type="string" />
+        <attribute name="otherSizeAxis" type="string" value="width"/>
     
         <!--- The attribute of the scrolltarget that is modified by the scrollbar,
               default: value of axis attribute.
@@ -471,12 +478,7 @@
             if (this.axis != 'y') return;
             // check if the mouse is over the view
             if (this.mousewheelactive || (this.scrolltarget && this.scrolltarget.immediateparent && this.scrolltarget.immediateparent.isMouseOver()) ) {
-                // activate, then deactivate after a little while
-                this.setAttribute('activated', true);
-                if (! this.__deactivatedel) {
-                    this.__deactivatedel = new LzDelegate(this, 'deactivate');
-                }
-                lz.Timer.resetTimer(this.__deactivatedel, 3000);
+                this.activateWithTimeout();
                 this.step(-d);
             }
             ]]>
@@ -708,7 +710,7 @@
         </doc>
     </mixin>
 
-    <class name="scrlbr" extends="basepanel" with="buttonevents,applybasecolor,bsscrlbr">
+    <class name="scrlbr" extends="basepanel" with="buttonevents,bsscrlbr">
         <attribute name="size" value="16" style="size"/>
         <attribute name="width" value="${this.size}"/>
         <attribute name="opacity" value=".2"/>
@@ -729,6 +731,14 @@
             }
             if (this.onactivated.ready) this.onactivated.sendEvent(activated)
         </setter>
+        <method name="activateWithTimeout">
+            // activate, then deactivate after a little while
+            this.setAttribute('activated', true);
+            if (! this.__deactivatedel) {
+                this.__deactivatedel = new LzDelegate(this, 'deactivate');
+            }
+            lz.Timer.resetTimer(this.__deactivatedel, 2000);
+        </method>
         <method name="activate">
             this.activated = true;
             this.animate('opacity', 1, 200);
@@ -740,7 +750,7 @@
             }
         </method>
 
-        <method name="draw">
+        <method name="draw" args="context">
             this.beginPath();
             this.rect(0,0,this.width,this.height,this.width);
             this.lineWidth = this.borderwidth;

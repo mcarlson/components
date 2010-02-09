@@ -1,23 +1,6 @@
 <library>
-    <include href="extensions/drawview.lzx"/>
     <include href="../componentfocus.lzx"/>
+    <include href="draw.lzx"/>
 
-    <mixin name="drawinputtext">
-        <method name="init">
-            super.init();
-            var basepanel = this.immediateparent;
-            if (basepanel is lz.basepanel) {
-                basepanel.addScope(this);
-            }
-        </method>
-        <method name="draw" args="scope">            
-            scope.rect(this.x + 1,this.y,this.width - 1,this.height,3);
-            scope.strokeStyle = 0x999999;
-            scope.stroke();
-            scope.fillStyle = 0xf2f2f2;
-            scope.fill();
-        </method>
-    </mixin>
-
-    <class name="inpt" extends="inputtext" with="drawinputtext,componentfocus"/>
+    <class name="inpt" extends="inputtext" with="drawinputtext"/>
 </library>

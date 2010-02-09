@@ -20,7 +20,7 @@
         }
     </handler>
 
-    <method name="draw">
+    <method name="draw" args="context">
         //Debug.info('draw', this.mousestate);
         this.globalAlpha = this.disabled ? .5 : 1;
         this.lineWidth = this.borderwidth;

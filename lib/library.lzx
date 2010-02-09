@@ -1,8 +1,8 @@
 <library>
+    <include href="applybasecolor.lzx"/>
     <include href="basepanel.lzx"/>
     <include href="componentmodel.lzx"/>
     <include href="componentfocus.lzx"/>
-    <include href="applybasecolor.lzx"/>
     <include href="button/"/>
     <include href="inputtext/"/>
     <include href="scrollbar/"/>

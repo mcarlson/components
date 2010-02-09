@@ -1,7 +1,7 @@
 <library>
     <include href="extensions/drawview.lzx"/>
 
-    <class name="basepanel" extends="drawview">
+    <class name="basepanel" extends="drawview" with="applybasecolor">
         <attribute name="borderwidth" style="border-width" type="number" value="0"/>
         <attribute name="bordercolor" style="border-color" type="color"/>
         <attribute name="cornerradius"   style="corner-radius" type="number" value="0"/>
