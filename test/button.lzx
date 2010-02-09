@@ -1,0 +1,559 @@
+<canvas>
+    <include href="../basepanel.lzx"/>
+
+    <stylesheet>
+        basepanel {
+            font: '';
+            font-size : 11;
+            font-style : 'bold';
+            font-color : #3c3c3c;
+            border-color: #6c6c6c;
+            
+            interior-border-color-up:   #bababa;
+            interior-fill-color-up:     #f2f2f2;
+            interior-border-color-over: #6c6c6c;
+            interior-fill-color-over:   #6c6c6c;
+            interior-border-color-down: #8b8b8b;
+            interior-fill-color-down:   #6c6c6c;
+            
+            gradientfill-start-up:     #d6d6d6;
+            gradientfill-stop-up:      #f2f2f2;
+            gradientfill-start-over:   #e6e6e6;
+            gradientfill-stop-over:    #f1f1f1;
+            gradientfill-start-down:   #dcdcdc;
+            gradientfill-stop-down:    #bfbfbf;
+        }
+    </stylesheet> 
+
+    <view x="20" y="20" width="${parent.width - 20}" >
+    <wrappinglayout axis="x" spacing="5" />
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="18"  onclick="this.setAttribute('width', 100 )" text="test"/>
+        <button width="100" height="18"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="18"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100"  >
+        <simplelayout axis="x" />
+        <button width="100" height="18"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="30"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="30"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="40"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="40"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="40"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    <view x="100" y="100" >
+        <simplelayout axis="x" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )" />
+        <button width="100" height="20"  onclick="this.setAttribute('width', 100 )"  />
+    </view>
+    </view>
+</canvas>
