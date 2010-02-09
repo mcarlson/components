@@ -9,8 +9,8 @@
         <![CDATA[ 
         if ( m && ( this.mouseisover || this.mouseisdown ) &&
                 !this.childOf( m ) ){
-            this.mouseisover = this.mouseisdown = false;
-            this._updateFrame();
+            this.setAttribute('mouseisover', false );
+            this.setAttribute('mouseisdown', false );
         }
         ]]> 
     </handler>

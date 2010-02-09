@@ -7,6 +7,7 @@
     <class name="scrlstepbtn" height="${this.width}" extends="basepanel" with="applybasecolor,buttonevents,mousedownrepeater,componentfocus" opacity=".1" focusable="true">
         <handler name="onmouseisover" args="isover">
             this.animate('opacity', isover ? .8 : .1, 200);
+            this.classroot.setAttribute('activated', isover);
         </handler>
         <attribute name="direction" value="1" type="number"/>
         <!--- @keywords private -->
@@ -17,6 +18,16 @@
         <handler name="onmousestilldown">
             this.classroot.step(this.direction);
         </handler>
+        <handler name="onkeydown" args="key">
+            if (key == 37 || key == 38) {
+                // if left or up
+                this.classroot.step(-1);
+            } else if (key == 39 || key == 40) {
+                // if right or down
+                this.classroot.step(1);
+            }
+        </handler>
+
         <method name="draw">
             <![CDATA[
             //super.draw();
@@ -52,13 +63,15 @@
             this.lineWidth = this.borderwidth;
             this.lineStyle = this.interiorbordercolor;
             this.fill();
-            //this.stroke();
             ]]>
         </method>
     </class>
 
     <class name="scrltrk" with="buttonevents,mousedownrepeater">
         <attribute name="direction" value="1" type="number"/>
+        <handler name="onmouseisover" args="isover">
+            this.classroot.setAttribute('activated', isover);
+        </handler>
         <!--- @keywords private -->
         <handler name="onmousedown">
             this.classroot.page(this.direction);
@@ -70,6 +83,10 @@
     </class>
 
     <class name="scrlthmb" extends="bsbtn" focusable="false" vertical="true">
+        <handler name="onmouseisover" args="isover">
+            this.classroot.setAttribute('activated', isover);
+        </handler>
+
         <!--- @keywords private -->
         <attribute name="target" value="null" />
         <!--- @keywords private -->
@@ -454,6 +471,12 @@
             if (this.axis != 'y') return;
             // check if the mouse is over the view
             if (this.mousewheelactive || (this.scrolltarget && this.scrolltarget.immediateparent && this.scrolltarget.immediateparent.isMouseOver()) ) {
+                // activate, then deactivate after a little while
+                this.setAttribute('activated', true);
+                if (! this.__deactivatedel) {
+                    this.__deactivatedel = new LzDelegate(this, 'deactivate');
+                }
+                lz.Timer.resetTimer(this.__deactivatedel, 3000);
                 this.step(-d);
             }
             ]]>
@@ -590,12 +613,6 @@
             this.setPosRelative(n*this.pagesize);
         </method>
 
-        <!--- @keywords private -->
-        <method name="_applystyle" args="s">
-            if (this.style != null) {
-                setTint(this, this.style.basecolor);
-            }
-        </method>
         <doc>
           <tag name="shortdesc"><text>Provides non-visual aspects of scrollbar.</text></tag>
           <text>
@@ -691,9 +708,37 @@
         </doc>
     </mixin>
 
-    <class name="scrlbr" extends="basepanel" with="applybasecolor,bsscrlbr">
+    <class name="scrlbr" extends="basepanel" with="buttonevents,applybasecolor,bsscrlbr">
         <attribute name="size" value="16" style="size"/>
         <attribute name="width" value="${this.size}"/>
+        <attribute name="opacity" value=".2"/>
+
+        <handler name="onmouseisover" args="isover">
+            this.setAttribute('activated', isover);
+        </handler>
+        <attribute name="activated" value="false" type="boolean"/>
+        <event name="onactivated"/>
+        <setter name="activated" args="activated">
+            if (activated != this.activated) {
+                this.activated = activated;
+                if (activated) {
+                    this.activate();
+                } else {
+                    this.deactivate();
+                }
+            }
+            if (this.onactivated.ready) this.onactivated.sendEvent(activated)
+        </setter>
+        <method name="activate">
+            this.activated = true;
+            this.animate('opacity', 1, 200);
+        </method>
+        <method name="deactivate">
+            this.activated = false;
+            if (! this.isMouseOver()) {
+                this.animate('opacity', .2, 200);
+            }
+        </method>
 
         <method name="draw">
             this.beginPath();

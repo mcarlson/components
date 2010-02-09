@@ -7,8 +7,8 @@
         <attribute name="cornerradius"   style="corner-radius" type="number" value="0"/>
         <attribute name="interiorbordercolor" style="interior-border-color" type="color"/>
         <attribute name="interiorfillcolor" style="interior-fill-color" type="color"/>
-
         <attribute name="lockredraw" value="false" type="boolean"/>
+
         <handler name="onwidth" method="redraw"/>
         <handler name="onheight" method="redraw"/>
         <handler name="oncontext" method="redraw"/>

@@ -1,22 +1,27 @@
 <mixin name="drawbutton">
-    <handler name="onframe" method="redraw"/>
-    <method name="getDrawState">            
-        switch(this.frame) {
-            case 1:
-                return 'up';
-            case 2:
-                return 'over';
-            case 3:
-                return 'down';
-            case 4:
-                return 'up';
-        }
-    </method>
+    <attribute name="vertical" value="false" type="boolean"/>
+    <attribute name="mousestate" type="string" value="up"/>
 
-    <method name="draw" args="context">
-        var state = this.getDrawState();
-        if (! state) return;
-        //Debug.info('draw', state);
+    <handler name="onframe" args="frame">
+        // default
+        var newstate = 'up';
+        switch(frame) {
+            case 2:
+                newstate = 'over';
+                break;
+            case 3:
+                newstate = 'down';
+                break;
+        }
+
+        if (this.mousestate != newstate) {
+            this.setAttribute('mousestate', newstate);
+            this.redraw();
+        }
+    </handler>
+
+    <method name="draw">
+        //Debug.info('draw', this.mousestate);
         this.globalAlpha = this.disabled ? .5 : 1;
         this.lineWidth = this.borderwidth;
         this.drawinteriorborder(this);
@@ -49,25 +54,22 @@
     <attribute name="interiorfillcolordown"    value="${this.interiorfillcolor}" style="interior-fill-color-down" type="color"/>
 
     <method name="drawinteriorborder" args="context">
-        var state = this.getDrawState();
-        if (! state) return;
-        if (! this['interiorfillcolor' + state]) return;
+        if (! this['interiorfillcolor' + this.mousestate]) return;
         // DRAW INTERIOR BORDER AND FILL
         context.beginPath();
         context.rect(1, 1, this.width - 2, this.height - 2, this.cornerradius);
         context.closePath();
 
-        context.fillStyle = this['interiorfillcolor' + state];
+        context.fillStyle = this['interiorfillcolor' + this.mousestate];
         context.fill();
 
         if (this.borderwidth > 0) {
-            if (! this['interiorbordercolor' + state]) return;
-            context.strokeStyle = this['interiorbordercolor' + state];
+            if (! this['interiorbordercolor' + this.mousestate]) return;
+            context.strokeStyle = this['interiorbordercolor' + this.mousestate];
             context.stroke();
         }
     </method>
 
-    <attribute name="vertical"         value="false" type="boolean"/>
     <attribute name="gradientfillstartup"      value="null" style="gradientfill-start-up" type="color"/>
     <attribute name="gradientfillstopup"       value="null" style="gradientfill-stop-up" type="color"/>
     <attribute name="gradientfillstartover"    value="null" style="gradientfill-start-over" type="color"/>
@@ -87,15 +89,13 @@
     </method>
 
     <method name="drawgradient" args="context">
-        var state = this.getDrawState();
-        if (! state) return;
-        if (! this['gradientfillstart' + state] || ! this['gradientfillstop' + state]) return;
+        if (! this['gradientfillstart' + this.mousestate] || ! this['gradientfillstop' + this.mousestate]) return;
 
         context.beginPath();
         var bevel = 1;
         var width = this.width - (bevel * 2);
         var height = this.height - (bevel * 2);
-        if (state == 'down') {
+        if (this.mousestate == 'down') {
             if (this.vertical) {
                 context.rect(bevel, bevel, width * .5, height);
             } else {
@@ -117,8 +117,8 @@
             } else {
                 var g = context.createLinearGradient(0,Math.round( 0.5*height),0,height);
             }
-            g.addColorStop(0, this['gradientfillstart' + state] );
-            g.addColorStop(1, this['gradientfillstop' + state] );
+            g.addColorStop(0, this['gradientfillstart' + this.mousestate] );
+            g.addColorStop(1, this['gradientfillstop' + this.mousestate] );
             this._gradientfills[this.frame] = g;
         }
         context.fillStyle = this._gradientfills[this.frame];
