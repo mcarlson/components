@@ -4,5 +4,6 @@
     <include href="componentfocus.lzx"/>
     <include href="applybasecolor.lzx"/>
     <include href="button/"/>
+    <include href="inputtext/"/>
     <include href="scrollbar/"/>
 </library>

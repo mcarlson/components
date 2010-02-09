@@ -8,18 +8,41 @@
         <attribute name="interiorbordercolor" style="interior-border-color" type="color"/>
         <attribute name="interiorfillcolor" style="interior-fill-color" type="color"/>
         <attribute name="lockredraw" value="false" type="boolean"/>
+        <attribute name="scopes"/>
 
         <handler name="onwidth" method="redraw"/>
         <handler name="onheight" method="redraw"/>
         <handler name="oncontext" method="redraw"/>
 
         <method name="redraw" args="ignore=null" >            
+            <![CDATA[
             if (! this.context || ! this.isinited || this.lockredraw) return;
             this.clear();
-            this.draw();
+            if (this.draw) this.draw(this);
+            if (! this.scopes) {
+                this.scopes = [];
+                return;
+            }
+            var l = this.scopes.length;
+            if (! l) return;
+            for (var i = 0; i < l; i++) {
+                var scope = this.scopes[i];
+                if (scope) {
+                    scope.draw(this);
+                }
+            }
+            ]]>
         </method>
-        <method name="draw">            
-            return false;
+
+        <method name="addScope" args="scope">
+            <![CDATA[
+            if (! this.scopes) this.scopes = [];
+            new LzDelegate(this, 'redraw', scope, 'onx');
+            new LzDelegate(this, 'redraw', scope, 'ony');
+            this.scopes.push(scope);
+            //console.log('addScope', scope, this.scopes);
+            this.redraw()
+            ]]>
         </method>
     </class>
 </library>

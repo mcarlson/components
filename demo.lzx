@@ -31,11 +31,14 @@
         }
     </stylesheet--> 
 
-    <vbox x="10" y="10" spacing="10">
+    <basepanel x="10" y="10" spacing="10">
+        <simplelayout spacing="10"/>
         <bsbtn width="50" height="50"/>
         <bsbtn width="50" height="50" disabled="true"/>
         <btn onclick="this.animate('width', 100, 500)" text="ok"/>
         <btn onclick="this.animate('width', 100, 500)" text="cancel"/>
+        <inpt width="100">Hey there!</inpt>
+        <inpt width="100" multiline="true">Hey there! This text should wrap onto a few lines.</inpt>
         <view bgcolor="white" width="200" height="200" clip="true">
             <text multiline="true" width="180">
                 Man through his scientific genius has been able to draw distance and
@@ -68,7 +71,7 @@
             </text>
             <scrlbr/>
         </view>
-    </vbox>
+    </basepanel>
 
     
 </canvas>
