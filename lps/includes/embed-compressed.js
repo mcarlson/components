@@ -11,19 +11,25 @@ $4.flashvars+="&accessible=true"
 $4.flashvars+="&history=true"
 };if($0.bgcolor!=null){
 $4.flashvars+="&bgcolor="+escape($0.bgcolor)
-};$4.flashvars+="&width="+escape($0.width);$4.flashvars+="&height="+escape($0.height);$4.flashvars+="&__lzurl="+escape($3);$4.flashvars+="&__lzminimumversion="+escape($1);$4.flashvars+="&id="+escape($0.id);var $3=$4.url+"?"+$4.query;var $7=$2._getAppendDiv($0.id,$0.appenddivid);var $8={width:"100%",height:"100%",id:$0.id,bgcolor:$0.bgcolor,wmode:$0.wmode,flashvars:$4.flashvars,allowfullscreen:$0.allowfullscreen,flash8:$3,appenddiv:$7};if($2[$0.id])alert("Warning: an app with the id: "+$0.id+" already exists.");var app=$2[$0.id]=$2.applications[$0.id]={runtime:"swf",_id:$0.id,appenddiv:$7,setCanvasAttribute:$2._setCanvasAttributeSWF,getCanvasAttribute:$2._getCanvasAttributeSWF,callMethod:$2._callMethodSWF,_ready:$2._ready,_onload:[],_getSWFDiv:$2._getSWFDiv,loaded:false,_sendMouseWheel:$2._sendMouseWheel,_sendAllKeysUp:$2._sendAllKeysUpSWF,_setCanvasAttributeDequeue:$2._setCanvasAttributeDequeue,_sendPercLoad:$2._sendPercLoad,setGlobalFocusTrap:$2.__setGlobalFocusTrapSWF};if($0.history==false){
+};var $7=lz.embed.options;if($0.cancelkeyboardcontrol){
+$7.cancelkeyboardcontrol=$0.cancelkeyboardcontrol
+};$4.flashvars+="&width="+escape($0.width);$4.flashvars+="&height="+escape($0.height);$4.flashvars+="&__lzurl="+escape($3);$4.flashvars+="&__lzminimumversion="+escape($1);$4.flashvars+="&id="+escape($0.id);var $3=$4.url+"?"+$4.query;var $8=$2._getAppendDiv($0.id,$0.appenddivid);var $9={width:"100%",height:"100%",id:$0.id,bgcolor:$0.bgcolor,wmode:$0.wmode,flashvars:$4.flashvars,allowfullscreen:$0.allowfullscreen,flash8:$3,appenddiv:$8};if($2[$0.id])alert("Warning: an app with the id: "+$0.id+" already exists.");var app=$2[$0.id]=$2.applications[$0.id]={runtime:"swf",_id:$0.id,appenddiv:$8,setCanvasAttribute:$2._setCanvasAttributeSWF,getCanvasAttribute:$2._getCanvasAttributeSWF,callMethod:$2._callMethodSWF,_ready:$2._ready,_onload:[],_getSWFDiv:$2._getSWFDiv,loaded:false,_sendMouseWheel:$2._sendMouseWheel,_sendAllKeysUp:$2._sendAllKeysUpSWF,_setCanvasAttributeDequeue:$2._setCanvasAttributeDequeue,_sendPercLoad:$2._sendPercLoad,setGlobalFocusTrap:$2.__setGlobalFocusTrapSWF};if($0.history==false){
 $2.history.active=false
-};$2.dojo.addLoadedListener($2._loaded,app);$2.dojo.setSwf($8,$1);$7.style.height=$2.CSSDimension($0.height);$7.style.width=$2.CSSDimension($0.width);if($0.cancelmousewheel!=true&&($2.browser.OS=="Mac"||$2.browser.OS=="Windows")){
+};$2.dojo.addLoadedListener($2._loaded,app);$2.dojo.setSwf($9,$1);$8.style.height=$2.CSSDimension($0.height);$8.style.width=$2.CSSDimension($0.width);if($0.cancelmousewheel!=true&&($2.browser.OS=="Mac"||$2.browser.OS=="Windows")){
 if($2["mousewheel"]){
 $2.mousewheel.setCallback(app,"_sendMouseWheel")
-}};if(($8.wmode=="transparent"||$8.wmode=="opaque")&&$2.browser.OS=="Windows"&&($2.browser.isOpera||$2.browser.isFirefox)){
-var div=$8.appenddiv;div.onmouseout=function($0){
+}};if(($9.wmode=="transparent"||$9.wmode=="opaque")&&$2.browser.OS=="Windows"&&($2.browser.isOpera||$2.browser.isFirefox)){
+var div=$9.appenddiv;div.onmouseout=function($0){
 div.mouseisoutside=true
 };div.onmouseover=function($0){
 div.mouseisoutside=false
 };div._gotmouseup=document.onmouseup=function($0){
 if(div.mouseisoutside){
 app.callMethod("LzMouseKernel.__mouseUpOutsideHandler()")
+}}};if($2.browser.isIE&&$3.indexOf("swf8")==-1&&!$7.cancelkeyboardcontrol){
+document.onkeydown=function($0){
+if(!$0)$0=window.event;if($0.keyCode==9){
+app.callMethod("lz.Keys.__browserTabEvent("+$0.shiftKey+")");return false
 }}}},__swfSetAppAppendDivStyle:function($0,$1,$2){
 var $3=lz.embed.applications[$0].appenddiv;return $3.style[$1]=$2
 },lfc:function($0,$1){
@@ -32,7 +38,7 @@ $1="."
 }else if(!$1||typeof $1!="string"){
 alert("WARNING: lz.embed.lfc() requires a valid serverroot to be specified.");return
 };lz.embed.options.serverroot=$1;if(lz.embed.browser.isIE){
-var $2=$1+"lps/includes/excanvas.js";this.__dhtmlLoadScript($2);if(lz.embed.browser.version<7){
+if(lz.embed.browser.version<7){
 this.__dhtmlLoadScript("http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js")
 }};this.__dhtmlLoadScript($0)
 },dhtml:function($0){
@@ -233,7 +239,8 @@ return $0.detachEvent("on"+$1,$5)
 }},_handlers:{},_cleanupHandlers:function(){
 lz.embed._handlers={}},getAbsolutePosition:function($0){
 var $1=null;var $2={};var $3;if(!(lz.embed.browser.isFirefox&&$0==document.body)&&$0.getBoundingClientRect){
-$3=$0.getBoundingClientRect();var $4=document.documentElement.scrollTop||document.body.scrollTop;var $5=document.documentElement.scrollLeft||document.body.scrollLeft;return {x:Math.floor($3.left+$5),y:Math.floor($3.top+$4)}}else if(document.getBoxObjectFor){
+if(!$0.parentNode){
+return {x:0,y:0}};$3=$0.getBoundingClientRect();var $4=document.documentElement.scrollTop||document.body.scrollTop;var $5=document.documentElement.scrollLeft||document.body.scrollLeft;return {x:Math.floor($3.left+$5),y:Math.floor($3.top+$4)}}else if(document.getBoxObjectFor){
 $3=document.getBoxObjectFor($0);$2={x:$3.x,y:$3.y}}else{
 $2={x:$0.offsetLeft,y:$0.offsetTop};$1=$0.offsetParent;if($1!=$0){
 while($1){
@@ -441,7 +448,7 @@ alert("There was an error downloading the Flash Player update. "+"Please try aga
 var $6="__lz"+lz.embed.iframemanager.__counter++;var $7='javascript:""';var $8='lz.embed.iframemanager.__gotload("'+$6+'")';if($1==null||$1=="null"||$1=="")$1=$6;lz.embed.iframemanager.__namebyid[$6]=$1;if($3==null||$3=="undefined"){
 $3=document.body
 };if(document.all){
-var $9="<iframe name='"+$1+"' id='"+$6+"' src='"+$7+"' onload='"+$8+"' frameBorder='0'";if($2!=true)$9+=" scrolling='no'";$9+="></iframe>";var $a=document.createElement("div");lz.embed.__setAttr($a,"id",$6+"Container");$3.appendChild($a);$a.innerHTML=$9;var $b=document.getElementById($6)
+var $9="<iframe name='"+$1+"' id='"+$6+"' src='"+$7+"' onload='"+$8+"' frameBorder='0'";if($2!=true)$9+=" scrolling='no'";$9+="></iframe>";var $a=document.createElement("div");lz.embed.__setAttr($a,"id",$6+"Container");$3.appendChild($a);$a.style.position="absolute";$a.style.display="none";$a.style.top="0px";$a.style.left="0px";$a.innerHTML=$9;var $b=document.getElementById($6)
 }else{
 var $b=document.createElement("iframe");lz.embed.__setAttr($b,"name",$1);lz.embed.__setAttr($b,"src",$7);lz.embed.__setAttr($b,"id",$6);lz.embed.__setAttr($b,"onload",$8);if($2!=true)lz.embed.__setAttr($b,"scrolling","no");this.appendTo($b,$3)
 };if($b){
@@ -522,7 +529,10 @@ if(lz.embed[$1.owner]){
 lz.embed[$1.owner].callMethod("lz.embed.iframemanager.__gotload('"+$0+"')")
 }else{
 return
-}};this.__loading[$0]=false;if(this.__sendmouseevents[$0]){
+}};this.__loading[$0]=false;if(document.all){
+if($1.parentElement){
+$1.parentElement.style.display=""
+}};if(this.__sendmouseevents[$0]){
 this.__setSendMouseEvents($0,true)
 };if(this.__calljsqueue[$0]){
 this.__playQueue(this.__calljsqueue[$0]);delete this.__calljsqueue[$0]
@@ -634,7 +644,7 @@ $1[$2](window,"DOMMouseScroll",$1.mousewheel,"__mousewheelEvent")
 var $0=lz.embed.history;if($0.active||$0.active==false)return;$0.active=true;$0._title=top.document.title;var $1=$0.get();var $2=lz.embed.browser;if($2.isSafari&&$2.version<523.1){
 $0._historylength=history.length;$0._history=[];for(var $3=1;$3<$0._historylength;$3++){
 $0._history.push("")
-};$0._history.push($1);var $4=document.createElement("form");$4.method="get";document.body.appendChild($4);$0._form=$4;if(!top.document.location.lzaddr){
+};$0._history.push($1);var $4=document.createElement("form");$4.method="get";document.body.appendChild($4);$4.style.display="none";$0._form=$4;if(!top.document.location.lzaddr){
 top.document.location.lzaddr={}};if(top.document.location.lzaddr.history){
 $0._history=top.document.location.lzaddr.history.split(",")
 };if($1!=""){
