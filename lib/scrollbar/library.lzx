@@ -4,9 +4,20 @@
     <include href="../componentfocus.lzx"/>
     <include href="../button/"/>
 
-    <class name="scrlstepbtn" height="${this.width}" extends="basepanel" with="applybasecolor,buttonevents,mousedownrepeater,componentfocus" opacity=".1" focusable="true">
+    <class name="scrlstepbtn" height="${this.width}" extends="basepanel" with="applybasecolor,buttonevents,mousedownrepeater,componentfocus" focusable="true">
+        <handler name="oninit" args="isover">
+            if (canvas.capabilities.minimize_opacity_changes) {
+                // TODO: handle for IE
+            } else {
+                this.setAttribute('opacity', .1);
+            }
+        </handler>
         <handler name="onmouseisover" args="isover">
-            this.animate('opacity', isover ? .8 : .1, 200);
+            if (canvas.capabilities.minimize_opacity_changes) {
+                // TODO: handle in IE
+            } else {
+                this.animate('opacity', isover ? .8 : .1, 200);
+            }
             this.classroot.setAttribute('activated', isover);
         </handler>
         <attribute name="direction" value="1" type="number"/>
@@ -713,8 +724,14 @@
     <class name="scrlbr" extends="basepanel" with="buttonevents,bsscrlbr">
         <attribute name="size" value="16" style="size"/>
         <attribute name="width" value="${this.size}"/>
-        <attribute name="opacity" value=".2"/>
 
+        <handler name="oninit" args="isover">
+            if (canvas.capabilities.minimize_opacity_changes) {
+                // TODO: handle for IE
+            } else {
+                this.setAttribute('opacity', .4);
+            }
+        </handler>
         <handler name="onmouseisover" args="isover">
             this.setAttribute('activated', isover);
         </handler>
@@ -739,14 +756,22 @@
             }
             lz.Timer.resetTimer(this.__deactivatedel, 2000);
         </method>
-        <method name="activate">
+        <method name="activate" args="ignore=null">
             this.activated = true;
-            this.animate('opacity', 1, 200);
+            if (canvas.capabilities.minimize_opacity_changes) {
+                // TODO: handle for IE
+            } else {
+                this.animate('opacity', 1, 200);
+            }
         </method>
-        <method name="deactivate">
+        <method name="deactivate" args="ignore=null">
             this.activated = false;
             if (! this.isMouseOver()) {
-                this.animate('opacity', .2, 200);
+                if (canvas.capabilities.minimize_opacity_changes) {
+                    // TODO: handle for IE
+                } else {
+                    this.animate('opacity', .4, 200);
+                }
             }
         </method>
 
