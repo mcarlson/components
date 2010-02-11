@@ -1,4 +1,4 @@
-canvas=new LzCanvas(null,{__LZproxied:"false",appbuilddate:"2010-02-10T22:37:24Z",bgcolor:16777215,embedfonts:true,font:"Helvetica,Sans",fontname:"Helvetica,Sans",fontsize:12,fontstyle:"plain",height:"100%",lpsbuild:"15667 /Users/maxcarlson/openlaszlo/trunk-clean",lpsbuilddate:"2010-02-09T22:00:50Z",lpsrelease:"Latest",lpsversion:"5.0.x",runtime:"dhtml",width:"100%"});Class.make("$lzc$class_simplelayout",LzLayout,["axis",void 0,"$lzc$set_axis",function($0){
+canvas=new LzCanvas(null,{__LZproxied:"false",appbuilddate:"2010-02-11T02:41:13Z",bgcolor:16777215,embedfonts:true,font:"Helvetica,Sans",fontname:"Helvetica,Sans",fontsize:12,fontstyle:"plain",height:"100%",lpsbuild:"15667 /Users/maxcarlson/openlaszlo/trunk-clean",lpsbuilddate:"2010-02-09T22:00:50Z",lpsrelease:"Latest",lpsversion:"5.0.x",runtime:"dhtml",width:"100%"});Class.make("$lzc$class_simplelayout",LzLayout,["axis",void 0,"$lzc$set_axis",function($0){
 this.setAxis($0)
 },"inset",void 0,"$lzc$set_inset",function($0){
 this.inset=$0;if(this.subviews&&this.subviews.length)this.update();if(this["oninset"])this.oninset.sendEvent(this.inset)
