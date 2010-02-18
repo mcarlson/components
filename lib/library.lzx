@@ -1,5 +1,6 @@
 <library>
     <include href="basepanel.lzx"/>
+    <include href="virtualdrawview.lzx"/>
     <include href="button/"/>
     <include href="inputtext/"/>
     <include href="scrollbar/"/>

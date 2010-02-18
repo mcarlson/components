@@ -1,4 +1,4 @@
-canvas=new LzCanvas(null,{__LZproxied:"false",appbuilddate:"2010-02-18T21:07:49Z",bgcolor:16777215,embedfonts:true,font:"Helvetica,Sans",fontname:"Helvetica,Sans",fontsize:12,fontstyle:"plain",height:"100%",lpsbuild:"15732 /Users/maxcarlson/openlaszlo/trunk-clean",lpsbuilddate:"2010-02-13T03:16:54Z",lpsrelease:"Latest",lpsversion:"5.0.x",runtime:"dhtml",width:"100%"});Mixin.make("DrawviewShared",null,["$lzsc$initialize",function($0,$1,$2,$3){
+canvas=new LzCanvas(null,{__LZproxied:"false",appbuilddate:"2010-02-18T21:34:15Z",bgcolor:16777215,embedfonts:true,font:"Helvetica,Sans",fontname:"Helvetica,Sans",fontsize:12,fontstyle:"plain",height:"100%",lpsbuild:"15732 /Users/maxcarlson/openlaszlo/trunk-clean",lpsbuilddate:"2010-02-13T03:16:54Z",lpsrelease:"Latest",lpsversion:"5.0.x",runtime:"dhtml",width:"100%"});Mixin.make("DrawviewShared",null,["$lzsc$initialize",function($0,$1,$2,$3){
 switch(arguments.length){
 case 0:
 $0=null;
@@ -371,7 +371,36 @@ this.setAttribute("interiorbordercolor",LzColorUtils.convertColor("void 0"))
 with(this){
 this.setAttribute("interiorfillcolor",LzColorUtils.convertColor("void 0"))
 }},bordercolor:new LzStyleConstraintExpr("bordercolor","border-color","color",new LzOnceExpr("$m5")),borderwidth:new LzStyleConstraintExpr("borderwidth","border-width","number",0),cornerradius:new LzStyleConstraintExpr("cornerradius","corner-radius","number",0),interiorbordercolor:new LzStyleConstraintExpr("interiorbordercolor","interior-border-color","color",new LzOnceExpr("$m6")),interiorfillcolor:new LzStyleConstraintExpr("interiorfillcolor","interior-fill-color","color",new LzOnceExpr("$m7")),lockredraw:false,scopes:null},$lzc$class_basepanel.attributes)
-}}})($lzc$class_basepanel);Mixin.make("$lzc$class_componentmodel",null,["value",void 0,"disabled",void 0,"$m12",function($0){
+}}})($lzc$class_basepanel);Mixin.make("$lzc$class_virtualdrawview",null,["drawtarget",void 0,"ondrawtarget",void 0,"init",function(){
+var $0=this.immediateparent;if(lz.basepanel["$lzsc$isa"]?lz.basepanel.$lzsc$isa($0):$0 instanceof lz.basepanel){
+this.setAttribute("drawtarget",$0)
+};(arguments.callee["$superclass"]&&arguments.callee.$superclass.prototype["init"]||this.nextMethod(arguments.callee,"init")).call(this)
+},"$lzc$set_drawtarget",function($0){
+if(lz.basepanel["$lzsc$isa"]?lz.basepanel.$lzsc$isa($0):$0 instanceof lz.basepanel){
+this.drawtarget=$0;$0.addScope(this);if(this.ondrawtarget.ready)this.ondrawtarget.sendEvent($0)
+}},"redraw",function($0){
+switch(arguments.length){
+case 0:
+$0=null;
+
+};if(!this.drawtarget||!this.isinited)return;this.drawtarget.redraw(this)
+},"$lzsc$initialize",function($0,$1,$2,$3){
+switch(arguments.length){
+case 0:
+$0=null;
+case 1:
+$1=null;
+case 2:
+$2=null;
+case 3:
+$3=false;
+
+};(arguments.callee["$superclass"]&&arguments.callee.$superclass.prototype["$lzsc$initialize"]||this.nextMethod(arguments.callee,"$lzsc$initialize")).call(this,$0,$1,$2,$3)
+}],["tagname","virtualdrawview","attributes",new LzInheritedHash(LzView.attributes)]);(function($0){
+with($0)with($0.prototype){
+{
+LzNode.mergeAttributes({drawtarget:null,ondrawtarget:LzDeclaredEvent},$lzc$class_virtualdrawview.attributes)
+}}})($lzc$class_virtualdrawview);Mixin.make("$lzc$class_componentmodel",null,["value",void 0,"disabled",void 0,"$m12",function($0){
 with(this){
 var $1=!disabled;if($1!==this["focusable"]||!this.inited){
 this.setAttribute("focusable",$1)
@@ -429,36 +458,7 @@ $3=false;
 with($0)with($0.prototype){
 {
 LzNode.mergeAttributes({$delegates:["onfocus","doFocus",null,"onblur","doBlur",null],focusanimationspeed:500,shadowblurradius:0,shadowcolor:LzColorUtils.convertColor("0xcc"),shadowdistance:0},$lzc$class_componentfocus.attributes)
-}}})($lzc$class_componentfocus);Mixin.make("$lzc$class_virtualdrawview",null,["drawtarget",void 0,"ondrawtarget",void 0,"init",function(){
-var $0=this.immediateparent;if(lz.basepanel["$lzsc$isa"]?lz.basepanel.$lzsc$isa($0):$0 instanceof lz.basepanel){
-this.setAttribute("drawtarget",$0)
-};(arguments.callee["$superclass"]&&arguments.callee.$superclass.prototype["init"]||this.nextMethod(arguments.callee,"init")).call(this)
-},"$lzc$set_drawtarget",function($0){
-if(lz.basepanel["$lzsc$isa"]?lz.basepanel.$lzsc$isa($0):$0 instanceof lz.basepanel){
-this.drawtarget=$0;$0.addScope(this);if(this.ondrawtarget.ready)this.ondrawtarget.sendEvent($0)
-}},"redraw",function($0){
-switch(arguments.length){
-case 0:
-$0=null;
-
-};if(!this.drawtarget||!this.isinited)return;this.drawtarget.redraw(this)
-},"$lzsc$initialize",function($0,$1,$2,$3){
-switch(arguments.length){
-case 0:
-$0=null;
-case 1:
-$1=null;
-case 2:
-$2=null;
-case 3:
-$3=false;
-
-};(arguments.callee["$superclass"]&&arguments.callee.$superclass.prototype["$lzsc$initialize"]||this.nextMethod(arguments.callee,"$lzsc$initialize")).call(this,$0,$1,$2,$3)
-}],["tagname","virtualdrawview","attributes",new LzInheritedHash(LzView.attributes)]);(function($0){
-with($0)with($0.prototype){
-{
-LzNode.mergeAttributes({drawtarget:null,ondrawtarget:LzDeclaredEvent},$lzc$class_virtualdrawview.attributes)
-}}})($lzc$class_virtualdrawview);Mixin.make("$lzc$class_buttonevents",null,["mouseisover",void 0,"mouseisdown",void 0,"$m16",function(){
+}}})($lzc$class_componentfocus);Mixin.make("$lzc$class_buttonevents",null,["mouseisover",void 0,"mouseisdown",void 0,"$m16",function(){
 var $0=lz.ModeManager;return $0
 },"$m17",function($0){
 if($0&&(this.mouseisover||this.mouseisdown)&&!this.childOf($0)){
@@ -2142,4 +2142,4 @@ case 3:
 $3=false;
 
 };(arguments.callee["$superclass"]&&arguments.callee.$superclass.prototype["$lzsc$initialize"]||this.nextMethod(arguments.callee,"$lzsc$initialize")).call(this,$0,$1,$2,$3)
-}],["children",LzNode.mergeChildren([],$lzc$class_btn["children"]),"attributes",new LzInheritedHash($lzc$class_btn.attributes)]);canvas.LzInstantiateView({attrs:{x:10,y:10},children:[{attrs:{spacing:10},"class":$lzc$class_simplelayout},{attrs:{height:50,width:50},"class":$lzc$class_bsbtn},{attrs:{disabled:true,height:50,width:50},"class":$lzc$class_bsbtn},{attrs:{$delegates:["onclick","$m202",null],clickable:true,text:"ok"},"class":$lzc$class_m204},{attrs:{$delegates:["onclick","$m203",null],clickable:true,text:"cancel"},"class":$lzc$class_m205},{attrs:{text:"Hey there!",width:100},"class":$lzc$class_inpt},{attrs:{multiline:true,text:"Hey there! This text should wrap onto a few lines.",width:100},"class":$lzc$class_inpt},{attrs:{clip:true,height:200,width:200},children:[{attrs:{font:"Helvetica,Sans",fontsize:12,fontstyle:"plain",multiline:true,text:"Man through his scientific genius has been able to draw distance and save time and space. He has been able to carry highways through the stratosphere. We read just the other day that a rocket plane went 1900 miles in one hour. Twice as fast as the speed of sound. This is the new age. Bob Hope has described this new age, this jet age; it is an age in which planes will be moving so fast that we will have a non-stop flight from New York to Los Angeles, when you start out you might develop the hiccups and you will hic in New York and cup in Los Angeles. This is an age in which it will be possible to leave Tokyo on a Sunday morning and arrive in Seattle, Washington on the preceding Saturday night. When your friends meet you at the airport and ask what time did you leave Tokyo, you will have to say I left tomorrow. That is this new age. We live in one world geographically. We face the great problem of making it one spiritually.<br/>Through our scientific means we have made of the world a neighborhood and now the challenge confronts us through our moral and spiritual means to make of it a brotherhood. We must live together, we are not independent we are interdependent. We are all involved in a single process. Whatever affects one directly affects all indirectly for we are tied together in a single progress. We are all linked in the great chain of humanity.<br/>Martin Luther King, Jr.<br/>11 August 1956",width:184},"class":LzText},{"class":$lzc$class_scrlbr}],"class":LzView}],"class":$lzc$class_basepanel},21);lz["simplelayout"]=$lzc$class_simplelayout;lz["applybasecolor"]=$lzc$class_applybasecolor;lz["drawpanel"]=$lzc$class_drawpanel;lz["basepanel"]=$lzc$class_basepanel;lz["componentmodel"]=$lzc$class_componentmodel;lz["componentfocus"]=$lzc$class_componentfocus;lz["virtualdrawview"]=$lzc$class_virtualdrawview;lz["buttonevents"]=$lzc$class_buttonevents;lz["mousedownrepeater"]=$lzc$class_mousedownrepeater;lz["drawbutton"]=$lzc$class_drawbutton;lz["bsbtn"]=$lzc$class_bsbtn;lz["btn"]=$lzc$class_btn;lz["drawinputtext"]=$lzc$class_drawinputtext;lz["inpt"]=$lzc$class_inpt;lz["scrlstepbtn"]=$lzc$class_scrlstepbtn;lz["scrltrk"]=$lzc$class_scrltrk;lz["scrlthmb"]=$lzc$class_scrlthmb;lz["bsscrlbr"]=$lzc$class_bsscrlbr;lz["scrlbr"]=$lzc$class_scrlbr;canvas.initDone();
+}],["children",LzNode.mergeChildren([],$lzc$class_btn["children"]),"attributes",new LzInheritedHash($lzc$class_btn.attributes)]);canvas.LzInstantiateView({attrs:{x:10,y:10},children:[{attrs:{spacing:10},"class":$lzc$class_simplelayout},{attrs:{height:50,width:50},"class":$lzc$class_bsbtn},{attrs:{disabled:true,height:50,width:50},"class":$lzc$class_bsbtn},{attrs:{$delegates:["onclick","$m202",null],clickable:true,text:"ok"},"class":$lzc$class_m204},{attrs:{$delegates:["onclick","$m203",null],clickable:true,text:"cancel"},"class":$lzc$class_m205},{attrs:{text:"Hey there!",width:100},"class":$lzc$class_inpt},{attrs:{multiline:true,text:"Hey there! This text should wrap onto a few lines.",width:100},"class":$lzc$class_inpt},{attrs:{clip:true,height:200,width:200},children:[{attrs:{font:"Helvetica,Sans",fontsize:12,fontstyle:"plain",multiline:true,text:"Man through his scientific genius has been able to draw distance and save time and space. He has been able to carry highways through the stratosphere. We read just the other day that a rocket plane went 1900 miles in one hour. Twice as fast as the speed of sound. This is the new age. Bob Hope has described this new age, this jet age; it is an age in which planes will be moving so fast that we will have a non-stop flight from New York to Los Angeles, when you start out you might develop the hiccups and you will hic in New York and cup in Los Angeles. This is an age in which it will be possible to leave Tokyo on a Sunday morning and arrive in Seattle, Washington on the preceding Saturday night. When your friends meet you at the airport and ask what time did you leave Tokyo, you will have to say I left tomorrow. That is this new age. We live in one world geographically. We face the great problem of making it one spiritually.<br/>Through our scientific means we have made of the world a neighborhood and now the challenge confronts us through our moral and spiritual means to make of it a brotherhood. We must live together, we are not independent we are interdependent. We are all involved in a single process. Whatever affects one directly affects all indirectly for we are tied together in a single progress. We are all linked in the great chain of humanity.<br/>Martin Luther King, Jr.<br/>11 August 1956",width:184},"class":LzText},{"class":$lzc$class_scrlbr}],"class":LzView}],"class":$lzc$class_basepanel},21);lz["simplelayout"]=$lzc$class_simplelayout;lz["applybasecolor"]=$lzc$class_applybasecolor;lz["drawpanel"]=$lzc$class_drawpanel;lz["basepanel"]=$lzc$class_basepanel;lz["virtualdrawview"]=$lzc$class_virtualdrawview;lz["componentmodel"]=$lzc$class_componentmodel;lz["componentfocus"]=$lzc$class_componentfocus;lz["buttonevents"]=$lzc$class_buttonevents;lz["mousedownrepeater"]=$lzc$class_mousedownrepeater;lz["drawbutton"]=$lzc$class_drawbutton;lz["bsbtn"]=$lzc$class_bsbtn;lz["btn"]=$lzc$class_btn;lz["drawinputtext"]=$lzc$class_drawinputtext;lz["inpt"]=$lzc$class_inpt;lz["scrlstepbtn"]=$lzc$class_scrlstepbtn;lz["scrltrk"]=$lzc$class_scrltrk;lz["scrlthmb"]=$lzc$class_scrlthmb;lz["bsscrlbr"]=$lzc$class_bsscrlbr;lz["scrlbr"]=$lzc$class_scrlbr;canvas.initDone();
