@@ -21,12 +21,18 @@
     </handler>
 
     <method name="draw" args="context">
+        <![CDATA[
+        if (this.drawtarget && context === this) {
+            context.clear();
+            return;
+        }
         //Debug.info('draw', this.mousestate);
-        this.globalAlpha = this.disabled ? .5 : 1;
-        this.lineWidth = this.borderwidth;
-        this.drawinteriorborder(this);
-        this.drawgradient(this);
-        this.drawborder(this);
+        context.globalAlpha = this.disabled ? .5 : 1;
+        context.lineWidth = context.borderwidth;
+        this.drawinteriorborder(context);
+        this.drawgradient(context);
+        this.drawborder(context);
+        ]]>
     </method>
     
     <method name="drawborder" args="context">
@@ -44,8 +50,8 @@
     <handler name="oninteriorbordercolor" args="b">
         //Debug.debug('oninteriorbordercolor', b, (LzColorUtils.tohsv(b)).v - (LzColorUtils.tohsv(LzColorUtils.hextoint('#f2f2f2'))).v);
     </handler>
-    <attribute name="interiorbordercolor"    value="null" style="interior-border-color" type="color"/>
-    <attribute name="interiorfillcolor"      value="null" style="interior-fill-color" type="color"/>
+    <attribute name="interiorbordercolor"    value="void(0)" style="interior-border-color" type="color"/>
+    <attribute name="interiorfillcolor"      value="void(0)" style="interior-fill-color" type="color"/>
     <attribute name="interiorbordercolorup"    value="${this.interiorbordercolor}" style="interior-border-color-up" type="color"/>
     <attribute name="interiorfillcolorup"      value="${this.interiorfillcolor}" style="interior-fill-color-up" type="color"/>
     <attribute name="interiorbordercolorover"  value="${this.interiorbordercolor}" style="interior-border-color-over" type="color"/>
@@ -70,12 +76,12 @@
         }
     </method>
 
-    <attribute name="gradientfillstartup"      value="null" style="gradientfill-start-up" type="color"/>
-    <attribute name="gradientfillstopup"       value="null" style="gradientfill-stop-up" type="color"/>
-    <attribute name="gradientfillstartover"    value="null" style="gradientfill-start-over" type="color"/>
-    <attribute name="gradientfillstopover"     value="null" style="gradientfill-stop-over" type="color"/>
-    <attribute name="gradientfillstartdown"    value="null" style="gradientfill-start-down" type="color"/>
-    <attribute name="gradientfillstopdown"     value="null" style="gradientfill-stop-down" type="color"/>
+    <attribute name="gradientfillstartup"      value="void(0)" style="gradientfill-start-up" type="color"/>
+    <attribute name="gradientfillstopup"       value="void(0)" style="gradientfill-stop-up" type="color"/>
+    <attribute name="gradientfillstartover"    value="void(0)" style="gradientfill-start-over" type="color"/>
+    <attribute name="gradientfillstopover"     value="void(0)" style="gradientfill-stop-over" type="color"/>
+    <attribute name="gradientfillstartdown"    value="void(0)" style="gradientfill-start-down" type="color"/>
+    <attribute name="gradientfillstopdown"     value="void(0)" style="gradientfill-stop-down" type="color"/>
 
     <handler name="ongradientfillstartup" method="__resetgradientcache"/>
     <handler name="ongradientfillstopup" method="__resetgradientcache"/>

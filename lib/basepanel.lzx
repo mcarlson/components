@@ -1,14 +1,16 @@
 <library>
     <include href="extensions/drawview.lzx"/>
-
-    <class name="basepanel" extends="drawview" with="applybasecolor">
+    <include href="applybasecolor.lzx"/>
+    <include href="drawpanel.lzx"/>
+    
+    <class name="basepanel" extends="drawpanel" with="applybasecolor">
         <attribute name="borderwidth" style="border-width" type="number" value="0"/>
-        <attribute name="bordercolor" style="border-color" type="color"/>
+        <attribute name="bordercolor" style="border-color" type="color" value="void 0"/>
         <attribute name="cornerradius"   style="corner-radius" type="number" value="0"/>
-        <attribute name="interiorbordercolor" style="interior-border-color" type="color"/>
-        <attribute name="interiorfillcolor" style="interior-fill-color" type="color"/>
+        <attribute name="interiorbordercolor" style="interior-border-color" type="color" value="void 0"/>
+        <attribute name="interiorfillcolor" style="interior-fill-color" type="color" value="void 0"/>
         <attribute name="lockredraw" value="false" type="boolean"/>
-        <attribute name="scopes"/>
+        <attribute name="scopes" value="null"/>
 
         <handler name="onwidth" method="redraw"/>
         <handler name="onheight" method="redraw"/>
@@ -18,9 +20,8 @@
             <![CDATA[
             if (! this.context || ! this.isinited || this.lockredraw) return;
             this.clear();
-            if (this.draw) this.draw(this);
+            if (this['draw']) this.draw(this);
             if (! this.scopes) {
-                this.scopes = [];
                 return;
             }
             var l = this.scopes.length;
@@ -28,7 +29,12 @@
             for (var i = 0; i < l; i++) {
                 var scope = this.scopes[i];
                 if (scope) {
+                    var x = scope.x;
+                    var y = scope.y;
+                    this.translate(x, y);
+                    this.beginPath();
                     scope.draw(this);
+                    this.translate(-x, -y);
                 }
             }
             ]]>
@@ -36,12 +42,15 @@
 
         <method name="addScope" args="scope">
             <![CDATA[
-            if (! this.scopes) this.scopes = [];
+            if (! this.scopes) {
+                this.scopes = [];
+            }
             new LzDelegate(this, 'redraw', scope, 'onx');
             new LzDelegate(this, 'redraw', scope, 'ony');
+            new LzDelegate(this, 'redraw', scope, 'onwidth');
+            new LzDelegate(this, 'redraw', scope, 'onheight');
             this.scopes.push(scope);
             //console.log('addScope', scope, this.scopes);
-            this.redraw()
             ]]>
         </method>
     </class>

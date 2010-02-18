@@ -1,30 +1,35 @@
 <mixin name="drawinputtext">
-    <method name="init">
-        super.init();
-        var basepanel = this.immediateparent;
-        if (basepanel is lz.basepanel) {
-            this.drawtarget = basepanel;
-            basepanel.addScope(this);
+    <attribute name="borderopacity" value="1" type="number"/>
+    <handler name="onborderopacity" method="redraw"/>
+    <method name="doFocus" args="ignore=null">
+        if (! this.disabled) {
+            this.setAttribute('borderopacity', 0);
+            this.animate('borderopacity', 1, this.focusanimationspeed);
+            this.focused = true;
+            this.redraw();
         }
     </method>
-    <handler name="onfocus">
-        this.focused = true;
-        //console.log('focus', lz.Focus.getFocus());
-        //this.drawtarget.redraw();
-    </handler>
-    <handler name="onblur">
+    <method name="doBlur" args="ignore=null">
+        var a = this.animate('borderopacity', 0, this.focusanimationspeed);
+        new LzDelegate(this, 'finishBlur', a, 'onstop');
+        this.redraw();
+    </method>
+    <method name="finishBlur" args="ignore=null">
         this.focused = false;
-        //console.log('blur', lz.Focus.getFocus());
-        //this.drawtarget.redraw();
-    </handler>
+        this.setAttribute('borderopacity', 1);
+    </method>
     <method name="draw" args="scope">            
-        //console.log('draw', this, this.focused);
-        scope.clear();
-        scope.rect(this.x + 1,this.y,this.width - 1,this.height,scope.cornerradius);
+        if (! scope['interiorfillcolor'] || ! scope['interiorbordercolor']) return;
+        scope.rect(1,0,this.width - 1,this.height,scope.cornerradius);
+
         scope.lineWidth = scope.borderwidth;
-        scope.lineStyle = scope.interiorbordercolor;
+        scope.strokeStyle = this.focused ? scope.highlightcolor : scope.interiorbordercolor;
         scope.fillStyle = scope.interiorfillcolor;
-        scope.stroke();
         scope.fill();
+
+        var globalAlpha = scope.globalAlpha;
+        scope.globalAlpha = borderopacity;
+        scope.stroke();
+        scope.globalAlpha = globalAlpha;
     </method>
 </mixin>

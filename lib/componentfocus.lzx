@@ -1,12 +1,17 @@
 <library>
     <mixin name="componentfocus" shadowcolor="#0000cc" shadowdistance="0" shadowblurradius="0">
+        <attribute name="focusanimationspeed" type="number" value="500"/>
         <handler name="onfocus" method="doFocus"/>
         <handler name="onblur" method="doBlur"/>
         <method name="doFocus" args="ignore=null">
-            if (! this.disabled) this.animate('shadowblurradius', 10, 500);
+            var radius = 10;
+            if (this.capabilities.minimize_opacity_changes) {
+                radius = 2;
+            }
+            if (! this.disabled) this.animate('shadowblurradius', radius, this.focusanimationspeed);
         </method>
         <method name="doBlur" args="ignore=null">
-            this.animate('shadowblurradius', 0, 500);
+            this.animate('shadowblurradius', 0, this.focusanimationspeed);
         </method>
     </mixin>
 </library>

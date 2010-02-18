@@ -1,0 +1,23 @@
+<mixin name="virtualdrawview">
+    <attribute name="drawtarget" value="null" type="expression"/>
+    <event name="ondrawtarget"/>
+
+    <method name="init">
+        var basepanel = this.immediateparent;
+        if (basepanel is lz.basepanel) {
+            this.setAttribute('drawtarget', basepanel);
+        }
+        super.init();
+    </method>
+    <setter name="drawtarget" args="t">
+        if (t is lz.basepanel) {
+            this.drawtarget = t;
+            t.addScope(this);
+            if (this.ondrawtarget.ready) this.ondrawtarget.sendEvent(t);
+        }
+    </setter>
+    <method name="redraw" args="ignore=null">
+        if (! this.drawtarget || ! this.isinited) return;
+        this.drawtarget.redraw(this);
+    </method>
+</mixin>

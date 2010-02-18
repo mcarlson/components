@@ -4,20 +4,12 @@
     <include href="../componentfocus.lzx"/>
     <include href="../button/"/>
 
-    <class name="scrlstepbtn" height="${this.width}" extends="basepanel" with="applybasecolor,buttonevents,mousedownrepeater,componentfocus" focusable="true">
+    <class name="scrlstepbtn" height="${this.width}" with="applybasecolor,buttonevents,mousedownrepeater,componentfocus,virtualdrawview" focusable="true">
         <handler name="oninit" args="isover">
-            if (canvas.capabilities.minimize_opacity_changes) {
-                // TODO: handle for IE
-            } else {
-                this.setAttribute('opacity', .1);
-            }
+            this.setAttribute('opacity', .1);
         </handler>
         <handler name="onmouseisover" args="isover">
-            if (canvas.capabilities.minimize_opacity_changes) {
-                // TODO: handle in IE
-            } else {
-                this.animate('opacity', isover ? .8 : .1, 200);
-            }
+            this.animate('opacity', isover ? .8 : .1, 200);
             this.classroot.setAttribute('activated', isover);
         </handler>
         <attribute name="direction" value="1" type="number"/>
@@ -42,13 +34,15 @@
                 this.classroot.setAttribute('activated', true);
             }
         </handler>
+        <handler name="onopacity" method="redraw"/>
 
         <method name="draw" args="context">
             <![CDATA[
+            if (! context['interiorbordercolor']) return;
             //super.draw();
             // draw arrow
             //this.drawborder(this);
-            this.beginPath();
+            context.beginPath();
             var x = 2;
             var y = 2;
             var width = this.width - 2;
@@ -56,16 +50,16 @@
             
             if (this.direction < 0) {
                 // up
-                this.moveTo(x, height);
-                this.lineTo((width + x) * .5, y);
-                this.lineTo(width, height);
-                this.moveTo(x, height);
+                context.moveTo(x, height);
+                context.lineTo((width + x) * .5, y);
+                context.lineTo(width, height);
+                context.moveTo(x, height);
             } else {
                 // down
-                this.moveTo(x, y);
-                this.lineTo((width + x) * .5, height);
-                this.lineTo(width, y);
-                this.moveTo(x, y);
+                context.moveTo(x, y);
+                context.lineTo((width + x) * .5, height);
+                context.lineTo(width, y);
+                context.moveTo(x, y);
             }
             /* TODO: add left/right arrows
             var axis = this.classroot.axis;
@@ -74,10 +68,15 @@
             }
             */
 
-            this.globalAlpha = 1;
-            this.lineWidth = this.borderwidth;
-            this.lineStyle = this.interiorbordercolor;
-            this.fill();
+            var globalAlpha = context.globalAlpha;
+            context.globalAlpha = this.opacity;
+
+            context.lineWidth = context.borderwidth;
+            context.strokeStyle = context.interiorbordercolor;
+            context.fillStyle = context.interiorbordercolor;
+            context.fill();
+
+            context.globalAlpha = globalAlpha;
             ]]>
         </method>
     </class>
@@ -99,7 +98,7 @@
         </handler>
     </class>
 
-    <class name="scrlthmb" extends="bsbtn" focusable="false" vertical="true">
+    <class name="scrlthmb" extends="bsbtn" with="virtualdrawview" focusable="false" vertical="true">
         <handler name="onmouseisover" args="isover">
             this.classroot.setAttribute('activated', isover);
         </handler>
@@ -344,7 +343,7 @@
                 for (var i = 0; i < subcount; i++) {
                    var s = immediateparent.subviews[i];
                    if (s instanceof lz.view) {
-                      if (! (s subclassof lz.bsscrlbr)){
+                      if (! (s is lz.bsscrlbr)){
                         // first non-scrollbar view is the scrolltarget
                         if (!this.scrolltarget) this.scrolltarget = s;
                       } else {
@@ -779,7 +778,7 @@
             this.beginPath();
             this.rect(0,0,this.width,this.height,this.width);
             this.lineWidth = this.borderwidth;
-            this.lineStyle = this.interiorbordercolor;
+            this.strokeStyle = this.interiorbordercolor;
             this.fillStyle = this.interiorfillcolor;
             this.fill();
             this.stroke();
@@ -787,7 +786,7 @@
 
         <view name="scrolltrack" width="100%" height="100%">
             <scrltrk direction="-1" width="${parent.width}" height="${parent.thumb.y}"/>
-            <scrlthmb name="thumb" x="1" width="${parent.width-4}"/>
+            <scrlthmb name="thumb" x="1" width="${parent.width-2}" drawtarget="${classroot}"/>
             <scrltrk direction="1" y="${parent.thumb.y+parent.thumb.height}" width="${parent.width}" height="${parent.height - parent.thumb.y - parent.thumb.height}"/>
         </view>
         <scrlstepbtn direction="-1" x="1" width="${parent.width - 2}"/>
