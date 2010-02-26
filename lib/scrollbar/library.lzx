@@ -4,62 +4,65 @@
     <include href="../componentfocus.lzx"/>
     <include href="../button/"/>
 
-    <class name="scrlstepbtn" height="${this.width}" with="applybasecolor,buttonevents,mousedownrepeater,componentfocus,virtualdrawview" focusable="true">
-        <handler name="oninit" args="isover">
-            this.setAttribute('opacity', .1);
+    <class name="scrlstepbtn" height="${this.width}" with="buttonevents,mousedownrepeater,keyboardrepeater,drawborderfocus,componentfocus,virtualdrawview" focusable="true">
+        <handler name="oninit" args="ignore=null">
+            this.setAttribute('opacity', .4);
         </handler>
         <handler name="onmouseisover" args="isover">
-            this.animate('opacity', isover ? .8 : .1, 200);
+            this.animate('opacity', isover ? 1 : .4, 200);
             this.classroot.setAttribute('activated', isover);
         </handler>
+
+        <!-- the amount this button should step by -->
         <attribute name="direction" value="1" type="number"/>
         <!--- @keywords private -->
-        <handler name="onmousedown">
-            this.classroot.step(this.direction);
-            this.classroot.setAttribute('activated', true);
-        </handler>
+        <handler name="onmousedown" method="handleMouseDown"/>
         <!--- @keywords private -->
-        <handler name="onmousestilldown">
-            this.classroot.step(this.direction);
+        <handler name="onmousestilldown" method="handleMouseDown"/>
+        <!--- @keywords private -->
+        <method name="handleMouseDown" args="direction">
+            if (direction is this.constructor) direction = this.direction;
+            this.classroot.step(direction);
             this.classroot.setAttribute('activated', true);
-        </handler>
-        <handler name="onkeydown" args="key">
+        </method>
+
+        <!--- @keywords private -->
+        <handler name="onkeydown" method="handleKeyDown"/>
+        <!--- @keywords private -->
+        <handler name="onkeystilldown" method="handleKeyDown"/>
+        <!--- @keywords private -->
+        <method name="handleKeyDown" args="key">
             if (key == 37 || key == 38) {
                 // if left or up
-                this.classroot.step(-1);
-                this.classroot.setAttribute('activated', true);
+                this.handleMouseDown(-1);
             } else if (key == 39 || key == 40) {
                 // if right or down
-                this.classroot.step(1);
-                this.classroot.setAttribute('activated', true);
+                this.handleMouseDown(1);
             }
-        </handler>
+        </method>
+
         <handler name="onopacity" method="redraw"/>
 
-        <method name="draw" args="context">
+        <method name="drawshape" args="context">
             <![CDATA[
-            if (! context['interiorbordercolor']) return;
-            //super.draw();
             // draw arrow
-            //this.drawborder(this);
-            context.beginPath();
-            var x = 2;
-            var y = 2;
+            var x = 1;
+            var y = 1;
             var width = this.width - 2;
             var height = this.height - 2;
             
             if (this.direction < 0) {
                 // up
                 context.moveTo(x, height);
-                context.lineTo((width + x) * .5, y);
+                context.lineTo(width * .5, y);
                 context.lineTo(width, height);
-                context.moveTo(x, height);
+                context.lineTo(x, height);
             } else {
                 // down
                 context.moveTo(x, y);
-                context.lineTo((width + x) * .5, height);
+                context.lineTo(width * .5, height);
                 context.lineTo(width, y);
-                context.moveTo(x, y);
+                context.lineTo(x, y);
             }
             /* TODO: add left/right arrows
             var axis = this.classroot.axis;
@@ -67,6 +70,16 @@
             } else {
             }
             */
+            ]]>
+        </method>
+
+        <method name="draw" args="context">
+            if (! context['interiorbordercolor']) return;
+            context.beginPath();
+
+            this.drawshape(context);
+
+            if (this.focused) this.drawfocus(context);
 
             var globalAlpha = context.globalAlpha;
             context.globalAlpha = this.opacity;
@@ -77,7 +90,6 @@
             context.fill();
 
             context.globalAlpha = globalAlpha;
-            ]]>
         </method>
     </class>
 
@@ -776,7 +788,7 @@
 
         <method name="draw" args="context">
             this.beginPath();
-            this.rect(0,0,this.width,this.height,this.width);
+            this.rect(0,0,this.width - 1,this.height - 2,this.width);
             this.lineWidth = this.borderwidth;
             this.strokeStyle = this.interiorbordercolor;
             this.fillStyle = this.interiorfillcolor;
@@ -789,7 +801,7 @@
             <scrlthmb name="thumb" x="1" width="${parent.width-2}" drawtarget="${classroot}"/>
             <scrltrk direction="1" y="${parent.thumb.y+parent.thumb.height}" width="${parent.width}" height="${parent.height - parent.thumb.y - parent.thumb.height}"/>
         </view>
-        <scrlstepbtn direction="-1" x="1" width="${parent.width - 2}"/>
-        <scrlstepbtn direction="1" x="1" y="${parent.height - this.height}" width="${parent.width - 2}"/>
+        <scrlstepbtn direction="-1" x="2" width="${parent.width - 4}"/>
+        <scrlstepbtn direction="1" x="2" y="${parent.height - this.height}" width="${parent.width - 4}"/>
     </class>
 </library>
