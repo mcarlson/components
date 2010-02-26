@@ -2,7 +2,7 @@
     <mixin name="componentmodel">
         <attribute name="value" value="" type="string"/>
         <attribute name="disabled" value="false" type="boolean"/>
-        <attribute name="focusable" value="${! disabled}" type="boolean"/>
-        <attribute name="clickable" value="${! disabled}" type="boolean"/>
+        <attribute name="focusable" value="${! this.disabled}" type="boolean"/>
+        <attribute name="clickable" value="${! this.disabled}" type="boolean"/>
     </mixin>
 </library>
