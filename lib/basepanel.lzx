@@ -5,16 +5,12 @@
     
     <class name="basepanel" extends="drawpanel" with="applybasecolor">
         <attribute name="borderwidth" style="border-width" type="number" value="0"/>
-        <attribute name="bordercolor" style="border-color" type="color" value="void 0"/>
+        <attribute name="bordercolor" style="border-color" type="color" value="null"/>
         <attribute name="cornerradius"   style="corner-radius" type="number" value="0"/>
-        <attribute name="interiorbordercolor" style="interior-border-color" type="color" value="void 0"/>
-        <attribute name="interiorfillcolor" style="interior-fill-color" type="color" value="void 0"/>
-        <attribute name="lockredraw" value="false" type="boolean"/>
+        <attribute name="interiorbordercolor" style="interior-border-color" type="color" value="null"/>
+        <attribute name="interiorfillcolor" style="interior-fill-color" type="color" value="null"/>
         <attribute name="scopes" value="null"/>
 
-        <handler name="onwidth" method="redraw"/>
-        <handler name="onheight" method="redraw"/>
-        <handler name="oncontext" method="redraw"/>
 
         <method name="redraw" args="ignore=null" >            
             <![CDATA[
@@ -26,6 +22,10 @@
             }
             var l = this.scopes.length;
             if (! l) return;
+            // stop measuring the size for now, store current value to restore later
+            var measuresize = this.measuresize;
+            this.measuresize = false;
+
             for (var i = 0; i < l; i++) {
                 var scope = this.scopes[i];
                 if (scope) {
@@ -37,6 +37,8 @@
                     this.translate(-x, -y);
                 }
             }
+
+            this.measuresize = measuresize;
             ]]>
         </method>
 

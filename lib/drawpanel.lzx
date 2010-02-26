@@ -1,4 +1,6 @@
 <class name="drawpanel" extends="drawview">
+    <attribute name="lockredraw" value="false" type="boolean"/>
+    <attribute name="crisplines" value="true" type="boolean"/>
     <handler name="onwidth" method="redraw"/>
     <handler name="onheight" method="redraw"/>
     <handler name="oncontext" method="redraw"/>
@@ -8,7 +10,7 @@
         this.draw(this);
     </method>
 
-    <method name="draw">
-        this.clear();
+    <method name="draw" args="context">
+        context.clear();
     </method>
 </class>
