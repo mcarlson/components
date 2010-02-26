@@ -1,5 +1,4 @@
 <canvas>
-    <include href="../basepanel.lzx"/>
 
     <stylesheet>
         basepanel {
