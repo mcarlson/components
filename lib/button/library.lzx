@@ -5,6 +5,7 @@
     <include href="../componentfocus.lzx"/>
     <include href="events.lzx"/>
     <include href="mousedownrepeater.lzx"/>
+    <include href="keyboardrepeater.lzx"/>
     <include href="draw.lzx"/>
 
     <class name="bsbtn" extends="basepanel" with="componentmodel,buttonevents,drawbutton,componentfocus,applybasecolor"/>

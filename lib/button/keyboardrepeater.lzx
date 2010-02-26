@@ -1,0 +1,68 @@
+<mixin name="keyboardrepeater">
+    <!---  @keywords private -->
+    <attribute name="__keydowntime" value="0" type="number" />
+    <!---  @keywords private -->
+    <attribute name="__keystillDownDelegate" value="null" type="expression" />
+    <!---  @keywords private -->
+    <attribute name="__keydownrepeatinterval" value="50" type="number" />
+    <!---  @keywords private -->
+    <attribute name="__keydowninitialinterval" value="300" type="number" />
+
+    <!--- @keywords public -->
+    <event name="onkeystilldown" />
+
+    <method name="init">
+        super.init();
+        this.__keystillDownDelegate = new LzDelegate( this, "__iskeystilldown" );
+    </method> 
+
+    <!---  @keywords private -->
+    <method name="__iskeystilldown" args="now">
+        <![CDATA[
+        var diff = now - this.__keydowntime;
+        this.__keydowntime = now;
+
+        var keyarray = lz.Keys.downKeysArray;
+
+        if (keyarray.length > 0) {
+            var next;
+            if (diff > this.__keydowninitialinterval) {
+                next = this.__keydowninitialinterval;
+            } else {
+                next = this.__keydownrepeatinterval;
+                // send one event per key
+                for (var i = 0; i < keyarray.length; i++) {
+                    this.onkeystilldown.sendEvent(keyarray[i]);
+                }
+            }
+            lz.Timer.resetTimer( this.__keystillDownDelegate, next );
+        }
+        ]]>
+    </method>
+
+    <!--- @keywords private -->
+    <handler name="onkeydown">
+        this.__keydowntime = (new Date()).getTime();
+        lz.Timer.addTimer( this.__keystillDownDelegate, this.__keydowninitialinterval );
+    </handler>
+
+    <!--- @keywords private -->
+    <handler name="onkeyup">
+        if (lz.Keys.downKeysArray.length == 0) {
+            lz.Timer.removeTimer( this.__keystillDownDelegate );
+        }
+    </handler>
+
+    <doc>
+        <tag name="shortdesc"><text>a mixin for use with buttonevents that sends an event if the key is held down.</text></tag>
+        <text>
+        <p>This class is a simple extension of
+        <classname>basebutton</classname>.  If the user holds the mouse button
+        down over the button (for more than a half second), then an event
+        <event>onmousestilldown</event> will be sent.  The
+        <event>onmousestilldown</event> event will continue to be sent every
+        50 milliseconds until the mouse button is released.</p>
+        </text>
+    </doc>
+</mixin>
+
