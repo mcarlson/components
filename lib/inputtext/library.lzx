@@ -1,6 +1,9 @@
 <library>
     <include href="../componentfocus.lzx"/>
+    <include href="../drawborderfocus.lzx"/>
     <include href="draw.lzx"/>
 
-    <class name="inpt" extends="inputtext" with="drawinputtext,virtualdrawview,componentfocus"/>
+    <class name="inpt" extends="inputtext" with="virtualdrawview,drawborderfocus,drawinputtext,componentfocus,componentmodel">
+        <attribute name="enabled" value="${! this.disabled}" type="boolean"/>
+    </class>
 </library>
