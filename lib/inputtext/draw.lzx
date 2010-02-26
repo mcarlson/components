@@ -1,35 +1,23 @@
 <mixin name="drawinputtext">
-    <attribute name="borderopacity" value="1" type="number"/>
-    <handler name="onborderopacity" method="redraw"/>
-    <method name="doFocus" args="ignore=null">
-        if (! this.disabled) {
-            this.setAttribute('borderopacity', 0);
-            this.animate('borderopacity', 1, this.focusanimationspeed);
-            this.focused = true;
-            this.redraw();
-        }
-    </method>
-    <method name="doBlur" args="ignore=null">
-        var a = this.animate('borderopacity', 0, this.focusanimationspeed);
-        new LzDelegate(this, 'finishBlur', a, 'onstop');
-        this.redraw();
-    </method>
-    <method name="finishBlur" args="ignore=null">
-        this.focused = false;
-        this.setAttribute('borderopacity', 1);
-    </method>
-    <method name="draw" args="scope">            
+    <method name="draw" args="scope">
         if (! scope['interiorfillcolor'] || ! scope['interiorbordercolor']) return;
-        scope.rect(1,0,this.width - 1,this.height,scope.cornerradius);
+        this.drawshape(scope);
 
-        scope.lineWidth = scope.borderwidth;
-        scope.strokeStyle = this.focused ? scope.highlightcolor : scope.interiorbordercolor;
+        if (this.focused) this.drawfocus(scope);
+
         scope.fillStyle = scope.interiorfillcolor;
         scope.fill();
 
-        var globalAlpha = scope.globalAlpha;
-        scope.globalAlpha = borderopacity;
+        scope.lineWidth = scope.borderwidth;
+        scope.strokeStyle = scope.interiorbordercolor;
         scope.stroke();
-        scope.globalAlpha = globalAlpha;
+    </method>
+
+    <method name="drawfocus" args="scope">
+        return scope;
+    </method>
+
+    <method name="drawshape" args="scope">
+        scope.rect(0,0,this.width - 1,this.height - 1,scope.cornerradius);
     </method>
 </mixin>
