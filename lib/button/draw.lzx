@@ -39,7 +39,7 @@
         if (this.borderwidth > 0) {
             if (! this.bordercolor) return;
             context.beginPath();
-            context.rect(0, 0, this.width, this.height, this.cornerradius);
+            context.rect(0, 0, this.width - 1, this.height - 1, this.cornerradius);
             context.closePath();
 
             context.strokeStyle = this.bordercolor;
