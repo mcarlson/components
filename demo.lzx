@@ -3,7 +3,7 @@
 
     <stylesheet>
         basepanel {
-            border-width: .5;
+            border-width: 1;
             corner-radius: 3;
             base-color: #f2f2f2;
         }
@@ -31,15 +31,15 @@
         }
     </stylesheet--> 
 
-    <basepanel x="10" y="10">
+    <basepanel y="10">
         <simplelayout spacing="10"/>
-        <bsbtn width="50" height="50"/>
-        <bsbtn width="50" height="50" disabled="true"/>
-        <btn onclick="this.animate('width', 100, 500)" text="ok"/>
-        <btn onclick="this.animate('width', 100, 500)" text="cancel"/>
-        <inpt width="100">Hey there!</inpt>
-        <inpt width="100" multiline="true">Hey there! This text should wrap onto a few lines.</inpt>
-        <view width="200" height="200" clip="true">
+        <bsbtn x="10" width="50" height="50"/>
+        <bsbtn x="10" width="50" height="50" disabled="true"/>
+        <btn x="10" onclick="this.animate('width', 100, 500)" text="ok"/>
+        <btn x="10" onclick="this.animate('width', 100, 500)" text="cancel"/>
+        <inpt x="10" width="100">Hey there!</inpt>
+        <inpt x="10" width="100" multiline="true">Hey there! This text should wrap onto a few lines.</inpt>
+        <view x="10" width="200" height="200" clip="true">
             <text multiline="true" width="184">
                 Man through his scientific genius has been able to draw distance and
                 save time and space. He has been able to carry highways through the
