@@ -27,7 +27,7 @@
                 next = this.__mousedowninitialinterval;
             } else {
                 next = this.__mousedownrepeatinterval;
-                this.onmousestilldown.sendEvent();
+                this.onmousestilldown.sendEvent(this);
             }
             lz.Timer.resetTimer( this.__mousestillDownDelegate, next );
         }
