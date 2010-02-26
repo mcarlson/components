@@ -11,12 +11,13 @@
         <attribute name="interiorfillcolor" style="interior-fill-color" type="color" value="null"/>
         <attribute name="scopes" value="null"/>
 
-
         <method name="redraw" args="ignore=null" >            
             <![CDATA[
             if (! this.context || ! this.isinited || this.lockredraw) return;
             this.clear();
-            if (this['draw']) this.draw(this);
+            if (this['draw']) {
+                this.draw(this);
+            }
             if (! this.scopes) {
                 return;
             }
@@ -53,6 +54,36 @@
             new LzDelegate(this, 'redraw', scope, 'onheight');
             this.scopes.push(scope);
             //console.log('addScope', scope, this.scopes);
+            ]]>
+        </method>
+
+        <method name="removeScope" args="scope">
+            <![CDATA[
+            for (var i = 0; i < this.scopes.length; i++) {
+                if (this.scopes[i] === scope) {
+                    scope.onx.unregisterAll();
+                    scope.ony.unregisterAll();
+                    scope.onwidth.unregisterAll();
+                    scope.onheight.unregisterAll();
+                    this.scopes.splice(i, 1);
+                    return;
+                }
+            }
+            ]]>
+        </method>
+        <method name="destroy">
+            <![CDATA[
+            for (var i = 0; i < this.scopes.length; i++) {
+                var scope = this.scopes[i];
+                if (scope) {
+                    scope.onx.unregisterAll();
+                    scope.ony.unregisterAll();
+                    scope.onwidth.unregisterAll();
+                    scope.onheight.unregisterAll();
+                }
+            }
+            this.scopes = null;
+            super.destroy();
             ]]>
         </method>
     </class>

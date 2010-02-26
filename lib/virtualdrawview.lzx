@@ -16,6 +16,12 @@
             if (this.ondrawtarget.ready) this.ondrawtarget.sendEvent(t);
         }
     </setter>
+    <method name="destroy">
+        if (this.drawtarget) {
+            this.drawtarget.removeScope(this);
+        }
+        super.destroy();
+    </method>
     <method name="redraw" args="ignore=null">
         if (! this.drawtarget || ! this.isinited) return;
         this.drawtarget.redraw(this);
