@@ -1,0 +1,35 @@
+<mixin name="drawborderfocus">
+    <attribute name="focuspercentage" value="0" type="number"/>
+    <handler name="onfocuspercentage" method="redraw"/>
+
+    <handler name="onfocused" args="focused">
+        if (focused) {
+            this.animate('focuspercentage', 1, this.focusanimationspeed);
+        } else {
+            this.animate('focuspercentage', 0, this.focusanimationspeed);
+        }
+    </handler>
+
+    <!-- draws a focus halo for a shape already drawn in the scope -->
+    <method name="drawfocus" args="scope"> 
+        var globalAlpha = scope.globalAlpha;
+        var crisplines = scope.crisplines;
+
+        // Use alpha with decreasing line widths
+        scope.globalAlpha = .1;
+        // we don't want crisp lines...
+        scope.crisplines = false;
+        scope.strokeStyle = scope.highlightcolor;
+        scope.lineWidth = (this.focuspercentage * 9) + 1;
+        while (scope.lineWidth > 0) {
+            //scope.strokeStyle = LzColorUtils.tweenrgb(scope.highlightcolor, canvas.bgcolor, scope.lineWidth / 10);
+            //console.log('scope.globalAlpha', scope.globalAlpha);
+            scope.lineWidth -= 2;
+            scope.stroke();
+        }
+
+        // restore previous values
+        scope.globalAlpha = globalAlpha;
+        scope.crisplines = crisplines;
+    </method>
+</mixin>

@@ -1,0 +1,22 @@
+<mixin name="drawshadowfocus">
+    <handler name="onfocused" args="focused">
+        if (focused) {
+            var radius = 10;
+            if (this.capabilities['minimize_opacity_changes']) {
+                radius = 2;
+            }
+            this.setAttribute('shadowcolor', 0x0000cc);
+            this.setAttribute('shadowdistance', 0);
+                this.setAttribute('shadowblurradius', 0);
+            this.animate('shadowblurradius', radius, this.focusanimationspeed);
+        } else {
+            if (this.disabled) return;
+            var a = this.animate('shadowblurradius', 0, this.focusanimationspeed);
+            new LzDelegate(this, '__finishBlur', a, 'onstop');
+        }
+    </handler>
+
+    <method name="__finishBlur" args="ignore=null">
+        this.setAttribute('shadowcolor', null);
+    </method>
+</mixin>
