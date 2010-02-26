@@ -3,12 +3,13 @@
     <include href="../basepanel.lzx"/>
     <include href="../componentmodel.lzx"/>
     <include href="../componentfocus.lzx"/>
+    <include href="../drawshadowfocus.lzx"/>
     <include href="events.lzx"/>
     <include href="mousedownrepeater.lzx"/>
     <include href="keyboardrepeater.lzx"/>
     <include href="draw.lzx"/>
 
-    <class name="bsbtn" extends="basepanel" with="componentmodel,buttonevents,drawbutton,componentfocus,applybasecolor"/>
+    <class name="bsbtn" extends="basepanel" with="componentmodel,buttonevents,drawshadowfocus,drawbutton,componentfocus,applybasecolor"/>
 
     <class name="btn" extends="bsbtn" height="${this.txt.height + 2}" width="${this.txt.width + 4}">
         <!--- text to display in the button (can leave empty) -->
