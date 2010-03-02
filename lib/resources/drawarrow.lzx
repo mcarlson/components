@@ -1,0 +1,27 @@
+<mixin name="drawarrow">
+    <method name="drawarrow" args="context, x, y, width, height, isup">
+        <![CDATA[
+        var midpt = (width) * .5;
+        // draw arrow
+        if (isup) {
+            // up
+            context.moveTo(x, height);
+            context.lineTo(midpt, y);
+            context.lineTo(width, height);
+            context.lineTo(x, height);
+        } else {
+            // down
+            context.moveTo(x, y);
+            context.lineTo(midpt, height);
+            context.lineTo(width, y);
+            context.lineTo(x, y);
+        }
+        /* TODO: add left/right arrows
+        var axis = this.classroot.axis;
+        if (axis == 'y') {
+        } else {
+        }
+        */
+        ]]>
+    </method>
+</mixin>

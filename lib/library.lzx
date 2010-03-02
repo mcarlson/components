@@ -1,4 +1,5 @@
 <library>
+    <include href="resources/"/>
     <include href="basepanel.lzx"/>
     <include href="virtualdrawview.lzx"/>
     <include href="button/"/>
