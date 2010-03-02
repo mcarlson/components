@@ -4,7 +4,7 @@
     <include href="../componentfocus.lzx"/>
     <include href="../button/"/>
 
-    <class name="scrlstepbtn" height="${this.width}" with="buttonevents,mousedownrepeater,keyboardrepeater,drawborderfocus,componentfocus,virtualdrawview" focusable="true">
+    <class name="scrlstepbtn" height="${this.width}" with="buttonevents,mousedownrepeater,keyboardrepeater,drawborderfocus,componentfocus,drawarrow,virtualdrawview" focusable="true">
         <handler name="oninit" args="ignore=null">
             this.setAttribute('opacity', .4);
         </handler>
@@ -45,31 +45,7 @@
 
         <method name="drawshape" args="context">
             <![CDATA[
-            // draw arrow
-            var x = 1;
-            var y = 1;
-            var width = this.width - 2;
-            var height = this.height - 2;
-            
-            if (this.direction < 0) {
-                // up
-                context.moveTo(x, height);
-                context.lineTo(width * .5, y);
-                context.lineTo(width, height);
-                context.lineTo(x, height);
-            } else {
-                // down
-                context.moveTo(x, y);
-                context.lineTo(width * .5, height);
-                context.lineTo(width, y);
-                context.lineTo(x, y);
-            }
-            /* TODO: add left/right arrows
-            var axis = this.classroot.axis;
-            if (axis == 'y') {
-            } else {
-            }
-            */
+            this.drawarrow(context,1,1,this.width - 2, this.height - 2, this.direction < 0);
             ]]>
         </method>
 

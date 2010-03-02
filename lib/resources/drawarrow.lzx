@@ -1,7 +1,7 @@
 <mixin name="drawarrow">
     <method name="drawarrow" args="context, x, y, width, height, isup">
         <![CDATA[
-        var midpt = (width) * .5;
+        var midpt = (width + x) * .5;
         // draw arrow
         if (isup) {
             // up
