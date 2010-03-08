@@ -23,22 +23,22 @@
         if (! this.interiorbordercolor) {
             this.setAttribute('interiorbordercolor', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v - .2196));
         }
-        if (! this.gradientfillstartup) {
+        if (! this['gradientfillstartup']) {
             this.setAttribute('gradientfillstartup', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v - .1098));
         }
-        if (! this.gradientfillstopup) {
+        if (! this['gradientfillstopup']) {
             this.setAttribute('gradientfillstopup', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v));
         }
-        if (! this.gradientfillstartover) {
+        if (! this['gradientfillstartover']) {
             this.setAttribute('gradientfillstartover', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v - .047));
         }
-        if (! this.gradientfillstopover) {
+        if (! this['gradientfillstopover']) {
             this.setAttribute('gradientfillstopover', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v - .0039));
         }
-        if (! this.gradientfillstartdown) {
+        if (! this['gradientfillstartdown']) {
             this.setAttribute('gradientfillstartdown', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v - .0862));
         }
-        if (! this.gradientfillstopdown) {
+        if (! this['gradientfillstopdown']) {
             this.setAttribute('gradientfillstopdown', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v - .1999));
         }
         if (this.redraw) this.redraw();

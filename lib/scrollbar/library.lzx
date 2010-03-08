@@ -270,7 +270,7 @@
 
         <!--- @keywords private -->
         <attribute name="_enabled"
-            value="${this.enabled &amp;&amp; this.scrollable &amp;&amp;
+            value="${this['enabled'] &amp;&amp; this.scrollable &amp;&amp;
                (this._parentcomponent ? this._parentcomponent._enabled : true)}"/>
 
         <!--- If scrollmax is not defined and this is true, use the target
@@ -713,7 +713,7 @@
         <attribute name="width" value="${this.size}"/>
 
         <handler name="oninit" args="isover">
-            if (canvas.capabilities.minimize_opacity_changes) {
+            if (canvas.capabilities['minimize_opacity_changes']) {
                 // TODO: handle for IE
             } else {
                 this.setAttribute('opacity', .4);
@@ -745,7 +745,7 @@
         </method>
         <method name="activate" args="ignore=null">
             this.activated = true;
-            if (canvas.capabilities.minimize_opacity_changes) {
+            if (canvas.capabilities['minimize_opacity_changes']) {
                 // TODO: handle for IE
             } else {
                 this.animate('opacity', 1, 200);
@@ -754,7 +754,7 @@
         <method name="deactivate" args="ignore=null">
             this.activated = false;
             if (! this.isMouseOver()) {
-                if (canvas.capabilities.minimize_opacity_changes) {
+                if (canvas.capabilities['minimize_opacity_changes']) {
                     // TODO: handle for IE
                 } else {
                     this.animate('opacity', .4, 200);

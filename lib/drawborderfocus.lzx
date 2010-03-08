@@ -13,12 +13,12 @@
     <!-- draws a focus halo for a shape already drawn in the scope -->
     <method name="drawfocus" args="scope"> 
         var globalAlpha = scope.globalAlpha;
-        var crisplines = scope.crisplines;
+        var aliaslines = scope.aliaslines;
 
         // Use alpha with decreasing line widths
         scope.globalAlpha = .1;
         // we don't want crisp lines...
-        scope.crisplines = false;
+        scope.aliaslines = false;
         scope.strokeStyle = scope.highlightcolor;
         scope.lineWidth = (this.focuspercentage * 9) + 1;
         while (scope.lineWidth > 0) {
@@ -30,6 +30,6 @@
 
         // restore previous values
         scope.globalAlpha = globalAlpha;
-        scope.crisplines = crisplines;
+        scope.aliaslines = aliaslines;
     </method>
 </mixin>
