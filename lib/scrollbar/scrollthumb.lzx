@@ -1,0 +1,97 @@
+<class name="scrlthmb" extends="bsbtn" with="virtualdrawview" focusable="false" vertical="true">
+    <handler name="onmouseisover" args="isover">
+        this.classroot.setAttribute('activated', isover);
+    </handler>
+
+    <!--- @keywords private -->
+    <attribute name="target" value="null" />
+    <!--- @keywords private -->
+    <attribute name="axis" value="" type="string" />
+    <!--- @keywords private -->
+    <attribute name="trackscroll" value="0" type="number" />
+    <!--- @keywords private -->
+    <attribute name="targetscroll" value="0" type="number" />
+
+    <!--- @keywords private -->
+    <method name="init">
+        super.init();
+        var croot = this.classroot;
+        this.classroot.thumb = this;
+    </method>
+
+    <!--- @keywords private -->
+    <method name="destroy" ><![CDATA[
+        this.classroot.thumb = null;
+        this.target = null;
+        super.destroy();
+    ]]></method>
+
+    <!--- @keywords private -->
+    <handler name="onmousedown" method="startDrag" />
+    <!--- @keywords private -->
+    <handler name="onmouseup" method="stopDrag" />
+
+    <!--- @keywords private -->
+    <method name="startDrag" args="ignore=null"><![CDATA[
+        var croot = this.classroot;
+        // disable targetpos delegate while dragging
+        croot.targetPosDel.disable();
+        // calculate temp var for what doesn't change while dragging
+        var sizeAxis = croot.sizeAxis;
+        this.target = croot.scrolltarget;
+        this.axis = croot.axis;
+        this.trackscroll = this.immediateparent[sizeAxis] - this[sizeAxis];
+        this.targetscroll = croot.scrollmax - this.target.immediateparent[sizeAxis];
+        // apply thumbdrag state
+        this[this.axis + 'thumbdrag'].setAttribute('applied', true);
+    ]]></method>
+
+    <!--- @keywords private -->
+    <method name="stopDrag" args="ignore=null"><![CDATA[
+        // remove thumbdrag state
+        this[this.axis + 'thumbdrag'].setAttribute('applied', false);
+        // re-enable targetpos delegate
+        this.classroot.targetPosDel.enable();
+    ]]></method>
+
+    <state name="ythumbdrag">
+        <attribute name="doffset" value="this.getMouse( 'y' )" when="once" />
+        <attribute name="y"
+            value="${this.thumbControl(this.immediateparent.getMouse( 'y' ))}"/>
+    </state>
+
+    <state name="xthumbdrag">
+        <attribute name="doffset" value="this.getMouse( 'x' )" when="once" />
+        <attribute name="x"
+            value="${this.thumbControl(this.immediateparent.getMouse( 'x' ))}"/>
+    </state>
+
+    <!--- @keywords private -->
+    <method name="thumbControl" args="mousepos"><![CDATA[
+        var thumbpos = mousepos - this.doffset;
+        if (thumbpos <= 0) {
+            thumbpos = 0;
+        } else if (thumbpos > this.trackscroll) {
+            thumbpos = this.trackscroll;
+        }
+
+        var pos = Math.round(-thumbpos / this.trackscroll * this.targetscroll);
+        if (pos != this.target[this.classroot.scrollattr]) {
+            this.target.setAttribute(this.classroot.scrollattr, pos);
+        }
+
+        return thumbpos;
+    ]]></method>
+
+    <doc>
+        <tag name="shortdesc"><text>Provides non-visual aspects of a scrollbar thumb.</text></tag>
+        <text>
+        <p>
+            This class must be used with basescrollbar.
+            The thumb automatically scales its height to display the relationship between
+            the target height and the track height.
+        </p>
+        </text>
+    </doc>
+</class>
+

@@ -1,0 +1,16 @@
+<class name="scrltrk" with="buttonevents,mousedownrepeater">
+    <attribute name="direction" value="1" type="number"/>
+    <handler name="onmouseisover" args="isover">
+        this.classroot.setAttribute('activated', isover);
+    </handler>
+    <!--- @keywords private -->
+    <handler name="onmousedown">
+        this.classroot.page(this.direction);
+        this.classroot.setAttribute('activated', true);
+    </handler>
+    <!--- @keywords private -->
+    <handler name="onmousestilldown">
+        this.classroot.page(this.direction);
+        this.classroot.setAttribute('activated', true);
+    </handler>
+</class>
