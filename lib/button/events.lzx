@@ -2,6 +2,7 @@
     <handler name="ondisabled" method="_updateFrame"/>
     <attribute name="mouseisover" value="false" type="boolean"/>
     <attribute name="mouseisdown" value="false" type="boolean"/>
+    <attribute name="mousestate" type="string" value="up"/>
 
     <!--- @access private 
             Handle mode changes -->
@@ -62,6 +63,22 @@
         if (newframe !== this.frame) {
             //Debug.debug('frame', newframe);
             this.setAttribute('frame', newframe);
+        }
+
+        // Set mousestate
+        var newstate = 'up';
+        switch(newframe) {
+            case 2:
+                newstate = 'over';
+                break;
+            case 3:
+                newstate = 'down';
+                break;
+        }
+
+        if (this.mousestate != newstate) {
+            this.setAttribute('mousestate', newstate);
+            this.redraw();
         }
         ]]>
     </method>

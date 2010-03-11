@@ -1,24 +1,5 @@
 <mixin name="drawbutton">
     <attribute name="vertical" value="false" type="boolean"/>
-    <attribute name="mousestate" type="string" value="up"/>
-
-    <handler name="onframe" args="frame">
-        // default
-        var newstate = 'up';
-        switch(frame) {
-            case 2:
-                newstate = 'over';
-                break;
-            case 3:
-                newstate = 'down';
-                break;
-        }
-
-        if (this.mousestate != newstate) {
-            this.setAttribute('mousestate', newstate);
-            this.redraw();
-        }
-    </handler>
 
     <method name="draw" args="context">
         <![CDATA[
