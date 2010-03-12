@@ -1,0 +1,83 @@
+<mixin name="stylebutton">
+    <attribute name="vertical" value="false" type="boolean"/>
+    <attribute name="bevel" style="bevel-width" value="0" type="number"/>
+
+    <attribute name="interiorbordercolor"    value="void(0)" style="interior-border-color" type="color"/>
+    <attribute name="interiorbordercolorup"    value="${this.interiorbordercolor}" style="interior-border-color-up" type="color"/>
+    <attribute name="interiorbordercolorover"  value="${this.interiorbordercolor}" style="interior-border-color-over" type="color"/>
+    <attribute name="interiorbordercolordown"  value="${this.interiorbordercolor}" style="interior-border-color-down" type="color"/>
+
+    <attribute name="interiorfillcolor"      value="void(0)" style="interior-fill-color" type="color"/>
+    <attribute name="interiorfillcolorup"      value="${this.interiorfillcolor}" style="interior-fill-color-up" type="color"/>
+    <attribute name="interiorfillcolorover"    value="${this.interiorfillcolor}" style="interior-fill-color-over" type="color"/>
+    <attribute name="interiorfillcolordown"    value="${this.interiorfillcolor}" style="interior-fill-color-down" type="color"/>
+
+    <attribute name="gradientfillstartup"      value="void(0)" style="gradientfill-start-up" type="color"/>
+    <attribute name="gradientfillstopup"       value="void(0)" style="gradientfill-stop-up" type="color"/>
+    <attribute name="gradientfillstartover"    value="void(0)" style="gradientfill-start-over" type="color"/>
+    <attribute name="gradientfillstopover"     value="void(0)" style="gradientfill-stop-over" type="color"/>
+    <attribute name="gradientfillstartdown"    value="void(0)" style="gradientfill-start-down" type="color"/>
+    <attribute name="gradientfillstopdown"     value="void(0)" style="gradientfill-stop-down" type="color"/>
+
+    <attribute name="gradientfillup" style="gradient-fill-up" type="string" value=""/>
+    <attribute name="gradientfillover" style="gradient-fill-over" type="string" value=""/>
+    <attribute name="gradientfilldown" style="gradient-fill-down" type="string" value=""/>
+    <attribute name="gradientfilldisabled" style="gradient-fill-disabled" type="string" value=""/>
+
+    <method name="cssToLinearGradient" args="lineargradient, context">
+        <![CDATA[
+        if (! lineargradient) return;
+
+        // From http://dev.w3.org/csswg/css3-images/#linear-gradients 
+        // linear-gradient([<bg-position> || <angle>,]? <color-stop>, <color-stop>[, <color-stop>]*);
+        // <color-stop> stands for: <color> [ <percentage> | <length> ]?
+
+        // We require  and percentages with colors for now...
+        // linear-gradient([top | left], <color-stop>, <color-stop>[, <color-stop>]*);
+        // <color-stop> stands for: <color> <percentage>
+
+        var tokens = lineargradient.split(',');
+        if (tokens.length < 2) {
+            if ($debug) {
+                Debug.warn('Gradients require a position [top | left] and two color positions', tokens, lineargradient);
+            }
+            return;
+        }
+
+        var startpos = tokens.shift();
+
+//            // process angle
+//            var radians = parseInt(angle);
+//            // TODO: handle 'grad'
+//            if (angle.indexOf('deg') == -1) {
+//               radians *= (Math.PI / 180);
+//            }
+//
+//            var radius = this.width * 4;
+//            var x:Number = x + radius *Math.cos(radians);
+//            var y:Number = y + radius *Math.sin(2 * Math.PI - radians);
+
+        var x = 0, y = 0;
+        if (startpos == 'top') {
+            y = this.height;
+        } else if (startpos == 'left') {
+            x = this.width;
+        } else {
+            if ($debug) {
+                Debug.warn('unhandled position', startpos);
+            }
+        }
+
+        var g = this.createLinearGradient(0,0,x,y);
+
+        // Add color stops
+        for (var i = 0; i < tokens.length; i++) {
+            var items = tokens[i].split(' ');
+            var color = items[0];
+            var percentage = parseInt(items[1]) * .01;
+            g.addColorStop(percentage, color);
+        }
+        return g;
+        ]]>
+    </method>
+</mixin>
