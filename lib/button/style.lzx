@@ -20,9 +20,9 @@
     <attribute name="gradientfillstopdown"     value="void(0)" style="gradientfill-stop-down" type="color"/>
 
     <attribute name="gradientfillup" style="gradient-fill-up" type="string" value=""/>
-    <attribute name="gradientfillover" style="gradient-fill-over" type="string" value=""/>
-    <attribute name="gradientfilldown" style="gradient-fill-down" type="string" value=""/>
-    <attribute name="gradientfilldisabled" style="gradient-fill-disabled" type="string" value=""/>
+    <attribute name="gradientfillover" style="gradient-fill-over" type="string" value="${this.gradientfillup}"/>
+    <attribute name="gradientfilldown" style="gradient-fill-down" type="string" value="${this.gradientfillover}"/>
+    <attribute name="gradientfilldisabled" style="gradient-fill-disabled" type="string" value="${this.gradientfillup}"/>
 
     <method name="cssToLinearGradient" args="lineargradient, context">
         <![CDATA[
