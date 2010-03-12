@@ -1,4 +1,4 @@
-<canvas font="Helvetica,Sans" fontsize="12">
+<canvas font="futura" fontsize="12">
     <include href="lib/"/>
 
     <font name="futura" src="resources/futuraregular.ttf"/>
@@ -6,8 +6,6 @@
     <stylesheet>
         canvas {
             background-color: #F1F1F1;
-            font-style: Times;
-            font-size: 18;
         }
         sunbutton1 {
             corner-radius: 3;
@@ -21,7 +19,7 @@
         }
     </stylesheet> 
 
-    <class name="sunbutton1" extends="btn" font="futura">
+    <class name="sunbutton1" extends="btn">
         <handler name="oninit">
             this.setAttribute('shadowangle', 35);
             this.setAttribute('shadowdistance', 0);

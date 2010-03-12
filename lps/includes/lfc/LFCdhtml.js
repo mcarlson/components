@@ -518,12 +518,12 @@ $0=null;
 };var $1=this.target;var $2=this.dest;var $3=$1[$2];var $4=$1[this.source];if($4!==$3||!$1.inited){
 {
 if(!$1.__LZdeleted){
-var $lzsc$88021141="$lzc$set_"+$2;if(Function["$lzsc$isa"]?Function.$lzsc$isa($1[$lzsc$88021141]):$1[$lzsc$88021141] instanceof Function){
-$1[$lzsc$88021141]($4)
+var $lzsc$1498454505="$lzc$set_"+$2;if(Function["$lzsc$isa"]?Function.$lzsc$isa($1[$lzsc$1498454505]):$1[$lzsc$1498454505] instanceof Function){
+$1[$lzsc$1498454505]($4)
 }else{
-$1[$2]=$4;var $lzsc$1940248408=$1["on"+$2];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1940248408):$lzsc$1940248408 instanceof LzEvent){
-if($lzsc$1940248408.ready){
-$lzsc$1940248408.sendEvent($4)
+$1[$2]=$4;var $lzsc$192887449=$1["on"+$2];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$192887449):$lzsc$192887449 instanceof LzEvent){
+if($lzsc$192887449.ready){
+$lzsc$192887449.sendEvent($4)
 }}}}}}}],null);Class.make("PresentationType",null,null,["accept",function($0){
 return $0
 },"present",function($0){
@@ -663,23 +663,23 @@ var $a=$6;this.acceptAttribute($0,$2,$a.sourceValueID)
 }}else if($6!==void 0){
 {
 if(!this.__LZdeleted){
-var $lzsc$1945254760="$lzc$set_"+$0;if(Function["$lzsc$isa"]?Function.$lzsc$isa(this[$lzsc$1945254760]):this[$lzsc$1945254760] instanceof Function){
-this[$lzsc$1945254760]($6)
+var $lzsc$784536033="$lzc$set_"+$0;if(Function["$lzsc$isa"]?Function.$lzsc$isa(this[$lzsc$784536033]):this[$lzsc$784536033] instanceof Function){
+this[$lzsc$784536033]($6)
 }else{
-this[$0]=$6;var $lzsc$636653705=this["on"+$0];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$636653705):$lzsc$636653705 instanceof LzEvent){
-if($lzsc$636653705.ready){
-$lzsc$636653705.sendEvent($6)
+this[$0]=$6;var $lzsc$1837652535=this["on"+$0];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1837652535):$lzsc$1837652535 instanceof LzEvent){
+if($lzsc$1837652535.ready){
+$lzsc$1837652535.sendEvent($6)
 }}}}}}else if(LzInitExpr["$lzsc$isa"]?LzInitExpr.$lzsc$isa($3):$3 instanceof LzInitExpr){
 this.applyConstraintExpr($3)
 }else{
 {
 if(!this.__LZdeleted){
-var $lzsc$1587252244="$lzc$set_"+$0;if(Function["$lzsc$isa"]?Function.$lzsc$isa(this[$lzsc$1587252244]):this[$lzsc$1587252244] instanceof Function){
-this[$lzsc$1587252244]($3)
+var $lzsc$578611924="$lzc$set_"+$0;if(Function["$lzsc$isa"]?Function.$lzsc$isa(this[$lzsc$578611924]):this[$lzsc$578611924] instanceof Function){
+this[$lzsc$578611924]($3)
 }else{
-this[$0]=$3;var $lzsc$338671293=this["on"+$0];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$338671293):$lzsc$338671293 instanceof LzEvent){
-if($lzsc$338671293.ready){
-$lzsc$338671293.sendEvent($3)
+this[$0]=$3;var $lzsc$1068113912=this["on"+$0];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1068113912):$lzsc$1068113912 instanceof LzEvent){
+if($lzsc$1068113912.ready){
+$lzsc$1068113912.sendEvent($3)
 }}}}}}},"construct",function($0,$1){
 this.earlySetters=LzNode.earlySetters;var $2=$0;this.parent=$2;if($2){
 var $3=$2;if($1["ignoreplacement"]||this.ignoreplacement){
@@ -1001,12 +1001,12 @@ $4=null;
 };if($2==0){
 var $5=$3?this[$0]+$1:$1;{
 if(!this.__LZdeleted){
-var $lzsc$265993613="$lzc$set_"+$0;if(Function["$lzsc$isa"]?Function.$lzsc$isa(this[$lzsc$265993613]):this[$lzsc$265993613] instanceof Function){
-this[$lzsc$265993613]($5)
+var $lzsc$710969644="$lzc$set_"+$0;if(Function["$lzsc$isa"]?Function.$lzsc$isa(this[$lzsc$710969644]):this[$lzsc$710969644] instanceof Function){
+this[$lzsc$710969644]($5)
 }else{
-this[$0]=$5;var $lzsc$582267023=this["on"+$0];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$582267023):$lzsc$582267023 instanceof LzEvent){
-if($lzsc$582267023.ready){
-$lzsc$582267023.sendEvent($5)
+this[$0]=$5;var $lzsc$1933993787=this["on"+$0];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1933993787):$lzsc$1933993787 instanceof LzEvent){
+if($lzsc$1933993787.ready){
+$lzsc$1933993787.sendEvent($5)
 }}}}};return null
 };var $6={attribute:$0,to:$1,duration:$2,start:true,relative:$3,target:this};for(var $7 in $4)$6[$7]=$4[$7];var $8=new LzAnimator(null,$6);return $8
 },"toString",function(){
@@ -1032,12 +1032,12 @@ $1=DefaultPresentationType.accept($1)
 $2=this.acceptTypeValue($1,$2);if(this[$0]!==$2){
 {
 if(!this.__LZdeleted){
-var $lzsc$1156898749="$lzc$set_"+$0;if(Function["$lzsc$isa"]?Function.$lzsc$isa(this[$lzsc$1156898749]):this[$lzsc$1156898749] instanceof Function){
-this[$lzsc$1156898749]($2)
+var $lzsc$1964618029="$lzc$set_"+$0;if(Function["$lzsc$isa"]?Function.$lzsc$isa(this[$lzsc$1964618029]):this[$lzsc$1964618029] instanceof Function){
+this[$lzsc$1964618029]($2)
 }else{
-this[$0]=$2;var $lzsc$1035449350=this["on"+$0];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1035449350):$lzsc$1035449350 instanceof LzEvent){
-if($lzsc$1035449350.ready){
-$lzsc$1035449350.sendEvent($2)
+this[$0]=$2;var $lzsc$2124493923=this["on"+$0];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$2124493923):$lzsc$2124493923 instanceof LzEvent){
+if($lzsc$2124493923.ready){
+$lzsc$2124493923.sendEvent($2)
 }}}}}}},"presentTypeValue",function($0,$1){
 var $2=LzNode.presentationtypes[$0];if($2!=null&&$2["present"]){
 $1=$2.present($1)
@@ -2389,7 +2389,7 @@ this.__LZcanvas=G_vmlCanvasManager.initElement(this.__LZcanvas);this.__docanvasc
 catch($0){};if(--this.__maxTries>0){
 var $1=lz.BrowserUtils.getcallbackstr(this,"__initcanvasie");this.__canvasTId=setTimeout($1,50)
 }};LzSprite.prototype.__getShadowCSS=function($0,$1,$2,$3){
-if($0==null){
+if($0==null||$1==0&&$3==0){
 return ""
 };if(this.capabilities.minimize_opacity_changes){
 $1=Math.round($1);$3=Math.round($3);$2=Math.round($2)
@@ -2397,8 +2397,6 @@ $1=Math.round($1);$3=Math.round($3);$2=Math.round($2)
 if($1==0){
 this.xoffset=this.yoffset=-$3;this.applyCSS("left",this.x+this.xoffset);this.applyCSS("top",this.y+this.yoffset);if($3>0){
 var $4=LzColorUtils.inttohex($0);return "progid:DXImageTransform.Microsoft.Glow(Color='"+$4+"',Strength="+$3+")"
-}else{
-return ""
 }}else{
 $2+=90;var $4=LzColorUtils.inttohex($0);return "progid:DXImageTransform.Microsoft.Shadow(Color='"+$4+"',Direction="+$2+",Strength="+$1+")"
 }}else{
@@ -3506,12 +3504,12 @@ this.hasfgcolor=true
 }},"__spriteAttribute",function($0,$1){
 if(this[$0]){
 if(!this.__LZdeleted){
-var $lzsc$1919074319="$lzc$set_"+$0;if(Function["$lzsc$isa"]?Function.$lzsc$isa(this[$lzsc$1919074319]):this[$lzsc$1919074319] instanceof Function){
-this[$lzsc$1919074319]($1)
+var $lzsc$313386516="$lzc$set_"+$0;if(Function["$lzsc$isa"]?Function.$lzsc$isa(this[$lzsc$313386516]):this[$lzsc$313386516] instanceof Function){
+this[$lzsc$313386516]($1)
 }else{
-this[$0]=$1;var $lzsc$1040548650=this["on"+$0];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1040548650):$lzsc$1040548650 instanceof LzEvent){
-if($lzsc$1040548650.ready){
-$lzsc$1040548650.sendEvent($1)
+this[$0]=$1;var $lzsc$287342968=this["on"+$0];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$287342968):$lzsc$287342968 instanceof LzEvent){
+if($lzsc$287342968.ready){
+$lzsc$287342968.sendEvent($1)
 }}}}}},"__makeSprite",function($0){
 this.sprite=new LzSprite(this,false)
 },"init",function(){
@@ -3985,22 +3983,22 @@ this.sprite.updateResourceSize();this.reevaluateSize()
 },"setAttributeRelative",function($0,$1){
 var $2=this.getLinkage($1);var $3=$1[$0];if($0=="x"||$0=="y"){
 $2.update($0);{
-var $lzsc$805156440=($3-$2.offset[$0])/$2.scale[$0];if(!this.__LZdeleted){
-var $lzsc$374577694="$lzc$set_"+$0;if(Function["$lzsc$isa"]?Function.$lzsc$isa(this[$lzsc$374577694]):this[$lzsc$374577694] instanceof Function){
-this[$lzsc$374577694]($lzsc$805156440)
+var $lzsc$2022760291=($3-$2.offset[$0])/$2.scale[$0];if(!this.__LZdeleted){
+var $lzsc$2106032731="$lzc$set_"+$0;if(Function["$lzsc$isa"]?Function.$lzsc$isa(this[$lzsc$2106032731]):this[$lzsc$2106032731] instanceof Function){
+this[$lzsc$2106032731]($lzsc$2022760291)
 }else{
-this[$0]=$lzsc$805156440;var $lzsc$1200542430=this["on"+$0];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1200542430):$lzsc$1200542430 instanceof LzEvent){
-if($lzsc$1200542430.ready){
-$lzsc$1200542430.sendEvent($lzsc$805156440)
+this[$0]=$lzsc$2022760291;var $lzsc$1712142113=this["on"+$0];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1712142113):$lzsc$1712142113 instanceof LzEvent){
+if($lzsc$1712142113.ready){
+$lzsc$1712142113.sendEvent($lzsc$2022760291)
 }}}}}}else if($0=="width"||$0=="height"){
 var $4=$0=="width"?"x":"y";$2.update($4);{
-var $lzsc$682647694=$3/$2.scale[$4];if(!this.__LZdeleted){
-var $lzsc$930312192="$lzc$set_"+$0;if(Function["$lzsc$isa"]?Function.$lzsc$isa(this[$lzsc$930312192]):this[$lzsc$930312192] instanceof Function){
-this[$lzsc$930312192]($lzsc$682647694)
+var $lzsc$1645707795=$3/$2.scale[$4];if(!this.__LZdeleted){
+var $lzsc$1161854846="$lzc$set_"+$0;if(Function["$lzsc$isa"]?Function.$lzsc$isa(this[$lzsc$1161854846]):this[$lzsc$1161854846] instanceof Function){
+this[$lzsc$1161854846]($lzsc$1645707795)
 }else{
-this[$0]=$lzsc$682647694;var $lzsc$1623134346=this["on"+$0];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1623134346):$lzsc$1623134346 instanceof LzEvent){
-if($lzsc$1623134346.ready){
-$lzsc$1623134346.sendEvent($lzsc$682647694)
+this[$0]=$lzsc$1645707795;var $lzsc$1271694632=this["on"+$0];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1271694632):$lzsc$1271694632 instanceof LzEvent){
+if($lzsc$1271694632.ready){
+$lzsc$1271694632.sendEvent($lzsc$1645707795)
 }}}}}}},"$lzc$setAttributeRelative_dependencies",function($0,$1,$2,$3){
 var $4=$0.getLinkage($3);var $5=2;var $6=[];if($2=="width"){
 var $7="x"
@@ -4242,9 +4240,9 @@ if(!this.__LZdeleted){
 if(Function["$lzsc$isa"]?Function.$lzsc$isa(this["$lzc$set_context"]):this["$lzc$set_context"] instanceof Function){
 this["$lzc$set_context"]($0)
 }else{
-this["context"]=$0;var $lzsc$1925363754=this["oncontext"];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1925363754):$lzsc$1925363754 instanceof LzEvent){
-if($lzsc$1925363754.ready){
-$lzsc$1925363754.sendEvent($0)
+this["context"]=$0;var $lzsc$1149826127=this["oncontext"];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1149826127):$lzsc$1149826127 instanceof LzEvent){
+if($lzsc$1149826127.ready){
+$lzsc$1149826127.sendEvent($0)
 }}}}}}}},"onshadowangle",LzDeclaredEvent,"shadowangle",0,"$lzc$set_shadowangle",function($0){
 if(this.capabilities["dropshadows"]){
 this.shadowangle=$0;this.__updateShadow();if(this.onshadowangle.ready){
@@ -4862,12 +4860,12 @@ var $5=$1[$3];if(LzStyleIdent["$lzsc$isa"]?LzStyleIdent.$lzsc$isa($5):$5 instanc
 $5=$5.sourceValueID
 };Debug.info("setting style",$3,$4,$5);{
 if(!this.__LZdeleted){
-var $lzsc$1079157917="$lzc$set_"+$4;if(Function["$lzsc$isa"]?Function.$lzsc$isa(this[$lzsc$1079157917]):this[$lzsc$1079157917] instanceof Function){
-this[$lzsc$1079157917]($5)
+var $lzsc$1968529366="$lzc$set_"+$4;if(Function["$lzsc$isa"]?Function.$lzsc$isa(this[$lzsc$1968529366]):this[$lzsc$1968529366] instanceof Function){
+this[$lzsc$1968529366]($5)
 }else{
-this[$4]=$5;var $lzsc$438634955=this["on"+$4];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$438634955):$lzsc$438634955 instanceof LzEvent){
-if($lzsc$438634955.ready){
-$lzsc$438634955.sendEvent($5)
+this[$4]=$5;var $lzsc$295017381=this["on"+$4];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$295017381):$lzsc$295017381 instanceof LzEvent){
+if($lzsc$295017381.ready){
+$lzsc$295017381.sendEvent($5)
 }}}}}}};var $6=this.subnodes;if($6){
 for(var $7=0;$7<$6.length;){
 var $8=$6[$7++];var $9=$6[$7];if($8.isinited||!$8.__LZinstantiated)continue;$8.__LZcallInit();if($9!=$6[$7]){
@@ -5101,13 +5099,13 @@ if(this.isactive)return;this.isactive=true;this.prepareStart();this.updateDel.re
 },"prepareStart",function(){
 this.crepeat=this.repeat;var $0=this.target;var $1=this.attribute;if($0[$1]==this.to)return;if(this.from!=null){
 {
-var $lzsc$484027554=Number(this.from);if(!$0.__LZdeleted){
-var $lzsc$2077386910="$lzc$set_"+$1;if(Function["$lzsc$isa"]?Function.$lzsc$isa($0[$lzsc$2077386910]):$0[$lzsc$2077386910] instanceof Function){
-$0[$lzsc$2077386910]($lzsc$484027554)
+var $lzsc$508376665=Number(this.from);if(!$0.__LZdeleted){
+var $lzsc$492438354="$lzc$set_"+$1;if(Function["$lzsc$isa"]?Function.$lzsc$isa($0[$lzsc$492438354]):$0[$lzsc$492438354] instanceof Function){
+$0[$lzsc$492438354]($lzsc$508376665)
 }else{
-$0[$1]=$lzsc$484027554;var $lzsc$664269228=$0["on"+$1];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$664269228):$lzsc$664269228 instanceof LzEvent){
-if($lzsc$664269228.ready){
-$lzsc$664269228.sendEvent($lzsc$484027554)
+$0[$1]=$lzsc$508376665;var $lzsc$1262042977=$0["on"+$1];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1262042977):$lzsc$1262042977 instanceof LzEvent){
+if($lzsc$1262042977.ready){
+$lzsc$1262042977.sendEvent($lzsc$508376665)
 }}}}}};if(this.relative){
 this.to=this.origto
 }else{
@@ -5117,12 +5115,12 @@ this.to=this.origto-$0.getExpectedAttribute($1)
 var $0=this.target;var $1=this.attribute;var $2=this.from;if($2!=null){
 {
 if(!$0.__LZdeleted){
-var $lzsc$1143271675="$lzc$set_"+$1;if(Function["$lzsc$isa"]?Function.$lzsc$isa($0[$lzsc$1143271675]):$0[$lzsc$1143271675] instanceof Function){
-$0[$lzsc$1143271675]($2)
+var $lzsc$1445812125="$lzc$set_"+$1;if(Function["$lzsc$isa"]?Function.$lzsc$isa($0[$lzsc$1445812125]):$0[$lzsc$1445812125] instanceof Function){
+$0[$lzsc$1445812125]($2)
 }else{
-$0[$1]=$2;var $lzsc$2096989593=$0["on"+$1];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$2096989593):$lzsc$2096989593 instanceof LzEvent){
-if($lzsc$2096989593.ready){
-$lzsc$2096989593.sendEvent($2)
+$0[$1]=$2;var $lzsc$76584797=$0["on"+$1];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$76584797):$lzsc$76584797 instanceof LzEvent){
+if($lzsc$76584797.ready){
+$lzsc$76584797.sendEvent($2)
 }}}}};var $3=$2-$0.getExpectedAttribute($1);$0.addToExpectedAttribute($1,$3)
 };if(!this.relative){
 this.to=this.origto-$0.getExpectedAttribute($1);this.calcControlValues()
@@ -5142,13 +5140,13 @@ var $0=this.target;var $1=this.attribute;var $2="e_"+$1;if(!$0[$2].c){
 $0[$2].c=0
 };$0[$2].c-=1;if($0[$2].c<=0){
 $0[$2].c=0;{
-var $lzsc$1760179873=$0[$2].v;if(!$0.__LZdeleted){
-var $lzsc$351995479="$lzc$set_"+$1;if(Function["$lzsc$isa"]?Function.$lzsc$isa($0[$lzsc$351995479]):$0[$lzsc$351995479] instanceof Function){
-$0[$lzsc$351995479]($lzsc$1760179873)
+var $lzsc$901094984=$0[$2].v;if(!$0.__LZdeleted){
+var $lzsc$60838307="$lzc$set_"+$1;if(Function["$lzsc$isa"]?Function.$lzsc$isa($0[$lzsc$60838307]):$0[$lzsc$60838307] instanceof Function){
+$0[$lzsc$60838307]($lzsc$901094984)
 }else{
-$0[$1]=$lzsc$1760179873;var $lzsc$1241047763=$0["on"+$1];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1241047763):$lzsc$1241047763 instanceof LzEvent){
-if($lzsc$1241047763.ready){
-$lzsc$1241047763.sendEvent($lzsc$1760179873)
+$0[$1]=$lzsc$901094984;var $lzsc$498653655=$0["on"+$1];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$498653655):$lzsc$498653655 instanceof LzEvent){
+if($lzsc$498653655.ready){
+$lzsc$498653655.sendEvent($lzsc$901094984)
 }}}}};$0[$2].v=null
 };this.__LZhalt()
 },"calcNextValue",function($0){
@@ -5170,13 +5168,13 @@ this.setValue(this.to);return this.checkRepeat()
 },"setValue",function($0){
 this._valueaccumulator=+($0-this.currentValue);if(Math.abs(this._valueaccumulator)>=this.precision){
 var $1=this.target;var $2=this.attribute;{
-var $lzsc$1431807573=$1[$2]+this._valueaccumulator;if(!$1.__LZdeleted){
-var $lzsc$1792796623="$lzc$set_"+$2;if(Function["$lzsc$isa"]?Function.$lzsc$isa($1[$lzsc$1792796623]):$1[$lzsc$1792796623] instanceof Function){
-$1[$lzsc$1792796623]($lzsc$1431807573)
+var $lzsc$1797327056=$1[$2]+this._valueaccumulator;if(!$1.__LZdeleted){
+var $lzsc$478279953="$lzc$set_"+$2;if(Function["$lzsc$isa"]?Function.$lzsc$isa($1[$lzsc$478279953]):$1[$lzsc$478279953] instanceof Function){
+$1[$lzsc$478279953]($lzsc$1797327056)
 }else{
-$1[$2]=$lzsc$1431807573;var $lzsc$1222671040=$1["on"+$2];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1222671040):$lzsc$1222671040 instanceof LzEvent){
-if($lzsc$1222671040.ready){
-$lzsc$1222671040.sendEvent($lzsc$1431807573)
+$1[$2]=$lzsc$1797327056;var $lzsc$385546447=$1["on"+$2];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$385546447):$lzsc$385546447 instanceof LzEvent){
+if($lzsc$385546447.ready){
+$lzsc$385546447.sendEvent($lzsc$1797327056)
 }}}}};this._valueaccumulator=0
 };this.currentValue=$0
 },"_valueaccumulator",0,"toString",function(){
@@ -7390,12 +7388,12 @@ $4=null
 };var $7=$5.acceptTypeValue(this.type,$4);if($2||$5[$6]!==$7||!$5.inited||this.parsedPath.operator=="attributes"){
 {
 if(!$5.__LZdeleted){
-var $lzsc$713601701="$lzc$set_"+$6;if(Function["$lzsc$isa"]?Function.$lzsc$isa($5[$lzsc$713601701]):$5[$lzsc$713601701] instanceof Function){
-$5[$lzsc$713601701]($7)
+var $lzsc$421888579="$lzc$set_"+$6;if(Function["$lzsc$isa"]?Function.$lzsc$isa($5[$lzsc$421888579]):$5[$lzsc$421888579] instanceof Function){
+$5[$lzsc$421888579]($7)
 }else{
-$5[$6]=$7;var $lzsc$503699132=$5["on"+$6];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$503699132):$lzsc$503699132 instanceof LzEvent){
-if($lzsc$503699132.ready){
-$lzsc$503699132.sendEvent($7)
+$5[$6]=$7;var $lzsc$1619295769=$5["on"+$6];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1619295769):$lzsc$1619295769 instanceof LzEvent){
+if($lzsc$1619295769.ready){
+$lzsc$1619295769.sendEvent($7)
 }}}}}}};return $3
 },"unregisterAll",function(){
 var $0=this.pathparent.__LZdepChildren;if($0!=null){
@@ -7464,13 +7462,13 @@ $6.datapath.setClonePointer(this.initialnodes[1])
 };this.viewsize=$6[this.sizeAxis];$6.datapath.setClonePointer(null);this.clones.push($6);if($1.spacing==null){
 $1.spacing=0
 };this.totalsize=this.viewsize+$1.spacing;{
-var $lzsc$770544021=this.axis;var $lzsc$813947086=this.totalsize;if(!$6.__LZdeleted){
-var $lzsc$1810930828="$lzc$set_"+$lzsc$770544021;if(Function["$lzsc$isa"]?Function.$lzsc$isa($6[$lzsc$1810930828]):$6[$lzsc$1810930828] instanceof Function){
-$6[$lzsc$1810930828]($lzsc$813947086)
+var $lzsc$1112227982=this.axis;var $lzsc$1437725643=this.totalsize;if(!$6.__LZdeleted){
+var $lzsc$1823916069="$lzc$set_"+$lzsc$1112227982;if(Function["$lzsc$isa"]?Function.$lzsc$isa($6[$lzsc$1823916069]):$6[$lzsc$1823916069] instanceof Function){
+$6[$lzsc$1823916069]($lzsc$1437725643)
 }else{
-$6[$lzsc$770544021]=$lzsc$813947086;var $lzsc$1134786022=$6["on"+$lzsc$770544021];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1134786022):$lzsc$1134786022 instanceof LzEvent){
-if($lzsc$1134786022.ready){
-$lzsc$1134786022.sendEvent($lzsc$813947086)
+$6[$lzsc$1112227982]=$lzsc$1437725643;var $lzsc$1788408222=$6["on"+$lzsc$1112227982];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1788408222):$lzsc$1788408222 instanceof LzEvent){
+if($lzsc$1788408222.ready){
+$lzsc$1788408222.sendEvent($lzsc$1437725643)
 }}}}};this.__LZdataoffset=0;this.updateDel=new LzDelegate(this,"__LZhandleUpdate");this.updateDel.register(this.cloneimmediateparent,"on"+this.axis);this.updateDel.register(this.mask,"on"+this.sizeAxis)
 },"__LZhandleUpdate",function($0){
 this.__LZadjustVisibleClones(null,null)
@@ -7485,13 +7483,13 @@ this.__LZHandleMultiNodes([])
 var $2=this.cloneimmediateparent;var $3=this.nodes;var $4=this.axis;var $5=this.sizeAxis;var $6=this.totalsize;if($3){
 var $7=$3.length;if(this.__LZoldnodelen!=$7){
 {
-var $lzsc$1353442970=$7*$6-this.spacing;if(!$2.__LZdeleted){
-var $lzsc$1372483902="$lzc$set_"+$5;if(Function["$lzsc$isa"]?Function.$lzsc$isa($2[$lzsc$1372483902]):$2[$lzsc$1372483902] instanceof Function){
-$2[$lzsc$1372483902]($lzsc$1353442970)
+var $lzsc$197057715=$7*$6-this.spacing;if(!$2.__LZdeleted){
+var $lzsc$1331798081="$lzc$set_"+$5;if(Function["$lzsc$isa"]?Function.$lzsc$isa($2[$lzsc$1331798081]):$2[$lzsc$1331798081] instanceof Function){
+$2[$lzsc$1331798081]($lzsc$197057715)
 }else{
-$2[$5]=$lzsc$1353442970;var $lzsc$1347684592=$2["on"+$5];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1347684592):$lzsc$1347684592 instanceof LzEvent){
-if($lzsc$1347684592.ready){
-$lzsc$1347684592.sendEvent($lzsc$1353442970)
+$2[$5]=$lzsc$197057715;var $lzsc$677271575=$2["on"+$5];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$677271575):$lzsc$677271575 instanceof LzEvent){
+if($lzsc$677271575.ready){
+$lzsc$677271575.sendEvent($lzsc$197057715)
 }}}}};this.__LZoldnodelen=$7
 }};if(!(this.mask&&this.mask["hasset"+$5]))return;var $8=0;if($6!=0){
 $8=Math.floor(-$2[$4]/$6);if(0>$8)$8=0
@@ -7513,13 +7511,13 @@ $g=$e[$9++]
 $g=this.getNewClone()
 }};if($g){
 this.clones[$f]=$g;{
-var $lzsc$2057384842=($f+$8)*$6;if(!$g.__LZdeleted){
-var $lzsc$1871394976="$lzc$set_"+$4;if(Function["$lzsc$isa"]?Function.$lzsc$isa($g[$lzsc$1871394976]):$g[$lzsc$1871394976] instanceof Function){
-$g[$lzsc$1871394976]($lzsc$2057384842)
+var $lzsc$1974481917=($f+$8)*$6;if(!$g.__LZdeleted){
+var $lzsc$1970288041="$lzc$set_"+$4;if(Function["$lzsc$isa"]?Function.$lzsc$isa($g[$lzsc$1970288041]):$g[$lzsc$1970288041] instanceof Function){
+$g[$lzsc$1970288041]($lzsc$1974481917)
 }else{
-$g[$4]=$lzsc$2057384842;var $lzsc$1372551847=$g["on"+$4];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1372551847):$lzsc$1372551847 instanceof LzEvent){
-if($lzsc$1372551847.ready){
-$lzsc$1372551847.sendEvent($lzsc$2057384842)
+$g[$4]=$lzsc$1974481917;var $lzsc$564260368=$g["on"+$4];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$564260368):$lzsc$564260368 instanceof LzEvent){
+if($lzsc$564260368.ready){
+$lzsc$564260368.sendEvent($lzsc$1974481917)
 }}}}};$g.clonenumber=$8+$f;if($3){
 $g.datapath.setClonePointer($3[$8+$f])
 };if($g.onclonenumber.ready)$g.onclonenumber.sendEvent($f)
@@ -7596,31 +7594,31 @@ var $m=null
 var $f=this.nodes[$e+$5];var $m=this.clones[$e];if(!$m){
 $m=this.getNewClone();$m.clonenumber=$e+$5;$m.datapath.setClonePointer($f);if($m.onclonenumber.ready)$m.onclonenumber.sendEvent($e+$5);this.clones[$e]=$m
 };this.clones[$e]=$m;{
-var $lzsc$583206626=this.axis;if(!$m.__LZdeleted){
-var $lzsc$787679483="$lzc$set_"+$lzsc$583206626;if(Function["$lzsc$isa"]?Function.$lzsc$isa($m[$lzsc$787679483]):$m[$lzsc$787679483] instanceof Function){
-$m[$lzsc$787679483]($n)
+var $lzsc$550403189=this.axis;if(!$m.__LZdeleted){
+var $lzsc$1669942325="$lzc$set_"+$lzsc$550403189;if(Function["$lzsc$isa"]?Function.$lzsc$isa($m[$lzsc$1669942325]):$m[$lzsc$1669942325] instanceof Function){
+$m[$lzsc$1669942325]($n)
 }else{
-$m[$lzsc$583206626]=$n;var $lzsc$1189405970=$m["on"+$lzsc$583206626];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1189405970):$lzsc$1189405970 instanceof LzEvent){
-if($lzsc$1189405970.ready){
-$lzsc$1189405970.sendEvent($n)
+$m[$lzsc$550403189]=$n;var $lzsc$53699544=$m["on"+$lzsc$550403189];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$53699544):$lzsc$53699544 instanceof LzEvent){
+if($lzsc$53699544.ready){
+$lzsc$53699544.sendEvent($n)
 }}}}};var $g=$f.getUserData(this.datasizevar);var $h=$g==null?this.viewsize:$g;if($m[this.sizeAxis]!=$h){
 {
-var $lzsc$178981149=this.sizeAxis;if(!$m.__LZdeleted){
-var $lzsc$1266168920="$lzc$set_"+$lzsc$178981149;if(Function["$lzsc$isa"]?Function.$lzsc$isa($m[$lzsc$1266168920]):$m[$lzsc$1266168920] instanceof Function){
-$m[$lzsc$1266168920]($h)
+var $lzsc$455782539=this.sizeAxis;if(!$m.__LZdeleted){
+var $lzsc$793662725="$lzc$set_"+$lzsc$455782539;if(Function["$lzsc$isa"]?Function.$lzsc$isa($m[$lzsc$793662725]):$m[$lzsc$793662725] instanceof Function){
+$m[$lzsc$793662725]($h)
 }else{
-$m[$lzsc$178981149]=$h;var $lzsc$873487481=$m["on"+$lzsc$178981149];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$873487481):$lzsc$873487481 instanceof LzEvent){
-if($lzsc$873487481.ready){
-$lzsc$873487481.sendEvent($h)
+$m[$lzsc$455782539]=$h;var $lzsc$250956112=$m["on"+$lzsc$455782539];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$250956112):$lzsc$250956112 instanceof LzEvent){
+if($lzsc$250956112.ready){
+$lzsc$250956112.sendEvent($h)
 }}}}}};$n+=$h+this.spacing
 };this.__LZdataoffset=$5;{
-var $lzsc$582466663=this.cloneimmediateparent;var $lzsc$1806747=this.sizeAxis;if(!$lzsc$582466663.__LZdeleted){
-var $lzsc$294354040="$lzc$set_"+$lzsc$1806747;if(Function["$lzsc$isa"]?Function.$lzsc$isa($lzsc$582466663[$lzsc$294354040]):$lzsc$582466663[$lzsc$294354040] instanceof Function){
-$lzsc$582466663[$lzsc$294354040]($9)
+var $lzsc$685919953=this.cloneimmediateparent;var $lzsc$1538089188=this.sizeAxis;if(!$lzsc$685919953.__LZdeleted){
+var $lzsc$732685897="$lzc$set_"+$lzsc$1538089188;if(Function["$lzsc$isa"]?Function.$lzsc$isa($lzsc$685919953[$lzsc$732685897]):$lzsc$685919953[$lzsc$732685897] instanceof Function){
+$lzsc$685919953[$lzsc$732685897]($9)
 }else{
-$lzsc$582466663[$lzsc$1806747]=$9;var $lzsc$996782420=$lzsc$582466663["on"+$lzsc$1806747];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$996782420):$lzsc$996782420 instanceof LzEvent){
-if($lzsc$996782420.ready){
-$lzsc$996782420.sendEvent($9)
+$lzsc$685919953[$lzsc$1538089188]=$9;var $lzsc$1347280334=$lzsc$685919953["on"+$lzsc$1538089188];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1347280334):$lzsc$1347280334 instanceof LzEvent){
+if($lzsc$1347280334.ready){
+$lzsc$1347280334.sendEvent($9)
 }}}}};this.__LZresizeupdating=false
 }],null);lz.ResizeReplicationManager=LzResizeReplicationManager;Class.make("LzColorUtils",null,null,["__cache",{counter:0},"stringToColor",function($0){
 if(typeof $0!="string")return $0;if($0 in lz.colors)return lz.colors[$0];if($0 in global)return global[$0];if($0.indexOf("rgb")!=-1)return LzColorUtils.fromrgb($0);var $1=Number($0);if(isNaN($1)){
@@ -8356,23 +8354,23 @@ $2=0
 $2=$1
 };var $3=this.__lzhistq[$2];for(var $4 in $3){
 var $5=$3[$4];{
-var $lzsc$1374631605=global[$5.c];var $lzsc$649406143=$5.n;var $lzsc$480556388=$5.v;if(!$lzsc$1374631605.__LZdeleted){
-var $lzsc$426659940="$lzc$set_"+$lzsc$649406143;if(Function["$lzsc$isa"]?Function.$lzsc$isa($lzsc$1374631605[$lzsc$426659940]):$lzsc$1374631605[$lzsc$426659940] instanceof Function){
-$lzsc$1374631605[$lzsc$426659940]($lzsc$480556388)
+var $lzsc$625317076=global[$5.c];var $lzsc$332747013=$5.n;var $lzsc$1359515025=$5.v;if(!$lzsc$625317076.__LZdeleted){
+var $lzsc$1308346785="$lzc$set_"+$lzsc$332747013;if(Function["$lzsc$isa"]?Function.$lzsc$isa($lzsc$625317076[$lzsc$1308346785]):$lzsc$625317076[$lzsc$1308346785] instanceof Function){
+$lzsc$625317076[$lzsc$1308346785]($lzsc$1359515025)
 }else{
-$lzsc$1374631605[$lzsc$649406143]=$lzsc$480556388;var $lzsc$1291905247=$lzsc$1374631605["on"+$lzsc$649406143];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1291905247):$lzsc$1291905247 instanceof LzEvent){
-if($lzsc$1291905247.ready){
-$lzsc$1291905247.sendEvent($lzsc$480556388)
+$lzsc$625317076[$lzsc$332747013]=$lzsc$1359515025;var $lzsc$1226022403=$lzsc$625317076["on"+$lzsc$332747013];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1226022403):$lzsc$1226022403 instanceof LzEvent){
+if($lzsc$1226022403.ready){
+$lzsc$1226022403.sendEvent($lzsc$1359515025)
 }}}}}};this.offset=$2;if(this.onoffset.ready)this.onoffset.sendEvent($2);return $2
 },"receiveEvent",function($0,$1){
 {
 if(!canvas.__LZdeleted){
-var $lzsc$431017024="$lzc$set_"+$0;if(Function["$lzsc$isa"]?Function.$lzsc$isa(canvas[$lzsc$431017024]):canvas[$lzsc$431017024] instanceof Function){
-canvas[$lzsc$431017024]($1)
+var $lzsc$1434877123="$lzc$set_"+$0;if(Function["$lzsc$isa"]?Function.$lzsc$isa(canvas[$lzsc$1434877123]):canvas[$lzsc$1434877123] instanceof Function){
+canvas[$lzsc$1434877123]($1)
 }else{
-canvas[$0]=$1;var $lzsc$1376188461=canvas["on"+$0];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1376188461):$lzsc$1376188461 instanceof LzEvent){
-if($lzsc$1376188461.ready){
-$lzsc$1376188461.sendEvent($1)
+canvas[$0]=$1;var $lzsc$1795346795=canvas["on"+$0];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1795346795):$lzsc$1795346795 instanceof LzEvent){
+if($lzsc$1795346795.ready){
+$lzsc$1795346795.sendEvent($1)
 }}}}}},"getCanvasAttribute",function($0){
 return canvas[$0]
 },"setCanvasAttribute",function($0,$1){
@@ -8932,9 +8930,9 @@ if(!this.__LZdeleted){
 if(Function["$lzsc$isa"]?Function.$lzsc$isa(this["$lzc$set_width"]):this["$lzc$set_width"] instanceof Function){
 this["$lzc$set_width"]($1)
 }else{
-this["width"]=$1;var $lzsc$1991901833=this["onwidth"];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1991901833):$lzsc$1991901833 instanceof LzEvent){
-if($lzsc$1991901833.ready){
-$lzsc$1991901833.sendEvent($1)
+this["width"]=$1;var $lzsc$939567813=this["onwidth"];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$939567813):$lzsc$939567813 instanceof LzEvent){
+if($lzsc$939567813.ready){
+$lzsc$939567813.sendEvent($1)
 }}}}}}}},"$m14",function(){
 with(this){
 return [parent.container,"width"]
@@ -8946,9 +8944,9 @@ if(!this.__LZdeleted){
 if(Function["$lzsc$isa"]?Function.$lzsc$isa(this["$lzc$set_height"]):this["$lzc$set_height"] instanceof Function){
 this["$lzc$set_height"]($1)
 }else{
-this["height"]=$1;var $lzsc$1043086163=this["onheight"];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1043086163):$lzsc$1043086163 instanceof LzEvent){
-if($lzsc$1043086163.ready){
-$lzsc$1043086163.sendEvent($1)
+this["height"]=$1;var $lzsc$816564220=this["onheight"];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$816564220):$lzsc$816564220 instanceof LzEvent){
+if($lzsc$816564220.ready){
+$lzsc$816564220.sendEvent($1)
 }}}}}}}},"$m16",function(){
 with(this){
 return [parent.container,"height"]
@@ -8986,29 +8984,29 @@ $0.x=canvas.width-this.width
 };if($0.y>canvas.height-this.height){
 $0.y=canvas.height-this.height
 };this.bringToFront();{
-var $lzsc$1907888185=$0.x;if(!this.__LZdeleted){
+var $lzsc$164103295=$0.x;if(!this.__LZdeleted){
 if(Function["$lzsc$isa"]?Function.$lzsc$isa(this["$lzc$set_x"]):this["$lzc$set_x"] instanceof Function){
-this["$lzc$set_x"]($lzsc$1907888185)
+this["$lzc$set_x"]($lzsc$164103295)
 }else{
-this["x"]=$lzsc$1907888185;var $lzsc$2106364968=this["onx"];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$2106364968):$lzsc$2106364968 instanceof LzEvent){
-if($lzsc$2106364968.ready){
-$lzsc$2106364968.sendEvent($lzsc$1907888185)
+this["x"]=$lzsc$164103295;var $lzsc$786319715=this["onx"];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$786319715):$lzsc$786319715 instanceof LzEvent){
+if($lzsc$786319715.ready){
+$lzsc$786319715.sendEvent($lzsc$164103295)
 }}}}};{
-var $lzsc$550012931=$0.y;if(!this.__LZdeleted){
+var $lzsc$1618586884=$0.y;if(!this.__LZdeleted){
 if(Function["$lzsc$isa"]?Function.$lzsc$isa(this["$lzc$set_y"]):this["$lzc$set_y"] instanceof Function){
-this["$lzc$set_y"]($lzsc$550012931)
+this["$lzc$set_y"]($lzsc$1618586884)
 }else{
-this["y"]=$lzsc$550012931;var $lzsc$1626926272=this["ony"];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1626926272):$lzsc$1626926272 instanceof LzEvent){
-if($lzsc$1626926272.ready){
-$lzsc$1626926272.sendEvent($lzsc$550012931)
+this["y"]=$lzsc$1618586884;var $lzsc$2136067214=this["ony"];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$2136067214):$lzsc$2136067214 instanceof LzEvent){
+if($lzsc$2136067214.ready){
+$lzsc$2136067214.sendEvent($lzsc$1618586884)
 }}}}};{
 if(!this.__LZdeleted){
 if(Function["$lzsc$isa"]?Function.$lzsc$isa(this["$lzc$set_visible"]):this["$lzc$set_visible"] instanceof Function){
 this["$lzc$set_visible"](true)
 }else{
-this["visible"]=true;var $lzsc$341152225=this["onvisible"];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$341152225):$lzsc$341152225 instanceof LzEvent){
-if($lzsc$341152225.ready){
-$lzsc$341152225.sendEvent(true)
+this["visible"]=true;var $lzsc$1828259749=this["onvisible"];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1828259749):$lzsc$1828259749 instanceof LzEvent){
+if($lzsc$1828259749.ready){
+$lzsc$1828259749.sendEvent(true)
 }}}}};this.__globalmousedel.register(lz.GlobalMouse,"onmousedown")
 }},"hide",function(){
 with(this){
@@ -9019,9 +9017,9 @@ if(!this.__LZdeleted){
 if(Function["$lzsc$isa"]?Function.$lzsc$isa(this["$lzc$set_visible"]):this["$lzc$set_visible"] instanceof Function){
 this["$lzc$set_visible"](false)
 }else{
-this["visible"]=false;var $lzsc$1016971784=this["onvisible"];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1016971784):$lzsc$1016971784 instanceof LzEvent){
-if($lzsc$1016971784.ready){
-$lzsc$1016971784.sendEvent(false)
+this["visible"]=false;var $lzsc$1592971559=this["onvisible"];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1592971559):$lzsc$1592971559 instanceof LzEvent){
+if($lzsc$1592971559.ready){
+$lzsc$1592971559.sendEvent(false)
 }}}}}}},"setItems",function($0){
 with(this){
 this.__drawnitems={};var $1=this.container.subviews;for(var $2=$1.length;$2>=0;$2--){
@@ -9035,9 +9033,9 @@ if(!$8.__LZdeleted){
 if(Function["$lzsc$isa"]?Function.$lzsc$isa($8["$lzc$set_y"]):$8["$lzc$set_y"] instanceof Function){
 $8["$lzc$set_y"]($5)
 }else{
-$8["y"]=$5;var $lzsc$1356259669=$8["ony"];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1356259669):$lzsc$1356259669 instanceof LzEvent){
-if($lzsc$1356259669.ready){
-$lzsc$1356259669.sendEvent($5)
+$8["y"]=$5;var $lzsc$1640059328=$8["ony"];if(LzEvent["$lzsc$isa"]?LzEvent.$lzsc$isa($lzsc$1640059328):$lzsc$1640059328 instanceof LzEvent){
+if($lzsc$1640059328.ready){
+$lzsc$1640059328.sendEvent($5)
 }}}}};$5+=$8.height
 }};this.items=$0;this.background.redraw()
 }},"registerRedraw",function($0){

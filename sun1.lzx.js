@@ -1,4 +1,4 @@
-LzFontManager.addFont("futura","normal","normal","resources/futuraregular.ttf","ar");canvas=new LzCanvas(null,{__LZproxied:"false",appbuilddate:"2010-03-12T00:03:26Z",bgcolor:16777215,embedfonts:true,font:"Helvetica,Sans",fontname:"Helvetica,Sans",fontsize:12,fontstyle:"plain",height:"100%",lpsbuild:"15887 /Users/maxcarlson/openlaszlo/trunk-clean",lpsbuilddate:"2010-03-10T05:46:15Z",lpsrelease:"Latest",lpsversion:"5.0.x",runtime:"dhtml",width:"100%"});Mixin.make("DrawviewShared",null,["$lzsc$initialize",function($0,$1,$2,$3){
+LzFontManager.addFont("futura","normal","normal","resources/futuraregular.ttf","ar");canvas=new LzCanvas(null,{__LZproxied:"false",appbuilddate:"2010-03-12T01:18:12Z",bgcolor:16777215,embedfonts:true,font:"futura",fontname:"futura",fontsize:12,fontstyle:"plain",height:"100%",lpsbuild:"15887 /Users/maxcarlson/openlaszlo/trunk-clean",lpsbuilddate:"2010-03-10T05:46:15Z",lpsrelease:"Latest",lpsversion:"5.0.x",runtime:"dhtml",width:"100%"});Mixin.make("DrawviewShared",null,["$lzsc$initialize",function($0,$1,$2,$3){
 switch(arguments.length){
 case 0:
 $0=null;
@@ -2638,7 +2638,7 @@ with($0)with($0.prototype){
 {
 LzNode.mergeAttributes({shadowangle:90,shadowblurradius:0,shadowcolor:LzColorUtils.convertColor("0x0"),shadowdistance:10,target:null,visible:false},$lzc$class_fltr.attributes)
 }}})($lzc$class_fltr);(function(){
-var $0=LzCSSStyle,$1=LzCSSStyleRule;$0._addRule(new $1("canvas",{"background-color":15856113,"font-size":18,"font-style":new LzStyleIdent("Times")}));$0._addRule(new $1("sunbutton1",{"base-color":new LzStyleIdent("white"),"border-color":16777215,"corner-radius":3,"highlight-color":6710886,"text-color-down":15181597,"text-color-over":8044866,"text-color-up":9868950,"text-padding":4}))
+var $0=LzCSSStyle,$1=LzCSSStyleRule;$0._addRule(new $1("canvas",{"background-color":15856113}));$0._addRule(new $1("sunbutton1",{"base-color":new LzStyleIdent("white"),"border-color":16777215,"corner-radius":3,"highlight-color":6710886,"text-color-down":15181597,"text-color-over":8044866,"text-color-up":9868950,"text-padding":4}))
 })();Class.make("$lzc$class_m239",LzAnimatorGroup,["$m237",function($0){
 with(this){
 this.setAttribute("duration",parent.focusanimationspeed)
@@ -2696,7 +2696,7 @@ $3=false;
 }],["tagname","sunbutton1","children",LzNode.mergeChildren([{attrs:{$classrootdepth:1,duration:new LzOnceExpr("$m237"),name:"showanim",start:false},"class":$lzc$class_m239},{attrs:{$classrootdepth:1,$delegates:["onstop","$m238",null],duration:"200",name:"hideanim",start:false},"class":$lzc$class_m240}],$lzc$class_btn["children"]),"attributes",new LzInheritedHash($lzc$class_btn.attributes)]);(function($0){
 with($0)with($0.prototype){
 {
-LzNode.mergeAttributes({$delegates:["oninit","$m236",null],font:"futura"},$lzc$class_sunbutton1.attributes)
+LzNode.mergeAttributes({$delegates:["oninit","$m236",null]},$lzc$class_sunbutton1.attributes)
 }}})($lzc$class_sunbutton1);Class.make("$lzc$class_m245",$lzc$class_basepanel,["$m241",function($0){
 with(this){
 var $1=immediateparent.width;if($1!==this["width"]||!this.inited){
