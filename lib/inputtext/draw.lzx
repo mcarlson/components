@@ -18,7 +18,6 @@
     </method>
 
     <method name="drawshape" args="scope">
-        var yoffset = this.multiline ? 0 : -2;
-        scope.rect(0,yoffset,this.width - 1,this.height - 1 + yoffset,scope.cornerradius);
+        scope.rect(0,0,this.width,this.height,scope.cornerradius);
     </method>
 </mixin>
