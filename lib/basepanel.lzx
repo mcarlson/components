@@ -10,6 +10,7 @@
         <attribute name="interiorbordercolor" style="interior-border-color" type="color" value="null"/>
         <attribute name="interiorfillcolor" style="interior-fill-color" type="color" value="null"/>
         <attribute name="scopes" value="null"/>
+        <attribute name="drawchildren" value="true" type="boolean"/>
 
         <method name="redraw" args="ignore=null" >            
             <![CDATA[
@@ -18,7 +19,7 @@
             if (this['draw']) {
                 this.draw(this);
             }
-            if (! this.scopes) {
+            if (! this.scopes || ! this.drawchildren) {
                 return;
             }
             var l = this.scopes.length;
@@ -73,16 +74,18 @@
         </method>
         <method name="destroy">
             <![CDATA[
-            for (var i = 0; i < this.scopes.length; i++) {
-                var scope = this.scopes[i];
-                if (scope) {
-                    scope.onx.unregisterAll();
-                    scope.ony.unregisterAll();
-                    scope.onwidth.unregisterAll();
-                    scope.onheight.unregisterAll();
+            if (this.scopes) {
+                for (var i = 0; i < this.scopes.length; i++) {
+                    var scope = this.scopes[i];
+                    if (scope) {
+                        scope.onx.unregisterAll();
+                        scope.ony.unregisterAll();
+                        scope.onwidth.unregisterAll();
+                        scope.onheight.unregisterAll();
+                    }
                 }
+                this.scopes = null;
             }
-            this.scopes = null;
             super.destroy();
             ]]>
         </method>
