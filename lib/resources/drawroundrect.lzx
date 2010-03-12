@@ -1,0 +1,26 @@
+<mixin name="drawroundrect">
+    <method name="drawroundrect" args="context,x,y,width,height=0,topleftradius=0,bottomleftradius=0,bottomrightradius=0,toprightradius=0">
+        bottomleftradius = bottomleftradius || topleftradius;
+        bottomrightradius = bottomrightradius || topleftradius;
+        toprightradius = toprightradius || topleftradius;
+            
+        context.beginPath();
+        context.moveTo(x,y+topleftradius);
+        context.lineTo(x,y+height-bottomleftradius);
+        if (bottomleftradius != 0) {
+            context.quadraticCurveTo(x,y+height,x+bottomleftradius,y+height);
+        }
+        context.lineTo(x+width-bottomrightradius,y+height);
+        if (bottomrightradius != 0) {
+            context.quadraticCurveTo(x+width,y+height,x+width,y+height-bottomrightradius);
+        }
+        context.lineTo(x+width,y+toprightradius);
+        if (toprightradius != 0) {
+            context.quadraticCurveTo(x+width,y,x+width-toprightradius,y);
+        }
+        context.lineTo(x+topleftradius,y);
+        if (topleftradius != 0) {
+            context.quadraticCurveTo(x,y,x,y+topleftradius);
+        }
+    </method>
+</mixin>
