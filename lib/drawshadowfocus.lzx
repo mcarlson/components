@@ -5,9 +5,9 @@
             if (this.capabilities['minimize_opacity_changes']) {
                 radius = 2;
             }
-            this.setAttribute('shadowcolor', 0x0000cc);
+            this.setAttribute('shadowcolor', this.highlightcolor);
             this.setAttribute('shadowdistance', 0);
-                this.setAttribute('shadowblurradius', 0);
+            this.setAttribute('shadowblurradius', 0);
             this.animate('shadowblurradius', radius, this.focusanimationspeed);
         } else {
             if (this.disabled) return;
