@@ -1,0 +1,90 @@
+<canvas font="Helvetica,Sans" fontsize="12">
+    <include href="lib/"/>
+
+    <font name="futura" src="resources/futuraregular.ttf"/>
+
+    <stylesheet>
+        canvas {
+            background-color: #F1F1F1;
+            font-style: Times;
+            font-size: 18;
+        }
+        sunbutton1 {
+            corner-radius: 3;
+            base-color: white;
+            highlight-color: #666666;
+            border-color: #ffffff;
+            text-padding: 4;
+            text-color-up: #969696;
+            text-color-over: #7ac142;
+            text-color-down: #e7a71d;
+        }
+    </stylesheet> 
+
+    <class name="sunbutton1" extends="btn" font="futura">
+        <handler name="oninit">
+            this.setAttribute('shadowangle', 35);
+            this.setAttribute('shadowdistance', 0);
+            this.setAttribute('shadowblurradius', 0);
+            if (this.disabled) {
+                this.drawtarget = this.immediateparent;
+                this.drawtarget.addScope(this);
+            }
+        </handler>
+        <method name="draw" args="context">
+            <![CDATA[
+            if (! this.isinited) return;
+            if (this['drawtarget'] && context === this) {
+                context.clear();
+                return;
+            }
+            //Debug.info('draw', this.mousestate);
+
+            context.fillStyle = this.disabled ? 0xf1f1f1 : context['interiorfillcolor' + this.mousestate];
+            this.drawinteriorborder(context);
+
+            context.borderwidth = context.lineWidth = this.disabled ? 3 : 0;
+            this.styleborder(context);
+            this.drawborder(context);
+
+            if (this.mousestate == "over") {
+                this.setAttribute('shadowcolor', context.highlightcolor);
+                if (! this.focused) this.setAttribute('shadowblurradius', 4);
+                if (this.shadowdistance != 2) {
+                    this.setAttribute('shadowdistance', 0);
+                    this.showanim.doStart();
+                }
+            } else if (mousestate == "up") {
+                if (! this.focused) {
+                    this.hideanim.doStart();
+                }
+            }
+            ]]>
+        </method>
+        <animatorgroup name="showanim" duration="$once{parent.focusanimationspeed}" start="false">
+            <animator attribute="shadowdistance" to="2"/>
+            <animator attribute="shadowblurradius" to="4"/>
+        </animatorgroup>
+        <animatorgroup name="hideanim" duration="200" start="false" onstop="if (! this.parent.focused) this.parent.setAttribute('shadowcolor', null)">
+            <animator attribute="shadowdistance" to="0"/>
+            <animator attribute="shadowblurradius" to="0"/>
+        </animatorgroup>
+    </class>
+
+    <basepanel width="100%" height="100%">
+        <simplelayout spacing="10" inset="10"/>
+        <sunbutton1 x="10" align="center">Submit</sunbutton1>
+        <sunbutton1 x="10" align="center">Cancel</sunbutton1>
+        <sunbutton1 x="10" align="center">Ok</sunbutton1>
+        <sunbutton1 x="10" align="center" textcolorup="#e7a71d">Revert</sunbutton1>
+        <sunbutton1 x="10" align="center" disabled="true">Disabled</sunbutton1>
+        <method name="draw" args="context">
+            context.beginPath();
+            context.rect(0,0,this.width,this.height,this.cornerradius);
+            context.closePath();
+
+            context.fillStyle = canvas.bgcolor;
+            context.fill();
+        </method>
+    </basepanel>
+</canvas>

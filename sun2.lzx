@@ -1,0 +1,150 @@
+<canvas font="Verdana" fontsize="18">
+    <include href="lib/"/>
+
+    <stylesheet>
+        canvas {
+            background-color: #828282;
+            font-size: 11;
+            font: Verdana;
+        }
+        basepanel {
+            corner-radius: 3;
+            base-color: #333333;
+            border-width: 1;
+            border-color: #d8d8d8;
+        }
+        buttongroup {
+            divider-gradient: 'top,#797979 0,#b0b0b0 50,#797979 100';
+        }
+        sunbutton2 {
+            highlight-color: #99ccff;
+            gradient-fill-up: 'top,#6e6e6e 0,#333333 100';
+            gradient-fill-over: 'top,#333333 0,#6e6e6e 100';
+            gradient-fill-down: 'top,#6e6e6e 0,#333333 100';
+            gradient-fill-disabled: 'top,#797979 0,#535353 100';
+            text-padding: 6;
+            text-color-up: #ffffff;
+            text-color-over: #99ccff;
+            text-color-disabled: #cccccc;
+        }
+    </stylesheet> 
+
+    <class name="sunbutton2" extends="btn">
+        <handler name="oninit">
+            this.setAttribute('shadowangle', 35);
+            this.setAttribute('shadowdistance', 0);
+            this.setAttribute('shadowblurradius', 0);
+            if (this.disabled) {
+                this.drawtarget = this.immediateparent;
+                this.drawtarget.addScope(this);
+            }
+        </handler>
+        <method name="draw" args="context">
+            <![CDATA[
+            if (! this.isinited) return;
+            if (this['drawtarget'] && context === this) {
+                context.clear();
+                return;
+            }
+            //Debug.info('draw', this.mousestate);
+
+            this.styleborder(context);
+            this.drawborder(context);
+
+            var lookup = 'gradientfill' + (this.disabled ? 'disabled' : this.mousestate);
+            context.fillStyle = this.cssToLinearGradient(this[lookup], context);
+
+            var borderwidth = context.borderwidth;
+            context.borderwidth = 0;
+            this.drawinteriorborder(context);
+            context.borderwidth = borderwidth;
+            ]]>
+        </method>
+    </class>
+
+    <class name="buttongroup" extends="basepanel" with="buttonevents,stylebutton,drawbutton" drawchildren="false">
+        <simplelayout axis="x"/>
+
+        <attribute name="dividergradient" style="divider-gradient" type="string" value=""/>
+        <method name="draw" args="context">
+            <![CDATA[
+            this.beginPath();
+            this.roundedRect(context,1,1,this.width - 2, this.height - 2, this.cornerradius);
+            this.styleinteriorborder(context);
+            context.fill();
+            this.styleborder(context);
+            context.stroke();
+
+            var l = this.subviews.length;
+            var x = 0;
+            var dividergradient = this.cssToLinearGradient(this.dividergradient);
+            var dividergradient = this.cssToLinearGradient(this.dividergradient);
+            for (var i = 0; i < l; i++) {
+                var button = this.subviews[i];
+                if (! button.disabled) {
+                    var fillcss = button['gradientfill' + button.mousestate];
+
+                    context.fillStyle = this.cssToLinearGradient(fillcss, context);
+                }
+                this.beginPath();
+                this.roundedRect(context,button.x,button.y,button.width,button.height-1
+                    ,i == 0 ? this.cornerradius : 0
+                    ,i == 0 ? this.cornerradius : 0
+                    ,i == l - 1 ? this.cornerradius : 0
+                    ,i == l - 1 ? this.cornerradius : 0);
+                this.fill();
+
+                this.fillStyle = dividergradient;
+                x += button.width;
+                this.fillRect(x,2,1,this.height - 2);
+            }
+
+            this.beginPath();
+            this.roundedRect(context,1,1,this.width - 2, this.height - 2, this.cornerradius);
+            this.stroke();
+            ]]>
+        </method>
+        <method name="roundedRect" args="ctx,x,y,width,height,...radius">
+            //border-top-right-radius, border-bottom-right-radius, border-bottom-left-radius, border-top-left-radius, border-radius
+            var topleft = radius[0] || 0;
+            var bottomleft = radius[1] || topleft;
+            var bottomright = radius[2] || topleft;
+            var topright = radius[3] || topleft;
+                
+            ctx.beginPath();
+            ctx.moveTo(x,y+topleft);
+            ctx.lineTo(x,y+height-bottomleft);
+            ctx.quadraticCurveTo(x,y+height,x+bottomleft,y+height);
+            ctx.lineTo(x+width-bottomright,y+height);
+            ctx.quadraticCurveTo(x+width,y+height,x+width,y+height-bottomright);
+            ctx.lineTo(x+width,y+topright);
+            ctx.quadraticCurveTo(x+width,y,x+width-topright,y);
+            ctx.lineTo(x+topright,y);
+            ctx.quadraticCurveTo(x,y,x,y+topleft);
+            ctx.stroke();
+        </method>
+    </class>
+
+    <basepanel width="100%" height="100%">
+        <method name="draw" args="context">
+            context.clear();
+            context.beginPath();
+            context.rect(0,0,this.width,this.height);
+            context.closePath();
+
+            context.fillStyle = canvas.bgcolor;
+            context.fill();
+        </method>
+
+        <simplelayout spacing="10" inset="10"/>
+        <sunbutton2 x="10">Submit</sunbutton2>
+        <sunbutton2 x="10">Cancel</sunbutton2>
+        <sunbutton2 x="10">Ok</sunbutton2>
+        <sunbutton2 x="10">Revert</sunbutton2>
+        <sunbutton2 x="10" disabled="true">Disabled</sunbutton2>
+        <buttongroup borderwidth="0" x="10">
+            <sunbutton2 with="virtualdrawview">OK</sunbutton2>
+            <sunbutton2 with="virtualdrawview">Revert</sunbutton2>
+        </buttongroup>
+    </basepanel>
+</canvas>
