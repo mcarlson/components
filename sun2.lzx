@@ -8,6 +8,7 @@
             font: Verdana;
         }
         basepanel {
+            highlight-color: #99ccff;
             corner-radius: 3;
             base-color: #333333;
             border-width: 1;
@@ -17,7 +18,6 @@
             divider-gradient: 'top,#797979 0,#b0b0b0 50,#797979 100';
         }
         sunbutton2 {
-            highlight-color: #99ccff;
             gradient-fill-up: 'top,#6e6e6e 0,#333333 100';
             gradient-fill-over: 'top,#333333 0,#6e6e6e 100';
             gradient-fill-down: 'top,#6e6e6e 0,#333333 100';
@@ -55,81 +55,6 @@
             this.drawinteriorborder(context);
             context.borderwidth = borderwidth;
             ]]>
-        </method>
-    </class>
-
-    <class name="buttongroup" extends="basepanel" with="buttonevents,stylebutton,drawbutton" drawchildren="false">
-        <simplelayout axis="x"/>
-
-        <attribute name="dividergradient" style="divider-gradient" type="string" value=""/>
-        <method name="draw" args="context">
-            <![CDATA[
-            this.beginPath();
-            this.roundedRect(context,0,0,this.width - 2, this.height - 2, this.cornerradius);
-            this.styleinteriorborder(context);
-            context.fill();
-
-            var x = 0;
-            var dividergradient = this.cssToLinearGradient(this.dividergradient);
-
-            var l = this.subviews.length;
-            for (var i = 0; i < l; i++) {
-                // draw each button fill
-                var button = this.subviews[i];
-                if (! button.disabled) {
-                    var fillcss = button['gradientfill' + button.mousestate];
-
-                    context.fillStyle = this.cssToLinearGradient(fillcss, context);
-                } else {
-                    context.fillStyle = this.basecolor;
-                }
-
-                this.beginPath();
-                this.roundedRect(context,button.x,button.y,button.width,button.height-1
-                    ,i == 0 ? this.cornerradius : 0
-                    ,i == 0 ? this.cornerradius : 0
-                    ,i == l - 1 ? this.cornerradius : 0
-                    ,i == l - 1 ? this.cornerradius : 0);
-                this.fill();
-
-                this.fillStyle = dividergradient;
-                x += button.width;
-                this.fillRect(x,1,1,this.height - 2);
-            }
-
-            // draw border
-            this.beginPath();
-            this.roundedRect(context,0,0,this.width - 1, this.height - 1, this.cornerradius);
-            this.closePath();
-            this.styleborder(context);
-            this.stroke();
-            ]]>
-        </method>
-        <method name="roundedRect" args="ctx,x,y,width,height,...radius">
-            //border-top-right-radius, border-bottom-right-radius, border-bottom-left-radius, border-top-left-radius, border-radius
-            var topleft = radius[0] || 0;
-            var bottomleft = radius[1] || topleft;
-            var bottomright = radius[2] || topleft;
-            var topright = radius[3] || topleft;
-                
-            ctx.beginPath();
-            ctx.moveTo(x,y+topleft);
-            ctx.lineTo(x,y+height-bottomleft);
-            if (bottomleft) {
-                ctx.quadraticCurveTo(x,y+height,x+bottomleft,y+height);
-            }
-            ctx.lineTo(x+width-bottomright,y+height);
-            if (bottomright) {
-                ctx.quadraticCurveTo(x+width,y+height,x+width,y+height-bottomright);
-            }
-            ctx.lineTo(x+width,y+topright);
-            if (topright) {
-                ctx.quadraticCurveTo(x+width,y,x+width-topright,y);
-            }
-            ctx.lineTo(x+topright,y);
-            if (topleft) {
-                ctx.quadraticCurveTo(x,y,x,y+topleft);
-            }
         </method>
     </class>
 
