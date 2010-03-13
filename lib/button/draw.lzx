@@ -19,7 +19,7 @@
         this.drawborder(context);
         ]]>
     </method>
-    
+
     <method name="styleborder" args="context">
         if (! this.bordercolor) return;
         context.strokeStyle = this.bordercolor;
@@ -28,7 +28,7 @@
         if (this.borderwidth > 0) {
             if (! this.bordercolor) return;
             context.beginPath();
-            context.rect(0, 0, this.width - 1, this.height - 1, this.cornerradius);
+            this.drawshape(context, 0, 0, this.width - 1, this.height - 1);
             context.closePath();
 
             context.stroke();
@@ -46,7 +46,7 @@
         if (! this['interiorfillcolor' + this.mousestate]) return;
         // DRAW INTERIOR BORDER AND FILL
         context.beginPath();
-        context.rect(1, 1, this.width - 3, this.height - 3, this.cornerradius);
+        this.drawshape(context, 1, 1, this.width - 3, this.height - 3);
         context.closePath();
 
         context.fill();
@@ -55,7 +55,7 @@
         }
     </method>
 
-    <handler name="ongradientfillstartup" method="__resetgradientcache"/>
+    <!--handler name="ongradientfillstartup" method="__resetgradientcache"/>
     <handler name="ongradientfillstopup" method="__resetgradientcache"/>
     <handler name="ongradientfillstartover" method="__resetgradientcache"/>
     <handler name="ongradientfillstopover" method="__resetgradientcache"/>
@@ -64,9 +64,16 @@
     <handler name="ongradientsideways" method="__resetgradientcache"/>
     <method name="__resetgradientcache" args="ignore">
         this._gradientfills = [];
-    </method>
+    </method-->
 
     <method name="stylegradient" args="context">
+        var css = this['gradientfill' + (this.disabled ? 'disabled' : this.mousestate)];
+        if (this.vertical) {
+            var o = css.indexOf('top');
+            css = 'left' + css.substring(o + 3);
+        }
+        context.fillStyle = this.cssToLinearGradient(css, context);
+        /*
         if (! this['gradientfillstart' + this.mousestate] || ! this['gradientfillstop' + this.mousestate]) return;
         // cache gradient fills
         if (! this._gradientfills) this._gradientfills = [];
@@ -81,15 +88,17 @@
             this._gradientfills[this.frame] = g;
         }
         context.fillStyle = this._gradientfills[this.frame];
+        */
     </method>
 
     <method name="drawgradient" args="context">
-        if (! this['gradientfillstart' + this.mousestate] || ! this['gradientfillstop' + this.mousestate]) return;
-
         context.beginPath();
         var bevel = this.bevel + this.borderwidth;
         var width = this.width - (bevel * 2) - 2;
         var height = this.height - bevel - 2;
+        this.drawshape(context, bevel + 1, bevel, width, height);
+
+        /*
         if (this.mousestate == 'down') {
             if (this.vertical) {
                 context.rect(bevel + 1, bevel, width * .5, height);
@@ -103,6 +112,7 @@
                 context.rect(bevel + 1, height * .5, width, height * .5);
             }
         }
+        */
 
         context.fill();
     </method>
