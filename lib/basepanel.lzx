@@ -2,16 +2,20 @@
     <include href="extensions/drawview.lzx"/>
     <include href="applybasecolor.lzx"/>
     <include href="drawpanel.lzx"/>
-    <include href="resources/drawroundrect.lzx"/>
     
-    <class name="basepanel" extends="drawpanel" with="applybasecolor,drawroundrect">
+    <class name="basepanel" extends="drawpanel" with="applybasecolor">
+        <attribute name="scopes" value="null"/>
+        <attribute name="drawchildren" value="true" type="boolean"/>
+
         <attribute name="borderwidth" style="border-width" type="number" value="0"/>
         <attribute name="bordercolor" style="border-color" type="color" value="null"/>
         <attribute name="cornerradius"   style="corner-radius" type="number" value="0"/>
         <attribute name="interiorbordercolor" style="interior-border-color" type="color" value="null"/>
         <attribute name="interiorfillcolor" style="interior-fill-color" type="color" value="null"/>
-        <attribute name="scopes" value="null"/>
-        <attribute name="drawchildren" value="true" type="boolean"/>
+        <attribute name="bordertopleftradius" style="border-top-left-radius" type="number" value="${cornerradius}"/>
+        <attribute name="bordertoprightradius" style="border-top-right-radius" type="number" value="${cornerradius}"/>
+        <attribute name="borderbottomrightradius" style="border-bottom-right-radius" type="number" value="${cornerradius}"/>
+        <attribute name="borderbottomleftradius" style="border-bottom-left-radius" type="number" value="${cornerradius}"/>
 
         <method name="redraw" args="ignore=null" >            
             <![CDATA[
@@ -20,16 +24,27 @@
             if (this['draw']) {
                 this.draw(this);
             }
-            if (! this.scopes || ! this.drawchildren) {
+
+            if (this.scopes && this.scopes.length && this.drawchildren) {
+                this.__drawchildren();
+            }
+
+            if (this['drawlast']) {
+                this.drawlast(this);
+            }
+            ]]>
+        </method>
+
+        <method name="__drawchildren" args="ignore=null" >            
+            <![CDATA[
+            if (! this.scopes || ! this.scopes.length || ! this.drawchildren) {
                 return;
             }
-            var l = this.scopes.length;
-            if (! l) return;
             // stop measuring the size for now, store current value to restore later
             var measuresize = this.measuresize;
             this.measuresize = false;
 
-            for (var i = 0; i < l; i++) {
+            for (var i = 0, l = this.scopes.length; i < l; i++) {
                 var scope = this.scopes[i];
                 if (scope) {
                     var x = scope.x;
@@ -45,28 +60,77 @@
             ]]>
         </method>
 
+
+        <method name="drawshape" args="context,x,y,width,height">
+            // use once new rect is available in drawview
+            //context.rect(x, y, width, height, this.bordertopleftradius, this.borderbottomleftradius, this.borderbottomrightradius, this.bordertoprightradius);
+            this._rect(context,x, y, width, height, this.bordertopleftradius, this.borderbottomleftradius, this.borderbottomrightradius, this.bordertoprightradius);
+        </method>
+
+        <method name="range" args="val, max, min=null">
+            <![CDATA[
+            val = (val > max) ? max : val;
+            if (min != null) {
+                val = (val < min) ? min : val;
+            }
+            return val;
+            ]]>
+        </method>
+
+        <method name="_rect" args="context,x,y,width,height,topleftradius=0,bottomleftradius=0,bottomrightradius=0,toprightradius=0">
+            // the radius can't be bigger than our width/height
+            var maxsize = Math.min(width, height) * .5;
+            topleftradius = this.range(topleftradius, maxsize, 0);
+            // default to topleftradius
+            bottomleftradius = this.range(bottomleftradius || topleftradius, maxsize, 0);
+            bottomrightradius = this.range(bottomrightradius || topleftradius, maxsize, 0);
+            toprightradius = this.range(toprightradius || topleftradius, maxsize, 0);
+
+            // Method to draw curves
+            var curvemethod = context['curveTo'] ? 'curveTo' : 'quadraticCurveTo';
+
+            context.moveTo(x,y+topleftradius);
+            context.lineTo(x,y+height-bottomleftradius);
+            if (bottomleftradius != 0) {
+                context[curvemethod](x,y+height,x+bottomleftradius,y+height);
+            }
+            context.lineTo(x+width-bottomrightradius,y+height);
+            if (bottomrightradius != 0) {
+                context[curvemethod](x+width,y+height,x+width,y+height-bottomrightradius);
+            }
+            context.lineTo(x+width,y+toprightradius);
+            if (toprightradius != 0) {
+                context[curvemethod](x+width,y,x+width-toprightradius,y);
+            }
+            context.lineTo(x+topleftradius,y);
+            if (topleftradius != 0) {
+                context[curvemethod](x,y,x,y+topleftradius);
+            }
+        </method>
+
         <method name="addScope" args="scope">
             <![CDATA[
             if (! this.scopes) {
                 this.scopes = [];
+                this.__redrawdelegate = new LzDelegate(this, 'redraw');
             }
-            new LzDelegate(this, 'redraw', scope, 'onx');
-            new LzDelegate(this, 'redraw', scope, 'ony');
-            new LzDelegate(this, 'redraw', scope, 'onwidth');
-            new LzDelegate(this, 'redraw', scope, 'onheight');
+            
             this.scopes.push(scope);
+            this.__redrawdelegate.register( scope, 'onx');
+            this.__redrawdelegate.register( scope, 'ony');
+            this.__redrawdelegate.register( scope, 'onwidth');
+            this.__redrawdelegate.register( scope, 'onheight');
             //console.log('addScope', scope, this.scopes);
             ]]>
         </method>
-
         <method name="removeScope" args="scope">
             <![CDATA[
             for (var i = 0; i < this.scopes.length; i++) {
                 if (this.scopes[i] === scope) {
-                    scope.onx.unregisterAll();
-                    scope.ony.unregisterAll();
-                    scope.onwidth.unregisterAll();
-                    scope.onheight.unregisterAll();
+                    this.__redrawdelegate.unregisterFrom(scope.onx);
+                    this.__redrawdelegate.unregisterFrom(scope.ony);
+                    this.__redrawdelegate.unregisterFrom(scope.onwidth);
+                    this.__redrawdelegate.unregisterFrom(scope.onheight);
                     this.scopes.splice(i, 1);
                     return;
                 }
@@ -79,10 +143,10 @@
                 for (var i = 0; i < this.scopes.length; i++) {
                     var scope = this.scopes[i];
                     if (scope) {
-                        scope.onx.unregisterAll();
-                        scope.ony.unregisterAll();
-                        scope.onwidth.unregisterAll();
-                        scope.onheight.unregisterAll();
+                        this.__redrawdelegate.unregisterFrom(scope.onx);
+                        this.__redrawdelegate.unregisterFrom(scope.ony);
+                        this.__redrawdelegate.unregisterFrom(scope.onwidth);
+                        this.__redrawdelegate.unregisterFrom(scope.onheight);
                     }
                 }
                 this.scopes = null;
