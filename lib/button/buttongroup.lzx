@@ -1,75 +1,74 @@
-<class name="buttongroup" extends="basepanel" with="buttonevents,stylebutton,drawbutton" drawchildren="false">
-    <simplelayout axis="x" spacing="0"/>
+<class name="buttongroup" extends="basepanel" with="stylebutton,drawbutton" drawchildren="false">
+    <attribute name="axis" type="string" value="x"/>
+    <simplelayout axis="${parent.axis}" spacing="0"/>
 
     <attribute name="dividergradient" style="divider-gradient" type="string" value=""/>
     <method name="draw" args="context">
         <![CDATA[
-        this.beginPath();
-        this.roundedRect(context,0,0,this.width - 2, this.height - 2, this.cornerradius);
-        this.styleinteriorborder(context);
-        context.fill();
+        // draw background
+        //this.beginPath();
+        //this.drawshape(context,0,0,this.width - 1, this.height - 1);
+        //this.fillStyle = this.cssToLinearGradient(this.gradientfillup, context);
+        //this.fill();
 
-        var x = 0;
-        var dividergradient = this.cssToLinearGradient(this.dividergradient,context);
-
-        var l = this.subviews.length;
+        // set corner radii
+        var subviews = this.subviews;
+        var l = subviews.length;
         for (var i = 0; i < l; i++) {
-            // draw each button fill
-            var button = this.subviews[i];
+            var button = subviews[i];
 
-            if (button.disabled) {
-                context.fillStyle = this.basecolor;
-            } else {
-                var fillcss = button['gradientfill' + button.mousestate];
-
-                context.fillStyle = this.cssToLinearGradient(fillcss, context);
+            button.bordertopleftradius = button.borderbottomleftradius = button.bordertoprightradius = button.borderbottomrightradius = 0;
+            if (i == 0) {
+                if (this.axis == 'x') {
+                    button.bordertopleftradius = button.borderbottomleftradius = this.cornerradius;
+                } else {
+                    button.bordertopleftradius = button.bordertoprightradius = this.cornerradius;
+                }
+            } else if (i == l - 1) {
+                if (this.axis == 'x') {
+                    button.bordertoprightradius = button.borderbottomrightradius = this.cornerradius;
+                } else {
+                    button.borderbottomleftradius = button.borderbottomrightradius = this.cornerradius;
+                }
             }
 
-            this.beginPath();
-            this.roundedRect(context,button.x,button.y,button.width,button.height-1
-                ,i == 0 ? this.cornerradius : 0
-                ,i == 0 ? this.cornerradius : 0
-                ,i == l - 1 ? this.cornerradius : 0
-                ,i == l - 1 ? this.cornerradius : 0);
-            this.fill();
+            // draw button shape
+            context.beginPath();
+            button.drawshape(context,button.x,button.y,button.width,button.height-1);
+            context.closePath();
+            if (button.disabled) {
+                context.fillStyle = context.basecolor;
+            } else {
+                button.stylegradient(context);
+            }
+            context.fill();
+        }
+        ]]>
+    </method>
 
-            this.fillStyle = dividergradient;
-            x += button.width;
-            this.fillRect(x - 1,1,1,this.height - 2);
+    <method name="drawlast" args="context">
+        <![CDATA[
+        // draw dividers 
+        context.fillStyle = this.cssToLinearGradient(this.dividergradient,context);
+        var position = 0;
+        for (var i = 0, l = this.subviews.length - 1; i < l; i++) {
+            var button = subviews[i];
+
+            if (this.axis == 'x') {
+                position += button.width;
+                context.fillRect(position,1,1,this.height - 2);
+            } else {
+                position += button.height;
+                context.fillRect(1,position,this.width - 2,1);
+            }
         }
 
         // draw border
         this.beginPath();
-        this.roundedRect(context,0,0,this.width - 1, this.height - 1, this.cornerradius);
-        this.closePath();
+        this.drawshape(context,0,0,this.width - 1, this.height - 1);
+
         this.styleborder(context);
         this.stroke();
         ]]>
-    </method>
-    <method name="roundedRect" args="ctx,x,y,width,height,...radius">
-        //border-top-right-radius, border-bottom-right-radius, border-bottom-left-radius, border-top-left-radius, border-radius
-        var topleft = radius[0] || 0;
-        var bottomleft = radius[1] || topleft;
-        var bottomright = radius[2] || topleft;
-        var topright = radius[3] || topleft;
-            
-        ctx.beginPath();
-        ctx.moveTo(x,y+topleft);
-        ctx.lineTo(x,y+height-bottomleft);
-        if (bottomleft) {
-            ctx.quadraticCurveTo(x,y+height,x+bottomleft,y+height);
-        }
-        ctx.lineTo(x+width-bottomright,y+height);
-        if (bottomright) {
-            ctx.quadraticCurveTo(x+width,y+height,x+width,y+height-bottomright);
-        }
-        ctx.lineTo(x+width,y+topright);
-        if (topright) {
-            ctx.quadraticCurveTo(x+width,y,x+width-topright,y);
-        }
-        ctx.lineTo(x+topright,y);
-        if (topleft) {
-            ctx.quadraticCurveTo(x,y,x,y+topleft);
-        }
     </method>
 </class>
