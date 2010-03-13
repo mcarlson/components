@@ -111,15 +111,21 @@
         <method name="addScope" args="scope">
             <![CDATA[
             if (! this.scopes) {
-                this.scopes = [];
-                this.__redrawdelegate = new LzDelegate(this, 'redraw');
+                this.scopes = [scope];
+                // can't use this - fails for sun1.lzx text resize
+                //this.__redrawdelegate = new LzDelegate(this, 'redraw');
+            } else {
+                this.scopes.push(scope);
             }
+            new LzDelegate(this, 'redraw', scope, 'onx');
+            new LzDelegate(this, 'redraw', scope, 'ony');
+            new LzDelegate(this, 'redraw', scope, 'onwidth');
+            new LzDelegate(this, 'redraw', scope, 'onheight');
             
-            this.scopes.push(scope);
-            this.__redrawdelegate.register( scope, 'onx');
-            this.__redrawdelegate.register( scope, 'ony');
-            this.__redrawdelegate.register( scope, 'onwidth');
-            this.__redrawdelegate.register( scope, 'onheight');
+            //this.__redrawdelegate.register( scope, 'onx');
+            //this.__redrawdelegate.register( scope, 'ony');
+            //this.__redrawdelegate.register( scope, 'onwidth');
+            //this.__redrawdelegate.register( scope, 'onheight');
             //console.log('addScope', scope, this.scopes);
             ]]>
         </method>
@@ -127,10 +133,14 @@
             <![CDATA[
             for (var i = 0; i < this.scopes.length; i++) {
                 if (this.scopes[i] === scope) {
-                    this.__redrawdelegate.unregisterFrom(scope.onx);
-                    this.__redrawdelegate.unregisterFrom(scope.ony);
-                    this.__redrawdelegate.unregisterFrom(scope.onwidth);
-                    this.__redrawdelegate.unregisterFrom(scope.onheight);
+                    scope.onx.unregisterAll();
+                    scope.ony.unregisterAll();
+                    scope.onwidth.unregisterAll();
+                    scope.onheight.unregisterAll();
+                    //this.__redrawdelegate.unregisterFrom(scope.onx);
+                    //this.__redrawdelegate.unregisterFrom(scope.ony);
+                    //this.__redrawdelegate.unregisterFrom(scope.onwidth);
+                    //this.__redrawdelegate.unregisterFrom(scope.onheight);
                     this.scopes.splice(i, 1);
                     return;
                 }
@@ -143,10 +153,14 @@
                 for (var i = 0; i < this.scopes.length; i++) {
                     var scope = this.scopes[i];
                     if (scope) {
-                        this.__redrawdelegate.unregisterFrom(scope.onx);
-                        this.__redrawdelegate.unregisterFrom(scope.ony);
-                        this.__redrawdelegate.unregisterFrom(scope.onwidth);
-                        this.__redrawdelegate.unregisterFrom(scope.onheight);
+                        scope.onx.unregisterAll();
+                        scope.ony.unregisterAll();
+                        scope.onwidth.unregisterAll();
+                        scope.onheight.unregisterAll();
+                        //this.__redrawdelegate.unregisterFrom(scope.onx);
+                        //this.__redrawdelegate.unregisterFrom(scope.ony);
+                        //this.__redrawdelegate.unregisterFrom(scope.onwidth);
+                        //this.__redrawdelegate.unregisterFrom(scope.onheight);
                     }
                 }
                 this.scopes = null;
