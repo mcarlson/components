@@ -1,5 +1,5 @@
 <mixin name="stylebutton">
-    <attribute name="vertical" value="false" type="boolean"/>
+    <attribute name="vertical" style="gradient-vertical" value="false" type="boolean"/>
     <attribute name="bevel" style="bevel-width" value="0" type="number"/>
 
     <attribute name="interiorbordercolor"    value="void(0)" style="interior-border-color" type="color"/>
@@ -21,20 +21,26 @@
 
     <attribute name="gradientfillup" style="gradient-fill-up" type="string" value=""/>
     <attribute name="gradientfillover" style="gradient-fill-over" type="string" value="${this.gradientfillup}"/>
-    <attribute name="gradientfilldown" style="gradient-fill-down" type="string" value="${this.gradientfillover}"/>
+    <attribute name="gradientfilldown" style="gradient-fill-down" type="string" value="${this.gradientfillup}"/>
     <attribute name="gradientfilldisabled" style="gradient-fill-disabled" type="string" value="${this.gradientfillup}"/>
 
     <method name="cssToLinearGradient" args="lineargradient, context">
         <![CDATA[
+        // We require top|left position and percentages with colors for now...
+        // linear-gradient([top | left], <color-stop>, <color-stop>[, <color-stop>]*);
+        // <color-stop> stands for: <color> <percentage>
         if (! lineargradient) return;
+
+        if (! this._gradientfills) {
+            this._gradientfills = {};
+        } else if (this._gradientfills[lineargradient] != null) {
+            return this._gradientfills[lineargradient];
+        }
 
         // From http://dev.w3.org/csswg/css3-images/#linear-gradients 
         // linear-gradient([<bg-position> || <angle>,]? <color-stop>, <color-stop>[, <color-stop>]*);
         // <color-stop> stands for: <color> [ <percentage> | <length> ]?
 
-        // We require  and percentages with colors for now...
-        // linear-gradient([top | left], <color-stop>, <color-stop>[, <color-stop>]*);
-        // <color-stop> stands for: <color> <percentage>
 
         var tokens = lineargradient.split(',');
         if (tokens.length < 2) {
@@ -69,7 +75,6 @@
         }
 
         var g = this.createLinearGradient(0,0,x,y);
-
         // Add color stops
         for (var i = 0; i < tokens.length; i++) {
             var items = tokens[i].split(' ');
@@ -77,6 +82,8 @@
             var percentage = parseInt(items[1]) * .01;
             g.addColorStop(percentage, color);
         }
+
+        this._gradientfills[lineargradient] = g;
         return g;
         ]]>
     </method>
