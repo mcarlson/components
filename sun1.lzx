@@ -78,7 +78,7 @@
         <sunbutton1 x="10" align="center" disabled="true">Disabled</sunbutton1>
         <method name="draw" args="context">
             context.beginPath();
-            context.rect(0,0,this.width,this.height,this.cornerradius);
+            context.rect(0,0,this.width,this.height);
             context.closePath();
 
             context.fillStyle = canvas.bgcolor;

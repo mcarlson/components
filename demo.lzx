@@ -7,12 +7,22 @@
             corner-radius: 3;
             base-color: #f2f2f2;
         }
+        buttongroup {
+            gradient-fill-up: 'top,#f2f2f2 0%,#f2f2f2 49%,#d6d6d6 50%,#f2f2f2 100%';
+            divider-gradient: 'top,#797979 0,#b0b0b0 50,#797979 100';
+        }
         scrlbr {
             size: 16;
             corner-radius: 16;
         }
         scrlthmb {
             corner-radius: 20;
+        }
+        bsbtn {
+            bevel-width: 1;
+            gradient-fill-up: 'top,#f2f2f2 0%,#f2f2f2 49%,#d6d6d6 50%,#f2f2f2 100%';
+            gradient-fill-over: 'top,#f2f2f2 0%,#f2f2f2 49%,#e6e6e6 50%,#f1f1f1 100%';
+            gradient-fill-down: 'top,#bfbfbf 0%,#dcdcdc 49%,#f2f2f2 50%,#f2f2f2 100%';
         }
     </stylesheet> 
 
@@ -37,6 +47,14 @@
         <bsbtn x="10" width="50" height="50" disabled="true"/>
         <btn x="10" onclick="this.animate('width', 100, 500)" text="ok"/>
         <btn x="10" onclick="this.animate('width', 100, 500)" text="cancel"/>
+        <buttongroup borderwidth="0" x="10">
+            <btn with="virtualdrawview">OK</btn>
+            <btn with="virtualdrawview">Revert</btn>
+        </buttongroup>
+        <buttongroup borderwidth="0" x="10">
+            <btn with="virtualdrawview">OK</btn>
+            <btn with="virtualdrawview" disabled="true">Revert</btn>
+        </buttongroup>
         <inpt x="10" width="100">Hey there!</inpt>
         <inpt x="10" width="100" multiline="true">Hey there! This text should wrap onto a few lines.</inpt>
         <view x="10" width="200" height="200" clip="true">

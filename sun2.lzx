@@ -20,7 +20,6 @@
         sunbutton2 {
             gradient-fill-up: 'top,#6e6e6e 0,#333333 100';
             gradient-fill-over: 'top,#333333 0,#6e6e6e 100';
-            gradient-fill-down: 'top,#6e6e6e 0,#333333 100';
             gradient-fill-disabled: 'top,#797979 0,#535353 100';
             text-padding: 6;
             text-color-up: #ffffff;
@@ -47,12 +46,13 @@
             this.styleborder(context);
             this.drawborder(context);
 
-            var lookup = 'gradientfill' + (this.disabled ? 'disabled' : this.mousestate);
-            context.fillStyle = this.cssToLinearGradient(this[lookup], context);
+            this.stylegradient(context);
 
             var borderwidth = context.borderwidth;
             context.borderwidth = 0;
+
             this.drawinteriorborder(context);
+
             context.borderwidth = borderwidth;
             ]]>
         </method>
