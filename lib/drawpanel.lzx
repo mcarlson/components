@@ -4,7 +4,6 @@
     <attribute name="measuresize" value="false" type="boolean"/>
     <handler name="onwidth" method="redraw"/>
     <handler name="onheight" method="redraw"/>
-    <handler name="oncontext" method="redraw"/>
 
     <method name="redraw" args="ignore=null" >            
         if (! this.context || ! this.isinited || this.lockredraw) return;

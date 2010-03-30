@@ -24,17 +24,18 @@
     <attribute name="gradientfilldown" style="gradient-fill-down" type="string" value="${this.gradientfillup}"/>
     <attribute name="gradientfilldisabled" style="gradient-fill-disabled" type="string" value="${this.gradientfillup}"/>
 
-    <method name="cssToLinearGradient" args="lineargradient, context">
+    <method name="cssToLinearGradient" args="context, lineargradient">
         <![CDATA[
         // We require top|left position and percentages with colors for now...
         // linear-gradient([top | left], <color-stop>, <color-stop>[, <color-stop>]*);
         // <color-stop> stands for: <color> <percentage>
         if (! lineargradient) return;
 
-        if (! this._gradientfills) {
-            this._gradientfills = {};
-        } else if (this._gradientfills[lineargradient] != null) {
-            return this._gradientfills[lineargradient];
+        var cache = this._gradientfills;
+        if (! cache) {
+            cache = this._gradientfills = {};
+        } else if (cache[lineargradient] != null) {
+            return cache[lineargradient];
         }
 
         // From http://dev.w3.org/csswg/css3-images/#linear-gradients 
@@ -45,7 +46,7 @@
         var tokens = lineargradient.split(',');
         if (tokens.length < 2) {
             if ($debug) {
-                Debug.warn('Gradients require a position [top | left] and two color positions', tokens, lineargradient);
+                Debug.warn('Gradients require a position [top | left | right | bottom] and at least two color positions', tokens, lineargradient);
             }
             return;
         }
@@ -63,18 +64,22 @@
 //            var x:Number = x + radius *Math.cos(radians);
 //            var y:Number = y + radius *Math.sin(2 * Math.PI - radians);
 
-        var x = 0, y = 0;
+        var xfrom=0, yfrom=0, xto = 0, yto = 0;
         if (startpos == 'top') {
-            y = this.height;
+            yto = this.height;
+        } else if (startpos == 'bottom') {
+            yfrom = this.height;
         } else if (startpos == 'left') {
-            x = this.width;
+            xto = this.width;
+        } else if (startpos == 'right') {
+            xfrom = this.width;
         } else {
             if ($debug) {
                 Debug.warn('unhandled position', startpos);
             }
         }
 
-        var g = this.createLinearGradient(0,0,x,y);
+        var g = context.createLinearGradient(xfrom,yfrom,xto,yto);
         // Add color stops
         for (var i = 0; i < tokens.length; i++) {
             var items = tokens[i].split(' ');
@@ -83,7 +88,7 @@
             g.addColorStop(percentage, color);
         }
 
-        this._gradientfills[lineargradient] = g;
+        cache[lineargradient] = g;
         return g;
         ]]>
     </method>

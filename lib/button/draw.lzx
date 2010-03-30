@@ -70,9 +70,16 @@
         var css = this['gradientfill' + (this.disabled ? 'disabled' : this.mousestate)];
         if (this.vertical) {
             var o = css.indexOf('top');
-            css = 'left' + css.substring(o + 3);
+            if (o > -1) {
+                css = 'left' + css.substring(o + 3);
+            } else {
+                o = css.indexOf('bottom');
+                if (o > -1) {
+                    css = 'right' + css.substring(o + 6);
+                }
+            }
         }
-        context.fillStyle = this.cssToLinearGradient(css, context);
+        context.fillStyle = this.cssToLinearGradient(context, css);
         /*
         if (! this['gradientfillstart' + this.mousestate] || ! this['gradientfillstop' + this.mousestate]) return;
         // cache gradient fills

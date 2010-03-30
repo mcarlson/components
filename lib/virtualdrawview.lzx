@@ -2,10 +2,16 @@
     <attribute name="drawtarget" value="null" type="expression"/>
     <event name="ondrawtarget"/>
 
+    <method name="createContext">
+        // override to prevent creating a local drawview context
+        return;
+    </method>
+
     <method name="init">
         var basepanel = this.immediateparent;
         if (basepanel is lz.basepanel) {
             this.setAttribute('drawtarget', basepanel);
+            this.context = basepanel;
         }
         super.init();
     </method>

@@ -1,12 +1,11 @@
 <mixin name="applybasecolor">
-    <attribute name="cornerradius" style="corner-radius" type="number" value="0"/>
-    <attribute name="borderwidth" style="border-width" type="number" value="0"/>
-    <attribute name="bordercolor" style="border-color" type="color" value="null"/>
     <attribute name="basecolor" style="base-color" type="color" value="null"/>
-    <attribute name="highlightcolor" style="highlight-color" type="color" value="#0000ff"/>
-    <handler name="oninit">
+    <attribute name="lockredraw" type="boolean" value="true"/>
+    <method name="init">
+        super.init();
+        this.lockredraw = false;
         this.setAttribute('basecolor', this.basecolor);
-    </handler>
+    </method>
 
     <handler name="onbasecolor" args="basecolor">
         if (! this.isinited) return;

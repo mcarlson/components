@@ -5,4 +5,5 @@
     <include href="button/"/>
     <include href="inputtext/"/>
     <include href="scrollbar/"/>
+    <include href="floater/"/>
 </library>

@@ -78,7 +78,9 @@
 
         if (this.mousestate != newstate) {
             this.setAttribute('mousestate', newstate);
-            this.redraw();
+            if (this['redraw']) {
+                this.redraw();
+            }
         }
         ]]>
     </method>
