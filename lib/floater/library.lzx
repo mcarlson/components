@@ -1,0 +1,91 @@
+<library>
+    <include href="../componentfocus.lzx"/>
+    <include href="draw.lzx"/>
+
+    <class name="fltr" extends="basepanel" with="drawshadowfocus,drawfltr,componentfocus,componentmodel" shadowdistance="10" shadowangle="90" shadowcolor="0x000000" shadowblurradius="0" visible="false">
+        <attribute name="target" value="null"/>
+        <method name="show" args="target">
+            <![CDATA[
+            if (! target) return;
+            this.setAttribute('target', target);
+            if (! this['__posDel']) {
+                this.__posDel = new LzDelegate(this, 'updatePosition');
+            } else {
+                this.__posDel.unregisterAll();
+            }
+            this.__posDel.register(target, 'onx');
+            this.__posDel.register(target, 'ony');
+            this.__posDel.register(target, 'onwidth');
+            this.__posDel.register(target, 'onheight');
+            this.__posDel.register(canvas, 'onwidth');
+            this.__posDel.register(canvas, 'onheight');
+
+            this.updatePosition();
+            lz.Focus.setFocus(this);
+            lz.ModeManager.makeModal(this);
+
+            this.showAnim.doStart();
+            ]]>
+        </method>
+        <method name="updatePosition" args="ignore=null">
+            <![CDATA[
+            if (! this.target) return;
+            var who = this.target;
+            var x = who.getAttributeRelative('x', canvas);
+            var y = who.getAttributeRelative('y', canvas);
+
+            // can we fit below
+            if (y + who.height + this.height < canvas.height) {
+                y += who.height;
+            } else {
+                y -= this.height;
+            }
+
+            // is there room to the right
+            if (x + this.width > canvas.width) {
+                x -= canvas.width - this.width;
+            }
+            if (this.x != x) {
+                this.animate('x', x, 200);
+            }
+            if (this.y != y) {
+                this.animate('y', y, 200);
+            }
+            this.setAttribute('shadowblurradius', 0);
+            this.animate('shadowblurradius', 10, 400);
+            this.bringToFront(); 
+            ]]>
+        </method>
+        <method name="passModeEvent" args="event_name, view">
+            <![CDATA[
+            //Debug.write("passModeEvent", event_name, view);
+            if (event_name == "onmousedown" && view !== this.target) {
+                this.hide();
+            }
+            return true;
+            ]]>
+        </method>
+        <method name="hide">
+            this.__posDel.unregisterAll();
+            lz.ModeManager.release( this );
+            this.hideAnim.doStart();
+        </method>
+        <setter name="value" args="value">
+            if (! this.target) {
+                return;
+            }
+            this.target.setAttribute('value', value);
+            this.hide();
+        </setter>
+
+        <animator name="showAnim" attribute="opacity"
+                  onstart="parent.setAttribute('visible', true)"
+                  duration="500" from="0" to="1"
+                  start="false"/>
+
+        <animator name="hideAnim" attribute="opacity"
+                  onstop="parent.setAttribute('visible', false)"
+                  duration="500" from="1" to="0"
+                  start="false"/>
+    </class>
+</library>

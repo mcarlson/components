@@ -1,0 +1,13 @@
+<mixin name="drawfltr">
+    <method name="draw" args="scope">
+        if (! scope['interiorfillcolor'] || ! scope['interiorbordercolor']) return;
+        this.drawshape(scope,0,0,this.width - 1,this.height - 1);
+
+        scope.fillStyle = scope.interiorfillcolor;
+        scope.fill();
+
+        scope.lineWidth = scope.borderwidth;
+        scope.strokeStyle = scope.interiorbordercolor;
+        scope.stroke();
+    </method>
+</mixin>
