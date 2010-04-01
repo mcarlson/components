@@ -1,0 +1,72 @@
+<canvas font="Helvetica,Sans">
+    <include href="lib/"/>
+
+    <stylesheet>
+        canvas {
+            background-color: #828282;
+            font-size: 18;
+        }
+        basepanel {
+            highlight-color: #99ccff;
+            corner-radius: 3;
+            base-color: #333333;
+            border-width: 0;
+            border-color: #d6d6d6;
+        }
+        buttongroup {
+            divider-gradient: 'top,#797979 0,#b0b0b0 50,#797979 100';
+        }
+        button {
+            corner-radius: 100;
+            gradient-fill-up: 'top,#f6f6f6 0,#d6d6d6 100';
+            gradient-fill-over: 'top,#d6d6d6 0,#f6f6f6 100';
+            gradient-fill-disabled: 'top,#f6f6f6 0,#eeeeee 100';
+            text-padding: 6;
+            text-color-up: #4f4f4f;
+        }
+    </stylesheet> 
+
+    <class name="button" extends="btn">
+        <handler name="oninit">
+            this.setAttribute('shadowangle', 35);
+            this.setAttribute('shadowdistance', 0);
+            this.setAttribute('shadowblurradius', 0);
+        </handler>
+        <method name="draw" args="context">
+            <![CDATA[
+            if (! this.isinited) return;
+            if (this['drawtarget'] && context === this) {
+                context.clear();
+                return;
+            }
+            //Debug.info('draw', this.mousestate);
+
+
+            this.stylegradient(context);
+            this.drawshape(context,0,0,this.width-1,this.height-1);
+            this.fill();
+            //this.drawgradient(context);
+
+            this.styleborder(context);
+            this.beginPath();
+            this.drawshape(context,0,0,this.width-1,this.height-1);
+            this.stroke();
+            ]]>
+        </method>
+    </class>
+
+    <basepanel width="100%" height="100%">
+        <simplelayout spacing="10" inset="10"/>
+        <button x="10">Click this button!</button>
+        <button x="10">Cancel</button>
+        <buttongroup borderwidth="0" x="10">
+            <button with="virtualdrawview">OK</button>
+            <button with="virtualdrawview">Revert</button>
+        </buttongroup>
+        <buttongroup borderwidth="0" x="10">
+            <button with="virtualdrawview">OK</button>
+            <button with="virtualdrawview" disabled="true">Revert</button>
+        </buttongroup>
+        <button x="10" disabled="true">Disabled</button>
+    </basepanel>
+</canvas>
