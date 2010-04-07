@@ -6,4 +6,5 @@
     <include href="inputtext/"/>
     <include href="scrollbar/"/>
     <include href="floater/"/>
+    <include href="combobox/"/>
 </library>

@@ -1,7 +1,15 @@
 <canvas font="Helvetica,Sans" fontsize="12">
     <include href="lib/"/>
+    <include href="utils/diagnostic/memorymonitor.lzx"/>
 
     <stylesheet>
+        /*
+        canvas {
+            background-color: #F1F1F1;
+            font-style: Times;
+            font-size: 18;
+        }
+        */
         basepanel {
             border-width: 1;
             corner-radius: 3;
@@ -90,60 +98,6 @@
             </text>
             <scrlbr/>
         </view>
-        <basepanel x="10" width="100" onclick="this.open();" with="componentmodel,componentfocus">
-            <method name="open">
-                floater.show(this);
-            </method>
-            <method name="draw" args="context">
-                if (! context['interiorfillcolor'] || ! context['interiorbordercolor']) return;
-                this.drawshape(context,0,0,this.width - 1,this.height - 1);
-
-
-                context.fillStyle = context.interiorfillcolor;
-                context.fill();
-
-                context.lineWidth = context.borderwidth;
-                context.strokeStyle = context.interiorbordercolor;
-                context.stroke();
-
-
-            </method>
-
-            <text text="${this.parent.value}"/>
-            <bsbtn align="right" width="${this.height}" height="${this.parent.height}" onclick="this.parent.open()" with="drawarrow">
-                <method name="draw" args="context">
-                    super.draw(context);
-                    this.beginPath();
-                    context.fillStyle = context.interiorbordercolor;
-                    this.drawarrow(context, 4, 4, this.width - 4, this.height - 4, false);
-                    this.fill();
-                </method>
-            </bsbtn>
-        </basepanel>
+        <combobox opt="[0,1,2,3,4,5,6,7,8,9,10,11,12]"/>
     </basepanel>
-
-    <class name="listitem" extends="text" with="componentmodel,drawarrow" width="100">
-        <handler name="ondata" args="data">
-            this.setAttribute('text', 'foo: ' + data);
-        </handler>
-        <handler name="onclick">
-            this.controller.setAttribute('value', this.data);
-        </handler>
-    </class>
-
-    <fltr name="floater" width="100" height="200">
-        <attribute name="opt" value="$once{[0,1,2,3,4,5,6,7,8,9,10,11,12]}"/>
-        <handler name="onkeydown" args="k">
-            Debug.warn('onkeydown', k);
-        </handler>
-        <view name="content" width="100%" height="100%" clip="true">
-            <view>
-                <simplelayout/>
-                <replicator name="repl" nodes="${parent.parent.parent.opt}">
-                    <listitem controller="$once{this.parent.parent.parent}"/>
-                </replicator>
-            </view>
-            <scrlbr/>
-        </view>
-    </fltr>
 </canvas>

@@ -1,0 +1,53 @@
+<library>
+    <include href="../listitem.lzx"/>
+
+    <class name="combobox" extends="basepanel" x="10" width="100" onclick="this.open();" with="componentmodel,componentfocus">
+        <attribute name="opt" value="$once{[]}"/>
+        <method name="open">
+            combobox_floater.setAttribute('opt', this.opt);
+            combobox_floater.show(this);
+        </method>
+        <method name="draw" args="context">
+            if (! context['interiorfillcolor'] || ! context['interiorbordercolor']) return;
+            this.drawshape(context,0,0,this.width - 1,this.height - 1);
+
+
+            context.fillStyle = context.interiorfillcolor;
+            context.fill();
+
+            context.lineWidth = context.borderwidth;
+            context.strokeStyle = context.interiorbordercolor;
+            context.stroke();
+
+
+        </method>
+
+        <text text="${this.parent.value}"/>
+        <bsbtn align="right" width="${this.height}" height="${this.parent.height}" onclick="this.parent.open()" with="drawarrow">
+            <method name="draw" args="context">
+                super.draw(context);
+                this.beginPath();
+                context.fillStyle = context.interiorbordercolor;
+                this.drawarrow(context, 4, 4, this.width - 4, this.height - 4, false);
+                this.fill();
+            </method>
+        </bsbtn>
+    </class>
+
+    <fltr name="combobox_floater" width="100" height="200">
+        <attribute name="opt" value="$once{[]}"/>
+        <handler name="onkeydown" args="k">
+            Debug.warn('onkeydown', k);
+        </handler>
+        <view name="content" width="100%" height="100%" clip="true">
+            <view>
+                <simplelayout/>
+                <selectionmanager name="selector" sel="$lzc$set_selected"/>
+                <replicator nodes="${this.parent.parent.parent.opt}">
+                    <listitem controller="$once{this.parent.parent.parent}" selectionmanager="$once{this.parent.selector}"/>
+                </replicator>
+            </view>
+            <scrlbr/>
+        </view>
+    </fltr>
+</library>

@@ -1,0 +1,17 @@
+<class name="listitem" extends="text" with="componentmodel,buttonevents" width="100" fgcolor="${this.mouseisover ? this.controller.highlightcolor : this.selected ? this.controller.selectioncolor : 0}">
+    <attribute name="controller" value="null" type="expression"/>
+    <attribute name="selectionmanager" value="null" type="expression"/>
+    <attribute name="selected" value="false" type="boolean"/>
+    <event name="onselected"/>
+    <setter name="selected" args="sel">
+        this.selected = sel;
+        if (this.onselected.ready) this.onselected.sendEvent(sel);
+    </setter>
+    <handler name="ondata" args="data">
+        this.setAttribute('text', 'foo: ' + data);
+    </handler>
+    <handler name="onclick">
+        this.selectionmanager.select(this);
+        this.controller.setAttribute('value', this.data);
+    </handler>
+</class>
