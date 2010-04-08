@@ -2,27 +2,28 @@
     <include href="../componentfocus.lzx"/>
     <include href="draw.lzx"/>
 
-    <class name="fltr" extends="basepanel" with="drawshadowfocus,drawfltr,componentfocus,componentmodel" shadowdistance="10" shadowangle="90" shadowcolor="0x000000" shadowblurradius="0" visible="false">
+    <class name="fltr" extends="basepanel" with="drawshadowfocus,drawfltr,componentfocus,componentmodel" visible="false">
         <attribute name="target" value="null"/>
         <method name="show" args="target">
             <![CDATA[
             if (! target) return;
-            this.setAttribute('target', target);
-            if (! this['__posDel']) {
-                this.__posDel = new LzDelegate(this, 'updatePosition');
-            } else {
-                this.__posDel.unregisterAll();
+            if (target !== this.target) {
+                this.setAttribute('target', target);
+                if (! this['__posDel']) {
+                    this.__posDel = new LzDelegate(this, 'updatePosition');
+                } else {
+                    this.__posDel.unregisterAll();
+                }
+                this.__posDel.register(target, 'onx');
+                this.__posDel.register(target, 'ony');
+                this.__posDel.register(target, 'onwidth');
+                this.__posDel.register(target, 'onheight');
+                this.__posDel.register(canvas, 'onwidth');
+                this.__posDel.register(canvas, 'onheight');
+                this.updatePosition();
+                lz.Focus.setFocus(this);
+                lz.ModeManager.makeModal(this);
             }
-            this.__posDel.register(target, 'onx');
-            this.__posDel.register(target, 'ony');
-            this.__posDel.register(target, 'onwidth');
-            this.__posDel.register(target, 'onheight');
-            this.__posDel.register(canvas, 'onwidth');
-            this.__posDel.register(canvas, 'onheight');
-
-            this.updatePosition();
-            lz.Focus.setFocus(this);
-            lz.ModeManager.makeModal(this);
 
             this.showAnim.doStart();
             ]]>
@@ -59,7 +60,7 @@
         <method name="passModeEvent" args="event_name, view">
             <![CDATA[
             //Debug.write("passModeEvent", event_name, view);
-            if (event_name == "onmousedown" && view !== this.target) {
+            if (event_name == "onmousedown" && view !== this.target && ! view.childOf(this.target)) {
                 this.hide();
             }
             return true;
@@ -69,14 +70,8 @@
             this.__posDel.unregisterAll();
             lz.ModeManager.release( this );
             this.hideAnim.doStart();
+            this.target = null;
         </method>
-        <setter name="value" args="value">
-            if (! this.target) {
-                return;
-            }
-            this.target.setAttribute('value', value);
-            this.hide();
-        </setter>
 
         <animator name="showAnim" attribute="opacity"
                   onstart="parent.setAttribute('visible', true)"

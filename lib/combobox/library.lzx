@@ -4,7 +4,9 @@
     <class name="combobox" extends="basepanel" x="10" width="100" onclick="this.open();" with="componentmodel,componentfocus">
         <attribute name="opt" value="$once{[]}"/>
         <method name="open">
-            combobox_floater.setAttribute('opt', this.opt);
+            if (combobox_floater !== this.opt) {
+                combobox_floater.setAttribute('opt', this.opt);
+            }
             combobox_floater.show(this);
         </method>
         <method name="draw" args="context">
@@ -18,12 +20,10 @@
             context.lineWidth = context.borderwidth;
             context.strokeStyle = context.interiorbordercolor;
             context.stroke();
-
-
         </method>
 
         <text text="${this.parent.value}"/>
-        <bsbtn align="right" width="${this.height}" height="${this.parent.height}" onclick="this.parent.open()" with="drawarrow">
+        <bsbtn align="right" width="${this.height}" height="${this.parent.height}" onclick="this.parent.onclick.sendEvent(this)" with="drawarrow" focusable="false">
             <method name="draw" args="context">
                 super.draw(context);
                 this.beginPath();
@@ -36,9 +36,13 @@
 
     <fltr name="combobox_floater" width="100" height="200">
         <attribute name="opt" value="$once{[]}"/>
-        <handler name="onkeydown" args="k">
-            Debug.warn('onkeydown', k);
-        </handler>
+        <setter name="value" args="value">
+            if (! this.target) {
+                return;
+            }
+            this.target.setAttribute('value', value);
+            this.hide();
+        </setter>
         <view name="content" width="100%" height="100%" clip="true">
             <view>
                 <simplelayout/>
