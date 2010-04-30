@@ -19,11 +19,7 @@
     <attribute name="gradientfillstartdown"    value="void(0)" style="gradientfill-start-down" type="color"/>
     <attribute name="gradientfillstopdown"     value="void(0)" style="gradientfill-stop-down" type="color"/>
 
-    <attribute name="gradientfillup" style="gradient-fill-up" type="string" value=""/>
-    <attribute name="gradientfillover" style="gradient-fill-over" type="string" value="${this.gradientfillup}"/>
-    <attribute name="gradientfilldown" style="gradient-fill-down" type="string" value="${this.gradientfillup}"/>
-    <attribute name="gradientfilldisabled" style="gradient-fill-disabled" type="string" value="${this.gradientfillup}"/>
-
+    <attribute name="gradientfill" style="gradient-fill" type="string" value=""/>
     <method name="cssToLinearGradient" args="context, lineargradient">
         <![CDATA[
         // We require top|left position and percentages with colors for now...

@@ -67,7 +67,7 @@
     </method-->
 
     <method name="stylegradient" args="context">
-        var css = this['gradientfill' + (this.disabled ? 'disabled' : this.mousestate)];
+        var css = this['gradientfill'];
         if (this.vertical) {
             var o = css.indexOf('top');
             if (o > -1) {

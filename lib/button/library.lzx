@@ -17,26 +17,7 @@
         <!--- text to display in the button (can leave empty) -->
         <attribute name="text" value="" type="string" />
         <attribute name="textpadding" style="text-padding" value="2" type="number" />
-        <attribute name="textcolorup" style="text-color-up" value="black" type="string" />
-        <attribute name="textcolorover" style="text-color-over" value="${this.textcolorup}" type="string" />
-        <attribute name="textcolordown" style="text-color-down" value="${this.textcolorover}" type="string" />
-        <attribute name="textcolordisabled" style="text-color-disabled" value="${this.textcolorup}" type="string" />
-        <handler name="ondisabled" args="disabled">
-            if (disabled) {
-                this.txt.setAttribute('fgcolor', this.textcolordisabled);
-            }
-        </handler>
-        <handler name="oninit">
-            if (this.disabled) {
-                this.txt.setAttribute('fgcolor', this.textcolordisabled);
-            }
-        </handler>
-        <handler name="onmousestate" args="mousestate">
-            var newcolor = this['textcolor' + mousestate];
-            if (this.txt.fgcolor != newcolor) {
-                this.txt.setAttribute('fgcolor', newcolor);
-            }
-        </handler>
-        <text name="txt" fgcolor="${parent.textcolorup}" text="${classroot.text}" align="center" valign="middle" />  
+        <attribute name="textcolor" style="text-color" value="black" type="string" />
+        <text name="txt" fgcolor="${parent.textcolor}" text="${classroot.text}" align="center" valign="middle" />  
     </class>
 </library>
