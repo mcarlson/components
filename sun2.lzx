@@ -1,11 +1,11 @@
-<canvas font="Verdana">
+<canvas>
     <include href="lib/"/>
 
     <stylesheet>
         canvas {
             background-color: #828282;
             font-size: 11;
-            font: Verdana;
+            font-family: Verdana;
         }
         basepanel {
             highlight-color: #99ccff;
@@ -18,22 +18,28 @@
             divider-gradient: 'top,#797979 0,#b0b0b0 50,#797979 100';
         }
         sunbutton2 {
-            gradient-fill-up: 'top,#6e6e6e 0,#333333 100';
-            gradient-fill-over: 'top,#333333 0,#6e6e6e 100';
-            gradient-fill-disabled: 'top,#797979 0,#535353 100';
+            shadow-angle: 35;
+            shadow-distance: 0;
+            shadow-blur-radius: 0;
+            gradient-fill: 'top,#6e6e6e 0,#333333 100';
             text-padding: 6;
-            text-color-up: #ffffff;
-            text-color-over: #99ccff;
-            text-color-disabled: #cccccc;
+            text-color: #ffffff;
+        }
+        sunbutton2[mousestate=over] {
+            gradient-fill: 'top,#333333 0,#6e6e6e 100';
+            text-color: #99ccff;
+        }
+        sunbutton2[mousestate=down] {
+            gradient-fill: 'top,#6e6e6e 0,#333333 100';
+            text-color: #99ccff;
+        }
+        sunbutton2[disabled=true] {
+            gradient-fill: 'top,#797979 0,#535353 100';
+            text-color: #cccccc;
         }
     </stylesheet> 
 
     <class name="sunbutton2" extends="btn">
-        <handler name="oninit">
-            this.setAttribute('shadowangle', 35);
-            this.setAttribute('shadowdistance', 0);
-            this.setAttribute('shadowblurradius', 0);
-        </handler>
         <method name="draw" args="context">
             <![CDATA[
             if (! this.isinited) return;

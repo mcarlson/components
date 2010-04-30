@@ -1,22 +1,18 @@
-<canvas font="Helvetica,Sans" fontsize="12">
+<canvas>
     <include href="lib/"/>
-    <include href="utils/diagnostic/memorymonitor.lzx"/>
 
     <stylesheet>
-        /*
         canvas {
-            background-color: #F1F1F1;
-            font-style: Times;
-            font-size: 18;
+            font-size: 12;
+            font-family: Helvetica,Sans;
         }
-        */
         basepanel {
             border-width: 1;
             corner-radius: 3;
             base-color: #f2f2f2;
         }
         buttongroup {
-            gradient-fill-up: 'top,#f2f2f2 0%,#f2f2f2 49%,#d6d6d6 50%,#f2f2f2 100%';
+            gradient-fill: 'top,#f2f2f2 0%,#f2f2f2 49%,#d6d6d6 50%,#f2f2f2 100%';
             divider-gradient: 'top,#797979 0,#b0b0b0 50,#797979 100';
         }
         scrlbr {
@@ -29,9 +25,13 @@
         }
         bsbtn {
             bevel-width: 1;
-            gradient-fill-up: 'top,#f2f2f2 0%,#f2f2f2 49%,#d6d6d6 50%,#f2f2f2 100%';
-            gradient-fill-over: 'top,#f2f2f2 0%,#f2f2f2 49%,#e6e6e6 50%,#f1f1f1 100%';
-            gradient-fill-down: 'top,#bfbfbf 0%,#dcdcdc 49%,#f2f2f2 50%,#f2f2f2 100%';
+            gradient-fill: 'top,#f2f2f2 0%,#f2f2f2 49%,#d6d6d6 50%,#f2f2f2 100%';
+        }
+        bsbtn[mousestate=over]{
+            gradient-fill: 'top,#f2f2f2 0%,#f2f2f2 49%,#e6e6e6 50%,#f1f1f1 100%';
+        }
+        bsbtn[mousestate=down]{
+            gradient-fill: 'top,#bfbfbf 0%,#dcdcdc 49%,#f2f2f2 50%,#f2f2f2 100%';
         }
     </stylesheet> 
 

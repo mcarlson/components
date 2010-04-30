@@ -1,10 +1,11 @@
-<canvas font="Helvetica,Sans">
+<canvas>
     <include href="lib/"/>
 
     <stylesheet>
         canvas {
             background-color: #828282;
             font-size: 18;
+            font-family: Helvetica,Sans;
         }
         basepanel {
             highlight-color: #99ccff;
@@ -18,11 +19,21 @@
         }
         button {
             corner-radius: 100;
-            gradient-fill-up: 'top,#f6f6f6 0,#d6d6d6 100';
-            gradient-fill-over: 'top,#d6d6d6 0,#f6f6f6 100';
-            gradient-fill-disabled: 'top,#f6f6f6 0,#eeeeee 100';
+            gradient-fill: 'top,#f6f6f6 0,#d6d6d6 100';
             text-padding: 6;
             text-color-up: #4f4f4f;
+        }
+        button[mousestate=over] {
+            gradient-fill: 'top,#d6d6d6 0,#f6f6f6 100';
+        }
+        button[mousestate=down] {
+            gradient-fill: 'top,#d6d6d6 0,#f6f6f6 100';
+        }
+        button[mousestate=down] {
+            gradient-fill: 'top,#f6f6f6 0,#d6d6d6 100';
+        }
+        button[disabled=true] {
+            gradient-fill: 'top,#f6f6f6 0,#eeeeee 100';
         }
     </stylesheet> 
 
