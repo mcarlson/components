@@ -60,7 +60,7 @@
         <method name="passModeEvent" args="event_name, view">
             <![CDATA[
             //Debug.write("passModeEvent", event_name, view);
-            if (event_name == "onmousedown" && view !== this.target && ! view.childOf(this.target)) {
+            if (event_name == "onmousedown" && (!view || (view && view !== this.target && ! view.childOf(this.target) ) ) ) {
                 this.hide();
             }
             return true;
