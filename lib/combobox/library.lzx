@@ -43,15 +43,24 @@
             this.target.setAttribute('value', value);
             this.hide();
         </setter>
-        <view name="content" width="100%" height="100%" clip="true">
-            <view>
-                <simplelayout/>
-                <selectionmanager name="selector" sel="$lzc$set_selected"/>
-                <replicator nodes="${this.parent.parent.parent.opt}">
-                    <listitem controller="$once{this.parent.parent.parent}" selectionmanager="$once{this.parent.selector}"/>
-                </replicator>
+        <handler name="ontarget" args="t">
+            <![CDATA[
+            if (t != null && this.contentstate.applied == false) {
+                this.contentstate.setAttribute('applied', true);
+            }
+            ]]>
+        </handler>
+        <state name="contentstate">
+            <view name="content" width="100%" height="100%" clip="true">
+                <view>
+                    <simplelayout/>
+                    <selectionmanager name="selector" sel="$lzc$set_selected"/>
+                    <replicator nodes="${this.parent.parent.parent.opt}">
+                        <listitem controller="$once{this.parent.parent.parent}" selectionmanager="$once{this.parent.selector}"/>
+                    </replicator>
+                </view>
+                <scrlbr/>
             </view>
-            <scrlbr/>
-        </view>
+        </state>
     </fltr>
 </library>
