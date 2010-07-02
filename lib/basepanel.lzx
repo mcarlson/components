@@ -2,22 +2,18 @@
     <include href="extensions/drawview.lzx"/>
     <include href="applybasecolor.lzx"/>
     <include href="drawpanel.lzx"/>
+    <include href="borderradius.lzx"/>
     
-    <class name="basepanel" extends="drawpanel" with="applybasecolor">
+    <class name="basepanel" extends="drawpanel" with="applybasecolor, borderradius">
         <attribute name="scopes" value="null"/>
         <attribute name="drawchildren" value="true" type="boolean"/>
 
         <attribute name="borderwidth" style="border-width" type="number" value="0"/>
         <attribute name="bordercolor" style="border-color" type="color" value="null"/>
-        <attribute name="cornerradius"   style="corner-radius" type="number" value="0"/>
         <attribute name="highlightcolor" style="highlight-color" type="color" value="#0000ff"/>
         <attribute name="selectioncolor" style="selection-color" type="color" value="#9999ff"/>
         <attribute name="interiorbordercolor" style="interior-border-color" type="color" value="null"/>
         <attribute name="interiorfillcolor" style="interior-fill-color" type="color" value="null"/>
-        <attribute name="bordertopleftradius" style="border-top-left-radius" type="number" value="${cornerradius}"/>
-        <attribute name="bordertoprightradius" style="border-top-right-radius" type="number" value="${cornerradius}"/>
-        <attribute name="borderbottomrightradius" style="border-bottom-right-radius" type="number" value="${cornerradius}"/>
-        <attribute name="borderbottomleftradius" style="border-bottom-left-radius" type="number" value="${cornerradius}"/>
 
         <method name="redraw" args="ignore=null" >            
             <![CDATA[
@@ -62,10 +58,10 @@
             ]]>
         </method>
 
-
         <method name="drawshape" args="context,x,y,width,height">
             // use once new rect is available in drawview
             //context.rect(x, y, width, height, this.bordertopleftradius, this.borderbottomleftradius, this.borderbottomrightradius, this.bordertoprightradius);
+            //Debug.warn('drawshape %w %w %w %w %w', this.borderradius, this.bordertopleftradius, this.bordertoprightradius, this.borderbottomrightradius, this.borderbottomleftradius);
             this._rect(context,x, y, width, height, this.bordertopleftradius, this.borderbottomleftradius, this.borderbottomrightradius, this.bordertoprightradius);
         </method>
 

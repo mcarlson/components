@@ -1,0 +1,51 @@
+<mixin name="borderradius">
+    <attribute name="borderradius" style="border-radius" type="string" value=""/>
+    <attribute name="bordertopleftradius" style="border-top-left-radius" type="number" value=""/>
+    <attribute name="bordertoprightradius" style="border-top-right-radius" type="number" value=""/>
+    <attribute name="borderbottomrightradius" style="border-bottom-right-radius" type="number" value=""/>
+    <attribute name="borderbottomleftradius" style="border-bottom-left-radius" type="number" value=""/>
+
+    <event name="onborderradius"/>
+    <setter name="borderradius" args="radius">
+        <![CDATA[
+        if (this.borderradius === radius) return;
+        // handle list of border radii per http://www.w3.org/TR/css3-background/#the-border-radius
+        // The four values for each radii are given in the order top-left, top-right, bottom-right, bottom-left. 
+        var radii = String(radius).split(' ');
+        var l = radii.length;
+        // If top-right is omitted it is the same as top-left. 
+        if (l <= 1) radii[1] = radii[0];
+        // If bottom-left is omitted it is the same as top-right. 
+        if (l <= 3) radii[3] = radii[1];
+        // If bottom-right is omitted it is the same as top-left. 
+        if (l <= 2) radii[2] = radii[0];
+        this._borderradius = radii;
+
+        this.borderradius = radius;
+
+        this.bordertopleftradius = parseFloat(radii[0]);
+        this.bordertoprightradius = parseFloat(radii[1]);
+        this.borderbottomrightradius = parseFloat(radii[2]);
+        this.borderbottomleftradius = parseFloat(radii[3]);
+        this.setAttribute('cornerradius', radii.join(' '));
+
+        if (this.onborderradius.ready) this.onborderradius.sendEvent(radius);
+        //Debug.info('borderradius', radius, radii);
+        ]]>
+    </setter>
+
+    <handler name="onbordertopleftradius" method="_updateradii"/>
+    <handler name="onbordertoprightradius" method="_updateradii"/>
+    <handler name="onborderbottomrightradius" method="_updateradii"/>
+    <handler name="onborderbottomleftradius" method="_updateradii"/>
+    <method name="_updateradii" args="ignore=null">
+        // update the radii when they've changed from outside
+        var radii = this._borderradius;
+        radii[0] = this.bordertopleftradius;
+        radii[1] = this.bordertoprightradius;
+        radii[2] = this.borderbottomrightradius;
+        radii[3] = this.borderbottomleftradius;
+        this.$lzc$set_borderradius(radii.join(' '));
+        //Debug.warn('_updateradii %w', radii);
+    </method>
+</mixin>
