@@ -2,6 +2,7 @@
     <attribute name="lockredraw" value="false" type="boolean"/>
     <attribute name="aliaslines" value="true" type="boolean"/>
     <attribute name="measuresize" value="false" type="boolean"/>
+    <attribute name="lineCap" value="round" type="string"/>
     <handler name="onwidth" method="redraw"/>
     <handler name="onheight" method="redraw"/>
 
