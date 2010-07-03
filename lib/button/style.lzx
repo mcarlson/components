@@ -12,42 +12,22 @@
     <attribute name="interiorfillcolorover"    value="${this.interiorfillcolor}" style="interior-fill-color-over" type="color"/>
     <attribute name="interiorfillcolordown"    value="${this.interiorfillcolor}" style="interior-fill-color-down" type="color"/>
 
-    <attribute name="gradientfillstartup"      value="void(0)" style="gradientfill-start-up" type="color"/>
-    <attribute name="gradientfillstopup"       value="void(0)" style="gradientfill-stop-up" type="color"/>
-    <attribute name="gradientfillstartover"    value="void(0)" style="gradientfill-start-over" type="color"/>
-    <attribute name="gradientfillstopover"     value="void(0)" style="gradientfill-stop-over" type="color"/>
-    <attribute name="gradientfillstartdown"    value="void(0)" style="gradientfill-start-down" type="color"/>
-    <attribute name="gradientfillstopdown"     value="void(0)" style="gradientfill-stop-down" type="color"/>
-
     <attribute name="gradientfill" style="gradient-fill" type="string" value=""/>
-    <method name="cssToLinearGradient" args="context, lineargradient">
+
+    <attribute name="_parseLinearGradientCache" value="{}"/>
+    <method name="parseLinearGradient" args="lineargradient">
         <![CDATA[
-        // We require top|left position and percentages with colors for now...
-        // linear-gradient([top | left], <color-stop>, <color-stop>[, <color-stop>]*);
-        // <color-stop> stands for: <color> <percentage>
-        if (! lineargradient) return;
-
-        var cache = this._gradientfills;
-        if (! cache) {
-            cache = this._gradientfills = {};
-        } else if (cache[lineargradient] != null) {
-            return cache[lineargradient];
-        }
-
-        // From http://dev.w3.org/csswg/css3-images/#linear-gradients 
-        // linear-gradient([<bg-position> || <angle>,]? <color-stop>, <color-stop>[, <color-stop>]*);
-        // <color-stop> stands for: <color> [ <percentage> | <length> ]?
-
-
-        var tokens = lineargradient.split(',');
-        if (tokens.length < 2) {
-            if ($debug) {
-                Debug.warn('Gradients require a position [top | left | right | bottom] and at least two color positions', tokens, lineargradient);
+        var gradientschema:Object = this._parseLinearGradientCache[lineargradient];
+        if (! gradientschema) {
+            var tokens = lineargradient.split(',');
+            if (tokens.length < 2) {
+                if ($debug) {
+                    Debug.warn('Gradients require a position [top | left | right | bottom] and at least two color positions', tokens, lineargradient);
+                }
+                return;
             }
-            return;
-        }
 
-        var startpos = tokens.shift();
+            var startpos = tokens.shift();
 
 //            // process angle
 //            var radians = parseInt(angle);
@@ -60,7 +40,67 @@
 //            var x:Number = x + radius *Math.cos(radians);
 //            var y:Number = y + radius *Math.sin(2 * Math.PI - radians);
 
-        var xfrom=0, yfrom=0, xto = 0, yto = 0;
+
+            // create gradient schema
+            gradientschema = {};
+            gradientschema.startpos = startpos;
+            gradientschema.colorstops = [];
+            // Add color stops
+            for (var i = 0; i < tokens.length; i++) {
+                // color, percentage
+                var items = tokens[i].split(' ');
+                gradientschema.colorstops[i] = {
+                                    color: items[0],
+                                    percentage: parseInt(items[1]) * .01
+                                };
+            }
+            // save to global cache
+            this._parseLinearGradientCache[lineargradient] = gradientschema;
+        }
+        return gradientschema;
+        ]]>
+    </method>
+
+    <method name="tintColor" args="color">
+        if (! this._basehsv) {
+            return color;
+        } else {
+            // Use v from the color
+            var v = LzColorUtils.tohsv(color).v;
+            // Use h and s from basecolor
+            return LzColorUtils.fromhsv(this._basehsv.h, this._basehsv.s, v);
+        }
+    </method>
+
+    <handler name="onwidth" method="__resetgradientcache"/>
+    <handler name="onheight" method="__resetgradientcache"/>
+    <handler name="onbasecolor" method="__resetgradientcache"/>
+    <method name="__resetgradientcache" args="ignore">
+        this._gradientfills = {};
+    </method>
+
+    <method name="cssToLinearGradient" args="context, lineargradient">
+        <![CDATA[
+        // We require top|left position and percentages with colors for now...
+        // linear-gradient([top | left], <color-stop>, <color-stop>[, <color-stop>]*);
+        // <color-stop> stands for: <color> <percentage>
+        if (! lineargradient) return;
+
+        var cache = this['_gradientfills'];
+        if (! cache) {
+            cache = this._gradientfills = {};
+        } else if (cache[lineargradient] != null) {
+            return cache[lineargradient];
+        }
+
+        // From http://dev.w3.org/csswg/css3-images/#linear-gradients 
+        // linear-gradient([<bg-position> || <angle>,]? <color-stop>, <color-stop>[, <color-stop>]*);
+        // <color-stop> stands for: <color> [ <percentage> | <length> ]?
+
+        var gradientschema = this.parseLinearGradient(lineargradient);
+
+        // create gradient
+        var xfrom=0, yfrom=0, xto = 0, yto = 0, startpos = gradientschema.startpos;
         if (startpos == 'top') {
             yto = this.height;
         } else if (startpos == 'bottom') {
@@ -76,12 +116,11 @@
         }
 
         var g = context.createLinearGradient(xfrom,yfrom,xto,yto);
+        var colorstops = gradientschema.colorstops;
         // Add color stops
-        for (var i = 0; i < tokens.length; i++) {
-            var items = tokens[i].split(' ');
-            var color = items[0];
-            var percentage = parseInt(items[1]) * .01;
-            g.addColorStop(percentage, color);
+        for (var i = 0, l = colorstops.length; i < l; i++) {
+            var colorstop = colorstops[i];
+            g.addColorStop(colorstop.percentage, this.tintColor(colorstop.color));
         }
 
         cache[lineargradient] = g;
