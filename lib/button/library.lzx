@@ -11,13 +11,79 @@
     <include href="draw.lzx"/>
     <include href="buttongroup.lzx"/>
 
-    <class name="bsbtn" extends="basepanel" with="componentmodel,buttonevents,stylebutton,drawshadowfocus,drawbutton,componentfocus,applybasecolor"/>
+    <class name="bsbtn" extends="basepanel" with="componentmodel,buttonevents,stylebutton,drawshadowfocus,drawbutton,componentfocus">
+        <attribute name="padding" style="padding" value="2" type="number"/>
+    </class>
 
-    <class name="btn" extends="bsbtn" height="${this.txt.height + (this.textpadding * 2)}" width="${this.txt.width + (this.textpadding * 2) + 2}">
+    <class name="btn" extends="bsbtn" width="${this.txt.width + this.padding}" height="${this.txt.height + this.padding}">
         <!--- text to display in the button (can leave empty) -->
         <attribute name="text" value="" type="string" />
-        <attribute name="textpadding" style="text-padding" value="2" type="number" />
         <attribute name="textcolor" style="text-color" value="black" type="string" />
-        <text name="txt" fgcolor="${parent.textcolor}" text="${classroot.text}" align="center" valign="middle" />  
+        <attribute name="iconresource" value="" type="string"/>
+        <attribute name="iconpadding" value="10" type="number" />
+        <attribute name="iconposition" value="left" type="string" />
+
+        <handler name="oninit">
+            <![CDATA[
+            if (this.iconresource != null && this.iconresource != '') {
+                this._iconstate.setAttribute('applied', true);
+                this._update();
+            }
+            ]]>
+        </handler>
+
+        <state name="_iconstate">
+            <view name="icon" resource="${parent.iconresource}"/>
+            <handler name="oniconpadding" method="_update"/>
+            <handler name="oniconposition" method="_update"/>
+            <handler name="onwidth" method="_update" reference="this.icon"/>
+            <handler name="onheight" method="_update" reference="this.icon"/>
+            <handler name="onwidth" method="_update" reference="this.txt"/>
+            <handler name="onheight" method="_update" reference="this.txt"/>
+            <method name="_update" args="ignore=null">
+                if (this.text == '' || this.iconresource == '') {
+                    return;
+                }
+                var ix = this.padding, 
+                    iy = this.padding, 
+                    tx = this.padding, 
+                    ty = this.padding, 
+                    width = this.width, 
+                    height = this.height,
+                    padding = (this.padding * 2) + this.iconpadding;
+                // pay attention to iconposition
+                if (iconposition.indexOf('left') > -1) {
+                    tx = this.icon.width + this.iconpadding + this.padding;
+                    width = this.icon.width + this.txt.width + padding;
+                    height = Math.max(this.icon.height, this.txt.height) + padding;
+                    ty = (height - this.txt.height) * .5;
+                } else if (iconposition.indexOf('right') > -1) {
+                    ix = this.txt.width + this.iconpadding + this.padding;
+                    width = this.icon.width + this.txt.width + padding;
+                    height = Math.max(this.icon.height, this.txt.height) + padding;
+                    ty = (height - this.txt.height) * .5;
+                } else if (iconposition.indexOf('top') > -1) {
+                    ty = this.icon.height + this.iconpadding + this.padding;
+                    width = Math.max(this.icon.width, this.txt.width) + padding;
+                    height = this.icon.height + this.txt.height + padding;
+                    ix = (width - this.icon.width) * .5;
+                    tx = (width - this.txt.width) * .5;
+                } else if (iconposition.indexOf('bottom') > -1) {
+                    iy = this.txt.height + this.iconpadding + this.padding;
+                    width = Math.max(this.icon.width, this.txt.width) + padding;
+                    height = this.icon.height + this.txt.height + padding;
+                    ix = (width - this.icon.width) * .5;
+                    tx = (width - this.txt.width) * .5;
+                }
+                this.setAttribute('width', width);
+                this.setAttribute('height', height);
+                this.icon.setAttribute('x', ix);
+                this.icon.setAttribute('y', iy);
+                this.txt.setAttribute('x', tx);
+                this.txt.setAttribute('y', ty);
+            </method>
+        </state>
+
+        <text name="txt" fgcolor="${parent.textcolor}" text="${classroot.text}" x="${(parent.width - this.width) * .5}" y="${(parent.height - this.height) * .5}"/>
     </class>
 </library>
