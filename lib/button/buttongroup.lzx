@@ -3,6 +3,40 @@
     <simplelayout axis="${parent.axis}" spacing="0"/>
 
     <attribute name="dividergradient" style="divider-gradient" type="string" value=""/>
+    <handler name="onaddsubview" method="_updateborders"/>
+    <method name="_updateborders" args="ignore=null">
+        <![CDATA[
+        if (! this._borderradius) return;
+        // set corner radii
+        var subviews = this.subviews;
+        var radii = this._borderradius;
+        var axis = this.axis;
+        for (var i = 0, l = subviews.length; i < l; i++) {
+            var button = subviews[i];
+
+            button.bordertopleftradius = button.borderbottomleftradius = button.bordertoprightradius = button.borderbottomrightradius = 0;
+
+            if (i == 0) {
+                if (axis == 'x') {
+                    button.bordertopleftradius = radii[0]
+                    button.borderbottomleftradius = radii[3];
+                } else {
+                    button.bordertopleftradius = radii[0];
+                    button.bordertoprightradius = radii[1];
+                }
+            } else if (i == l - 1) {
+                if (axis == 'x') {
+                    button.bordertoprightradius = radii[1];
+                    button.borderbottomrightradius = radii[2];
+                } else {
+                    button.borderbottomleftradius = radii[3];
+                    button.borderbottomrightradius = radii[2];
+                }
+            }
+            button._updateradii();
+        }
+        ]]>
+    </method>
     <method name="draw" args="context">
         <![CDATA[
         // draw background
@@ -10,32 +44,16 @@
         //this.drawshape(context,0,0,this.width - 1, this.height - 1);
         //this.fillStyle = this.cssToLinearGradient(this.gradientfillup, context);
         //this.fill();
+        this._updateborders();
 
-        // set corner radii
-        var subviews = this.subviews;
-        var l = subviews.length;
-        for (var i = 0; i < l; i++) {
+        for (var i = 0, l = subviews.length; i < l; i++) {
             var button = subviews[i];
-
-            button.bordertopleftradius = button.borderbottomleftradius = button.bordertoprightradius = button.borderbottomrightradius = 0;
-            if (i == 0) {
-                if (this.axis == 'x') {
-                    button.bordertopleftradius = button.borderbottomleftradius = this.cornerradius;
-                } else {
-                    button.bordertopleftradius = button.bordertoprightradius = this.cornerradius;
-                }
-            } else if (i == l - 1) {
-                if (this.axis == 'x') {
-                    button.bordertoprightradius = button.borderbottomrightradius = this.cornerradius;
-                } else {
-                    button.borderbottomleftradius = button.borderbottomrightradius = this.cornerradius;
-                }
-            }
-
             // draw button shape
             context.beginPath();
             button.drawshape(context,button.x,button.y,button.width,button.height-1);
             context.closePath();
+
+            // fill with gradient or flat color
             if (button.disabled) {
                 context.fillStyle = context.basecolor;
             } else {
