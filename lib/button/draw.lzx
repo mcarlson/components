@@ -44,7 +44,7 @@
     </method>
     <method name="drawinteriorborder" args="context">
         if (! this['interiorfillcolor' + this.mousestate]) return;
-        // DRAW INTERIOR BORDER AND FILL
+        // Draw interior border and fill
         context.beginPath();
         this.drawshape(context, 1, 1, this.width - 3, this.height - 3);
         context.closePath();
@@ -54,17 +54,6 @@
             context.stroke();
         }
     </method>
-
-    <!--handler name="ongradientfillstartup" method="__resetgradientcache"/>
-    <handler name="ongradientfillstopup" method="__resetgradientcache"/>
-    <handler name="ongradientfillstartover" method="__resetgradientcache"/>
-    <handler name="ongradientfillstopover" method="__resetgradientcache"/>
-    <handler name="ongradientfillstartdown" method="__resetgradientcache"/>
-    <handler name="ongradientfillstopdown" method="__resetgradientcache"/>
-    <handler name="ongradientsideways" method="__resetgradientcache"/>
-    <method name="__resetgradientcache" args="ignore">
-        this._gradientfills = [];
-    </method-->
 
     <method name="stylegradient" args="context">
         var css = this['gradientfill'];
@@ -80,22 +69,6 @@
             }
         }
         context.fillStyle = this.cssToLinearGradient(context, css);
-        /*
-        if (! this['gradientfillstart' + this.mousestate] || ! this['gradientfillstop' + this.mousestate]) return;
-        // cache gradient fills
-        if (! this._gradientfills) this._gradientfills = [];
-        if (this._gradientfills[this.frame] == null) {
-            if (this.vertical) {
-                var g = context.createLinearGradient(0,0,width,0);
-            } else {
-                var g = context.createLinearGradient(0,Math.round( 0.5*height),0,height);
-            }
-            g.addColorStop(0, this['gradientfillstart' + this.mousestate] );
-            g.addColorStop(1, this['gradientfillstop' + this.mousestate] );
-            this._gradientfills[this.frame] = g;
-        }
-        context.fillStyle = this._gradientfills[this.frame];
-        */
     </method>
 
     <method name="drawgradient" args="context">
@@ -104,23 +77,6 @@
         var width = this.width - (bevel * 2) - 2;
         var height = this.height - bevel - 2;
         this.drawshape(context, bevel + 1, bevel, width, height);
-
-        /*
-        if (this.mousestate == 'down') {
-            if (this.vertical) {
-                context.rect(bevel + 1, bevel, width * .5, height);
-            } else {
-                context.rect(bevel + 1, bevel, width, height * .5);
-            }
-        } else {
-            if (this.vertical) {
-                context.rect(bevel, bevel, width * .5, height);
-            } else {
-                context.rect(bevel + 1, height * .5, width, height * .5);
-            }
-        }
-        */
-
         context.fill();
     </method>
 </mixin>
