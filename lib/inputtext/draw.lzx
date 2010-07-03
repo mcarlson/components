@@ -1,7 +1,7 @@
 <mixin name="drawinputtext">
     <method name="draw" args="scope">
         if (! scope['interiorfillcolor'] || ! scope['interiorbordercolor']) return;
-        this.drawshape(scope);
+        scope.drawshape(scope, 0, 0, this.width, this.height);
 
         if (this.focused) this.drawfocus(scope);
 
@@ -15,9 +15,5 @@
 
     <method name="drawfocus" args="scope">
         return scope;
-    </method>
-
-    <method name="drawshape" args="scope">
-        scope.rect(0,0,this.width,this.height,scope.cornerradius);
     </method>
 </mixin>
