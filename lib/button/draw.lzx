@@ -20,19 +20,23 @@
         ]]>
     </method>
 
+    <handler name="onmousestate" method="redraw"/>
+
     <method name="styleborder" args="context">
         if (! this.bordercolor) return;
         context.strokeStyle = this.bordercolor;
     </method>
     <method name="drawborder" args="context">
-        if (this.borderwidth > 0) {
-            if (! this.bordercolor) return;
-            context.beginPath();
-            this.drawshape(context, 0, 0, this.width - 1, this.height - 1);
-            context.closePath();
+        <![CDATA[
+        if (this.borderwidth <= 0) return;
+        if (! this.bordercolor) return;
 
-            context.stroke();
-        }
+        context.beginPath();
+        this.drawshape(context, 0, 0, this.width - 1, this.height - 1);
+        context.closePath();
+
+        context.stroke();
+        ]]>
     </method>
 
     <method name="styleinteriorborder" args="context">
@@ -73,10 +77,11 @@
 
     <method name="drawgradient" args="context">
         context.beginPath();
-        var bevel = this.bevel + this.borderwidth;
-        var width = this.width - (bevel * 2) - 2;
-        var height = this.height - bevel - 2;
-        this.drawshape(context, bevel + 1, bevel, width, height);
+        var inset = 0;
+        if (this.bevel) {
+            var inset = this.bevel + this.borderwidth;
+        }
+        this.drawshape(context, inset, inset, this.width - (inset * 2), this.height - (inset * 2));
         context.fill();
     </method>
 </mixin>
