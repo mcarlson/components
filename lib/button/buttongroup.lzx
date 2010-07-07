@@ -14,26 +14,29 @@
         for (var i = 0, l = subviews.length; i < l; i++) {
             var button = subviews[i];
 
-            button.bordertopleftradius = button.borderbottomleftradius = button.bordertoprightradius = button.borderbottomrightradius = 0;
+            var topleft = 0;
+            var topright = 0;
+            var bottomright = 0;
+            var bottomleft = 0;
 
             if (i == 0) {
                 if (axis == 'x') {
-                    button.bordertopleftradius = radii[0]
-                    button.borderbottomleftradius = radii[3];
+                    topleft = radii[0]
+                    bottomleft = radii[3];
                 } else {
-                    button.bordertopleftradius = radii[0];
-                    button.bordertoprightradius = radii[1];
+                    topleft = radii[0];
+                    topright = radii[1];
                 }
             } else if (i == l - 1) {
                 if (axis == 'x') {
-                    button.bordertoprightradius = radii[1];
-                    button.borderbottomrightradius = radii[2];
+                    topright = radii[1];
+                    bottomright = radii[2];
                 } else {
-                    button.borderbottomleftradius = radii[3];
-                    button.borderbottomrightradius = radii[2];
+                    bottomleft = radii[3];
+                    bottomright = radii[2];
                 }
             }
-            button._updateradii();
+            button.setAttribute('borderradius', ([topleft, topright, bottomright, bottomleft]).join(' '));
         }
         ]]>
     </method>
