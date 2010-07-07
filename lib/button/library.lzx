@@ -41,37 +41,48 @@
             <handler name="onwidth" method="_update" reference="this.txt"/>
             <handler name="onheight" method="_update" reference="this.txt"/>
             <method name="_update" args="ignore=null">
-                if (this.text == '' || this.iconresource == '') {
+                if (this.iconresource == '') {
                     return;
                 }
+
+                if (this.text == '') {
+                    // only worry about layout of icon
+                    var padding = this.padding * 2;
+                    this.setAttribute('width', this.icon.width + padding);
+                    this.setAttribute('height', this.icon.height + padding);
+                    this.icon.setAttribute('x', this.padding);
+                    this.icon.setAttribute('y', this.padding);
+                    return;
+                }
+
                 var ix = this.padding, 
                     iy = this.padding, 
                     tx = this.padding, 
                     ty = this.padding, 
                     width = this.width, 
                     height = this.height,
-                    padding = (this.padding * 2) + this.iconpadding;
+                    padding = (this.padding * 2);
                 // pay attention to iconposition
                 if (iconposition.indexOf('left') > -1) {
                     tx = this.icon.width + this.iconpadding + this.padding;
-                    width = this.icon.width + this.txt.width + padding;
+                    width = this.icon.width + this.txt.width + padding + this.iconpadding;
                     height = Math.max(this.icon.height, this.txt.height) + padding;
                     ty = (height - this.txt.height) * .5;
                 } else if (iconposition.indexOf('right') > -1) {
                     ix = this.txt.width + this.iconpadding + this.padding;
-                    width = this.icon.width + this.txt.width + padding;
+                    width = this.icon.width + this.txt.width + padding + this.iconpadding;
                     height = Math.max(this.icon.height, this.txt.height) + padding;
                     ty = (height - this.txt.height) * .5;
                 } else if (iconposition.indexOf('top') > -1) {
                     ty = this.icon.height + this.iconpadding + this.padding;
                     width = Math.max(this.icon.width, this.txt.width) + padding;
-                    height = this.icon.height + this.txt.height + padding;
+                    height = this.icon.height + this.txt.height + padding + this.iconpadding;
                     ix = (width - this.icon.width) * .5;
                     tx = (width - this.txt.width) * .5;
                 } else if (iconposition.indexOf('bottom') > -1) {
                     iy = this.txt.height + this.iconpadding + this.padding;
                     width = Math.max(this.icon.width, this.txt.width) + padding;
-                    height = this.icon.height + this.txt.height + padding;
+                    height = this.icon.height + this.txt.height + padding + this.iconpadding;
                     ix = (width - this.icon.width) * .5;
                     tx = (width - this.txt.width) * .5;
                 }
