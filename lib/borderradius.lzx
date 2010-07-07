@@ -1,9 +1,5 @@
 <mixin name="borderradius">
     <attribute name="borderradius" style="border-radius" type="string" value=""/>
-    <attribute name="bordertopleftradius" style="border-top-left-radius" type="number" value=""/>
-    <attribute name="bordertoprightradius" style="border-top-right-radius" type="number" value=""/>
-    <attribute name="borderbottomrightradius" style="border-bottom-right-radius" type="number" value=""/>
-    <attribute name="borderbottomleftradius" style="border-bottom-left-radius" type="number" value=""/>
 
     <event name="onborderradius"/>
     <setter name="borderradius" args="radius">
@@ -34,13 +30,57 @@
         ]]>
     </setter>
 
-    <handler name="onbordertopleftradius" method="_updateradii"/>
-    <handler name="onbordertoprightradius" method="_updateradii"/>
-    <handler name="onborderbottomrightradius" method="_updateradii"/>
-    <handler name="onborderbottomleftradius" method="_updateradii"/>
+    <attribute name="bordertopleftradius" style="border-top-left-radius" type="number" value="-1"/>
+    <event name="onbordertopleftradius"/>
+    <setter name="bordertopleftradius" args="radius">
+        <![CDATA[
+        if (radius < 0) return;
+        if (this.bordertopleftradius === radius) return;
+        this.bordertopleftradius = radius;
+        if (this.onbordertopleftradius.ready) this.onbordertopleftradius.sendEvent(radius);
+        //Debug.info('borderradius', radius, radii);
+        ]]>
+    </setter>
+
+    <attribute name="bordertoprightradius" style="border-top-right-radius" type="number" value="-1"/>
+    <event name="onbordertoprightradius"/>
+    <setter name="bordertoprightradius" args="radius">
+        <![CDATA[
+        if (radius < 0) return;
+        if (this.bordertoprightradius === radius) return;
+        this.bordertoprightradius = radius;
+        if (this.onbordertoprightradius.ready) this.onbordertoprightradius.sendEvent(radius);
+        //Debug.info('borderradius', radius, radii);
+        ]]>
+    </setter>
+
+    <attribute name="borderbottomrightradius" style="border-bottom-right-radius" type="number" value="-1"/>
+    <event name="onborderbottomrightradius"/>
+    <setter name="borderbottomrightradius" args="radius">
+        <![CDATA[
+        if (radius < 0) return;
+        if (this.borderbottomrightradius === radius) return;
+        this.borderbottomrightradius = radius;
+        if (this.onborderbottomrightradius.ready) this.onborderbottomrightradius.sendEvent(radius);
+        //Debug.info('borderradius', radius, radii);
+        ]]>
+    </setter>
+
+    <attribute name="borderbottomleftradius" style="border-bottom-left-radius" type="number" value="-1"/>
+    <event name="onborderbottomleftradius"/>
+    <setter name="borderbottomleftradius" args="radius">
+        <![CDATA[
+        if (radius < 0) return;
+        if (this.borderbottomleftradius === radius) return;
+        this.borderbottomleftradius = radius;
+        if (this.onborderbottomleftradius.ready) this.onborderbottomleftradius.sendEvent(radius);
+        //Debug.info('borderradius', radius, radii);
+        ]]>
+    </setter>
+
     <method name="_updateradii" args="ignore=null">
         // update the radii when they've changed from outside
-        var radii = this._borderradius;
+        var radii = [];
         radii[0] = this.bordertopleftradius;
         radii[1] = this.bordertoprightradius;
         radii[2] = this.borderbottomrightradius;
