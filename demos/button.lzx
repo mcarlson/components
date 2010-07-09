@@ -1,5 +1,5 @@
 <canvas>
-    <include href="lib/"/>
+    <include href="../lib/"/>
     <resource name="tweety" src="bird.png"/>
 
     <stylesheet>

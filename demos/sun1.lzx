@@ -1,5 +1,5 @@
 <canvas>
-    <include href="lib/"/>
+    <include href="../lib/"/>
 
     <font name="futura" src="resources/futuraregular.ttf"/>
 
