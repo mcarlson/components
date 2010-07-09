@@ -8,6 +8,7 @@
         <attribute name="scopes" value="null"/>
         <attribute name="drawchildren" value="true" type="boolean"/>
 
+        <attribute name="padding" style="padding" value="3" type="number"/>
         <attribute name="borderwidth" style="border-width" type="number" value="0"/>
         <attribute name="bordercolor" style="border-color" type="color" value="null"/>
         <attribute name="highlightcolor" style="highlight-color" type="color" value="#0000ff"/>
@@ -19,6 +20,7 @@
             <![CDATA[
             if (! this.context || ! this.isinited || this.lockredraw) return;
             this.clear();
+            this.beginPath();
             if (this['draw']) {
                 this.draw(this);
             }
@@ -30,6 +32,7 @@
             if (this['drawlast']) {
                 this.drawlast(this);
             }
+            this.closePath();
             ]]>
         </method>
 

@@ -11,9 +11,7 @@
     <include href="draw.lzx"/>
     <include href="buttongroup.lzx"/>
 
-    <class name="bsbtn" extends="basepanel" with="componentmodel,buttonevents,stylebutton,drawshadowfocus,drawbutton,componentfocus">
-        <attribute name="padding" style="padding" value="2" type="number"/>
-    </class>
+    <class name="bsbtn" extends="basepanel" with="componentmodel,buttonevents,stylebutton,drawshadowfocus,drawbutton,componentfocus"/>
 
     <class name="btn" extends="bsbtn" width="${this.txt.width + this.padding}" height="${this.txt.height + this.padding}">
         <!--- text to display in the button (can leave empty) -->
