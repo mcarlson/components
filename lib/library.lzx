@@ -7,4 +7,5 @@
     <include href="scrollbar/"/>
     <include href="floater/"/>
     <include href="combobox/"/>
+    <include href="slider/"/>
 </library>

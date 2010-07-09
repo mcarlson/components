@@ -1,0 +1,97 @@
+<library>
+    <include href="../button/"/>
+
+    <class name="sliderbutton" extends="bsbtn" with="keyboardrepeater,virtualdrawview">
+        <dragstate name="dragger" drag_axis="x" drag_max_x="${this.parent.width - this.width}" drag_min_x="0" applied="${this.parent.mouseisdown}"/>
+        <handler name="ondata" args="d">
+            <![CDATA[
+            var range = Math.abs(parent.max - parent.min);
+            var perc = (parseFloat(d) - parent.min) / range;
+            if (perc < 0) {
+                perc = 0;
+            } else if (perc > 1) {
+                perc = 1;
+            }
+            this.setAttribute('x', Math.floor(perc * (this.parent.width - this.width)));
+            //Debug.info('ondata', d, parent, perc, range);
+            ]]>
+        </handler>
+        <handler name="onx" args="x">
+            <![CDATA[
+            var range = Math.abs(parent.max - parent.min);
+            var perc = x / (parent.width - this.width);
+            if (perc < 0) {
+                perc = 0;
+            } else if (perc > 1) {
+                perc = 1;
+            }
+            var newval = (perc * range) + parent.min;
+            //Debug.info('onx', x, perc, range, newval, this.clonenumber);
+            parent.updateValue(this.clonenumber, newval);
+            ]]>
+        </handler>
+        <handler name="onkeydown" method="handleKeyDown"/>
+        <handler name="onkeystilldown" method="handleKeyDown"/>
+        <handler name="onmousewheeldelta" method="step" reference="lz.Keys"/>
+        <method name="handleKeyDown" args="key">
+            <![CDATA[
+            var step = 0;
+            if (key == 37 || key == 38) {
+                // if left or up
+                step = -1;
+            } else if (key == 39 || key == 40) {
+                // if right or down
+                step = 1;
+            }
+            //Debug.warn('handleKeyDown', key);
+            if (lz.Keys.isKeyDown('shift')) {
+                step *= 2;
+            }
+            this.step(step);
+            ]]>
+        </method>
+        <method name="step" args="amount">
+            <![CDATA[
+            if (! this.focused) return;
+            var newx = this.x + amount;
+            var max = (parent.width - this.width);
+            if (newx < 0) {
+                newx = 0;
+            } else if (newx > max) {
+                newx = max;
+            }
+            if (this.x != newx) this.setAttribute('x', newx);
+            ]]>
+        </method>
+    </class>
+
+    <class name="sldr" extends="basepanel" with="componentmodel,componentfocus" width="100" height="20" focusable="false">
+        <attribute name="_model" value="[0]"/>
+        <attribute name="min" type="number" value="0"/>
+        <attribute name="max" type="number" value="100"/>
+        <method name="draw" args="context">
+            var h = this.height * .25;
+            this.drawshape(context,0,h,this.width - 1,h * 2);
+            context.lineWidth = this.borderwidth;
+            context.strokeStyle = this.interiorbordercolor;
+            context.fillStyle = this.interiorfillcolor;
+            context.fill();
+            context.stroke();
+        </method>
+        <method name="updateValue" args="index, value">
+            this._model[index] = value;
+            this.value = this._model.join(',');
+            if (this.onvalue.ready) this.onvalue.sendEvent(this.value);
+        </method>
+        <event name="onvalue"/>
+        <setter name="value" args="v">
+            this.value = v;
+            this.setAttribute('_model', v.split(','));
+            if (this.onvalue.ready) this.onvalue.sendEvent(this.value);
+        </setter>
+
+        <replicator nodes="${this.parent._model}">
+            <sliderbutton width="10" height="${this.parent.height}" opacity="${this.mouseisover ? 1 : .5}" transition="opacity .5s"/>
+        </replicator>
+    </class>
+</library>
