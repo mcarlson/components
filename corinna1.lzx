@@ -8,8 +8,9 @@
             font-family: Helvetica,Sans;
         }
         basepanel {
+            padding: 10;
             highlight-color: #99ccff;
-            corner-radius: 3;
+            border-radius: 3;
             base-color: #333333;
             border-width: 0;
             border-color: #d6d6d6;
@@ -18,7 +19,7 @@
             divider-gradient: 'top,#797979 0,#b0b0b0 50,#797979 100';
         }
         button {
-            corner-radius: 100;
+            border-radius: 100;
             gradient-fill: 'top,#f6f6f6 0,#d6d6d6 100';
             text-padding: 6;
             text-color-up: #4f4f4f;

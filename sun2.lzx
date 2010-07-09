@@ -9,7 +9,7 @@
         }
         basepanel {
             highlight-color: #99ccff;
-            corner-radius: 3;
+            border-radius: 3;
             base-color: #333333;
             border-width: 1;
             border-color: #d8d8d8;

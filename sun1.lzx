@@ -13,8 +13,8 @@
             shadow-angle: 35;
             shadow-distance: 0;
             shadow-blur-radius: 0;
-            corner-radius: 3;
-            base-color: white;
+            border-radius: 3;
+            base-color: #ffffff;
             highlight-color: #666666;
             border-color: #ffffff;
             text-padding: 4;
@@ -47,12 +47,13 @@
             }
             //Debug.info('draw', this.mousestate);
 
-            context.fillStyle = this.disabled ? 0xf1f1f1 : context['interiorfillcolor' + this.mousestate];
-            this.drawinteriorborder(context);
+            context.fillStyle = this.disabled ? 0xf1f1f1 : context['interiorfillcolor'];
 
             context.borderwidth = context.lineWidth = this.disabled ? 3 : 0;
             this.styleborder(context);
             this.drawborder(context);
+
+            this.drawinteriorborder(context);
 
             if (this.mousestate == "over") {
                 this.setAttribute('shadowcolor', context.highlightcolor);

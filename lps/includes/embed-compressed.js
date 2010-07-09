@@ -2,7 +2,9 @@ var $runtime="dhtml";var $dhtml=true;var $as3=false;var $as2=false;var $swf10=fa
 if(lz){}}
 catch(e){
 lz={}};lz.embed={options:{cancelkeyboardcontrol:false,serverroot:null,approot:"",usemastersprite:false},swf:function($0,$1){
-var $2=lz.embed;if($1==null)$1=10;var $3=$0.url;var $4=this.__getqueryurl($3);for(var $5 in $4.options){
+var $2=lz.embed;if($1==null)$1=10;if(!$0.id){
+$0.id="lzapp"+Math.round(Math.random()*1000000)
+};var $3=$0.url;var $4=this.__getqueryurl($3);for(var $5 in $4.options){
 var $6=$4.options[$5];if($6!=null){
 $0[$5]=$6
 }};if($0.accessible&&$0.accessible!="false"){
@@ -13,9 +15,9 @@ $4.flashvars+="&history=true"
 $4.flashvars+="&bgcolor="+escape($0.bgcolor)
 };var $7=lz.embed.options;if($0.cancelkeyboardcontrol){
 $7.cancelkeyboardcontrol=$0.cancelkeyboardcontrol
-};$4.flashvars+="&width="+escape($0.width);$4.flashvars+="&height="+escape($0.height);$4.flashvars+="&__lzurl="+escape($3);$4.flashvars+="&__lzminimumversion="+escape($1);$4.flashvars+="&id="+escape($0.id);var $3=$4.url+"?"+$4.query;var $8=$2._getAppendDiv($0.id,$0.appenddivid);var $9={width:"100%",height:"100%",id:$0.id,bgcolor:$0.bgcolor,wmode:$0.wmode,flashvars:$4.flashvars,allowfullscreen:$0.allowfullscreen,flash8:$3,appenddiv:$8};if($2[$0.id])alert("Warning: an app with the id: "+$0.id+" already exists.");var app=$2[$0.id]=$2.applications[$0.id]={runtime:"swf",_id:$0.id,appenddiv:$8,setCanvasAttribute:$2._setCanvasAttributeSWF,getCanvasAttribute:$2._getCanvasAttributeSWF,callMethod:$2._callMethodSWF,_ready:$2._ready,_onload:[],_getSWFDiv:$2._getSWFDiv,loaded:false,_sendMouseWheel:$2._sendMouseWheel,_sendAllKeysUp:$2._sendAllKeysUpSWF,_setCanvasAttributeDequeue:$2._setCanvasAttributeDequeue,_sendPercLoad:$2._sendPercLoad,setGlobalFocusTrap:$2.__setGlobalFocusTrapSWF};if($0.history==false){
+};$4.flashvars+="&width="+escape($0.width);$4.flashvars+="&height="+escape($0.height);$4.flashvars+="&__lzurl="+escape($3);$4.flashvars+="&__lzminimumversion="+escape($1);$4.flashvars+="&id="+escape($0.id);var $3=$4.url+"?"+$4.query;var $8=$2._getAppendDiv($0.id,$0.appenddivid);var $9={width:"100%",height:"100%",id:$0.id,bgcolor:$0.bgcolor,wmode:$0.wmode,flashvars:$4.flashvars,allowfullscreen:$0.allowfullscreen,flash8:$3,appenddiv:$8};if($2[$0.id])alert("Warning: an app with the id: "+$0.id+" already exists.");var app=$2[$0.id]=$2.applications[$0.id]={runtime:"swf",_id:$0.id,appenddiv:$8,setCanvasAttribute:$2._setCanvasAttributeSWF,getCanvasAttribute:$2._getCanvasAttributeSWF,callMethod:$2._callMethodSWF,_ready:$2._ready,_onload:[],_getSWFDiv:$2._getSWFDiv,loaded:false,_sendMouseWheel:$2._sendMouseWheel,_sendAllKeysUp:$2._sendAllKeysUpSWF,_setCanvasAttributeDequeue:$2._setCanvasAttributeDequeue,_sendPercLoad:$2._sendPercLoad,setGlobalFocusTrap:$2.__setGlobalFocusTrapSWF,initargs:$4.initargs};if($0.history==false){
 $2.history.active=false
-};$2.dojo.addLoadedListener($2._loaded,app);$2.dojo.setSwf($9,$1);$8.style.height=$2.CSSDimension($0.height);$8.style.width=$2.CSSDimension($0.width);if($0.cancelmousewheel!=true&&($2.browser.OS=="Mac"||$2.browser.OS=="Windows")){
+};$2.dojo.addLoadedListener($2._loaded,app);$2.dojo.setSwf($9,$1);$8.style.height=$2.CSSDimension($0.height);$8.style.width=$2.CSSDimension($0.width);if($0.cancelmousewheel!=true){
 if($2["mousewheel"]){
 $2.mousewheel.setCallback(app,"_sendMouseWheel")
 }};if(($9.wmode=="transparent"||$9.wmode=="opaque")&&$2.browser.OS=="Windows"&&($2.browser.isOpera||$2.browser.isFirefox)){
@@ -25,7 +27,7 @@ div.mouseisoutside=true
 div.mouseisoutside=false
 };div._gotmouseup=document.onmouseup=function($0){
 if(div.mouseisoutside){
-app.callMethod("LzMouseKernel.__mouseUpOutsideHandler()")
+app.callMethod("lz.GlobalMouse.__mouseUpOutsideHandler()")
 }}};if($2.browser.isIE&&$3.indexOf("swf8")==-1&&!$7.cancelkeyboardcontrol){
 document.onkeydown=function($0){
 if(!$0)$0=window.event;if($0.keyCode==9){
@@ -39,10 +41,14 @@ $1="."
 alert("WARNING: lz.embed.lfc() requires a valid serverroot to be specified.");return
 };lz.embed.options.serverroot=$1;if(lz.embed.browser.isIE){
 if(lz.embed.browser.version<7){
-this.__dhtmlLoadScript("http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js")
-}};this.__dhtmlLoadScript($0)
+this.__dhtmlLoadLibrary("http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js")
+}};this.__dhtmlLoadLibrary($0,lz.embed.__lfcloaded)
 },dhtml:function($0){
-var $1=this.__getqueryurl($0.url,true);for(var $2 in $1.options){
+if(lz.embed.dhtmlapploaded){
+alert("Warning: skipping lz.embed.dhtml() call for "+$0.url+". Only one DHTML application can be loaded per window.  Use iframes to load more than one DHTML application.");return
+};if(!$0.id){
+$0.id="lzapp"+Math.round(Math.random()*1000000)
+};var $1=this.__getqueryurl($0.url);for(var $2 in $1.options){
 var $3=$1.options[$2];if($3!=null){
 $0[$2]=$3
 }};var $4=$1.url+"?lzt=object&"+$1.query;var appenddiv=lz.embed._getAppendDiv($0.id,$0.appenddivid);if(!$0.skipchromeinstall&&lz.embed.browser.isIE&&lz.embed.browser.version<7){
@@ -60,29 +66,41 @@ $5.serverroot=$0.serverroot
 $5.approot=$0.approot
 };if($0.usemastersprite!=null){
 $5.usemastersprite=$0.usemastersprite
-};lz.embed.__propcache={bgcolor:$0.bgcolor,width:$0.width,height:$0.height,id:$0.id,appenddiv:lz.embed._getAppendDiv($0.id,$0.appenddivid),url:$4,options:$5};if(lz.embed[$0.id])alert("Warning: an app with the id: "+$0.id+" already exists.");var $6=lz.embed[$0.id]=lz.embed.applications[$0.id]={runtime:"dhtml",_id:$0.id,_ready:lz.embed._ready,_onload:[],loaded:false,setCanvasAttribute:lz.embed._setCanvasAttributeDHTML,getCanvasAttribute:lz.embed._getCanvasAttributeDHTML,callMethod:lz.embed._callMethodDHTML,_sendAllKeysUp:lz.embed._sendAllKeysUpDHTML};if($0.history==false){
+};lz.embed.__propcache={bgcolor:$0.bgcolor,width:$0.width,height:$0.height,id:$0.id,appenddiv:lz.embed._getAppendDiv($0.id,$0.appenddivid),url:$4,options:$5};if(lz.embed[$0.id])alert("Warning: an app with the id: "+$0.id+" already exists.");var $6=lz.embed[$0.id]=lz.embed.applications[$0.id]={runtime:"dhtml",_id:$0.id,_ready:lz.embed._ready,_onload:[],loaded:false,setCanvasAttribute:lz.embed._setCanvasAttributeDHTML,getCanvasAttribute:lz.embed._getCanvasAttributeDHTML,callMethod:lz.embed._callMethodDHTML,_sendAllKeysUp:lz.embed._sendAllKeysUpDHTML,initargs:$1.initargs};if($0.history==false){
 lz.embed.history.active=false
 };if($0.cancelmousewheel==true){
 lz.embed.mousewheel.setEnabled(false)
-};this.__dhtmlLoadLibrary($4);if(lz.embed.browser.OS=="Windows"&&lz.embed.browser.isFirefox){
+};if(lz.embed.browser.OS=="Windows"&&lz.embed.browser.isFirefox){
 window.focus()
+};if(!lz.embed.lfcloaded){
+lz.embed.__appqueue.push($4);if($0.lfcurl&&$0.serverroot){
+lz.embed.lfc($0.lfcurl,$0.serverroot)
+}}else{
+lz.embed.dhtmlapploaded=true;this.__dhtmlLoadLibrary($4)
 }},applications:{},__dhtmlLoadScript:function($0){
 var $1='<script type="text/javascript" language="JavaScript1.5" src="'+$0+'"></script>';document.writeln($1);return $1
-},__dhtmlLoadLibrary:function($0){
-var $1=document.createElement("script");this.__setAttr($1,"type","text/javascript");this.__setAttr($1,"src",$0);document.getElementsByTagName("head")[0].appendChild($1);return $1
-},__getqueryurl:function($0,$1){
-var $2=$0.split("?");$0=$2[0];if($2.length==1)return {url:$0,flashvars:"",query:""};var $3=this.__parseQuery($2[1]);var $4="";var $5="";var $6={};var $7=new RegExp("\\+","g");for(var $8 in $3){
-if($8==""||$8==null)continue;var $9=$3[$8];if($8=="lzr"||$8=="lzt"||$8=="debug"||$8=="profile"||$8=="lzbacktrace"||$8=="lzconsoledebug"||$8=="lzdebug"||$8=="lzkrank"||$8=="lzprofile"||$8=="lzcopyresources"||$8=="fb"||$8=="sourcelocators"||$8=="_canvas_debug"||$8=="lzsourceannotations"){
-$4+=$8+"="+$9+"&"
+},__dhtmlLoadLibrary:function($0,callback){
+var script=document.createElement("script");this.__setAttr(script,"type","text/javascript");this.__setAttr(script,"defer","defer");if(callback){
+if(script.readyState){
+script.onreadystatechange=function(){
+if(script.readyState=="loaded"||script.readyState=="complete"){
+script.onreadystatechange=null;callback()
+}}}else{
+script.onload=function(){
+callback()
+}}};this.__setAttr(script,"src",$0);var $1=document.getElementsByTagName("body")[0]||document.getElementsByTagName("head")[0];$1.appendChild(script)
+},__getqueryurl:function($0){
+var $1=$0.split("?");$0=$1[0];if($1.length==1)return {url:$0,flashvars:"",query:""};var $2=this.__parseQuery($1[1]);var $3="";var $4="";var $5={};var $6={};var $7=new RegExp("\\+","g");for(var $8 in $2){
+if($8==""||$8==null)continue;var $9=$2[$8];if($8=="lzr"||$8=="lzt"||$8=="debug"||$8=="profile"||$8=="lzbacktrace"||$8=="lzconsoledebug"||$8=="lzdebug"||$8=="lzkrank"||$8=="lzprofile"||$8=="lzcopyresources"||$8=="fb"||$8=="sourcelocators"||$8=="_canvas_debug"||$8=="lzsourceannotations"){
+$3+=$8+"="+$9+"&"
 };if($8=="lzusemastersprite"||$8=="lzskipchromeinstall"||$8=="lzcancelkeyboardcontrol"||$8=="lzcancelmousewheel"||$8=="lzhistory"||$8=="lzaccessible"){
-$6[$8.substring(2)]=$9=="true"
+$5[$8.substring(2)]=$9=="true"
 };if($8=="lzapproot"||$8=="lzserverroot"||$8=="lzwmode"){
-$6[$8.substring(2)]=$9
-};if($1){
-if(window[$8]==null){
-window[$8]=unescape($9.replace($7," "))
-}};$5+=$8+"="+$9+"&"
-};$4=$4.substr(0,$4.length-1);$5=$5.substr(0,$5.length-1);return {url:$0,flashvars:$5,query:$4,options:$6}},__parseQuery:function($0){
+$5[$8.substring(2)]=$9
+};if($6[$8]==null){
+$6[$8]=unescape($9.replace($7," "))
+};$4+=$8+"="+$9+"&"
+};$3=$3.substr(0,$3.length-1);$4=$4.substr(0,$4.length-1);return {url:$0,flashvars:$4,query:$3,options:$5,initargs:$6}},__parseQuery:function($0){
 if($0.indexOf("=")==-1)return;var $1=$0.split("&");var $2={};for(var $3=0;$3<$1.length;$3++){
 var $4=$1[$3].split("=");if($4.length==1)continue;var $5=$4[0];var $6=$4[1];$2[$5]=$6
 };return $2
@@ -141,8 +159,10 @@ this.isOpera=true
 this.isFirefox=true
 }else if(this.browser=="Explorer"){
 this.isIE=true
-}else if(this.browser=="iPhone"){
+}else if(this.browser=="iPhone"||this.browser=="iPad"){
 this.isSafari=true;this.isIphone=true
+}else if(this.OS=="Android"){
+this.isSafari=true
 }else if(this.browser=="Chrome"){
 this.isChrome=true
 }},searchString:function($0){
@@ -156,7 +176,7 @@ var $1=$0.indexOf(this.versionSearchString);if($1==-1)return;return parseFloat($
 var $1=new RegExp(this.versionSearchString+".\\d+\\.\\d+\\.([\\d.]+)");var $2=$1.exec($0);if($2&&$2.length>1)return parseFloat($2[1])
 },searchOSVersion:function($0){
 var $1=$0.indexOf(this.osversionSearchString);if($1==-1)return;return parseFloat($0.substring($1+this.osversionSearchString.length+1))
-},dataBrowser:[{string:navigator.userAgent,subString:"iPhone",identity:"iPhone",versionSearch:"WebKit"},{string:navigator.userAgent,subString:"Chrome",identity:"Chrome",versionSearch:"WebKit"},{string:navigator.userAgent,subString:"OmniWeb",versionSearch:"OmniWeb/",identity:"OmniWeb"},{string:navigator.vendor,subString:"Apple",identity:"Safari",versionSearch:"WebKit"},{prop:window.opera,identity:"Opera"},{string:navigator.vendor,subString:"iCab",identity:"iCab"},{string:navigator.vendor,subString:"KDE",identity:"Konqueror"},{string:navigator.userAgent,subString:"Firefox",identity:"Firefox"},{string:navigator.userAgent,subString:"Iceweasel",versionSearch:"Iceweasel",identity:"Firefox"},{string:navigator.vendor,subString:"Camino",identity:"Camino"},{string:navigator.userAgent,subString:"Netscape",identity:"Netscape"},{string:navigator.userAgent,subString:"MSIE",identity:"Explorer",versionSearch:"MSIE",osversionSearch:"Windows NT"},{string:navigator.userAgent,subString:"Gecko",identity:"Mozilla",versionSearch:"rv"},{string:navigator.userAgent,subString:"Mozilla",identity:"Netscape",versionSearch:"Mozilla"}],dataOS:[{string:navigator.platform,subString:"Win",identity:"Windows"},{string:navigator.platform,subString:"Mac",identity:"Mac"},{string:navigator.userAgent,subString:"iPhone",identity:"iPhone/iPod"},{string:navigator.platform,subString:"Linux",identity:"Linux"}]},_callMethodSWF:function($0){
+},dataBrowser:[{string:navigator.userAgent,subString:"iPhone",identity:"iPhone",versionSearch:"WebKit"},{string:navigator.userAgent,subString:"iPad",identity:"iPad",versionSearch:"WebKit"},{string:navigator.userAgent,subString:"Android",identity:"Android",versionSearch:"WebKit"},{string:navigator.userAgent,subString:"Chrome",identity:"Chrome",versionSearch:"WebKit"},{string:navigator.userAgent,subString:"OmniWeb",versionSearch:"OmniWeb/",identity:"OmniWeb"},{string:navigator.vendor,subString:"Apple",identity:"Safari",versionSearch:"WebKit"},{prop:window.opera,identity:"Opera"},{string:navigator.vendor,subString:"iCab",identity:"iCab"},{string:navigator.vendor,subString:"KDE",identity:"Konqueror"},{string:navigator.userAgent,subString:"Firefox",identity:"Firefox"},{string:navigator.userAgent,subString:"Iceweasel",versionSearch:"Iceweasel",identity:"Firefox"},{string:navigator.vendor,subString:"Camino",identity:"Camino"},{string:navigator.userAgent,subString:"Netscape",identity:"Netscape"},{string:navigator.userAgent,subString:"MSIE",identity:"Explorer",versionSearch:"MSIE",osversionSearch:"Windows NT"},{string:navigator.userAgent,subString:"Gecko",identity:"Mozilla",versionSearch:"rv"},{string:navigator.userAgent,subString:"Mozilla",identity:"Netscape",versionSearch:"Mozilla"}],dataOS:[{string:navigator.platform,subString:"Win",identity:"Windows"},{string:navigator.platform,subString:"Mac",identity:"Mac"},{string:navigator.userAgent,subString:"iPhone",identity:"iPhone/iPod/iPad"},{string:navigator.userAgent,subString:"iPad",identity:"iPhone/iPod/iPad"},{string:navigator.userAgent,subString:"Android",identity:"Android"},{string:navigator.platform,subString:"Linux",identity:"Linux"}]},_callMethodSWF:function($0){
 if(this.loaded){
 return lz.embed.dojo.comm[this._id].callMethod($0)
 }else{
@@ -238,16 +258,16 @@ $0.removeEventListener($1,$5,false);return true
 return $0.detachEvent("on"+$1,$5)
 }},_handlers:{},_cleanupHandlers:function(){
 lz.embed._handlers={}},getAbsolutePosition:function($0){
-var $1=null;var $2={};var $3;if(!(lz.embed.browser.isFirefox&&$0==document.body)&&$0.getBoundingClientRect){
+var $1=null;var $2={};var $3;var $4=lz.embed.browser;if(!($4.isFirefox&&$0==document.body)&&$0.getBoundingClientRect){
 if(!$0.parentNode){
-return {x:0,y:0}};$3=$0.getBoundingClientRect();var $4=document.documentElement.scrollTop||document.body.scrollTop;var $5=document.documentElement.scrollLeft||document.body.scrollLeft;return {x:Math.floor($3.left+$5),y:Math.floor($3.top+$4)}}else if(document.getBoxObjectFor){
+return {x:0,y:0}};$3=$0.getBoundingClientRect();var $5=document.documentElement.scrollTop||document.body.scrollTop;var $6=document.documentElement.scrollLeft||document.body.scrollLeft;return {x:Math.floor($3.left+$6),y:Math.floor($3.top+$5)}}else if(document.getBoxObjectFor){
 $3=document.getBoxObjectFor($0);$2={x:$3.x,y:$3.y}}else{
 $2={x:$0.offsetLeft,y:$0.offsetTop};$1=$0.offsetParent;if($1!=$0){
 while($1){
 $2.x+=$1.offsetLeft;$2.y+=$1.offsetTop;$1=$1.offsetParent
-}};if(lz.embed.browser.isSafari&&document.defaultView&&document.defaultView.getComputedStyle){
-var $6=document.defaultView.getComputedStyle($0,"")
-};if(lz.embed.browser.isOpera||lz.embed.browser.isSafari&&$6&&$6["position"]=="absolute"){
+}};if($4.isSafari&&document.defaultView&&document.defaultView.getComputedStyle){
+var $7=document.defaultView.getComputedStyle($0,"")
+};if($4.isOpera||$4.isSafari){
 $2.y-=document.body.offsetTop
 }};if($0.parentNode){
 $1=$0.parentNode
@@ -276,6 +296,36 @@ div.onblur=function(){
 div.focus()
 }}else{
 div.onblur=null
+}},__unescapestring:function($0){
+var $1=arguments[0];var $2=eval($1);var $3=null;var $4=$1.lastIndexOf(".");if($4>-1){
+$3=eval($1.substring(0,$4))
+};if(!$2||(function($0,$1){
+return $1["$lzsc$isa"]?$1.$lzsc$isa($0):$0 instanceof $1
+})(!$2,Function)){
+return
+};var $5=[];for(var $6=1,$7=arguments.length;$6<$7;$6++){
+var $8=arguments[$6];if($8=="__#lznull"){
+$8=""
+};$5[$6-1]=$8
+};var $9=$2.apply($3,$5);if($9==""){
+return "__#lznull"
+}else{
+return $9
+}},__lfcloaded:function(){
+lz.embed.lfcloaded=true;var $0=lz.embed.__appqueue;if($0.length){
+for(var $1=0,$2=$0.length;$1<$2;$1++){
+lz.embed.__dhtmlLoadLibrary($0[$1])
+}}},__appqueue:[],resizeWindow:function($0,$1){
+if($0.indexOf("%")>-1){
+$0=null
+}else{
+$0=parseInt($0)
+};if($1.indexOf("%")>-1){
+$1=null
+}else{
+$1=parseInt($1)
+};if(window.innerHeight){
+window.resizeTo($0?$0+window.outerWidth-window.innerWidth:window.outerWidth,$1?$1+window.outerHeight-window.innerHeight:window.outerHeight)
 }}};lz.embed.browser.init();lz.embed.attachEventHandler(window,"beforeunload",lz.embed,"_cleanupHandlers");lz.embed.attachEventHandler(window,"focus",lz.embed,"_gotFocus");if(lz.embed.browser.isIE){
 lz.embed.attachEventHandler(window,"activate",lz.embed,"_gotFocus")
 };lz.embed.dojo=function(){};lz.embed.dojo={defaults:{flash8:null,ready:false,visible:true,width:500,height:400,bgcolor:"#ffffff",allowfullscreen:false,wmode:"window",flashvars:"",minimumVersion:8,id:"flashObject",appenddiv:null},obj:{},comm:{},_loadedListeners:[],_loadedListenerScopes:[],_installingListeners:[],_installingListenerScopes:[],setSwf:function($0,$1){
@@ -450,7 +500,7 @@ $3=document.body
 };if(document.all){
 var $9="<iframe name='"+$1+"' id='"+$6+"' src='"+$7+"' onload='"+$8+"' frameBorder='0'";if($2!=true)$9+=" scrolling='no'";$9+="></iframe>";var $a=document.createElement("div");lz.embed.__setAttr($a,"id",$6+"Container");$3.appendChild($a);$a.style.position="absolute";$a.style.display="none";$a.style.top="0px";$a.style.left="0px";$a.innerHTML=$9;var $b=document.getElementById($6)
 }else{
-var $b=document.createElement("iframe");lz.embed.__setAttr($b,"name",$1);lz.embed.__setAttr($b,"src",$7);lz.embed.__setAttr($b,"id",$6);lz.embed.__setAttr($b,"onload",$8);if($2!=true)lz.embed.__setAttr($b,"scrolling","no");this.appendTo($b,$3)
+var $b=document.createElement("iframe");lz.embed.__setAttr($b,"name",$1);lz.embed.__setAttr($b,"src",$7);lz.embed.__setAttr($b,"id",$6);lz.embed.__setAttr($b,"onload",$8);lz.embed.__setAttr($b,"tabindex","-1");if($2!=true)lz.embed.__setAttr($b,"scrolling","no");this.appendTo($b,$3)
 };if($b){
 this.__finishCreate($6,$0,$1,$2,$3,$4,$5)
 }else{
@@ -564,11 +614,7 @@ this.__calljsqueue[$0]=[]
 var $5=$4.eval($1);if($5){
 var $6=$5.apply($4,$3);if($2)$2.execute($6);return $6
 }}
-catch($7){}},__globalMouseover:function($0,$1){
-var $2=lz.embed.iframemanager.getFrame($1);if(!$2)return;$0=window.event;if($2.owner&&$2.owner.sprite){
-if($0.toElement&&$0.toElement.nodeName!="IFRAME"){
-LzMouseKernel.__resetMouse()
-}}},__mouseEvent:function($0,$1){
+catch($7){}},__mouseEvent:function($0,$1){
 var $2=lz.embed;var $3=$2.iframemanager.getFrame($1);if(!$3)return;if(!$0){
 $0=window.event
 };var $4="on"+$0.type;if($3.owner&&$3.owner.sprite&&$3.owner.sprite.__mouseEvent){
@@ -596,9 +642,7 @@ this.__callqueue[$0].push(["setSendMouseEvents",$0,$1]);return
 var iframe=lz.embed.iframemanager.getFrameWindow(id);if(!iframe){
 return
 };if($0){
-if(lz.embed.browser.isIE){
-lz.embed.attachEventHandler(document,"mouseover",lz.embed.iframemanager,"__globalMouseover",id)
-};try{
+try{
 lz.embed.attachEventHandler(iframe.document,"mousedown",lz.embed.iframemanager,"__mouseEvent",id);lz.embed.attachEventHandler(iframe.document,"mouseup",lz.embed.iframemanager,"__mouseEvent",id);lz.embed.attachEventHandler(iframe.document,"click",lz.embed.iframemanager,"__mouseEvent",id);iframe.document.oncontextmenu=function($0){
 if(!$0)$0=iframe.event;return lz.embed.iframemanager.__mouseEvent($0,id)
 };if(lz.embed.browser.isIE){
@@ -607,9 +651,7 @@ lz.embed.attachEventHandler(iframe.document,"mouseenter",lz.embed.iframemanager,
 lz.embed.attachEventHandler(iframe.document,"mouseover",lz.embed.iframemanager,"__mouseEvent",id);lz.embed.attachEventHandler(iframe.document,"mouseout",lz.embed.iframemanager,"__mouseEvent",id)
 }}
 catch($1){}}else{
-if(lz.embed.browser.isIE){
-lz.embed.removeEventHandler(document,"mouseover",lz.embed.iframemanager,"__globalMouseover")
-};try{
+try{
 lz.embed.removeEventHandler(iframe.document,"mousedown",lz.embed.iframemanager,"__mouseEvent");lz.embed.removeEventHandler(iframe.document,"mouseup",lz.embed.iframemanager,"__mouseEvent");lz.embed.removeEventHandler(iframe.document,"click",lz.embed.iframemanager,"__mouseEvent");iframe.document.oncontextmenu=null;if(lz.embed.browser.isIE){
 lz.embed.removeEventHandler(iframe.document,"mouseenter",lz.embed.iframemanager,"__mouseEvent");lz.embed.removeEventHandler(iframe.document,"mouseleave",lz.embed.iframemanager,"__mouseEvent")
 }else{
@@ -641,7 +683,7 @@ return
 $1[$2](window,"DOMMouseScroll",$1.mousewheel,"__mousewheelEvent")
 };$1[$2](document,"mousewheel",$1.mousewheel,"__mousewheelEvent")
 }};lz.embed.history={active:null,_currentstate:null,_apps:[],_intervalID:null,_registeredapps:{},intervaltime:200,init:function(){
-var $0=lz.embed.history;if($0.active||$0.active==false)return;$0.active=true;$0._title=top.document.title;var $1=$0.get();var $2=lz.embed.browser;if($2.isSafari&&$2.version<523.1){
+var $0=lz.embed.history;if($0.active||$0.active==false)return;$0.active=true;var $1=$0.get();var $2=lz.embed.browser;if($2.isSafari&&$2.version<523.1){
 $0._historylength=history.length;$0._history=[];for(var $3=1;$3<$0._historylength;$3++){
 $0._history.push("")
 };$0._history.push($1);var $4=document.createElement("form");$4.method="get";document.body.appendChild($4);$4.style.display="none";$0._form=$4;if(!top.document.location.lzaddr){
@@ -677,8 +719,6 @@ this._parse($1.substring(1))
 var $1=$0.history.get();if($1=="")$1="0";if($0.browser.isIE){
 if($1!=this._currentstate){
 top.location.hash=$1=="0"?"":"#"+$1;this._currentstate=$1;this._parse($1)
-};if(top.document.title!=this._title){
-top.document.title=this._title
 }}else{
 this._currentstate=$1;this._parse($1)
 }}},set:function($0){
