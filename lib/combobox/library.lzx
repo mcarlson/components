@@ -1,7 +1,7 @@
 <library>
     <include href="../listitem.lzx"/>
 
-    <class name="combobox" extends="basepanel" x="10" width="100" onclick="this.open();" with="componentmodel,componentfocus">
+    <class name="combobox" extends="basepanel" x="10" width="100" onclick="this.open();" with="componentmodel,componentfocus,drawshadowfocus">
         <attribute name="opt" value="$once{[]}"/>
         <method name="open">
             if (combobox_floater !== this.opt) {
@@ -21,6 +21,13 @@
             context.strokeStyle = context.interiorbordercolor;
             context.stroke();
         </method>
+        <handler name="onkeydown" args="key">
+            if (! this.focused) return;
+            if (key == 13 || key == 32) {
+                // enter or space
+                this.open();
+            }
+        </handler>
 
         <text text="${this.parent.value}"/>
         <bsbtn align="right" width="${this.height}" height="${this.parent.height}" onclick="this.parent.onclick.sendEvent(this)" with="drawarrow" focusable="false">
@@ -45,11 +52,24 @@
         </setter>
         <handler name="ontarget" args="t">
             <![CDATA[
-            if (t != null && this.contentstate.applied == false) {
+            if (t == null) return;
+            lz.Focus.setFocus(this);
+            lz.ModeManager.makeModal(this);
+            
+            if (this.contentstate.applied == false) {
                 this.contentstate.setAttribute('applied', true);
             }
             ]]>
         </handler>
+        <method name="passModeEvent" args="event_name, view">
+            <![CDATA[
+            //Debug.write("passModeEvent", event_name, view);
+            if (event_name == "onmousedown" && (!view || (view && view !== this.target && ! view.childOf(this.target) ) ) ) {
+                this.hide();
+            }
+            return true;
+            ]]>
+        </method>
         <state name="contentstate">
             <view name="content" width="100%" height="100%" clip="true">
                 <view>

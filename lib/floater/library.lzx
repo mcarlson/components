@@ -2,7 +2,7 @@
     <include href="../componentfocus.lzx"/>
     <include href="draw.lzx"/>
 
-    <class name="fltr" extends="basepanel" with="drawshadowfocus,drawfltr,componentfocus,componentmodel" visible="false">
+    <class name="fltr" extends="basepanel" with="drawshadowfocus,drawfltr,componentfocus,componentmodel" opacity="0">
         <attribute name="target" value="null"/>
         <method name="show" args="target">
             <![CDATA[
@@ -21,11 +21,9 @@
                 this.__posDel.register(canvas, 'onwidth');
                 this.__posDel.register(canvas, 'onheight');
                 this.updatePosition();
-                lz.Focus.setFocus(this);
-                lz.ModeManager.makeModal(this);
-            }
 
-            this.showAnim.doStart();
+            }
+            this.animate('opacity', 1, 500);
             ]]>
         </method>
         <method name="updatePosition" args="ignore=null">
@@ -47,40 +45,19 @@
                 x -= canvas.width - this.width;
             }
             if (this.x != x) {
-                this.animate('x', x, 200);
+                this.animate('x', x, 0);
             }
             if (this.y != y) {
-                this.animate('y', y, 200);
+                this.animate('y', y, 0);
             }
-            this.setAttribute('shadowblurradius', 0);
-            this.animate('shadowblurradius', 10, 400);
             this.bringToFront(); 
-            ]]>
-        </method>
-        <method name="passModeEvent" args="event_name, view">
-            <![CDATA[
-            //Debug.write("passModeEvent", event_name, view);
-            if (event_name == "onmousedown" && (!view || (view && view !== this.target && ! view.childOf(this.target) ) ) ) {
-                this.hide();
-            }
-            return true;
             ]]>
         </method>
         <method name="hide">
             this.__posDel.unregisterAll();
             lz.ModeManager.release( this );
-            this.hideAnim.doStart();
+            this.setAttribute('opacity', 0);
             this.target = null;
         </method>
-
-        <animator name="showAnim" attribute="opacity"
-                  onstart="parent.setAttribute('visible', true)"
-                  duration="500" from="0" to="1"
-                  start="false"/>
-
-        <animator name="hideAnim" attribute="opacity"
-                  onstop="parent.setAttribute('visible', false)"
-                  duration="500" from="1" to="0"
-                  start="false"/>
     </class>
 </library>
