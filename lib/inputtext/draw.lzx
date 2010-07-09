@@ -1,16 +1,16 @@
 <mixin name="drawinputtext">
-    <method name="draw" args="scope">
-        if (! scope['interiorfillcolor'] || ! scope['interiorbordercolor']) return;
-        scope.drawshape(scope, 0, 0, this.width, this.height);
+    <method name="draw" args="context">
+        if (! context['interiorfillcolor'] || ! context['interiorbordercolor']) return;
+        context.drawshape(context, -context.padding, -context.padding, this.width + context.padding, this.height + context.padding);
 
-        if (this.focused) this.drawfocus(scope);
+        if (this.focused) this.drawfocus(context);
 
-        scope.fillStyle = scope.interiorfillcolor;
-        scope.fill();
+        context.fillStyle = context.interiorfillcolor;
+        context.fill();
 
-        scope.lineWidth = scope.borderwidth;
-        scope.strokeStyle = scope.interiorbordercolor;
-        scope.stroke();
+        context.lineWidth = context.borderwidth;
+        context.strokeStyle = context.interiorbordercolor;
+        context.stroke();
     </method>
 
     <method name="drawfocus" args="scope">
