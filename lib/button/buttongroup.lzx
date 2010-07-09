@@ -48,28 +48,42 @@
     </method>
     <method name="handleArrow" args="key">
         <![CDATA[
+        var direction;
+        if (key == 37 || key == 38) {
+            // if left or up
+            direction = -1;
+        } else if (key == 39 || key == 40) {
+            // if right or down
+            direction = 1;
+        } else {
+            return;
+        }
+
+        // find the currently focused view
+        var focusedview;
         for (var i = 0, l = this.subviews.length; i < l; i++) {
             var view = this.subviews[i];
-            // find the focused view
             if (view.focused) {
-                var newview;
-                if (key == 37 || key == 38) {
-                    // if left or up
-                    if (i > 0) {
-                        newview = this.subviews[i - 1];
-                    }
-                } else if (key == 39 || key == 40) {
-                    // if right or down
-                    if (i != l - 1) {
-                        newview = this.subviews[i + 1];
-                    }
-                }
-                if (newview) {
-                    lz.Focus.setFocus(newview);
-                }
-                //Debug.info('handleArrow', key, view, newview);
-                return;
+                focusedview = view;
+                break;
             }
+        }
+        if (focusedview) {
+            var newview;
+            // find the next view that's not disabled
+            i += direction
+            while (i >= 0 && i < l) {
+                var view = this.subviews[i];
+                if (view.disabled != true) {
+                    newview = view;
+                    break
+                }
+                i += direction
+            }
+            if (newview) {
+                lz.Focus.setFocus(newview);
+            }
+            //Debug.info('handleArrow', key, view, newview);
         }
         ]]>
     </method>
