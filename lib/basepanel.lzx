@@ -62,10 +62,7 @@
         </method>
 
         <method name="drawshape" args="context,x,y,width,height">
-            // use once new rect is available in drawview
-            //context.rect(x, y, width, height, this.bordertopleftradius, this.borderbottomleftradius, this.borderbottomrightradius, this.bordertoprightradius);
-            //Debug.warn('drawshape %w %w %w %w %w', this.borderradius, this.bordertopleftradius, this.bordertoprightradius, this.borderbottomrightradius, this.borderbottomleftradius);
-            this._rect(context,x, y, width, height, this.bordertopleftradius, this.borderbottomleftradius, this.borderbottomrightradius, this.bordertoprightradius);
+            context.rect(x, y, width, height, this.bordertopleftradius, this.bordertoprightradius, this.borderbottomrightradius, this.borderbottomleftradius);
         </method>
 
         <method name="range" args="val, max, min=null">
@@ -78,7 +75,7 @@
             ]]>
         </method>
 
-        <method name="_rect" args="context,x,y,width,height,topleftradius=0,bottomleftradius=0,bottomrightradius=0,toprightradius=0">
+        <!--method name="_rect" args="context,x,y,width,height,topleftradius=0,bottomleftradius=0,bottomrightradius=0,toprightradius=0">
             // the radius can't be bigger than our width/height
             var maxsize = Math.min(width, height) * .5;
             topleftradius = this.range(topleftradius, maxsize, 0);
@@ -107,7 +104,7 @@
             if (topleftradius != 0) {
                 context[curvemethod](x,y,x,y+topleftradius);
             }
-        </method>
+        </method-->
 
         <method name="addScope" args="scope">
             <![CDATA[
