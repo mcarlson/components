@@ -65,7 +65,7 @@
             context.rect(x, y, width, height, this.bordertopleftradius, this.bordertoprightradius, this.borderbottomrightradius, this.borderbottomleftradius);
         </method>
 
-        <method name="range" args="val, max, min=null">
+        <!--method name="range" args="val, max, min=null">
             <![CDATA[
             val = (val > max) ? max : val;
             if (min != null) {
@@ -75,7 +75,7 @@
             ]]>
         </method>
 
-        <!--method name="_rect" args="context,x,y,width,height,topleftradius=0,bottomleftradius=0,bottomrightradius=0,toprightradius=0">
+        <method name="_rect" args="context,x,y,width,height,topleftradius=0,bottomleftradius=0,bottomrightradius=0,toprightradius=0">
             // the radius can't be bigger than our width/height
             var maxsize = Math.min(width, height) * .5;
             topleftradius = this.range(topleftradius, maxsize, 0);
