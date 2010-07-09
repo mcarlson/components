@@ -8,20 +8,8 @@
             font-style : 'bold';
             font-color : #3c3c3c;
             border-color: #6c6c6c;
-            
-            interior-border-color-up:   #bababa;
-            interior-fill-color-up:     #f2f2f2;
-            interior-border-color-over: #6c6c6c;
-            interior-fill-color-over:   #6c6c6c;
-            interior-border-color-down: #8b8b8b;
-            interior-fill-color-down:   #6c6c6c;
-            
-            gradientfill-start-up:     #d6d6d6;
-            gradientfill-stop-up:      #f2f2f2;
-            gradientfill-start-over:   #e6e6e6;
-            gradientfill-stop-over:    #f1f1f1;
-            gradientfill-start-down:   #dcdcdc;
-            gradientfill-stop-down:    #bfbfbf;
+            border-width: 1;
+            gradient-fill: 'top,#f2f2f2 0%,#f2f2f2 49%,#d6d6d6 50%,#f2f2f2 100%';
         }
     </stylesheet> 
 
