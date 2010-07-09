@@ -1,0 +1,47 @@
+<canvas>
+    <include href="lib/"/>
+    <resource name="tweety" src="bird.png"/>
+
+    <stylesheet>
+        canvas {
+            font-family: Helvetica,Sans;
+            font-size: 16;
+        }
+        basepanel {
+            border-width: 1;
+            border-radius: 10;
+            border-color: #CCCCCC;
+            base-color: #eeeeee;
+            gradient-fill: 'top,#eeeeee 0%,#e6e6e6 5%,#cccccc 100%';
+        }
+        btn {
+            text-color: #144a9c;
+            shadow-distance: 2;
+            shadow-blur-radius: 2;
+        }
+        btn[mousestate=over]{
+            gradient-fill: 'top,#ffffff 0%,#f6f6f6 5%,#dddddd 100%';
+        }
+    </stylesheet> 
+
+    <basepanel y="10">
+        <simplelayout spacing="10"/>
+        <btn x="10" padding="10" text="tweet this"/>
+        <btn x="10" padding="10" iconresource="tweety"/>
+        <btn x="10" padding="10" text="tweet this" iconresource="tweety">
+            <handler name="onclick" args="ignore=null">
+                var pos = this.iconposition;
+                if (pos == 'left') {
+                    pos = 'top';
+                } else if (pos == 'top') {
+                    pos = 'right';
+                } else if (pos == 'right') {
+                    pos = 'bottom';
+                } else if (pos == 'bottom') {
+                    pos = 'left';
+                }
+                this.setAttribute('iconposition', pos);
+            </handler>
+        </btn>
+    </basepanel>
+</canvas>
