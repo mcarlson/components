@@ -7,6 +7,11 @@
     <method name="_updateborders" args="ignore=null">
         <![CDATA[
         if (! this._borderradius) return;
+        if (! this.handleArrowDel) {
+            this.handleArrowDel = new LzDelegate(this, 'handleArrow');
+        } else {
+            this.handleArrowDel.unregisterAll();
+        }
         // set corner radii
         var subviews = this.subviews;
         var radii = this._borderradius;
@@ -37,6 +42,34 @@
                 }
             }
             button.setAttribute('borderradius', ([topleft, topright, bottomright, bottomleft]).join(' '));
+            this.handleArrowDel.register(button, 'onkeydown');
+        }
+        ]]>
+    </method>
+    <method name="handleArrow" args="key">
+        <![CDATA[
+        for (var i = 0, l = this.subviews.length; i < l; i++) {
+            var view = this.subviews[i];
+            // find the focused view
+            if (view.focused) {
+                var newview;
+                if (key == 37 || key == 38) {
+                    // if left or up
+                    if (i > 0) {
+                        newview = this.subviews[i - 1];
+                    }
+                } else if (key == 39 || key == 40) {
+                    // if right or down
+                    if (i != l - 1) {
+                        newview = this.subviews[i + 1];
+                    }
+                }
+                if (newview) {
+                    lz.Focus.setFocus(newview);
+                }
+                //Debug.info('handleArrow', key, view, newview);
+                return;
+            }
         }
         ]]>
     </method>
