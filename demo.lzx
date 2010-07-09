@@ -8,7 +8,7 @@
         }
         basepanel {
             border-width: 1;
-            corner-radius: 3;
+            border-radius: 3;
             base-color: #f2f2f2;
         }
         buttongroup {
@@ -17,11 +17,11 @@
         }
         scrlbr {
             size: 16;
-            corner-radius: 16;
+            border-radius: 16;
         }
         scrlthmb {
             border-width: .5;
-            corner-radius: 20;
+            border-radius: 20;
         }
         bsbtn {
             bevel-width: 1;
@@ -54,11 +54,12 @@
         <simplelayout spacing="10"/>
         <bsbtn x="10" width="50" height="50"/>
         <bsbtn x="10" width="50" height="50" disabled="true"/>
-        <btn x="10" onclick="this.animate('width', 100, 500)" text="ok"/>
+        <btn x="10" transition="width .5s" onclick="this.setAttribute('width', 100)" text="ok"/>
         <btn x="10" onclick="this.animate('width', 100, 500)" text="cancel"/>
         <buttongroup borderwidth="0" x="10">
-            <btn with="virtualdrawview">OK</btn>
-            <btn with="virtualdrawview">Revert</btn>
+            <btn with="virtualdrawview">Abort</btn>
+            <btn with="virtualdrawview">Retry</btn>
+            <btn with="virtualdrawview">Fail</btn>
         </buttongroup>
         <buttongroup borderwidth="0" x="10">
             <btn with="virtualdrawview">OK</btn>
@@ -98,6 +99,7 @@
             </text>
             <scrlbr/>
         </view>
+        <sldr x="10" value="120,150" min="100" max="200"/>
         <combobox opt="[0,1,2,3,4,5,6,7,8,9,10,11,12]"/>
     </basepanel>
 </canvas>
