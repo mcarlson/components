@@ -65,7 +65,9 @@
 
         <method name="draw" args="context">
             this.beginPath();
-            this.rect(0,0,this.width - 1,this.height - 2,this.width);
+            this.drawshape(context,0,0,this.width - 1,this.height - 2);
+            this.closePath();
+
             this.lineWidth = this.borderwidth;
             this.strokeStyle = this.interiorbordercolor;
             this.fillStyle = this.interiorfillcolor;
