@@ -1,0 +1,93 @@
+<canvas>
+    <include href="../lib/"/>
+
+    <stylesheet>
+        canvas {
+            font-size: 12;
+            font-family: Helvetica,Sans;
+        }
+        basepanel {
+            border-width: 1;
+            interior-border-width: 0;
+            border-radius: 8;
+            base-color: #eeeeee;
+            border-color: #e5e5e5; /* 'top,#e6e6e6 0%,#c5c5c5 100%'; TODO: fix */
+            interior-border-color: #ffffff;
+            highlight-color: #ffffff;
+        }
+        buttongroup {
+            gradient-fill: 'top,#fdfdfd 0%,#e5e5e5 82%,#dfdfdf 82%,#dfdfdf 100%';
+            divider-gradient: 'top,#797979 0,#b0b0b0 50,#797979 100';
+        }
+        scrlbr {
+            size: 16;
+            border-radius: '0 16 0 16';
+        }
+        scrlthmb {
+            border-width: .5;
+            border-radius: '0 20 0 20';
+        }
+        bsbtn {
+            bevel-width: 0;
+            gradient-fill: 'top,#fdfdfd 0%,#e5e5e5 82%,#dfdfdf 82%,#dfdfdf 100%';
+        }
+        bsbtn[mousestate=over]{
+        }
+        bsbtn[mousestate=down]{
+            gradient-fill: 'bottom,#fdfdfd 0%,#e5e5e5 82%,#dfdfdf 82%,#dfdfdf 100%';
+        }
+    </stylesheet> 
+
+    <basepanel y="10">
+        <simplelayout spacing="10"/>
+        <bsbtn x="10" width="195" height="72"/>
+        <bsbtn x="10" width="50" height="50" disabled="true"/>
+        <btn x="10" transition="width .5s" onclick="this.setAttribute('width', 100)" text="ok"/>
+        <btn x="10" onclick="this.animate('width', 100, 500)" text="cancel"/>
+        <buttongroup borderwidth="0" x="10">
+            <btn with="virtualdrawview">Abort</btn>
+            <btn with="virtualdrawview" disabled="true">Retry</btn>
+            <btn with="virtualdrawview">Fail</btn>
+        </buttongroup>
+        <buttongroup borderwidth="0" x="10">
+            <btn with="virtualdrawview">OK</btn>
+            <btn with="virtualdrawview" disabled="true">Revert</btn>
+        </buttongroup>
+        <inpt x="10" width="100">Hey there!</inpt>
+        <inpt x="10" width="100" multiline="true">Hey there! This text should wrap onto a few lines.</inpt>
+        <view x="10" width="200" height="200" clip="true">
+            <text multiline="true" width="184">
+                Man through his scientific genius has been able to draw distance and
+                save time and space. He has been able to carry highways through the
+                stratosphere. We read just the other day that a rocket plane went 1900
+                miles in one hour. Twice as fast as the speed of sound. This is the
+                new age. Bob Hope has described this new age, this jet age; it is an
+                age in which planes will be moving so fast that we will have a
+                non-stop flight from New York to Los Angeles, when you start out you
+                might develop the hiccups and you will hic in New York and cup in Los
+                Angeles. This is an age in which it will be possible to leave Tokyo on
+                a Sunday morning and arrive in Seattle, Washington on the preceding
+                Saturday night. When your friends meet you at the airport and ask what
+                time did you leave Tokyo, you will have to say I left tomorrow. That
+                is this new age.  We live in one world geographically. We face the
+                great problem of making it one spiritually.
+                <br/>
+                Through our scientific means we have made of the world a
+                neighborhood and now the challenge confronts us through our
+                moral and spiritual means to make of it a brotherhood. We must
+                live together, we are not independent we are interdependent. We
+                are all involved in a single process. Whatever affects one
+                directly affects all indirectly for we are tied together in a
+                single progress. We are all linked in the great chain of
+                humanity.
+                <br/>
+                Martin Luther King, Jr.
+                <br/>
+                11 August 1956
+            </text>
+            <scrlbr/>
+        </view>
+        <sldr x="10" value="120,150" min="100" max="200"/>
+        <combobox opt="[0,1,2,3,4,5,6,7,8,9,10,11,12]"/>
+    </basepanel>
+</canvas>
