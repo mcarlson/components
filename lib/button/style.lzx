@@ -65,10 +65,11 @@
         if (! this._basehsv) {
             return color;
         } else {
-            // Use v from the color
-            var v = LzColorUtils.tohsv(color).v;
-            // Use h and s from basecolor
-            return LzColorUtils.fromhsv(this._basehsv.h, this._basehsv.s, v);
+            // Use v and s from the color
+            var col = LzColorUtils.tohsv(color);
+            // Use h from basecolor
+            //Debug.info('tintColor', color, this._basehsv, col);
+            return LzColorUtils.fromhsv(this._basehsv.h, this._basehsv.s, col.v);
         }
     </method>
 

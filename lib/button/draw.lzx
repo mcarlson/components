@@ -7,16 +7,21 @@
         }
         //Debug.info('draw', this.mousestate);
         context.globalAlpha = this.disabled ? .5 : 1;
-        context.lineWidth = context.borderwidth;
 
-        this.styleinteriorborder(context);
-        this.drawinteriorborder(context);
+        if (this.interiorborderwidth) {
+            context.lineWidth = context.interiorborderwidth;
+            this.styleinteriorborder(context);
+            this.drawinteriorborder(context);
+        }
+
+        context.lineWidth = context.borderwidth;
+        if (this.borderwidth) {
+            this.styleborder(context);
+            this.drawborder(context);
+        }
 
         this.stylegradient(context);
         this.drawgradient(context);
-
-        this.styleborder(context);
-        this.drawborder(context);
         ]]>
     </method>
 
@@ -42,9 +47,7 @@
     <method name="styleinteriorborder" args="context">
         if (! this['interiorfillcolor' + this.mousestate] || ! this['interiorbordercolor' + this.mousestate]) return;
         context.fillStyle = this['interiorfillcolor' + this.mousestate];
-        if (this.borderwidth > 0) {
-            context.strokeStyle = this['interiorbordercolor' + this.mousestate];
-        }
+        context.strokeStyle = this['interiorbordercolor' + this.mousestate];
     </method>
     <method name="drawinteriorborder" args="context">
         if (! this['interiorfillcolor' + this.mousestate]) return;
@@ -54,9 +57,7 @@
         context.closePath();
 
         context.fill();
-        if (this.borderwidth > 0) {
-            context.stroke();
-        }
+        context.stroke();
     </method>
 
     <method name="stylegradient" args="context">
@@ -77,11 +78,11 @@
 
     <method name="drawgradient" args="context">
         context.beginPath();
-        var inset = 0;
+        var inset = 1;
         if (this.bevel) {
             var inset = this.bevel + this.borderwidth;
         }
-        this.drawshape(context, inset, inset, this.width - (inset * 2), this.height - (inset * 2));
+        this.drawshape(context, inset, inset, this.width - (inset * 2) - 1, this.height - (inset * 2) - 1);
         context.fill();
     </method>
 </mixin>

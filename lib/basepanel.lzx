@@ -15,6 +15,7 @@
         <attribute name="selectioncolor" style="selection-color" type="color" value="#9999ff"/>
         <attribute name="interiorbordercolor" style="interior-border-color" type="color" value="null"/>
         <attribute name="interiorfillcolor" style="interior-fill-color" type="color" value="null"/>
+        <attribute name="interiorborderwidth" style="interior-border-width" type="number" value="${this.borderwidth}"/>
 
         <method name="redraw" args="ignore=null" >            
             <![CDATA[
