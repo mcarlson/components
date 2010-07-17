@@ -57,7 +57,7 @@
             var borderwidth = context.borderwidth;
             context.borderwidth = 0;
 
-            this.drawinteriorborder(context);
+            this.drawgradient(context);
 
             context.borderwidth = borderwidth;
             ]]>
