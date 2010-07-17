@@ -102,7 +102,7 @@
         </replicator>
     </class>
 
-    <fltr name="slider_floater" focusable="false">
+    <fltr name="slider_floater" focusable="false" showbelow="false">
         <text text="${parent.value}"/>
     </fltr>
 </library>

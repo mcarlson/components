@@ -4,6 +4,7 @@
 
     <class name="fltr" extends="basepanel" with="drawshadowfocus,drawfltr,componentfocus,componentmodel" opacity="0">
         <attribute name="target" value="null"/>
+        <attribute name="showbelow" value="true" type="boolean"/>
         <method name="show" args="target">
             <![CDATA[
             if (! target) return;
@@ -33,11 +34,20 @@
             var x = who.getAttributeRelative('x', canvas);
             var y = who.getAttributeRelative('y', canvas);
 
-            // can we fit below
-            if (y + who.height + this.height < canvas.height) {
-                y += who.height;
+
+            if (this.showbelow) {
+                // can we fit below
+                if (y + who.height + this.height < canvas.height) {
+                    y += who.height;
+                } else {
+                    y -= this.height;
+                }
             } else {
-                y -= this.height;
+                if (y - this.height > 0) {
+                    y -= this.height;
+                } else {
+                    y += who.height;
+                }
             }
 
             // is there room to the right
