@@ -1,4 +1,4 @@
-var combobox_floater=null;var slider_floater=null;canvas=new LzCanvas(null,{__LZproxied:"false",appbuilddate:"2010-07-17T05:42:28Z",bgcolor:16777215,embedfonts:true,font:"Verdana,Vera,sans-serif",fontsize:11,fontstyle:"plain",height:"100%",lpsbuild:"16953 /Users/maxcarlson/openlaszlo/trunk-clean",lpsbuilddate:"2010-07-16T01:16:41Z",lpsrelease:"Latest",lpsversion:"5.0.x",runtime:"dhtml",width:"100%"});Mixin.make("DrawviewShared",["$lzsc$initialize",function($0,$1,$2,$3){
+var combobox_floater=null;var slider_floater=null;canvas=new LzCanvas(null,{__LZproxied:"false",appbuilddate:"2010-07-17T06:06:16Z",bgcolor:16777215,embedfonts:true,font:"Verdana,Vera,sans-serif",fontsize:11,fontstyle:"plain",height:"100%",lpsbuild:"16953 /Users/maxcarlson/openlaszlo/trunk-clean",lpsbuilddate:"2010-07-16T01:16:41Z",lpsrelease:"Latest",lpsversion:"5.0.x",runtime:"dhtml",width:"100%"});Mixin.make("DrawviewShared",["$lzsc$initialize",function($0,$1,$2,$3){
 switch(arguments.length){
 case 0:
 $0=null;
@@ -3740,7 +3740,7 @@ with($0)with($0.prototype){
 LzNode.mergeAttributes({$delegates:["onfocused","$m246",null]},$lzc$class_drawshadowfocus$drawfltr$componentfocus$componentmodel$basepanel.attributes)
 }}})($lzc$class_drawshadowfocus$drawfltr$componentfocus$componentmodel$basepanel)
 };{
-Class.make("$lzc$class_fltr",["target",void 0,"show",function($0){
+Class.make("$lzc$class_fltr",["target",void 0,"showbelow",void 0,"show",function($0){
 with(this){
 if(!$0)return;if($0!==this.target){
 this.setAttribute("target",$0);if(!this["__posDel"]){
@@ -3755,11 +3755,17 @@ switch(arguments.length){
 case 0:
 $0=null;
 
-};if(!this.target)return;var $1=this.target;var $2=$1.getAttributeRelative("x",canvas);var $3=$1.getAttributeRelative("y",canvas);if($3+$1.height+this.height<canvas.height){
+};if(!this.target)return;var $1=this.target;var $2=$1.getAttributeRelative("x",canvas);var $3=$1.getAttributeRelative("y",canvas);if(this.showbelow){
+if($3+$1.height+this.height<canvas.height){
 $3+=$1.height
 }else{
 $3-=this.height
-};if($2+this.width>canvas.width){
+}}else{
+if($3-this.height>0){
+$3-=this.height
+}else{
+$3+=$1.height
+}};if($2+this.width>canvas.width){
 $2-=canvas.width-this.width
 };if(this.x!=$2){
 this.animate("x",$2,0)
@@ -3784,7 +3790,7 @@ $3=false;
 }],$lzc$class_drawshadowfocus$drawfltr$componentfocus$componentmodel$basepanel,["tagname","fltr","children",LzNode.mergeChildren([],$lzc$class_drawshadowfocus$drawfltr$componentfocus$componentmodel$basepanel["children"]),"attributes",new LzInheritedHash($lzc$class_drawshadowfocus$drawfltr$componentfocus$componentmodel$basepanel.attributes)]);(function($0){
 with($0)with($0.prototype){
 {
-LzNode.mergeAttributes({opacity:0,target:null},$lzc$class_fltr.attributes)
+LzNode.mergeAttributes({opacity:0,showbelow:true,target:null},$lzc$class_fltr.attributes)
 }}})($lzc$class_fltr)
 };{
 Class.make("$lzc$class_buttonevents$text",["mouseisover",void 0,"mouseisdown",void 0,"mousestate",void 0,"$m247",function(){
@@ -4522,7 +4528,7 @@ $1=true;
 slider_floater=$0
 }else if(slider_floater===$0){
 slider_floater=null
-}},focusable:false,name:"slider_floater"},children:[{attrs:{text:new LzAlwaysExpr("text","text","$m323","$m324",null)},"class":$lzc$class_m325}],"class":$lzc$class_fltr},2);;(function(){
+}},focusable:false,name:"slider_floater",showbelow:false},children:[{attrs:{text:new LzAlwaysExpr("text","text","$m323","$m324",null)},"class":$lzc$class_m325}],"class":$lzc$class_fltr},2);;(function(){
 var $0=LzCSSStyle,$1=LzCSSStyleRule;$0._addRule(new $1("canvas",{"font-family":new LzStyleIdent("Helvetica"),"font-size":12}));$0._addRule(new $1("basepanel",{"base-color":15658734,"border-color":15066597,"border-radius":8,"border-width":1,"highlight-color":16777215,"interior-border-color":16777215,"interior-border-width":0}));$0._addRule(new $1("buttongroup",{"divider-gradient":"top,#797979 0,#b0b0b0 50,#797979 100","gradient-fill":"top,#fdfdfd 0%,#e5e5e5 82%,#dfdfdf 82%,#dfdfdf 100%"}));$0._addRule(new $1("scrlbr",{"border-radius":"0 16 0 16",size:16}));$0._addRule(new $1("scrlthmb",{"border-radius":"0 20 0 20","border-width":0.5}));$0._addRule(new $1("bsbtn",{"bevel-width":0,"gradient-fill":"top,#fdfdfd 0%,#e5e5e5 82%,#dfdfdf 82%,#dfdfdf 100%"}));$0._addRule(new $1({attrname:"mousestate",attrvalue:"down",simpleselector:"bsbtn"},{"gradient-fill":"bottom,#fdfdfd 0%,#e5e5e5 82%,#dfdfdf 82%,#dfdfdf 100%"}))
 })();Class.make("$lzc$class_m328",["$m326",function($0){
 this.setAttribute("width",100)
