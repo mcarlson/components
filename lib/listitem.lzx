@@ -1,4 +1,4 @@
-<class name="listitem" extends="text" with="componentmodel,buttonevents" width="100" fgcolor="${this.mouseisover ? this.controller.highlightcolor : this.selected ? this.controller.selectioncolor : 0}">
+<class name="listitem" extends="text" with="componentmodel,buttonevents" width="100" fgcolor="${this.mouseisover ? this.controller.highlightcolor : this.selected ? this.controller.selectioncolor : 0}" bgcolor="${this.mouseisover ? this.controller.selectioncolor : null}">
     <attribute name="controller" value="null" type="expression"/>
     <attribute name="selectionmanager" value="null" type="expression"/>
     <attribute name="selected" value="false" type="boolean"/>
