@@ -9,41 +9,45 @@
         basepanel {
             border-width: 1;
             interior-border-width: 0;
-            border-radius: 8;
-            base-color: #eeeeee;
-            border-color: #e5e5e5; /* 'top,#e6e6e6 0%,#c5c5c5 100%'; TODO: fix */
+            border-radius: 4;
+            base-color: #e9e9e9;
+            text-color: #585858;
+            text-shadow-color: #ffffff;
+          /*   border-color: #e5e5e5; 'top,#e6e6e6 0%,#c5c5c5 100%'; TODO: fix */
             interior-border-color: #ffffff;
-            highlight-color: #ffffff;
+            highlight-color: #1689c8;
         }
         buttongroup {
             gradient-fill: 'top,#fdfdfd 0%,#e5e5e5 82%,#dfdfdf 82%,#dfdfdf 100%';
-            divider-gradient: 'top,#797979 0,#b0b0b0 50,#797979 100';
+            divider-gradient: 'top,#dddddd 0%,#dddddd 100%';
         }
         scrlbr {
             size: 16;
-            border-radius: '0 16 0 16';
+            border-radius: 16;
         }
         scrlthmb {
             border-width: .5;
-            border-radius: '0 20 0 20';
+            border-radius: 20;
         }
         bsbtn {
             bevel-width: 0;
-            gradient-fill: 'top,#fdfdfd 0%,#e5e5e5 82%,#dfdfdf 82%,#dfdfdf 100%';
+            padding: 8;
+            gradient-fill: 'top,#fdfdfd 0%,#e5e5e5 77%,#dfdfdf 77%,#dfdfdf 100%';
         }
         bsbtn[mousestate=over]{
+            gradient-fill: 'top,#fdfdfd 0%,#ebebeb 73%,#e5e5e5 73%,#e5e5e5 100%';
         }
         bsbtn[mousestate=down]{
-            gradient-fill: 'bottom,#fdfdfd 0%,#e5e5e5 82%,#dfdfdf 82%,#dfdfdf 100%';
+            gradient-fill: 'bottom,#fdfdfd 0%,#e5e5e5 77%,#dfdfdf 77%,#dfdfdf 100%';
         }
     </stylesheet> 
 
     <basepanel y="10">
-        <simplelayout spacing="10"/>
+        <simplelayout spacing="20"/>
         <bsbtn x="10" width="195" height="72"/>
         <bsbtn x="10" width="50" height="50" disabled="true"/>
-        <btn x="10" transition="width .5s" onclick="this.setAttribute('width', 100)" text="ok"/>
-        <btn x="10" onclick="this.animate('width', 100, 500)" text="cancel"/>
+        <btn x="10" transition="width .5s" onclick="this.setAttribute('width', 100)" text="OK"/>
+        <btn x="10" onclick="this.animate('width', 100, 500)" text="Cancel"/>
         <buttongroup borderwidth="0" x="10">
             <btn with="virtualdrawview">Abort</btn>
             <btn with="virtualdrawview" disabled="true">Retry</btn>
