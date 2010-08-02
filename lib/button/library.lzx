@@ -16,7 +16,6 @@
     <class name="btn" extends="bsbtn" width="${this.txt.width + this.padding}" height="${this.txt.height + this.padding}">
         <!--- text to display in the button (can leave empty) -->
         <attribute name="text" value="" type="string" />
-        <attribute name="textcolor" style="text-color" value="black" type="string" />
         <attribute name="iconresource" value="" type="string"/>
         <attribute name="iconpadding" value="10" type="number" />
         <attribute name="iconposition" value="left" type="string" />
@@ -93,6 +92,6 @@
             </method>
         </state>
 
-        <text name="txt" fgcolor="${parent.textcolor}" text="${classroot.text}" x="${(parent.width - this.width) * .5}" y="${(parent.height - this.height) * .5}"/>
+        <text name="txt" fgcolor="${parent.textcolor}" text="${classroot.text}" x="${(parent.width - this.width) * .5}" y="${(parent.height - this.height) * .5}" shadowdistance="1" shadowangle="45" shadowcolor="${parent.textshadowcolor}" shadowblurradius=".1"/>
     </class>
 </library>
