@@ -34,8 +34,8 @@
             <method name="draw" args="context">
                 super.draw(context);
                 this.beginPath();
-                context.fillStyle = context.interiorbordercolor;
-                this.drawarrow(context, 4, 4, this.width - 4, this.height - 4, false);
+                context.fillStyle = context.bordercolor;
+                this.drawarrow(context, 5, 7, this.width - 6, this.height - 8, false);
                 this.fill();
             </method>
         </bsbtn>

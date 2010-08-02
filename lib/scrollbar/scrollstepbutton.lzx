@@ -1,9 +1,9 @@
 <class name="scrlstepbtn" height="${this.width}" with="buttonevents,mousedownrepeater,keyboardrepeater,drawborderfocus,componentfocus,drawarrow,virtualdrawview" focusable="true">
     <handler name="oninit" args="ignore=null">
-        this.setAttribute('opacity', .4);
+        //this.setAttribute('opacity', .4);
     </handler>
     <handler name="onmouseisover" args="isover">
-        this.animate('opacity', isover ? 1 : .4, 200);
+        //this.animate('opacity', isover ? 1 : .4, 200);
         this.classroot.setAttribute('activated', isover);
     </handler>
 
@@ -43,7 +43,7 @@
 
     <method name="drawshape" args="context">
         <![CDATA[
-        this.drawarrow(context,1,1,this.width - 2, this.height - 2, this.direction < 0);
+        this.drawarrow(context,1,1,this.width - 2, this.height - 4, this.direction < 0);
         ]]>
     </method>
 
@@ -59,8 +59,8 @@
         context.globalAlpha = this.opacity;
 
         context.lineWidth = context.borderwidth;
-        context.strokeStyle = context.interiorbordercolor;
-        context.fillStyle = context.interiorbordercolor;
+        context.strokeStyle = context.bordercolor;
+        context.fillStyle = context.bordercolor;
         context.fill();
 
         context.globalAlpha = globalAlpha;

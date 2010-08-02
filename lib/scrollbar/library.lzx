@@ -79,7 +79,7 @@
             <scrlthmb name="thumb" x="1" width="${parent.width-2}" drawtarget="${classroot}"/>
             <scrltrk direction="1" y="${parent.thumb.y+parent.thumb.height}" width="${parent.width}" height="${parent.height - parent.thumb.y - parent.thumb.height}"/>
         </view>
-        <scrlstepbtn direction="-1" x="2" width="${parent.width - 4}"/>
-        <scrlstepbtn direction="1" x="2" y="${parent.height - this.height}" width="${parent.width - 4}"/>
+        <scrlstepbtn direction="-1" x="2" y="2" width="${parent.width - 4}"/>
+        <scrlstepbtn direction="1" x="2" y="${parent.height - this.height - 2}" width="${parent.width - 4}"/>
     </class>
 </library>
