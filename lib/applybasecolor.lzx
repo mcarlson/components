@@ -20,7 +20,7 @@
         var hsv = this._basehsv;
         // derive other colors from the basecolor if not set already
         if (! this.bordercolor) {
-            this.setAttribute('bordercolor', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v - .4039));
+            this.setAttribute('bordercolor', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v - .1));
         }
         if (! this.interiorfillcolor) {
             this.setAttribute('interiorfillcolor', LzColorUtils.fromhsv(hsv.h, hsv.s, hsv.v));
