@@ -103,6 +103,6 @@
     </class>
 
     <fltr name="slider_floater" focusable="false" showbelow="false">
-        <text text="${parent.value}"/>
+        <text fgcolor="${parent.textcolor}" text="${parent.value}" shadowdistance="1" shadowangle="45" shadowcolor="${parent.textshadowcolor}" shadowblurradius=".1"/>
     </fltr>
 </library>
