@@ -89,26 +89,23 @@
     </method>
     <method name="draw" args="context">
         <![CDATA[
-        // draw background
-        //this.beginPath();
-        //this.drawshape(context,0,0,this.width - 1, this.height - 1);
-        //this.fillStyle = this.cssToLinearGradient(this.gradientfillup, context);
-        //this.fill();
         this._updateborders();
+
+        // draw background
+        this.styleinteriorborder(context);
+        this.drawinteriorborder(context);
 
         for (var i = 0, l = subviews.length; i < l; i++) {
             var button = subviews[i];
+            if (button.disabled) {
+                continue;
+            }
             // draw button shape
             context.beginPath();
             button.drawshape(context,button.x,button.y,button.width,button.height-1);
             context.closePath();
 
-            // fill with gradient or flat color
-            if (button.disabled) {
-                context.fillStyle = context.basecolor;
-            } else {
-                button.stylegradient(context);
-            }
+            button.stylegradient(context);
             context.fill();
         }
         ]]>
@@ -131,12 +128,24 @@
             }
         }
 
-        // draw border
-        this.beginPath();
-        this.drawshape(context,0,0,this.width - 1, this.height - 1);
+        // borderwidth is always set to 0 here - a CSS bug perhaps?
+        context.lineWidth = 1;
+//        if (this.interiorborderwidth) {
+//            context.lineWidth = this.interiorborderwidth;
+            this.styleinteriorborder(context);
+            this.beginPath();
+            this.drawshape(context,1,1,this.width - 3, this.height - 3);
+            context.stroke();
+//        }
 
-        this.styleborder(context);
-        this.stroke();
+//        context.lineWidth = this.borderwidth;
+//        if (this.borderwidth) {
+            context.strokeStyle = this.bordercolor;
+            //this.drawborder(context);
+            this.beginPath();
+            this.drawshape(context,0,0,this.width - 1, this.height - 1);
+            context.stroke();
+//        }
         ]]>
     </method>
 </class>
