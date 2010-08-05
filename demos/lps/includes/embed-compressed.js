@@ -99,14 +99,14 @@ $2[$3]()
 }},loadJSLib:function(url,$0){
 var embed=lz.embed;if($0){
 (embed.jscallbacks[url]||(embed.jscallbacks[url]=[])).push($0)
-};if(embed.jsloaded[url]!==void 0)return;embed.jsloaded[url]=false;var script=document.createElement("script");embed.__setAttr(script,"type","text/javascript");embed.__setAttr(script,"defer","defer");if(script.readyState){
+};if(embed.jsloaded[url]!==void 0)return;embed.jsloaded[url]=false;var script=document.createElement("script");embed.__setAttr(script,"type","text/javascript");embed.__setAttr(script,"defer","defer");var addto=document.getElementsByTagName("body")[0]||document.getElementsByTagName("head")[0];if(script.readyState){
 script.onreadystatechange=function(){
 if(script.readyState=="loaded"||script.readyState=="complete"){
-script.onreadystatechange=null;embed.loadJSLibHandler(url)
+script.onreadystatechange=null;embed.loadJSLibHandler(url);addto.removeChild(script)
 }}}else{
 script.onload=function(){
 script.onload=null;embed.loadJSLibHandler(url)
-}};embed.__setAttr(script,"src",url);var $1=document.getElementsByTagName("body")[0]||document.getElementsByTagName("head")[0];$1.appendChild(script)
+}};embed.__setAttr(script,"src",url);addto.appendChild(script)
 },getServerRoot:function(){
 if(lz.embed.__serverroot)return lz.embed.__serverroot;var $0=document.getElementsByTagName("script");var $1;for(var $2=0,$3=$0.length;$2<$3;$2++){
 var $4=$0[$2].src;var $5=$4&&$4.indexOf("embed-compressed.js");if($5&&$5>-1){
@@ -232,14 +232,16 @@ return lz.embed.dojo.obj[this._id].get()
 },_sendMouseWheel:function($0){
 if($0!=null)this.callMethod("lz.Keys.__mousewheelEvent("+$0+")")
 },_gotFocus:function(){
-lz.embed._broadcastMethod("_sendAllKeysUp")
+setTimeout("lz.embed._broadcastMethod('_sendAllKeysUp')",1000)
 },_sendAllKeysUpSWF:function(){
 this.callMethod("lz.Keys.__allKeysUp()")
 },_sendAllKeysUpDHTML:function(){
 if(lz["Keys"]&&lz.Keys["__allKeysUp"]){
 lz.Keys.__allKeysUp()
 }},_sendPercLoad:function($0){
-if(this.onloadstatus&&typeof this.onloadstatus=="function"){
+if($0<100&&this.loaded){
+this.loaded=false;lz.embed.resetloaded(this._id)
+};if(this.onloadstatus&&typeof this.onloadstatus=="function"){
 this.onloadstatus($0)
 }},attachEventHandler:function($0,$1,callbackscope,callbackname,closure){
 if(!(callbackscope&&callbackname&&typeof callbackscope[callbackname]=="function")){
@@ -331,23 +333,17 @@ $1=null
 $1=parseInt($1)
 };if(window.innerHeight){
 window.resizeTo($0?$0+window.outerWidth-window.innerWidth:window.outerWidth,$1?$1+window.outerHeight-window.innerHeight:window.outerHeight)
+}},resetloaded:function($0){
+if(lz.embed.iframemanager&&lz.embed.iframemanager.__reset){
+lz.embed.iframemanager.__reset($0)
 }}};lz.embed.browser.init();if(lz.embed.browser.isIE){
-document.writeln('<script language="VBScript" type="text/vbscript">');document.writeln("Function VBGetSwfVer(i)");document.writeln("  on error resume next");document.writeln("  Dim swControl, swVersion");document.writeln("  swVersion = 0");document.writeln('  set swControl = CreateObject("ShockwaveFlash.ShockwaveFlash." + CStr(i))');document.writeln("  if (IsObject(swControl)) then");document.writeln('    swVersion = swControl.GetVariable("$version")');document.writeln("  end if");document.writeln("  VBGetSwfVer = swVersion");document.writeln("End Function");document.writeln("</script>")
-};lz.embed.attachEventHandler(window,"beforeunload",lz.embed,"_cleanupHandlers");lz.embed.attachEventHandler(window,"focus",lz.embed,"_gotFocus");if(lz.embed.browser.isIE){
-lz.embed.attachEventHandler(window,"activate",lz.embed,"_gotFocus")
-};lz.embed.__iframemanager_frames=[];lz.embed.iframemanager={create:function($0,$1,$2,$3,$4,$5){
-var $6=lz.embed;$6.__iframemanager_frames.push([].slice.call(arguments,0));if(typeof $0=="string"){
-$7="__lz"+($6.__iframemanager_frames.length-1)
-}else{
-var $7
-};var $8=$6.getServerRoot()+"iframemanager.js";if($6.jsloaded[$8])return $7;var $9=function(){
+document.writeln('<script language="VBScript" type="text/vbscript">');document.writeln("Function VBGetSwfVer(i)");document.writeln("  on error resume next");document.writeln("  Dim swControl, swVersion");document.writeln("  swVersion = 0");document.writeln('  set swControl = CreateObject("ShockwaveFlash.ShockwaveFlash." + CStr(i))');document.writeln("  if (IsObject(swControl)) then");document.writeln('    swVersion = swControl.GetVariable("$version")');document.writeln("  end if");document.writeln("  VBGetSwfVer = swVersion");document.writeln("End Function");document.writeln("</script>");lz.embed.attachEventHandler(window,"beforeunload",lz.embed,"_cleanupHandlers");lz.embed.attachEventHandler(window,"activate",lz.embed,"_gotFocus")
+};lz.embed.attachEventHandler(window,"focus",lz.embed,"_gotFocus");lz.embed.__iframemanager_frames=[];lz.embed.iframemanager={create:function($0,$1,$2,$3,$4,$5){
+var $6=lz.embed;$6.__iframemanager_frames.push([].slice.call(arguments,0));iframeid="__lz"+($6.__iframemanager_frames.length-1);var $7=$6.getServerRoot()+"iframemanager.js";if($6.jsloaded[$7])return iframeid;var $8=function(){
 var $0=lz.embed;for(var $1=0,$2=$0.__iframemanager_frames.length;$1<$2;$1++){
-var $3=$0.__iframemanager_frames[$1];var $4=$0.iframemanager.create.apply($0.iframemanager,$3);var $5=$3[0];if(typeof $5=="string"){
-lz.embed.applications[$5].callMethod('lz.embed.iframemanager.__createcallback("'+$4+'")')
-}else{
-$5.setiframeid($4)
-}};delete $0.__iframemanager_frames
-};$6.loadJSLib($8,$9);return $7
+var $3=$0.__iframemanager_frames[$1];var $4=$0.iframemanager.create.apply($0.iframemanager,$3)
+};delete $0.__iframemanager_frames
+};$6.loadJSLib($7,$8);return iframeid
 }};lz.embed.mousewheel={__mousewheelEvent:function($0){
 var $1=lz.embed;if(!$0)$0=window.event;var $2=0;if($0.wheelDelta){
 $2=$0.wheelDelta/120;if($1.browser.isOpera){

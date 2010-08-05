@@ -38,7 +38,8 @@
             gradient-fill: 'top,#fdfdfd 0%,#ebebeb 73%,#e5e5e5 73%,#e5e5e5 100%';
         }
         bsbtn[mousestate=down]{
-            gradient-fill: 'bottom,#fdfdfd 0%,#e5e5e5 77%,#dfdfdf 77%,#dfdfdf 100%';
+            gradient-fill: 'top,#dfdfdf 0%,#dfdfdf 23%,#e5e5e5 23%,#fdfdfd 100%';
+            /*bottom,#fdfdfd 0%,#e5e5e5 77%,#dfdfdf 77%,#dfdfdf 100%';*/
         }
     </stylesheet> 
 
