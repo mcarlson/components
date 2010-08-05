@@ -37,11 +37,13 @@
         }
         bsbtn[mousestate=over]{
             base-color: #d2ecfd;
+            text-color: #000000;
             gradient-transition-speed: 300;
             gradient-fill: 'top,#fdfdfd 0%,#ebebeb 73%,#e5e5e5 73%,#e5e5e5 100%';
         }
         bsbtn[mousestate=down]{
             base-color: #d2ecfd;
+            text-color: #000000;
             gradient-transition-speed: 200;
             gradient-fill: 'top,#dfdfdf 0%,#dfdfdf 23%,#e5e5e5 23%,#fdfdfd 100%';
             /*bottom,#fdfdfd 0%,#e5e5e5 77%,#dfdfdf 77%,#dfdfdf 100%';*/
