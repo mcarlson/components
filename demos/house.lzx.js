@@ -1,4 +1,4 @@
-var combobox_floater=null;var slider_floater=null;canvas=new LzCanvas(null,{__LZproxied:"false",appbuilddate:"2010-08-05T23:44:18Z",bgcolor:16777215,embedfonts:true,font:"Verdana,Vera,sans-serif",fontsize:11,fontstyle:"plain",height:"100%",lpsbuild:"17176 /Users/maxcarlson/openlaszlo/trunk-clean",lpsbuilddate:"2010-08-04T03:41:59Z",lpsrelease:"Latest",lpsversion:"5.0.x",runtime:"dhtml",width:"100%"});Mixin.make("DrawviewShared",["$lzsc$initialize",function($0,$1,$2,$3){
+var combobox_floater=null;var slider_floater=null;canvas=new LzCanvas(null,{__LZproxied:"false",appbuilddate:"2010-08-06T01:00:26Z",bgcolor:16777215,embedfonts:true,font:"Verdana,Vera,sans-serif",fontsize:11,fontstyle:"plain",height:"100%",lpsbuild:"17176 /Users/maxcarlson/openlaszlo/trunk-clean",lpsbuilddate:"2010-08-04T03:41:59Z",lpsrelease:"Latest",lpsversion:"5.0.x",runtime:"dhtml",width:"100%"});Mixin.make("DrawviewShared",["$lzsc$initialize",function($0,$1,$2,$3){
 switch(arguments.length){
 case 0:
 $0=null;
@@ -2904,9 +2904,9 @@ switch(arguments.length){
 case 0:
 $0=null;
 
-};this.setAttribute("opacity",0.1)
+};this.setAttribute("opacity",0.4)
 },"$5z",function($0){
-this.classroot.setAttribute("activated",$0);this.redraw()
+this.animate("opacity",$0?1:0.4,200);this.classroot.setAttribute("activated",$0)
 },"direction",void 0,"handleMouseDown",function($0){
 if(this.constructor["$lzsc$isa"]?this.constructor.$lzsc$isa($0):$0 instanceof this.constructor)$0=this.direction;this.classroot.step($0);this.classroot.setAttribute("activated",true)
 },"handleKeyDown",function($0){
@@ -2919,7 +2919,7 @@ this.onmousedown.sendEvent()
 }},"drawshape",function($0){
 this.drawarrow($0,1,1,this.width-2,this.height-4,this.direction<0)
 },"draw",function($0){
-if(!$0["interiorbordercolor"])return;$0.beginPath();this.drawshape($0);if(this.focused)this.drawfocus($0);var $1=$0.globalAlpha;$0.globalAlpha=this.opacity;$0.fillStyle=this.mouseisover?$0.highlightcolor:$0.bordercolor;$0.fill();$0.globalAlpha=$1
+if(!$0["interiorbordercolor"])return;$0.beginPath();this.drawshape($0);if(this.focused)this.drawfocus($0);var $1=$0.globalAlpha;$0.globalAlpha=this.opacity;$0.fillStyle=$0.highlightcolor;$0.fill();$0.globalAlpha=$1
 },"$lzsc$initialize",function($0,$1,$2,$3){
 switch(arguments.length){
 case 0:

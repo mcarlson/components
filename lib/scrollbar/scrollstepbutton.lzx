@@ -1,11 +1,10 @@
 <class name="scrlstepbtn" height="${this.width}" with="buttonevents,mousedownrepeater,keyboardrepeater,drawborderfocus,componentfocus,drawarrow,virtualdrawview,drawbutton,stylebutton" focusable="true">
     <handler name="oninit" args="ignore=null">
-        this.setAttribute('opacity', .1);
+        this.setAttribute('opacity', .4);
     </handler>
     <handler name="onmouseisover" args="isover">
-        //this.animate('opacity', isover ? 1 : .4, 200);
+        this.animate('opacity', isover ? 1 : .4, 200);
         this.classroot.setAttribute('activated', isover);
-        this.redraw();
     </handler>
 
     <!-- the amount this button should step by -->
@@ -61,7 +60,7 @@
 
         //context.lineWidth = context.borderwidth;
         //context.strokeStyle = context.bordercolor;
-        context.fillStyle = this.mouseisover ? context.highlightcolor : context.bordercolor;
+        context.fillStyle = context.highlightcolor;
         context.fill();
 
         context.globalAlpha = globalAlpha;
