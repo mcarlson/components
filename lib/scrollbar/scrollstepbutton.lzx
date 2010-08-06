@@ -3,7 +3,7 @@
         this.setAttribute('opacity', .4);
     </handler>
     <handler name="onmouseisover" args="isover">
-        this.animate('opacity', isover ? 1 : .4, 200);
+        //this.animate('opacity', isover ? .8 : .4, 200);
         this.classroot.setAttribute('activated', isover);
     </handler>
 
