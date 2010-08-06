@@ -55,14 +55,14 @@
 
         if (this.focused) this.drawfocus(context);
 
-        var globalAlpha = context.globalAlpha;
-        context.globalAlpha = this.opacity;
+//        var globalAlpha = context.globalAlpha;
+//        context.globalAlpha = this.opacity;
 
         //context.lineWidth = context.borderwidth;
         //context.strokeStyle = context.bordercolor;
-        context.fillStyle = context.highlightcolor;
+        context.fillStyle = context.iconcolor;
         context.fill();
 
-        context.globalAlpha = globalAlpha;
+//        context.globalAlpha = globalAlpha;
     </method>
 </class>

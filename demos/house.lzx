@@ -16,6 +16,7 @@
           /*   border-color: #e5e5e5; 'top,#e6e6e6 0%,#c5c5c5 100%'; TODO: fix */
             interior-border-color: #ffffff;
             highlight-color: #1689c8;
+            icon-color: #79ADC9;
         }
         buttongroup {
             gradient-fill: 'top,#fdfdfd 0%,#e5e5e5 82%,#dfdfdf 82%,#dfdfdf 100%';

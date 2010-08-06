@@ -34,7 +34,7 @@
             <method name="draw" args="context">
                 super.draw(context);
                 this.beginPath();
-                context.fillStyle = context.bordercolor;
+                context.fillStyle = context.iconcolor;
                 this.drawarrow(context, 5, 7, this.width - 6, this.height - 8, false);
                 this.fill();
             </method>
