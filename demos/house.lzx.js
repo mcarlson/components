@@ -1,4 +1,4 @@
-var combobox_floater=null;var slider_floater=null;canvas=new LzCanvas(null,{__LZproxied:"false",appbuilddate:"2010-08-06T01:25:42Z",bgcolor:16777215,embedfonts:true,font:"Verdana,Vera,sans-serif",fontsize:11,fontstyle:"plain",height:"100%",lpsbuild:"17176 /Users/maxcarlson/openlaszlo/trunk-clean",lpsbuilddate:"2010-08-04T03:41:59Z",lpsrelease:"Latest",lpsversion:"5.0.x",runtime:"dhtml",width:"100%"});Mixin.make("DrawviewShared",["$lzsc$initialize",function($0,$1,$2,$3){
+var combobox_floater=null;var slider_floater=null;canvas=new LzCanvas(null,{__LZproxied:"false",appbuilddate:"2010-08-06T23:06:30Z",bgcolor:16777215,embedfonts:true,font:"Verdana,Vera,sans-serif",fontsize:11,fontstyle:"plain",height:"100%",lpsbuild:"17176 /Users/maxcarlson/openlaszlo/trunk-clean",lpsbuilddate:"2010-08-04T03:41:59Z",lpsrelease:"Latest",lpsversion:"5.0.x",runtime:"dhtml",width:"100%"});Mixin.make("DrawviewShared",["$lzsc$initialize",function($0,$1,$2,$3){
 switch(arguments.length){
 case 0:
 $0=null;
@@ -203,32 +203,37 @@ $1=LzColorUtils.torgb(this.fillStyle);$0[this.fillStyle]=$1
 };this.__fillStyle=this.fillStyle
 }}},"__updateLineStyle",function(){
 with(this){
-var $0={lineWidth:"__lineWidth",lineCap:"__lineCap",lineJoin:"__lineJoin",miterLimit:"__miterLimit"};for(var $1 in $0){
-var $2=$0[$1];var $3=this[$1];if(this[$2]!=$3){
-this.context[$1]=$3;this[$2]=$3
-}};if(this.__strokeStyle!=this.strokeStyle){
+if(this.__lineWidth!=this.lineWidth){
+this.__lineWidth=this.context.lineWidth=this.lineWidth
+};if(this.__lineCap!=this.lineCap){
+this.__lineCap=this.context.lineCap=this.lineCap
+};if(this.__lineJoin!=this.lineJoin){
+this.__lineJoin=this.context.lineJoin=this.lineJoin
+};if(this.__miterLimit!=this.miterLimit){
+this.__miterLimit=this.context.miterLimit=this.miterLimit
+};if(this.__strokeStyle!=this.strokeStyle){
 if(this.strokeStyle instanceof LzCanvasGradient){
 this.strokeStyle.__applyStrokeTo(this.context)
 }else{
-var $4=lz.drawview.__colorcache;var $5=$4[this.strokeStyle];if($5==null){
-$5=LzColorUtils.torgb(this.strokeStyle);$4[this.strokeStyle]=$5
-};this.context.strokeStyle=$5
+var $0=lz.drawview.__colorcache;var $1=$0[this.strokeStyle];if($1==null){
+$1=LzColorUtils.torgb(this.strokeStyle);$0[this.strokeStyle]=$1
+};this.context.strokeStyle=$1
 };this.__strokeStyle=this.strokeStyle
 }}},"__playPath",function(){
-if(this.__path.length==0)return;this.__dirty=true;this.__updateLineStyle();this.__updateFillStyle();this.context.beginPath();var $0=this.aliaslines&&this.lineWidth%2?0.5:0;for(var $1=0;$1<this.__path.length;$1+=1){
-var $2=this.__path[$1];switch($2[0]){
+if(this.__path.length==0)return;this.__dirty=true;this.__updateLineStyle();this.__updateFillStyle();this.context.beginPath();var $0=this.aliaslines&&this.lineWidth%2?0.5:0;var $1=-1,$2=this.__path.length;while(++$1<$2){
+var $3=this.__path[$1];switch($3[0]){
 case 0:
 this.context.closePath();break;
 case 1:
-this.context.moveTo($2[1]+$0,$2[2]+$0);break;
+this.context.moveTo($3[1]+$0,$3[2]+$0);break;
 case 2:
-this.context.lineTo($2[1]+$0,$2[2]+$0);break;
+this.context.lineTo($3[1]+$0,$3[2]+$0);break;
 case 3:
-this.context.quadraticCurveTo($2[1],$2[2],$2[3]+$0,$2[4]+$0);break;
+this.context.quadraticCurveTo($3[1],$3[2],$3[3]+$0,$3[4]+$0);break;
 case 4:
-this.context.bezierCurveTo($2[1],$2[2],$2[3],$2[4],$2[5]+$0,$2[6]+$0);break;
+this.context.bezierCurveTo($3[1],$3[2],$3[3],$3[4],$3[5]+$0,$3[6]+$0);break;
 case 5:
-this.context.arc($2[1]+$0,$2[2]+$0,$2[3],$2[4],$2[5],$2[6]);break;
+this.context.arc($3[1]+$0,$3[2]+$0,$3[3],$3[4],$3[5],$3[6]);break;
 
 }}},"clipPath",function(){
 this.__playPath();this.context.clip()
@@ -1245,25 +1250,26 @@ LzNode.mergeAttributes({$delegates:["onkeydown","$2c",null,"onkeyup","$2d",null]
 }}})($lzc$class_keyboardrepeater)
 };{
 Mixin.make("$lzc$class_stylebutton",["vertical",void 0,"bevel",void 0,"$2e",void 0,"interiorbordercolor",void 0,"$2f",void 0,"$2g",void 0,"interiorbordercolorup",void 0,"$2h",void 0,"$2i",void 0,"interiorbordercolorover",void 0,"$2j",void 0,"$2k",void 0,"interiorbordercolordown",void 0,"$2l",void 0,"interiorfillcolor",void 0,"$2m",void 0,"$2n",void 0,"interiorfillcolorup",void 0,"$2o",void 0,"$2p",void 0,"interiorfillcolorover",void 0,"$2q",void 0,"$2r",void 0,"interiorfillcolordown",void 0,"gradientfill",void 0,"ongradientfill",void 0,"$lzc$set_gradientfill",function($0){
-if($0!=this.gradientfill){
+if($0&&$0!=this.gradientfill){
 this._gradientfill=this.parseLinearGradient($0)
 };this.gradientfill=$0;if(this.ongradientfill.ready)this.ongradientfill.sendEvent($0)
 },"_parseLinearGradientCache",void 0,"parseLinearGradient",function($0){
-var $1=null;if(!$1){
+var $1=this._parseLinearGradientCache[$0];if($1){
+return {startpos:$1.startpos,colorstops:$1.colorstops.slice(),css:$1.css}}else{
 var $2=$0.split(",");if($2.length<2){
 return
-};var $3=$2.shift();$1={};$1.startpos=$3;$1.colorstops=[];$1.css=$0;for(var $4=0;$4<$2.length;$4++){
-var $5=$2[$4].split(" ");$1.colorstops[$4]={color:$5[0],percentage:parseInt($5[1])*0.01}};this._parseLinearGradientCache[$0]=$1
+};var $3=$2.shift();$1={};$1.startpos=$3;$1.colorstops=[];$1.css=$0;var $4=LzColorUtils.hextoint;for(var $5=0;$5<$2.length;$5++){
+var $6=$2[$5].split(" ");$1.colorstops[$5]={color:$4($6[0]),percentage:parseInt($6[1])*0.01}};this._parseLinearGradientCache[$0]=$1
 };return $1
-},"tintColor",function($0,$1){
-if($1==null){
+},"__tintColor",void 0,"tintColor",function($0,$1){
+var $2=$0+"."+$1;if(this.__tintColor[$2])return this.__tintColor[$2];if($1==null){
 $1=this._basehsv
 }else{
 $1=LzColorUtils.tohsv($1)
 };if(!$1){
 return $0
 }else{
-var $2=LzColorUtils.tohsv($0);return LzColorUtils.fromhsv($1.h,$1.s,$2.v)
+var $3=LzColorUtils.tohsv($0);this.__tintColor[$2]=LzColorUtils.fromhsv($1.h,$1.s,$3.v);return this.__tintColor[$2]
 }},"__resetgradientcache",function($0){
 this._gradientfills={}},"cssToLinearGradient",function($0,$1){
 if(!$1||!$1.css)return;var $2=this["_gradientfills"];if(!$2){
@@ -1365,7 +1371,7 @@ catch($lzsc$e){
 if(Error["$lzsc$isa"]?Error.$lzsc$isa($lzsc$e):$lzsc$e instanceof Error){
 lz.$lzsc$thrownError=$lzsc$e
 };throw $lzsc$e
-}},$delegates:["onwidth","__resetgradientcache",null,"onheight","__resetgradientcache",null,"onbasecolor","__resetgradientcache",null],_parseLinearGradientCache:{},bevel:new LzStyleConstraintExpr("bevel","number","bevel-width",0,false),gradientfill:new LzStyleConstraintExpr("gradientfill","string","gradient-fill","",false),interiorbordercolor:new LzStyleConstraintExpr("interiorbordercolor","color","interior-border-color",new LzOnceExpr("interiorbordercolor","color","$2e",null),false),interiorbordercolordown:new LzStyleConstraintExpr("interiorbordercolordown","color","interior-border-color-down",new LzAlwaysExpr("interiorbordercolordown","color","$2j","$2k",null),false),interiorbordercolorover:new LzStyleConstraintExpr("interiorbordercolorover","color","interior-border-color-over",new LzAlwaysExpr("interiorbordercolorover","color","$2h","$2i",null),false),interiorbordercolorup:new LzStyleConstraintExpr("interiorbordercolorup","color","interior-border-color-up",new LzAlwaysExpr("interiorbordercolorup","color","$2f","$2g",null),false),interiorfillcolor:new LzStyleConstraintExpr("interiorfillcolor","color","interior-fill-color",new LzOnceExpr("interiorfillcolor","color","$2l",null),false),interiorfillcolordown:new LzStyleConstraintExpr("interiorfillcolordown","color","interior-fill-color-down",new LzAlwaysExpr("interiorfillcolordown","color","$2q","$2r",null),false),interiorfillcolorover:new LzStyleConstraintExpr("interiorfillcolorover","color","interior-fill-color-over",new LzAlwaysExpr("interiorfillcolorover","color","$2o","$2p",null),false),interiorfillcolorup:new LzStyleConstraintExpr("interiorfillcolorup","color","interior-fill-color-up",new LzAlwaysExpr("interiorfillcolorup","color","$2m","$2n",null),false),ongradientfill:LzDeclaredEvent,vertical:new LzStyleConstraintExpr("vertical","boolean","gradient-vertical",false,false)},$lzc$class_stylebutton.attributes)
+}},$delegates:["onwidth","__resetgradientcache",null,"onheight","__resetgradientcache",null,"onbasecolor","__resetgradientcache",null],__tintColor:{},_parseLinearGradientCache:{},bevel:new LzStyleConstraintExpr("bevel","number","bevel-width",0,false),gradientfill:new LzStyleConstraintExpr("gradientfill","string","gradient-fill","",false),interiorbordercolor:new LzStyleConstraintExpr("interiorbordercolor","color","interior-border-color",new LzOnceExpr("interiorbordercolor","color","$2e",null),false),interiorbordercolordown:new LzStyleConstraintExpr("interiorbordercolordown","color","interior-border-color-down",new LzAlwaysExpr("interiorbordercolordown","color","$2j","$2k",null),false),interiorbordercolorover:new LzStyleConstraintExpr("interiorbordercolorover","color","interior-border-color-over",new LzAlwaysExpr("interiorbordercolorover","color","$2h","$2i",null),false),interiorbordercolorup:new LzStyleConstraintExpr("interiorbordercolorup","color","interior-border-color-up",new LzAlwaysExpr("interiorbordercolorup","color","$2f","$2g",null),false),interiorfillcolor:new LzStyleConstraintExpr("interiorfillcolor","color","interior-fill-color",new LzOnceExpr("interiorfillcolor","color","$2l",null),false),interiorfillcolordown:new LzStyleConstraintExpr("interiorfillcolordown","color","interior-fill-color-down",new LzAlwaysExpr("interiorfillcolordown","color","$2q","$2r",null),false),interiorfillcolorover:new LzStyleConstraintExpr("interiorfillcolorover","color","interior-fill-color-over",new LzAlwaysExpr("interiorfillcolorover","color","$2o","$2p",null),false),interiorfillcolorup:new LzStyleConstraintExpr("interiorfillcolorup","color","interior-fill-color-up",new LzAlwaysExpr("interiorfillcolorup","color","$2m","$2n",null),false),ongradientfill:LzDeclaredEvent,vertical:new LzStyleConstraintExpr("vertical","boolean","gradient-vertical",false,false)},$lzc$class_stylebutton.attributes)
 }}})($lzc$class_stylebutton)
 };{
 Mixin.make("$lzc$class_drawbutton",["gradienttransition",void 0,"gradienttransitionspeed",void 0,"transitionto",void 0,"transitionfrom",void 0,"draw",function($0){
@@ -1396,15 +1402,11 @@ $2=$1.indexOf("bottom");if($2>-1){
 $1="right"+$1.substring($2+6)
 }}};var $3=this.parseLinearGradient($1);if(this.transitionfrom!=null){
 var $4=[];var $5=this.transitionto.colorstops;var $6=this.transitionfrom.colorstops;for(var $7=0,$8=$5.length;$7<$8;$7++){
-var $9={};var $a=this.tweenrgb(this.basefrom,this.baseto,this.gradienttransition);$9.color=this.tintColor(this.tweenrgb(LzColorUtils.hextoint($6[$7].color),LzColorUtils.hextoint($5[$7].color),this.gradienttransition),$a);var $b=$5[$7].percentage-$6[$7].percentage;$9.percentage=$6[$7].percentage+$b*this.gradienttransition;$4[$7]=$9
+var $9={};var $a=this.tweenrgb(this.basefrom,this.baseto,this.gradienttransition);$9.color=this.tintColor(this.tweenrgb($6[$7].color,$5[$7].color,this.gradienttransition),$a);var $b=$5[$7].percentage-$6[$7].percentage;$9.percentage=$6[$7].percentage+$b*this.gradienttransition;$4[$7]=$9
 };$3.colorstops=$4
 };$0.fillStyle=this.cssToLinearGradient($0,$3)
 },"tweenrgb",function($0,$1,$2){
-switch(arguments.length){
-case 2:
-$2=0;
-
-};if($0===$1)return $0;var $3=$0>>16&255,$4=$0>>8&255,$5=$0&255;var $6=$1>>16&255,$7=$1>>8&255,$8=$1&255;var $9=$3+($6-$3)*$2;var $a=$4+($7-$4)*$2;var $b=$5+($8-$5)*$2;return Math.round(($9<<16)+($a<<8)+$b)
+if($0===$1)return $0;var $3=$0>>16&255,$4=$0>>8&255,$5=$0&255;var $6=$1>>16&255,$7=$1>>8&255,$8=$1&255;var $9=$3+($6-$3)*$2;var $a=$4+($7-$4)*$2;var $b=$5+($8-$5)*$2;return($9<<16)+($a<<8)+($b|0)
 },"drawgradient",function($0){
 $0.beginPath();var $1=1;if(this.bevel){
 var $1=this.bevel+this.borderwidth
@@ -1447,7 +1449,6 @@ if(!this["interiorfillcolor"])return;$0.beginPath();this.drawshape($0,1,1,this.w
 if(!this.baseto)this.baseto=this.basecolor;this.basefrom=this.baseto;this.baseto=this.basecolor;if(!this.transitionto)this.transitionto=this._gradientfill;this.transitionfrom=this.transitionto;this.transitionto=this._gradientfill;if(typeof $0=="string"){
 this.gradienttransition=0;if(this._oldanim)this._oldanim.setAttribute("started",false);this._oldanim=this.animate("gradienttransition",1,this.gradienttransitionspeed)
 }},"stylegradient",function($0){
-with(this){
 var $1=this["gradientfill"];if(this.vertical){
 var $2=$1.indexOf("top");if($2>-1){
 $1="left"+$1.substring($2+3)
@@ -1456,17 +1457,12 @@ $2=$1.indexOf("bottom");if($2>-1){
 $1="right"+$1.substring($2+6)
 }}};var $3=this.parseLinearGradient($1);if(this.transitionfrom!=null){
 var $4=[];var $5=this.transitionto.colorstops;var $6=this.transitionfrom.colorstops;for(var $7=0,$8=$5.length;$7<$8;$7++){
-var $9={};var $a=this.tweenrgb(this.basefrom,this.baseto,this.gradienttransition);$9.color=this.tintColor(this.tweenrgb(LzColorUtils.hextoint($6[$7].color),LzColorUtils.hextoint($5[$7].color),this.gradienttransition),$a);var $b=$5[$7].percentage-$6[$7].percentage;$9.percentage=$6[$7].percentage+$b*this.gradienttransition;$4[$7]=$9
+var $9={};var $a=this.tweenrgb(this.basefrom,this.baseto,this.gradienttransition);$9.color=this.tintColor(this.tweenrgb($6[$7].color,$5[$7].color,this.gradienttransition),$a);var $b=$5[$7].percentage-$6[$7].percentage;$9.percentage=$6[$7].percentage+$b*this.gradienttransition;$4[$7]=$9
 };$3.colorstops=$4
 };$0.fillStyle=this.cssToLinearGradient($0,$3)
-}},"tweenrgb",function($0,$1,$2){
-with(this){
-switch(arguments.length){
-case 2:
-$2=0;
-
-};if($0===$1)return $0;var $3=$0>>16&255,$4=$0>>8&255,$5=$0&255;var $6=$1>>16&255,$7=$1>>8&255,$8=$1&255;var $9=$3+($6-$3)*$2;var $a=$4+($7-$4)*$2;var $b=$5+($8-$5)*$2;return Math.round(($9<<16)+($a<<8)+$b)
-}},"drawgradient",function($0){
+},"tweenrgb",function($0,$1,$2){
+if($0===$1)return $0;var $3=$0>>16&255,$4=$0>>8&255,$5=$0&255;var $6=$1>>16&255,$7=$1>>8&255,$8=$1&255;var $9=$3+($6-$3)*$2;var $a=$4+($7-$4)*$2;var $b=$5+($8-$5)*$2;return($9<<16)+($a<<8)+($b|0)
+},"drawgradient",function($0){
 $0.beginPath();var $1=1;if(this.bevel){
 var $1=this.bevel+this.borderwidth
 };this.drawshape($0,$1,$1,this.width-$1*2-1,this.height-$1*2-1);$0.fill()
@@ -1489,27 +1485,28 @@ LzNode.mergeAttributes({$delegates:["onmousestate","redraw",null,"ongradienttran
 }}})($lzc$class_$3)
 };{
 Class.make("$lzc$class_$4",["vertical",void 0,"bevel",void 0,"$2s",void 0,"$2t",void 0,"$2u",void 0,"interiorbordercolorup",void 0,"$2v",void 0,"$2w",void 0,"interiorbordercolorover",void 0,"$2x",void 0,"$2y",void 0,"interiorbordercolordown",void 0,"$2z",void 0,"$30",void 0,"$31",void 0,"interiorfillcolorup",void 0,"$32",void 0,"$33",void 0,"interiorfillcolorover",void 0,"$34",void 0,"$35",void 0,"interiorfillcolordown",void 0,"gradientfill",void 0,"ongradientfill",void 0,"$lzc$set_gradientfill",function($0){
-if($0!=this.gradientfill){
+if($0&&$0!=this.gradientfill){
 this._gradientfill=this.parseLinearGradient($0)
 };this.gradientfill=$0;if(this.ongradientfill.ready)this.ongradientfill.sendEvent($0)
 },"_parseLinearGradientCache",void 0,"parseLinearGradient",function($0){
 with(this){
-var $1=null;if(!$1){
+var $1=this._parseLinearGradientCache[$0];if($1){
+return {startpos:$1.startpos,colorstops:$1.colorstops.slice(),css:$1.css}}else{
 var $2=$0.split(",");if($2.length<2){
 return
-};var $3=$2.shift();$1={};$1.startpos=$3;$1.colorstops=[];$1.css=$0;for(var $4=0;$4<$2.length;$4++){
-var $5=$2[$4].split(" ");$1.colorstops[$4]={color:$5[0],percentage:parseInt($5[1])*0.01}};this._parseLinearGradientCache[$0]=$1
+};var $3=$2.shift();$1={};$1.startpos=$3;$1.colorstops=[];$1.css=$0;var $4=LzColorUtils.hextoint;for(var $5=0;$5<$2.length;$5++){
+var $6=$2[$5].split(" ");$1.colorstops[$5]={color:$4($6[0]),percentage:parseInt($6[1])*0.01}};this._parseLinearGradientCache[$0]=$1
 };return $1
-}},"tintColor",function($0,$1){
+}},"__tintColor",void 0,"tintColor",function($0,$1){
 with(this){
-if($1==null){
+var $2=$0+"."+$1;if(this.__tintColor[$2])return this.__tintColor[$2];if($1==null){
 $1=this._basehsv
 }else{
 $1=LzColorUtils.tohsv($1)
 };if(!$1){
 return $0
 }else{
-var $2=LzColorUtils.tohsv($0);return LzColorUtils.fromhsv($1.h,$1.s,$2.v)
+var $3=LzColorUtils.tohsv($0);this.__tintColor[$2]=LzColorUtils.fromhsv($1.h,$1.s,$3.v);return this.__tintColor[$2]
 }}},"__resetgradientcache",function($0){
 this._gradientfills={}},"cssToLinearGradient",function($0,$1){
 if(!$1||!$1.css)return;var $2=this["_gradientfills"];if(!$2){
@@ -1613,7 +1610,7 @@ catch($lzsc$e){
 if(Error["$lzsc$isa"]?Error.$lzsc$isa($lzsc$e):$lzsc$e instanceof Error){
 lz.$lzsc$thrownError=$lzsc$e
 };throw $lzsc$e
-}},$delegates:["onwidth","__resetgradientcache",null,"onheight","__resetgradientcache",null,"onbasecolor","__resetgradientcache",null],_parseLinearGradientCache:{},bevel:new LzStyleConstraintExpr("bevel","number","bevel-width",0,false),gradientfill:new LzStyleConstraintExpr("gradientfill","string","gradient-fill","",false),interiorbordercolor:new LzStyleConstraintExpr("interiorbordercolor","color","interior-border-color",new LzOnceExpr("interiorbordercolor","color","$2s",null),false),interiorbordercolordown:new LzStyleConstraintExpr("interiorbordercolordown","color","interior-border-color-down",new LzAlwaysExpr("interiorbordercolordown","color","$2x","$2y",null),false),interiorbordercolorover:new LzStyleConstraintExpr("interiorbordercolorover","color","interior-border-color-over",new LzAlwaysExpr("interiorbordercolorover","color","$2v","$2w",null),false),interiorbordercolorup:new LzStyleConstraintExpr("interiorbordercolorup","color","interior-border-color-up",new LzAlwaysExpr("interiorbordercolorup","color","$2t","$2u",null),false),interiorfillcolor:new LzStyleConstraintExpr("interiorfillcolor","color","interior-fill-color",new LzOnceExpr("interiorfillcolor","color","$2z",null),false),interiorfillcolordown:new LzStyleConstraintExpr("interiorfillcolordown","color","interior-fill-color-down",new LzAlwaysExpr("interiorfillcolordown","color","$34","$35",null),false),interiorfillcolorover:new LzStyleConstraintExpr("interiorfillcolorover","color","interior-fill-color-over",new LzAlwaysExpr("interiorfillcolorover","color","$32","$33",null),false),interiorfillcolorup:new LzStyleConstraintExpr("interiorfillcolorup","color","interior-fill-color-up",new LzAlwaysExpr("interiorfillcolorup","color","$30","$31",null),false),ongradientfill:LzDeclaredEvent,vertical:new LzStyleConstraintExpr("vertical","boolean","gradient-vertical",false,false)},$lzc$class_$4.attributes)
+}},$delegates:["onwidth","__resetgradientcache",null,"onheight","__resetgradientcache",null,"onbasecolor","__resetgradientcache",null],__tintColor:{},_parseLinearGradientCache:{},bevel:new LzStyleConstraintExpr("bevel","number","bevel-width",0,false),gradientfill:new LzStyleConstraintExpr("gradientfill","string","gradient-fill","",false),interiorbordercolor:new LzStyleConstraintExpr("interiorbordercolor","color","interior-border-color",new LzOnceExpr("interiorbordercolor","color","$2s",null),false),interiorbordercolordown:new LzStyleConstraintExpr("interiorbordercolordown","color","interior-border-color-down",new LzAlwaysExpr("interiorbordercolordown","color","$2x","$2y",null),false),interiorbordercolorover:new LzStyleConstraintExpr("interiorbordercolorover","color","interior-border-color-over",new LzAlwaysExpr("interiorbordercolorover","color","$2v","$2w",null),false),interiorbordercolorup:new LzStyleConstraintExpr("interiorbordercolorup","color","interior-border-color-up",new LzAlwaysExpr("interiorbordercolorup","color","$2t","$2u",null),false),interiorfillcolor:new LzStyleConstraintExpr("interiorfillcolor","color","interior-fill-color",new LzOnceExpr("interiorfillcolor","color","$2z",null),false),interiorfillcolordown:new LzStyleConstraintExpr("interiorfillcolordown","color","interior-fill-color-down",new LzAlwaysExpr("interiorfillcolordown","color","$34","$35",null),false),interiorfillcolorover:new LzStyleConstraintExpr("interiorfillcolorover","color","interior-fill-color-over",new LzAlwaysExpr("interiorfillcolorover","color","$32","$33",null),false),interiorfillcolorup:new LzStyleConstraintExpr("interiorfillcolorup","color","interior-fill-color-up",new LzAlwaysExpr("interiorfillcolorup","color","$30","$31",null),false),ongradientfill:LzDeclaredEvent,vertical:new LzStyleConstraintExpr("vertical","boolean","gradient-vertical",false,false)},$lzc$class_$4.attributes)
 }}})($lzc$class_$4)
 };Class.make("$lzc$class_38",["$36",function($0){
 with(this){
@@ -1689,13 +1686,14 @@ continue
 };$0.beginPath();$3.drawshape($0,$3.x,$3.y,$3.width,$3.height-1);$0.closePath();$3.stylegradient($0);$0.fill()
 }}},"drawlast",function($0){
 with(this){
-$0.fillStyle=this.cssToLinearGradient($0,this.dividergradient);var $1=0;for(var $2=0,$3=this.subviews.length-1;$2<$3;$2++){
+if($0.dividergradient){};var $1=0;for(var $2=0,$3=this.subviews.length-1;$2<$3;$2++){
 var $4=subviews[$2];if(this.axis=="x"){
 $1+=$4.width;$0.fillRect($1,1,1,this.height-2)
 }else{
 $1+=$4.height;$0.fillRect(1,$1,this.width-2,1)
-}};$0.lineWidth=1;this.styleinteriorborder($0);this.beginPath();this.drawshape($0,1,1,this.width-3,this.height-3);$0.stroke();$0.strokeStyle=this.bordercolor;this.beginPath();this.drawshape($0,0,0,this.width-1,this.height-1);$0.stroke()
-}},"$lzsc$initialize",function($0,$1,$2,$3){
+}};$0.lineWidth=1;this.styleinteriorborder($0);this.beginPath();this.drawshape($0,1,1,this.width-3,this.height-3);$0.stroke();if($0.bordercolor){
+$0.strokeStyle=$0.bordercolor;this.beginPath();this.drawshape($0,0,0,this.width-1,this.height-1);$0.stroke()
+}}},"$lzsc$initialize",function($0,$1,$2,$3){
 switch(arguments.length){
 case 0:
 $0=null;
@@ -1755,7 +1753,6 @@ if(!this["interiorfillcolor"])return;$0.beginPath();this.drawshape($0,1,1,this.w
 if(!this.baseto)this.baseto=this.basecolor;this.basefrom=this.baseto;this.baseto=this.basecolor;if(!this.transitionto)this.transitionto=this._gradientfill;this.transitionfrom=this.transitionto;this.transitionto=this._gradientfill;if(typeof $0=="string"){
 this.gradienttransition=0;if(this._oldanim)this._oldanim.setAttribute("started",false);this._oldanim=this.animate("gradienttransition",1,this.gradienttransitionspeed)
 }},"stylegradient",function($0){
-with(this){
 var $1=this["gradientfill"];if(this.vertical){
 var $2=$1.indexOf("top");if($2>-1){
 $1="left"+$1.substring($2+3)
@@ -1764,17 +1761,12 @@ $2=$1.indexOf("bottom");if($2>-1){
 $1="right"+$1.substring($2+6)
 }}};var $3=this.parseLinearGradient($1);if(this.transitionfrom!=null){
 var $4=[];var $5=this.transitionto.colorstops;var $6=this.transitionfrom.colorstops;for(var $7=0,$8=$5.length;$7<$8;$7++){
-var $9={};var $a=this.tweenrgb(this.basefrom,this.baseto,this.gradienttransition);$9.color=this.tintColor(this.tweenrgb(LzColorUtils.hextoint($6[$7].color),LzColorUtils.hextoint($5[$7].color),this.gradienttransition),$a);var $b=$5[$7].percentage-$6[$7].percentage;$9.percentage=$6[$7].percentage+$b*this.gradienttransition;$4[$7]=$9
+var $9={};var $a=this.tweenrgb(this.basefrom,this.baseto,this.gradienttransition);$9.color=this.tintColor(this.tweenrgb($6[$7].color,$5[$7].color,this.gradienttransition),$a);var $b=$5[$7].percentage-$6[$7].percentage;$9.percentage=$6[$7].percentage+$b*this.gradienttransition;$4[$7]=$9
 };$3.colorstops=$4
 };$0.fillStyle=this.cssToLinearGradient($0,$3)
-}},"tweenrgb",function($0,$1,$2){
-with(this){
-switch(arguments.length){
-case 2:
-$2=0;
-
-};if($0===$1)return $0;var $3=$0>>16&255,$4=$0>>8&255,$5=$0&255;var $6=$1>>16&255,$7=$1>>8&255,$8=$1&255;var $9=$3+($6-$3)*$2;var $a=$4+($7-$4)*$2;var $b=$5+($8-$5)*$2;return Math.round(($9<<16)+($a<<8)+$b)
-}},"drawgradient",function($0){
+},"tweenrgb",function($0,$1,$2){
+if($0===$1)return $0;var $3=$0>>16&255,$4=$0>>8&255,$5=$0&255;var $6=$1>>16&255,$7=$1>>8&255,$8=$1&255;var $9=$3+($6-$3)*$2;var $a=$4+($7-$4)*$2;var $b=$5+($8-$5)*$2;return($9<<16)+($a<<8)+($b|0)
+},"drawgradient",function($0){
 $0.beginPath();var $1=1;if(this.bevel){
 var $1=this.bevel+this.borderwidth
 };this.drawshape($0,$1,$1,this.width-$1*2-1,this.height-$1*2-1);$0.fill()
@@ -1829,27 +1821,28 @@ LzNode.mergeAttributes({$delegates:["onfocused","$3b",null]},$lzc$class_$7.attri
 }}})($lzc$class_$7)
 };{
 Class.make("$lzc$class_$8",["vertical",void 0,"bevel",void 0,"$3c",void 0,"$3d",void 0,"$3e",void 0,"interiorbordercolorup",void 0,"$3f",void 0,"$3g",void 0,"interiorbordercolorover",void 0,"$3h",void 0,"$3i",void 0,"interiorbordercolordown",void 0,"$3j",void 0,"$3k",void 0,"$3l",void 0,"interiorfillcolorup",void 0,"$3m",void 0,"$3n",void 0,"interiorfillcolorover",void 0,"$3o",void 0,"$3p",void 0,"interiorfillcolordown",void 0,"gradientfill",void 0,"ongradientfill",void 0,"$lzc$set_gradientfill",function($0){
-if($0!=this.gradientfill){
+if($0&&$0!=this.gradientfill){
 this._gradientfill=this.parseLinearGradient($0)
 };this.gradientfill=$0;if(this.ongradientfill.ready)this.ongradientfill.sendEvent($0)
 },"_parseLinearGradientCache",void 0,"parseLinearGradient",function($0){
 with(this){
-var $1=null;if(!$1){
+var $1=this._parseLinearGradientCache[$0];if($1){
+return {startpos:$1.startpos,colorstops:$1.colorstops.slice(),css:$1.css}}else{
 var $2=$0.split(",");if($2.length<2){
 return
-};var $3=$2.shift();$1={};$1.startpos=$3;$1.colorstops=[];$1.css=$0;for(var $4=0;$4<$2.length;$4++){
-var $5=$2[$4].split(" ");$1.colorstops[$4]={color:$5[0],percentage:parseInt($5[1])*0.01}};this._parseLinearGradientCache[$0]=$1
+};var $3=$2.shift();$1={};$1.startpos=$3;$1.colorstops=[];$1.css=$0;var $4=LzColorUtils.hextoint;for(var $5=0;$5<$2.length;$5++){
+var $6=$2[$5].split(" ");$1.colorstops[$5]={color:$4($6[0]),percentage:parseInt($6[1])*0.01}};this._parseLinearGradientCache[$0]=$1
 };return $1
-}},"tintColor",function($0,$1){
+}},"__tintColor",void 0,"tintColor",function($0,$1){
 with(this){
-if($1==null){
+var $2=$0+"."+$1;if(this.__tintColor[$2])return this.__tintColor[$2];if($1==null){
 $1=this._basehsv
 }else{
 $1=LzColorUtils.tohsv($1)
 };if(!$1){
 return $0
 }else{
-var $2=LzColorUtils.tohsv($0);return LzColorUtils.fromhsv($1.h,$1.s,$2.v)
+var $3=LzColorUtils.tohsv($0);this.__tintColor[$2]=LzColorUtils.fromhsv($1.h,$1.s,$3.v);return this.__tintColor[$2]
 }}},"__resetgradientcache",function($0){
 this._gradientfills={}},"cssToLinearGradient",function($0,$1){
 if(!$1||!$1.css)return;var $2=this["_gradientfills"];if(!$2){
@@ -1953,7 +1946,7 @@ catch($lzsc$e){
 if(Error["$lzsc$isa"]?Error.$lzsc$isa($lzsc$e):$lzsc$e instanceof Error){
 lz.$lzsc$thrownError=$lzsc$e
 };throw $lzsc$e
-}},$delegates:["onwidth","__resetgradientcache",null,"onheight","__resetgradientcache",null,"onbasecolor","__resetgradientcache",null],_parseLinearGradientCache:{},bevel:new LzStyleConstraintExpr("bevel","number","bevel-width",0,false),gradientfill:new LzStyleConstraintExpr("gradientfill","string","gradient-fill","",false),interiorbordercolor:new LzStyleConstraintExpr("interiorbordercolor","color","interior-border-color",new LzOnceExpr("interiorbordercolor","color","$3c",null),false),interiorbordercolordown:new LzStyleConstraintExpr("interiorbordercolordown","color","interior-border-color-down",new LzAlwaysExpr("interiorbordercolordown","color","$3h","$3i",null),false),interiorbordercolorover:new LzStyleConstraintExpr("interiorbordercolorover","color","interior-border-color-over",new LzAlwaysExpr("interiorbordercolorover","color","$3f","$3g",null),false),interiorbordercolorup:new LzStyleConstraintExpr("interiorbordercolorup","color","interior-border-color-up",new LzAlwaysExpr("interiorbordercolorup","color","$3d","$3e",null),false),interiorfillcolor:new LzStyleConstraintExpr("interiorfillcolor","color","interior-fill-color",new LzOnceExpr("interiorfillcolor","color","$3j",null),false),interiorfillcolordown:new LzStyleConstraintExpr("interiorfillcolordown","color","interior-fill-color-down",new LzAlwaysExpr("interiorfillcolordown","color","$3o","$3p",null),false),interiorfillcolorover:new LzStyleConstraintExpr("interiorfillcolorover","color","interior-fill-color-over",new LzAlwaysExpr("interiorfillcolorover","color","$3m","$3n",null),false),interiorfillcolorup:new LzStyleConstraintExpr("interiorfillcolorup","color","interior-fill-color-up",new LzAlwaysExpr("interiorfillcolorup","color","$3k","$3l",null),false),ongradientfill:LzDeclaredEvent,vertical:new LzStyleConstraintExpr("vertical","boolean","gradient-vertical",false,false)},$lzc$class_$8.attributes)
+}},$delegates:["onwidth","__resetgradientcache",null,"onheight","__resetgradientcache",null,"onbasecolor","__resetgradientcache",null],__tintColor:{},_parseLinearGradientCache:{},bevel:new LzStyleConstraintExpr("bevel","number","bevel-width",0,false),gradientfill:new LzStyleConstraintExpr("gradientfill","string","gradient-fill","",false),interiorbordercolor:new LzStyleConstraintExpr("interiorbordercolor","color","interior-border-color",new LzOnceExpr("interiorbordercolor","color","$3c",null),false),interiorbordercolordown:new LzStyleConstraintExpr("interiorbordercolordown","color","interior-border-color-down",new LzAlwaysExpr("interiorbordercolordown","color","$3h","$3i",null),false),interiorbordercolorover:new LzStyleConstraintExpr("interiorbordercolorover","color","interior-border-color-over",new LzAlwaysExpr("interiorbordercolorover","color","$3f","$3g",null),false),interiorbordercolorup:new LzStyleConstraintExpr("interiorbordercolorup","color","interior-border-color-up",new LzAlwaysExpr("interiorbordercolorup","color","$3d","$3e",null),false),interiorfillcolor:new LzStyleConstraintExpr("interiorfillcolor","color","interior-fill-color",new LzOnceExpr("interiorfillcolor","color","$3j",null),false),interiorfillcolordown:new LzStyleConstraintExpr("interiorfillcolordown","color","interior-fill-color-down",new LzAlwaysExpr("interiorfillcolordown","color","$3o","$3p",null),false),interiorfillcolorover:new LzStyleConstraintExpr("interiorfillcolorover","color","interior-fill-color-over",new LzAlwaysExpr("interiorfillcolorover","color","$3m","$3n",null),false),interiorfillcolorup:new LzStyleConstraintExpr("interiorfillcolorup","color","interior-fill-color-up",new LzAlwaysExpr("interiorfillcolorup","color","$3k","$3l",null),false),ongradientfill:LzDeclaredEvent,vertical:new LzStyleConstraintExpr("vertical","boolean","gradient-vertical",false,false)},$lzc$class_$8.attributes)
 }}})($lzc$class_$8)
 };{
 Class.make("$lzc$class_$9",["mouseisover",void 0,"mouseisdown",void 0,"mousestate",void 0,"$3q",function(){
@@ -2460,27 +2453,28 @@ LzNode.mergeAttributes({enabled:new LzAlwaysExpr("enabled","boolean","$4z","$50"
 }}})($lzc$class_inpt)
 };{
 Class.make("$lzc$class_$g",["vertical",void 0,"bevel",void 0,"$51",void 0,"interiorbordercolor",void 0,"$52",void 0,"$53",void 0,"interiorbordercolorup",void 0,"$54",void 0,"$55",void 0,"interiorbordercolorover",void 0,"$56",void 0,"$57",void 0,"interiorbordercolordown",void 0,"$58",void 0,"interiorfillcolor",void 0,"$59",void 0,"$5a",void 0,"interiorfillcolorup",void 0,"$5b",void 0,"$5c",void 0,"interiorfillcolorover",void 0,"$5d",void 0,"$5e",void 0,"interiorfillcolordown",void 0,"gradientfill",void 0,"ongradientfill",void 0,"$lzc$set_gradientfill",function($0){
-if($0!=this.gradientfill){
+if($0&&$0!=this.gradientfill){
 this._gradientfill=this.parseLinearGradient($0)
 };this.gradientfill=$0;if(this.ongradientfill.ready)this.ongradientfill.sendEvent($0)
 },"_parseLinearGradientCache",void 0,"parseLinearGradient",function($0){
 with(this){
-var $1=null;if(!$1){
+var $1=this._parseLinearGradientCache[$0];if($1){
+return {startpos:$1.startpos,colorstops:$1.colorstops.slice(),css:$1.css}}else{
 var $2=$0.split(",");if($2.length<2){
 return
-};var $3=$2.shift();$1={};$1.startpos=$3;$1.colorstops=[];$1.css=$0;for(var $4=0;$4<$2.length;$4++){
-var $5=$2[$4].split(" ");$1.colorstops[$4]={color:$5[0],percentage:parseInt($5[1])*0.01}};this._parseLinearGradientCache[$0]=$1
+};var $3=$2.shift();$1={};$1.startpos=$3;$1.colorstops=[];$1.css=$0;var $4=LzColorUtils.hextoint;for(var $5=0;$5<$2.length;$5++){
+var $6=$2[$5].split(" ");$1.colorstops[$5]={color:$4($6[0]),percentage:parseInt($6[1])*0.01}};this._parseLinearGradientCache[$0]=$1
 };return $1
-}},"tintColor",function($0,$1){
+}},"__tintColor",void 0,"tintColor",function($0,$1){
 with(this){
-if($1==null){
+var $2=$0+"."+$1;if(this.__tintColor[$2])return this.__tintColor[$2];if($1==null){
 $1=this._basehsv
 }else{
 $1=LzColorUtils.tohsv($1)
 };if(!$1){
 return $0
 }else{
-var $2=LzColorUtils.tohsv($0);return LzColorUtils.fromhsv($1.h,$1.s,$2.v)
+var $3=LzColorUtils.tohsv($0);this.__tintColor[$2]=LzColorUtils.fromhsv($1.h,$1.s,$3.v);return this.__tintColor[$2]
 }}},"__resetgradientcache",function($0){
 this._gradientfills={}},"cssToLinearGradient",function($0,$1){
 if(!$1||!$1.css)return;var $2=this["_gradientfills"];if(!$2){
@@ -2584,7 +2578,7 @@ catch($lzsc$e){
 if(Error["$lzsc$isa"]?Error.$lzsc$isa($lzsc$e):$lzsc$e instanceof Error){
 lz.$lzsc$thrownError=$lzsc$e
 };throw $lzsc$e
-}},$delegates:["onwidth","__resetgradientcache",null,"onheight","__resetgradientcache",null,"onbasecolor","__resetgradientcache",null],_parseLinearGradientCache:{},bevel:new LzStyleConstraintExpr("bevel","number","bevel-width",0,false),gradientfill:new LzStyleConstraintExpr("gradientfill","string","gradient-fill","",false),interiorbordercolor:new LzStyleConstraintExpr("interiorbordercolor","color","interior-border-color",new LzOnceExpr("interiorbordercolor","color","$51",null),false),interiorbordercolordown:new LzStyleConstraintExpr("interiorbordercolordown","color","interior-border-color-down",new LzAlwaysExpr("interiorbordercolordown","color","$56","$57",null),false),interiorbordercolorover:new LzStyleConstraintExpr("interiorbordercolorover","color","interior-border-color-over",new LzAlwaysExpr("interiorbordercolorover","color","$54","$55",null),false),interiorbordercolorup:new LzStyleConstraintExpr("interiorbordercolorup","color","interior-border-color-up",new LzAlwaysExpr("interiorbordercolorup","color","$52","$53",null),false),interiorfillcolor:new LzStyleConstraintExpr("interiorfillcolor","color","interior-fill-color",new LzOnceExpr("interiorfillcolor","color","$58",null),false),interiorfillcolordown:new LzStyleConstraintExpr("interiorfillcolordown","color","interior-fill-color-down",new LzAlwaysExpr("interiorfillcolordown","color","$5d","$5e",null),false),interiorfillcolorover:new LzStyleConstraintExpr("interiorfillcolorover","color","interior-fill-color-over",new LzAlwaysExpr("interiorfillcolorover","color","$5b","$5c",null),false),interiorfillcolorup:new LzStyleConstraintExpr("interiorfillcolorup","color","interior-fill-color-up",new LzAlwaysExpr("interiorfillcolorup","color","$59","$5a",null),false),ongradientfill:LzDeclaredEvent,vertical:new LzStyleConstraintExpr("vertical","boolean","gradient-vertical",false,false)},$lzc$class_$g.attributes)
+}},$delegates:["onwidth","__resetgradientcache",null,"onheight","__resetgradientcache",null,"onbasecolor","__resetgradientcache",null],__tintColor:{},_parseLinearGradientCache:{},bevel:new LzStyleConstraintExpr("bevel","number","bevel-width",0,false),gradientfill:new LzStyleConstraintExpr("gradientfill","string","gradient-fill","",false),interiorbordercolor:new LzStyleConstraintExpr("interiorbordercolor","color","interior-border-color",new LzOnceExpr("interiorbordercolor","color","$51",null),false),interiorbordercolordown:new LzStyleConstraintExpr("interiorbordercolordown","color","interior-border-color-down",new LzAlwaysExpr("interiorbordercolordown","color","$56","$57",null),false),interiorbordercolorover:new LzStyleConstraintExpr("interiorbordercolorover","color","interior-border-color-over",new LzAlwaysExpr("interiorbordercolorover","color","$54","$55",null),false),interiorbordercolorup:new LzStyleConstraintExpr("interiorbordercolorup","color","interior-border-color-up",new LzAlwaysExpr("interiorbordercolorup","color","$52","$53",null),false),interiorfillcolor:new LzStyleConstraintExpr("interiorfillcolor","color","interior-fill-color",new LzOnceExpr("interiorfillcolor","color","$58",null),false),interiorfillcolordown:new LzStyleConstraintExpr("interiorfillcolordown","color","interior-fill-color-down",new LzAlwaysExpr("interiorfillcolordown","color","$5d","$5e",null),false),interiorfillcolorover:new LzStyleConstraintExpr("interiorfillcolorover","color","interior-fill-color-over",new LzAlwaysExpr("interiorfillcolorover","color","$5b","$5c",null),false),interiorfillcolorup:new LzStyleConstraintExpr("interiorfillcolorup","color","interior-fill-color-up",new LzAlwaysExpr("interiorfillcolorup","color","$59","$5a",null),false),ongradientfill:LzDeclaredEvent,vertical:new LzStyleConstraintExpr("vertical","boolean","gradient-vertical",false,false)},$lzc$class_$g.attributes)
 }}})($lzc$class_$g)
 };{
 Class.make("$lzc$class_$h",["gradienttransition",void 0,"gradienttransitionspeed",void 0,"transitionto",void 0,"transitionfrom",void 0,"draw",function($0){
@@ -2607,7 +2601,6 @@ if(!this["interiorfillcolor"])return;$0.beginPath();this.drawshape($0,1,1,this.w
 if(!this.baseto)this.baseto=this.basecolor;this.basefrom=this.baseto;this.baseto=this.basecolor;if(!this.transitionto)this.transitionto=this._gradientfill;this.transitionfrom=this.transitionto;this.transitionto=this._gradientfill;if(typeof $0=="string"){
 this.gradienttransition=0;if(this._oldanim)this._oldanim.setAttribute("started",false);this._oldanim=this.animate("gradienttransition",1,this.gradienttransitionspeed)
 }},"stylegradient",function($0){
-with(this){
 var $1=this["gradientfill"];if(this.vertical){
 var $2=$1.indexOf("top");if($2>-1){
 $1="left"+$1.substring($2+3)
@@ -2616,17 +2609,12 @@ $2=$1.indexOf("bottom");if($2>-1){
 $1="right"+$1.substring($2+6)
 }}};var $3=this.parseLinearGradient($1);if(this.transitionfrom!=null){
 var $4=[];var $5=this.transitionto.colorstops;var $6=this.transitionfrom.colorstops;for(var $7=0,$8=$5.length;$7<$8;$7++){
-var $9={};var $a=this.tweenrgb(this.basefrom,this.baseto,this.gradienttransition);$9.color=this.tintColor(this.tweenrgb(LzColorUtils.hextoint($6[$7].color),LzColorUtils.hextoint($5[$7].color),this.gradienttransition),$a);var $b=$5[$7].percentage-$6[$7].percentage;$9.percentage=$6[$7].percentage+$b*this.gradienttransition;$4[$7]=$9
+var $9={};var $a=this.tweenrgb(this.basefrom,this.baseto,this.gradienttransition);$9.color=this.tintColor(this.tweenrgb($6[$7].color,$5[$7].color,this.gradienttransition),$a);var $b=$5[$7].percentage-$6[$7].percentage;$9.percentage=$6[$7].percentage+$b*this.gradienttransition;$4[$7]=$9
 };$3.colorstops=$4
 };$0.fillStyle=this.cssToLinearGradient($0,$3)
-}},"tweenrgb",function($0,$1,$2){
-with(this){
-switch(arguments.length){
-case 2:
-$2=0;
-
-};if($0===$1)return $0;var $3=$0>>16&255,$4=$0>>8&255,$5=$0&255;var $6=$1>>16&255,$7=$1>>8&255,$8=$1&255;var $9=$3+($6-$3)*$2;var $a=$4+($7-$4)*$2;var $b=$5+($8-$5)*$2;return Math.round(($9<<16)+($a<<8)+$b)
-}},"drawgradient",function($0){
+},"tweenrgb",function($0,$1,$2){
+if($0===$1)return $0;var $3=$0>>16&255,$4=$0>>8&255,$5=$0&255;var $6=$1>>16&255,$7=$1>>8&255,$8=$1&255;var $9=$3+($6-$3)*$2;var $a=$4+($7-$4)*$2;var $b=$5+($8-$5)*$2;return($9<<16)+($a<<8)+($b|0)
+},"drawgradient",function($0){
 $0.beginPath();var $1=1;if(this.bevel){
 var $1=this.bevel+this.borderwidth
 };this.drawshape($0,$1,$1,this.width-$1*2-1,this.height-$1*2-1);$0.fill()
