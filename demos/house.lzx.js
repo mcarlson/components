@@ -1,4 +1,4 @@
-var combobox_floater=null;var slider_floater=null;canvas=new LzCanvas(null,{__LZproxied:"false",appbuilddate:"2010-08-07T02:24:08Z",bgcolor:16777215,embedfonts:true,font:"Verdana,Vera,sans-serif",fontsize:11,fontstyle:"plain",height:"100%",lpsbuild:"17176 /Users/maxcarlson/openlaszlo/trunk-clean",lpsbuilddate:"2010-08-04T03:41:59Z",lpsrelease:"Latest",lpsversion:"5.0.x",runtime:"dhtml",width:"100%"});Mixin.make("DrawviewShared",["$lzsc$initialize",function($0,$1,$2,$3){
+var combobox_floater=null;var slider_floater=null;canvas=new LzCanvas(null,{__LZproxied:"false",appbuilddate:"2010-08-07T03:11:37Z",bgcolor:16777215,embedfonts:true,font:"Verdana,Vera,sans-serif",fontsize:11,fontstyle:"plain",height:"100%",lpsbuild:"17176 /Users/maxcarlson/openlaszlo/trunk-clean",lpsbuilddate:"2010-08-04T03:41:59Z",lpsrelease:"Latest",lpsversion:"5.0.x",runtime:"dhtml",width:"100%"});Mixin.make("DrawviewShared",["$lzsc$initialize",function($0,$1,$2,$3){
 switch(arguments.length){
 case 0:
 $0=null;
@@ -267,10 +267,10 @@ this.context.clearRect($0,$1,$2,$3)
 },"strokeRect",function($0,$1,$2,$3){
 this.__dirty=true;this.__updateLineStyle();this.context.strokeRect($0,$1,$2,$3)
 }],[DrawviewShared,LzView],["tagname","drawview","attributes",new LzInheritedHash(LzView.attributes),"__colorcache",{},"images",{}]);lz[$lzc$class_drawview.tagname]=$lzc$class_drawview;Class.make("LzCanvasGradient",["__context",null,"__g",null,"$lzsc$initialize",function($0,$1,$2){
-this.__context=$0;if($2){
-this.__g=$0.context.createRadialGradient.apply($0.context,$1)
+this.__context=$0;var $3=$0.context;if($2){
+this.__g=$3.createRadialGradient.apply($3,$1)
 }else{
-this.__g=$0.context.createLinearGradient.apply($0.context,$1)
+this.__g=$3.createLinearGradient.apply($3,$1)
 }},"addColorStop",function($0,$1){
 var $2=lz.drawview.__colorcache;var $3=$2[$1];if($3==null){
 $3=LzColorUtils.torgb($1);$2[$1]=$3
@@ -919,7 +919,7 @@ switch(arguments.length){
 case 0:
 $0=null;
 
-};if(!this.context||!canvas.isinited||this.lockredraw)return;this.clear();this.beginPath();if(this["draw"]){
+};if(!this.context||!canvas.isinited||this.lockredraw)return;this.beginPath();if(this["draw"]){
 this.draw(this)
 };if(this.scopes&&this.scopes.length&&this.drawchildren){
 this.__drawchildren()
@@ -1273,7 +1273,7 @@ return $0
 }else{
 var $3=LzColorUtils.tohsv($0);this.__tintColor[$2]=LzColorUtils.fromhsv($1.h,$1.s,$3.v);return this.__tintColor[$2]
 }},"__resetgradientcache",function($0){
-this._gradientfills={}},"cssToLinearGradient",function($0,$1){
+this.__dirty=false;this._gradientfills={}},"cssToLinearGradient",function($0,$1){
 if(!$1||!$1.css)return;var $2=this["_gradientfills"];if(!$2){
 $2=this._gradientfills={}}else if($2[$1.css]!=null){
 return $2[$1.css]
@@ -1379,11 +1379,12 @@ lz.$lzsc$thrownError=$lzsc$e
 Mixin.make("$lzc$class_drawbutton",["gradienttransition",void 0,"gradienttransitionspeed",void 0,"transitionto",void 0,"transitionfrom",void 0,"draw",function($0){
 if(this["drawtarget"]&&$0===this){
 $0.clear();return
-};$0.globalAlpha=this.disabled?0.5:1;if(this.interiorborderwidth){
+};$0.globalAlpha=this.disabled?0.5:1;if(!this.__dirty){
+if(this.interiorborderwidth){
 $0.lineWidth=$0.interiorborderwidth;this.styleinteriorborder($0);this.drawinteriorborder($0)
 };$0.lineWidth=$0.borderwidth;if(this.borderwidth){
 this.styleborder($0);this.drawborder($0)
-};this.stylegradient($0);this.drawgradient($0)
+}};this.stylegradient($0);this.drawgradient($0)
 },"styleborder",function($0){
 if(!this.bordercolor)return;$0.strokeStyle=this.bordercolor
 },"drawborder",function($0){
@@ -1410,7 +1411,7 @@ var $9={};var $a=this.tweenrgb(this.basefrom,this.baseto,this.gradienttransition
 },"tweenrgb",function($0,$1,$2){
 if($0===$1)return $0;var $3=$0>>16&255,$4=$0>>8&255,$5=$0&255;var $6=$1>>16&255,$7=$1>>8&255,$8=$1&255;var $9=$3+($6-$3)*$2;var $a=$4+($7-$4)*$2;var $b=$5+($8-$5)*$2;return($9<<16)+($a<<8)+($b|0)
 },"drawgradient",function($0){
-$0.beginPath();var $1=1;if(this.bevel){
+$0.beginPath();var $1=1.5;if(this.bevel){
 var $1=this.bevel+this.borderwidth
 };this.drawshape($0,$1,$1,this.width-$1*2-1,this.height-$1*2-1);$0.fill()
 },"$lzsc$initialize",function($0,$1,$2,$3){
@@ -1434,11 +1435,12 @@ LzNode.mergeAttributes({$delegates:["onmousestate","redraw",null,"ongradienttran
 Class.make("$lzc$class_$3",["gradienttransition",void 0,"gradienttransitionspeed",void 0,"transitionto",void 0,"transitionfrom",void 0,"draw",function($0){
 if(this["drawtarget"]&&$0===this){
 $0.clear();return
-};$0.globalAlpha=this.disabled?0.5:1;if(this.interiorborderwidth){
+};$0.globalAlpha=this.disabled?0.5:1;if(!this.__dirty){
+if(this.interiorborderwidth){
 $0.lineWidth=$0.interiorborderwidth;this.styleinteriorborder($0);this.drawinteriorborder($0)
 };$0.lineWidth=$0.borderwidth;if(this.borderwidth){
 this.styleborder($0);this.drawborder($0)
-};this.stylegradient($0);this.drawgradient($0)
+}};this.stylegradient($0);this.drawgradient($0)
 },"styleborder",function($0){
 if(!this.bordercolor)return;$0.strokeStyle=this.bordercolor
 },"drawborder",function($0){
@@ -1465,7 +1467,7 @@ var $9={};var $a=this.tweenrgb(this.basefrom,this.baseto,this.gradienttransition
 },"tweenrgb",function($0,$1,$2){
 if($0===$1)return $0;var $3=$0>>16&255,$4=$0>>8&255,$5=$0&255;var $6=$1>>16&255,$7=$1>>8&255,$8=$1&255;var $9=$3+($6-$3)*$2;var $a=$4+($7-$4)*$2;var $b=$5+($8-$5)*$2;return($9<<16)+($a<<8)+($b|0)
 },"drawgradient",function($0){
-$0.beginPath();var $1=1;if(this.bevel){
+$0.beginPath();var $1=1.5;if(this.bevel){
 var $1=this.bevel+this.borderwidth
 };this.drawshape($0,$1,$1,this.width-$1*2-1,this.height-$1*2-1);$0.fill()
 },"$lzsc$initialize",function($0,$1,$2,$3){
@@ -1510,7 +1512,7 @@ return $0
 }else{
 var $3=LzColorUtils.tohsv($0);this.__tintColor[$2]=LzColorUtils.fromhsv($1.h,$1.s,$3.v);return this.__tintColor[$2]
 }}},"__resetgradientcache",function($0){
-this._gradientfills={}},"cssToLinearGradient",function($0,$1){
+this.__dirty=false;this._gradientfills={}},"cssToLinearGradient",function($0,$1){
 if(!$1||!$1.css)return;var $2=this["_gradientfills"];if(!$2){
 $2=this._gradientfills={}}else if($2[$1.css]!=null){
 return $2[$1.css]
@@ -1738,11 +1740,12 @@ LzNode.mergeAttributes({$delegates:["onfocus","$39",null,"onblur","$3a",null],fo
 Class.make("$lzc$class_$6",["gradienttransition",void 0,"gradienttransitionspeed",void 0,"transitionto",void 0,"transitionfrom",void 0,"draw",function($0){
 if(this["drawtarget"]&&$0===this){
 $0.clear();return
-};$0.globalAlpha=this.disabled?0.5:1;if(this.interiorborderwidth){
+};$0.globalAlpha=this.disabled?0.5:1;if(!this.__dirty){
+if(this.interiorborderwidth){
 $0.lineWidth=$0.interiorborderwidth;this.styleinteriorborder($0);this.drawinteriorborder($0)
 };$0.lineWidth=$0.borderwidth;if(this.borderwidth){
 this.styleborder($0);this.drawborder($0)
-};this.stylegradient($0);this.drawgradient($0)
+}};this.stylegradient($0);this.drawgradient($0)
 },"styleborder",function($0){
 if(!this.bordercolor)return;$0.strokeStyle=this.bordercolor
 },"drawborder",function($0){
@@ -1769,7 +1772,7 @@ var $9={};var $a=this.tweenrgb(this.basefrom,this.baseto,this.gradienttransition
 },"tweenrgb",function($0,$1,$2){
 if($0===$1)return $0;var $3=$0>>16&255,$4=$0>>8&255,$5=$0&255;var $6=$1>>16&255,$7=$1>>8&255,$8=$1&255;var $9=$3+($6-$3)*$2;var $a=$4+($7-$4)*$2;var $b=$5+($8-$5)*$2;return($9<<16)+($a<<8)+($b|0)
 },"drawgradient",function($0){
-$0.beginPath();var $1=1;if(this.bevel){
+$0.beginPath();var $1=1.5;if(this.bevel){
 var $1=this.bevel+this.borderwidth
 };this.drawshape($0,$1,$1,this.width-$1*2-1,this.height-$1*2-1);$0.fill()
 },"$lzsc$initialize",function($0,$1,$2,$3){
@@ -1846,7 +1849,7 @@ return $0
 }else{
 var $3=LzColorUtils.tohsv($0);this.__tintColor[$2]=LzColorUtils.fromhsv($1.h,$1.s,$3.v);return this.__tintColor[$2]
 }}},"__resetgradientcache",function($0){
-this._gradientfills={}},"cssToLinearGradient",function($0,$1){
+this.__dirty=false;this._gradientfills={}},"cssToLinearGradient",function($0,$1){
 if(!$1||!$1.css)return;var $2=this["_gradientfills"];if(!$2){
 $2=this._gradientfills={}}else if($2[$1.css]!=null){
 return $2[$1.css]
@@ -2478,7 +2481,7 @@ return $0
 }else{
 var $3=LzColorUtils.tohsv($0);this.__tintColor[$2]=LzColorUtils.fromhsv($1.h,$1.s,$3.v);return this.__tintColor[$2]
 }}},"__resetgradientcache",function($0){
-this._gradientfills={}},"cssToLinearGradient",function($0,$1){
+this.__dirty=false;this._gradientfills={}},"cssToLinearGradient",function($0,$1){
 if(!$1||!$1.css)return;var $2=this["_gradientfills"];if(!$2){
 $2=this._gradientfills={}}else if($2[$1.css]!=null){
 return $2[$1.css]
@@ -2586,11 +2589,12 @@ lz.$lzsc$thrownError=$lzsc$e
 Class.make("$lzc$class_$h",["gradienttransition",void 0,"gradienttransitionspeed",void 0,"transitionto",void 0,"transitionfrom",void 0,"draw",function($0){
 if(this["drawtarget"]&&$0===this){
 $0.clear();return
-};$0.globalAlpha=this.disabled?0.5:1;if(this.interiorborderwidth){
+};$0.globalAlpha=this.disabled?0.5:1;if(!this.__dirty){
+if(this.interiorborderwidth){
 $0.lineWidth=$0.interiorborderwidth;this.styleinteriorborder($0);this.drawinteriorborder($0)
 };$0.lineWidth=$0.borderwidth;if(this.borderwidth){
 this.styleborder($0);this.drawborder($0)
-};this.stylegradient($0);this.drawgradient($0)
+}};this.stylegradient($0);this.drawgradient($0)
 },"styleborder",function($0){
 if(!this.bordercolor)return;$0.strokeStyle=this.bordercolor
 },"drawborder",function($0){
@@ -2617,7 +2621,7 @@ var $9={};var $a=this.tweenrgb(this.basefrom,this.baseto,this.gradienttransition
 },"tweenrgb",function($0,$1,$2){
 if($0===$1)return $0;var $3=$0>>16&255,$4=$0>>8&255,$5=$0&255;var $6=$1>>16&255,$7=$1>>8&255,$8=$1&255;var $9=$3+($6-$3)*$2;var $a=$4+($7-$4)*$2;var $b=$5+($8-$5)*$2;return($9<<16)+($a<<8)+($b|0)
 },"drawgradient",function($0){
-$0.beginPath();var $1=1;if(this.bevel){
+$0.beginPath();var $1=1.5;if(this.bevel){
 var $1=this.bevel+this.borderwidth
 };this.drawshape($0,$1,$1,this.width-$1*2-1,this.height-$1*2-1);$0.fill()
 },"$lzsc$initialize",function($0,$1,$2,$3){
