@@ -1,4 +1,4 @@
-var combobox_floater=null;var slider_floater=null;canvas=new LzCanvas(null,{__LZproxied:"false",appbuilddate:"2010-08-06T23:06:30Z",bgcolor:16777215,embedfonts:true,font:"Verdana,Vera,sans-serif",fontsize:11,fontstyle:"plain",height:"100%",lpsbuild:"17176 /Users/maxcarlson/openlaszlo/trunk-clean",lpsbuilddate:"2010-08-04T03:41:59Z",lpsrelease:"Latest",lpsversion:"5.0.x",runtime:"dhtml",width:"100%"});Mixin.make("DrawviewShared",["$lzsc$initialize",function($0,$1,$2,$3){
+var combobox_floater=null;var slider_floater=null;canvas=new LzCanvas(null,{__LZproxied:"false",appbuilddate:"2010-08-07T02:24:08Z",bgcolor:16777215,embedfonts:true,font:"Verdana,Vera,sans-serif",fontsize:11,fontstyle:"plain",height:"100%",lpsbuild:"17176 /Users/maxcarlson/openlaszlo/trunk-clean",lpsbuilddate:"2010-08-04T03:41:59Z",lpsrelease:"Latest",lpsversion:"5.0.x",runtime:"dhtml",width:"100%"});Mixin.make("DrawviewShared",["$lzsc$initialize",function($0,$1,$2,$3){
 switch(arguments.length){
 case 0:
 $0=null;
@@ -784,12 +784,13 @@ this.setAttribute("basecolor",LzColorUtils.convertColor("null"))
 }}})($lzc$class_applybasecolor)
 };{
 Class.make("$lzc$class_drawpanel",["lockredraw",void 0,"redraw",function($0){
+with(this){
 switch(arguments.length){
 case 0:
 $0=null;
 
-};if(!this.context||!this.isinited||this.lockredraw)return;this.draw(this)
-},"draw",function($0){
+};if(!this.context||!canvas.isinited||this.lockredraw)return;this.draw(this)
+}},"draw",function($0){
 $0.clear()
 },"$lzsc$initialize",function($0,$1,$2,$3){
 switch(arguments.length){
@@ -913,18 +914,19 @@ this.setAttribute("basecolor",LzColorUtils.convertColor("null"))
 }}})($lzc$class_$2)
 };{
 Class.make("$lzc$class_basepanel",["scopes",void 0,"drawchildren",void 0,"padding",void 0,"borderwidth",void 0,"$1o",void 0,"bordercolor",void 0,"highlightcolor",void 0,"iconcolor",void 0,"selectioncolor",void 0,"$1p",void 0,"interiorbordercolor",void 0,"$1q",void 0,"interiorfillcolor",void 0,"$1r",void 0,"$1s",void 0,"interiorborderwidth",void 0,"textcolor",void 0,"textshadowcolor",void 0,"redraw",function($0){
+with(this){
 switch(arguments.length){
 case 0:
 $0=null;
 
-};if(!this.context||!this.isinited||this.lockredraw)return;this.clear();this.beginPath();if(this["draw"]){
+};if(!this.context||!canvas.isinited||this.lockredraw)return;this.clear();this.beginPath();if(this["draw"]){
 this.draw(this)
 };if(this.scopes&&this.scopes.length&&this.drawchildren){
 this.__drawchildren()
 };if(this["drawlast"]){
 this.drawlast(this)
 };this.closePath()
-},"__drawchildren",function($0){
+}},"__drawchildren",function($0){
 switch(arguments.length){
 case 0:
 $0=null;
