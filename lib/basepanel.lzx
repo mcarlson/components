@@ -12,6 +12,7 @@
         <attribute name="borderwidth" style="border-width" type="number" value="0"/>
         <attribute name="bordercolor" style="border-color" type="color" value="null"/>
         <attribute name="highlightcolor" style="highlight-color" type="color" value="#0000ff"/>
+        <attribute name="iconcolor" style="icon-color" type="color" value="#0000ff"/>
         <attribute name="selectioncolor" style="selection-color" type="color" value="#c2d9e7"/>
         <attribute name="interiorbordercolor" style="interior-border-color" type="color" value="null"/>
         <attribute name="interiorfillcolor" style="interior-fill-color" type="color" value="null"/>
@@ -21,9 +22,9 @@
 
         <method name="redraw" args="ignore=null" >            
             <![CDATA[
-            if (! this.context || ! this.isinited || this.lockredraw) return;
-            this.clear();
-            this.beginPath();
+            if (! this.context || ! canvas.isinited || this.lockredraw) return;
+            //this.clear();
+            //this.beginPath();
             if (this['draw']) {
                 this.draw(this);
             }
@@ -35,7 +36,7 @@
             if (this['drawlast']) {
                 this.drawlast(this);
             }
-            this.closePath();
+            //this.closePath();
             ]]>
         </method>
 

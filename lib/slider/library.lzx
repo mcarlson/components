@@ -77,6 +77,7 @@
         <attribute name="min" type="number" value="0"/>
         <attribute name="max" type="number" value="100"/>
         <method name="draw" args="context">
+            context.clear();
             var h = this.height * .25;
             this.drawshape(context,0,h,this.width - 1,h * 2);
             context.lineWidth = this.borderwidth;

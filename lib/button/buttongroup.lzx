@@ -114,7 +114,9 @@
     <method name="drawlast" args="context">
         <![CDATA[
         // draw dividers 
-        context.fillStyle = this.cssToLinearGradient(context,this.dividergradient);
+        if (context.dividergradient) {
+            //context.fillStyle = this.cssToLinearGradient(context,context.dividergradient);
+        }
         var position = 0;
         for (var i = 0, l = this.subviews.length - 1; i < l; i++) {
             var button = subviews[i];
@@ -140,12 +142,14 @@
 
 //        context.lineWidth = this.borderwidth;
 //        if (this.borderwidth) {
-            context.strokeStyle = this.bordercolor;
+        if (context.bordercolor) {
+            context.strokeStyle = context.bordercolor;
             //this.drawborder(context);
             this.beginPath();
             this.drawshape(context,0,0,this.width - 1, this.height - 1);
             context.stroke();
 //        }
+        }
         ]]>
     </method>
 </class>

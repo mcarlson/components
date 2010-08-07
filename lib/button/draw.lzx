@@ -1,4 +1,8 @@
 <mixin name="drawbutton">
+    <attribute name="gradienttransition" type="number" value="0"/>
+    <attribute name="gradienttransitionspeed" type="number" style="gradient-transition-speed" value="300"/>
+    <attribute name="transitionto" value="null"/>
+    <attribute name="transitionfrom" value="null"/>
     <method name="draw" args="context">
         <![CDATA[
         if (this['drawtarget'] && context === this) {
@@ -8,16 +12,19 @@
         //Debug.info('draw', this.mousestate);
         context.globalAlpha = this.disabled ? .5 : 1;
 
-        if (this.interiorborderwidth) {
-            context.lineWidth = context.interiorborderwidth;
-            this.styleinteriorborder(context);
-            this.drawinteriorborder(context);
-        }
+        if (! this.__dirty) {
+            if (this.interiorborderwidth) {
+                context.lineWidth = context.interiorborderwidth;
+                this.styleinteriorborder(context);
+                this.drawinteriorborder(context);
+            }
 
-        context.lineWidth = context.borderwidth;
-        if (this.borderwidth) {
-            this.styleborder(context);
-            this.drawborder(context);
+            context.lineWidth = context.borderwidth;
+            if (this.borderwidth) {
+                this.styleborder(context);
+                this.drawborder(context);
+            }
+            this.__dirty = false
         }
 
         this.stylegradient(context);
@@ -26,6 +33,7 @@
     </method>
 
     <handler name="onmousestate" method="redraw"/>
+    <handler name="ongradienttransition"  method="redraw"/>
 
     <method name="styleborder" args="context">
         if (! this.bordercolor) return;
@@ -45,12 +53,12 @@
     </method>
 
     <method name="styleinteriorborder" args="context">
-        if (! this['interiorfillcolor' + this.mousestate] || ! this['interiorbordercolor' + this.mousestate]) return;
-        context.fillStyle = this['interiorfillcolor' + this.mousestate];
-        context.strokeStyle = this['interiorbordercolor' + this.mousestate];
+        if (! this['interiorfillcolor'] || ! this['interiorbordercolor']) return;
+        context.fillStyle = this['interiorfillcolor'];
+        context.strokeStyle = this['interiorbordercolor'];
     </method>
     <method name="drawinteriorborder" args="context">
-        if (! this['interiorfillcolor' + this.mousestate]) return;
+        if (! this['interiorfillcolor']) return;
         // Draw interior border and fill
         context.beginPath();
         this.drawshape(context, 1, 1, this.width - 3, this.height - 3);
@@ -60,7 +68,29 @@
         context.stroke();
     </method>
 
+    <handler name="onmousestate" method="updateTransitions"/>
+    <handler name="oninit" method="updateTransitions"/>
+    <method name="updateTransitions" args="ignore">
+        <![CDATA[
+        if (! this.baseto) this.baseto = this.basecolor;
+        this.basefrom = this.baseto;
+        this.baseto = this.basecolor;
+
+        if (! this.transitionto) this.transitionto = this._gradientfill;
+        this.transitionfrom = this.transitionto;
+        this.transitionto = this._gradientfill;
+
+        if (typeof ignore == 'string') {
+            // only animate for mouse events
+            this.gradienttransition = 0;
+            if (this._oldanim) this._oldanim.setAttribute('started', false);
+            this._oldanim = this.animate('gradienttransition', 1, this.gradienttransitionspeed);
+        }
+        ]]>
+    </method>
+
     <method name="stylegradient" args="context">
+        <![CDATA[
         var css = this['gradientfill'];
         if (this.vertical) {
             var o = css.indexOf('top');
@@ -73,16 +103,55 @@
                 }
             }
         }
-        context.fillStyle = this.cssToLinearGradient(context, css);
+
+        var gradientschema = this.parseLinearGradient(css);
+
+        if (this.transitionfrom != null) {
+            var stops = [];
+            var to = this.transitionto.colorstops;
+            var from = this.transitionfrom.colorstops;
+            for (var i = 0, l = to.length; i < l; i++) {
+                var stop = {};
+                var tintcolor = this.tweenrgb(this.basefrom, this.baseto, this.gradienttransition);
+                //Debug.info(tintcolor);
+                stop.color = this.tintColor(this.tweenrgb(from[i].color, to[i].color, this.gradienttransition), tintcolor)
+                var delta = to[i].percentage - from[i].percentage;
+                stop.percentage = from[i].percentage + (delta * this.gradienttransition);
+                //console.log(stop.color, stop.percentage);
+                stops[i] = stop;
+            }
+            gradientschema.colorstops = stops;
+        }
+        context.fillStyle = this.cssToLinearGradient(context, gradientschema);
+        ]]>
     </method>
 
+    <method name="tweenrgb" args="from, to, percent">
+        <![CDATA[
+        if (from === to) return from;
+    /**
+      * Returns the color between two rgb color values, given a percentage between 0 and 1
+      */
+        var rf = (from >> 16 & 0xff), gf = (from >> 8 & 0xff), bf = (from & 0xff);
+        var rt = (to >> 16 & 0xff), gt = (to >> 8 & 0xff), bt = (to & 0xff);
+        var newr = rf + ((rt - rf) * percent); 
+        var newg = gf + ((gt - gf) * percent); 
+        var newb = bf + ((bt - bf) * percent); 
+        return (newr << 16) + (newg << 8) + (newb | 0);
+        ]]>
+    </method>
+
+
     <method name="drawgradient" args="context">
-        context.beginPath();
-        var inset = 1;
-        if (this.bevel) {
-            var inset = this.bevel + this.borderwidth;
+        if (! this.__dirty) {
+            var inset = 1.5;
+            if (this.bevel) {
+                var inset = this.bevel + this.borderwidth;
+            }
+            context.beginPath();
+            this.drawshape(context, inset, inset, this.width - (inset * 2) - 1, this.height - (inset * 2) - 1);
+            context.closePath();
         }
-        this.drawshape(context, inset, inset, this.width - (inset * 2) - 1, this.height - (inset * 2) - 1);
         context.fill();
     </method>
 </mixin>

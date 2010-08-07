@@ -8,7 +8,7 @@
     <handler name="oninit" method="redraw"/>
 
     <method name="redraw" args="ignore=null" >            
-        if (! this.context || ! this.isinited || this.lockredraw) return;
+        if (! this.context || ! canvas.isinited || this.lockredraw) return;
         this.draw(this);
     </method>
 

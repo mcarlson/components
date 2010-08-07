@@ -1,16 +1,20 @@
 <mixin name="drawinputtext">
     <method name="draw" args="context">
         if (! context['interiorfillcolor'] || ! context['interiorbordercolor']) return;
-        context.drawshape(context, -context.padding, -context.padding, this.width + context.padding, this.height + context.padding);
+        if (! this.__dirty) {
+            context.drawshape(context, -context.padding, -context.padding, this.width + context.padding, this.height + context.padding);
+        }
 
         if (this.focused) this.drawfocus(context);
 
+        if (! this.__dirty) {
         context.fillStyle = context.interiorfillcolor;
         context.fill();
 
         context.lineWidth = context.borderwidth;
         context.strokeStyle = context.interiorbordercolor;
         context.stroke();
+        }
     </method>
 
     <method name="drawfocus" args="scope">
