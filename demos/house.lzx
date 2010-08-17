@@ -1,4 +1,4 @@
-<canvas>
+<canvas height="800">
     <include href="../lib/"/>
 
     <stylesheet>
