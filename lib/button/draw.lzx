@@ -6,7 +6,6 @@
     <method name="draw" args="context">
         <![CDATA[
         if (this['drawtarget'] && context === this) {
-            context.clear();
             return;
         }
         //Debug.info('draw', this.mousestate);
