@@ -6,7 +6,6 @@
     <handler name="onwidth" method="redraw"/>
     <handler name="onheight" method="redraw"/>
     <handler name="oninit" method="redraw"/>
-    <handler name="oninit" reference="canvas" method="redraw"/>
 
     <method name="redraw" args="ignore=null" >            
         if (! this.context || ! canvas.isinited || this.lockredraw) return;
