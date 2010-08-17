@@ -29,7 +29,7 @@
         super.destroy();
     </method>
     <method name="redraw" args="ignore=null">
-        if (! this.drawtarget || ! this.isinited) return;
+        if (! this.drawtarget || ! canvas.isinited) return;
         this.drawtarget.redraw(this);
     </method>
 </mixin>

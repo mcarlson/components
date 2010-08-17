@@ -79,6 +79,7 @@
         <method name="draw" args="context">
             context.clear();
             var h = this.height * .25;
+            this.beginPath();
             this.drawshape(context,0,h,this.width - 1,h * 2);
             context.lineWidth = this.borderwidth;
             context.strokeStyle = this.interiorbordercolor;
