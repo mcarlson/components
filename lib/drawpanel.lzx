@@ -3,12 +3,11 @@
     <attribute name="aliaslines" value="true" type="boolean"/>
     <attribute name="measuresize" value="false" type="boolean"/>
     <attribute name="lineCap" value="round" type="string"/>
-    <handler name="onwidth" method="redraw"/>
-    <handler name="onheight" method="redraw"/>
+    <handler name="oncontext" method="redraw"/>
     <handler name="oninit" method="redraw"/>
 
     <method name="redraw" args="ignore=null" >            
-        if (! this.context || ! canvas.isinited || this.lockredraw) return;
+        if (! canvas.isinited || this.lockredraw) return;
         this.draw(this);
     </method>
 
