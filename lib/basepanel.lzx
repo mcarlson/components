@@ -20,48 +20,55 @@
         <attribute name="textcolor" style="text-color" value="black" type="string" />
         <attribute name="textshadowcolor" style="text-shadow-color" value="white" type="string" />
 
+        <handler name="onwidth" method="_forceredraw"/>
+        <handler name="onheight" method="_forceredraw"/>
+        <method name="_forceredraw" args="ignore=null" >            
+            <![CDATA[
+            if (this.context && canvas.isinited) {
+                this.clear();
+                this.redraw();
+            }
+            ]]>
+        </method>
+
         <method name="redraw" args="ignore=null" >            
             <![CDATA[
-            if (! this.context || ! canvas.isinited || this.lockredraw) return;
-            //this.clear();
-            //this.beginPath();
+            // stop measuring the size for now, store current value to restore later
+            var measuresize = this.measuresize;
+            this.measuresize = false;
+
+            if (! canvas.isinited || this.lockredraw) return;
             if (this['draw']) {
                 this.draw(this);
             }
 
             if (this.scopes && this.scopes.length && this.drawchildren) {
-                this.__drawchildren();
+                this.__drawchildren(this);
             }
 
-            if (this['drawlast']) {
-                this.drawlast(this);
-            }
-            //this.closePath();
+            this.drawlast(this);
+            this.measuresize = measuresize;
             ]]>
         </method>
 
-        <method name="__drawchildren" args="ignore=null" >            
+        <method name="__drawchildren" args="context" >            
             <![CDATA[
-            if (! this.scopes || ! this.scopes.length || ! this.drawchildren) {
+            var scopes = this.scopes;
+            if (! scopes || ! scopes.length || ! this.drawchildren) {
                 return;
             }
-            // stop measuring the size for now, store current value to restore later
-            var measuresize = this.measuresize;
-            this.measuresize = false;
 
-            for (var i = 0, l = this.scopes.length; i < l; i++) {
-                var scope = this.scopes[i];
+            for (var i = 0, l = scopes.length; i < l; i++) {
+                var scope = scopes[i];
                 if (scope) {
                     var x = scope.x;
                     var y = scope.y;
-                    this.translate(x, y);
-                    this.beginPath();
-                    scope.draw(this);
-                    this.translate(-x, -y);
+                    context.translate(x, y);
+                    context.beginPath();
+                    scope.draw(context);
+                    context.translate(-x, -y);
                 }
             }
-
-            this.measuresize = measuresize;
             ]]>
         </method>
 
@@ -169,6 +176,9 @@
             }
             super.destroy();
             ]]>
+        </method>
+        <method name="drawlast" args="context">
+            return;
         </method>
     </class>
 </library>
