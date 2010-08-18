@@ -33,11 +33,11 @@
 
         <method name="redraw" args="ignore=null" >            
             <![CDATA[
+            if (! canvas.isinited || this.lockredraw) return;
             // stop measuring the size for now, store current value to restore later
             var measuresize = this.measuresize;
             this.measuresize = false;
 
-            if (! canvas.isinited || this.lockredraw) return;
             if (this['draw']) {
                 this.draw(this);
             }
