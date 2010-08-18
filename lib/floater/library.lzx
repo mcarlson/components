@@ -29,16 +29,15 @@
         </method>
         <method name="updatePosition" args="ignore=null">
             <![CDATA[
-            if (! this.target) return;
-            var who = this.target;
-            var x = who.getAttributeRelative('x', canvas);
-            var y = who.getAttributeRelative('y', canvas);
-
+            var target = this.target;
+            if (! target) return;
+            var x = target.getAttributeRelative('x', canvas);
+            var y = target.getAttributeRelative('y', canvas);
 
             if (this.showbelow) {
                 // can we fit below
-                if (y + who.height + this.height < canvas.height) {
-                    y += who.height;
+                if (y + target.height + this.height < canvas.height) {
+                    y += target.height;
                 } else {
                     y -= this.height;
                 }
@@ -46,7 +45,7 @@
                 if (y - this.height > 0) {
                     y -= this.height;
                 } else {
-                    y += who.height;
+                    y += target.height;
                 }
             }
 
