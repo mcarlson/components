@@ -1,0 +1,144 @@
+<mixin name="gradientfill">
+    <attribute name="gradientfill" style="gradient-fill" type="string" value=""/>
+    <event name="ongradientfill"/>
+    <setter name="gradientfill" args="css">
+        <![CDATA[
+        if (css && css != this.gradientfill) {
+            this._gradientfill = this.parseLinearGradient(css);
+        }
+        this.gradientfill = css;
+        if (this.ongradientfill.ready) this.ongradientfill.sendEvent(css);
+        ]]>
+    </setter>
+
+    <attribute name="_parseLinearGradientCache" value="{}"/>
+    <method name="parseLinearGradient" args="css">
+        <![CDATA[
+        var gradientschema:Object = this._parseLinearGradientCache[css];
+        if (gradientschema) {
+            // return a clone
+            return {startpos: gradientschema.startpos,
+                    colorstops: gradientschema.colorstops.slice(),
+                    css: gradientschema.css};
+        } else {
+            var tokens = css.split(',');
+            if (tokens.length < 2) {
+                if ($debug) {
+                    Debug.warn('Gradients require a position [top | left | right | bottom] and at least two color positions', tokens, css);
+                }
+                return;
+            }
+
+            var startpos = tokens.shift();
+
+//            // process angle
+//            var radians = parseInt(angle);
+//            // TODO: handle 'grad'
+//            if (angle.indexOf('deg') == -1) {
+//               radians *= (Math.PI / 180);
+//            }
+//
+//            var radius = this.width * 4;
+//            var x:Number = x + radius *Math.cos(radians);
+//            var y:Number = y + radius *Math.sin(2 * Math.PI - radians);
+
+
+            // create gradient schema
+            gradientschema = {};
+            gradientschema.startpos = startpos;
+            gradientschema.colorstops = [];
+            gradientschema.css = css;
+            var hextoint = lz.ColorUtils.hextoint;
+            // Add color stops
+            for (var i = 0; i < tokens.length; i++) {
+                // color, percentage
+                var items = tokens[i].split(' ');
+                gradientschema.colorstops[i] = {
+                                    color: hextoint(items[0]),
+                                    percentage: parseInt(items[1]) * .01
+                                };
+            }
+            // save to global cache
+            this._parseLinearGradientCache[css] = gradientschema;
+        }
+        return gradientschema;
+        ]]>
+    </method>
+
+    <attribute name="__tintColor" value="{}"/>
+
+    <method name="tintColor" args="color, basecolor">
+        var key = color + '.' + basecolor;
+        if (this.__tintColor[key]) return this.__tintColor[key];
+        if (basecolor == null) {
+            basecolor = this._basehsv;
+        } else {
+            basecolor = lz.ColorUtils.tohsv(basecolor);
+        }
+        if (! basecolor) {
+            return color;
+        } else {
+            // Use v and s from the color
+            var col = lz.ColorUtils.tohsv(color);
+            // Use h from basecolor
+            //Debug.info('tintColor', color, basecolor, col);
+            this.__tintColor[key] = lz.ColorUtils.fromhsv(basecolor.h, basecolor.s, col.v);
+            return this.__tintColor[key];
+        }
+    </method>
+
+    <handler name="onwidth" method="__resetgradientcache"/>
+    <handler name="onheight" method="__resetgradientcache"/>
+    <handler name="onbasecolor" method="__resetgradientcache"/>
+    <method name="__resetgradientcache" args="ignore">
+        this.__dirty = false;
+        this._gradientfills = {};
+    </method>
+
+    <method name="cssToLinearGradient" args="context, gradientschema">
+        <![CDATA[
+        // We require top|left position and percentages with colors for now...
+        // linear-gradient([top | left], <color-stop>, <color-stop>[, <color-stop>]*);
+        // <color-stop> stands for: <color> <percentage>
+        if (! gradientschema || ! gradientschema.css) return;
+
+        var cache = this['_gradientfills'];
+        if (! cache) {
+            cache = this._gradientfills = {};
+        } else if (cache[gradientschema.css] != null) {
+            return cache[gradientschema.css];
+        }
+
+        // From http://dev.w3.org/csswg/css3-images/#linear-gradients 
+        // linear-gradient([<bg-position> || <angle>,]? <color-stop>, <color-stop>[, <color-stop>]*);
+        // <color-stop> stands for: <color> [ <percentage> | <length> ]?
+
+        // create gradient
+        var xfrom=0, yfrom=0, xto = 0, yto = 0, startpos = gradientschema.startpos;
+        if (startpos == 'top') {
+            yto = this.height;
+        } else if (startpos == 'bottom') {
+            yfrom = this.height;
+        } else if (startpos == 'left') {
+            xto = this.width;
+        } else if (startpos == 'right') {
+            xfrom = this.width;
+        } else {
+            if ($debug) {
+                Debug.warn('unhandled position', startpos);
+            }
+        }
+
+        var g = context.createLinearGradient(xfrom,yfrom,xto,yto);
+        var colorstops = gradientschema.colorstops;
+        // Add color stops
+        for (var i = 0, l = colorstops.length; i < l; i++) {
+            var colorstop = colorstops[i];
+            g.addColorStop(colorstop.percentage, colorstop.color);
+        }
+
+        //cache[gradientschema.css] = g;
+        return g;
+        ]]>
+    </method>
+</mixin>

@@ -4,6 +4,7 @@
     <include href="../componentmodel.lzx"/>
     <include href="../componentfocus.lzx"/>
     <include href="../drawshadowfocus.lzx"/>
+    <include href="../gradientfill.lzx"/>
     <include href="events.lzx"/>
     <include href="mousedownrepeater.lzx"/>
     <include href="keyboardrepeater.lzx"/>
@@ -11,7 +12,7 @@
     <include href="draw.lzx"/>
     <include href="buttongroup.lzx"/>
 
-    <class name="bsbtn" extends="basepanel" with="componentmodel,buttonevents,stylebutton,drawshadowfocus,drawbutton,componentfocus"/>
+    <class name="bsbtn" extends="basepanel" with="componentmodel,buttonevents,stylebutton,drawshadowfocus,drawbutton,componentfocus,gradientfill"/>
 
     <class name="btn" extends="bsbtn" width="${this.txt.width + this.padding}" height="${this.txt.height + this.padding}">
         <!--- text to display in the button (can leave empty) -->
