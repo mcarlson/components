@@ -23,7 +23,6 @@
                 this.styleborder(context);
                 this.drawborder(context);
             }
-            this.__dirty = false
         }
 
         this.stylegradient(context);
@@ -142,15 +141,13 @@
 
 
     <method name="drawgradient" args="context">
-        if (! this.__dirty) {
-            var inset = 1.5;
-            if (this.bevel) {
-                var inset = this.bevel + this.borderwidth;
-            }
-            context.beginPath();
-            this.drawshape(context, inset, inset, this.width - (inset * 2) - 1, this.height - (inset * 2) - 1);
-            context.closePath();
+        var inset = 1.5;
+        if (this.bevel) {
+            var inset = this.bevel + this.borderwidth;
         }
+
+        context.beginPath();
+        this.drawshape(context, inset, inset, this.width - 1 - (inset * 2), this.height - 1 - (inset * 2));
         context.fill();
     </method>
 </mixin>
