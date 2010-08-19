@@ -67,7 +67,7 @@ $0.id="lzapp"+Math.round(Math.random()*1000000)
 };var $2=$1.__getqueryurl($0.url);for(var $3 in $2.options){
 var $4=$2.options[$3];if($4!=null){
 $0[$3]=$4
-}};var $5=$2.url+"?lzt=object&"+$2.query;var appenddiv=$1._getAppendDiv($0.id,$0.appenddivid);if(!$0.skipchromeinstall&&$1.browser.isIE&&$1.browser.version<7){
+}};var $5=$2.url+"?"+$2.query;var appenddiv=$1._getAppendDiv($0.id,$0.appenddivid);if(!$0.skipchromeinstall&&$1.browser.isIE&&$1.browser.version<7){
 if(window["CFInstall"]){
 CFInstall.check({onmissing:function(){
 appenddiv.style.display="none"
