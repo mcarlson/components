@@ -3,6 +3,17 @@
     <event name="ongradientfill"/>
     <setter name="gradientfill" args="css">
         <![CDATA[
+        if (this.vertical) {
+            var o = css.indexOf('top');
+            if (o > -1) {
+                css = 'left' + css.substring(o + 3);
+            } else {
+                o = css.indexOf('bottom');
+                if (o > -1) {
+                    css = 'right' + css.substring(o + 6);
+                }
+            }
+        }
         if (css && css != this.gradientfill) {
             this._gradientfill = this.parseLinearGradient(css);
         }
@@ -10,6 +21,69 @@
         if (this.ongradientfill.ready) this.ongradientfill.sendEvent(css);
         ]]>
     </setter>
+
+    <attribute name="gradienttransition" type="number" value="0"/>
+    <attribute name="gradienttransitionspeed" type="number" style="gradient-transition-speed" value="300"/>
+    <method name="updateTransitions" args="ignore">
+        <![CDATA[
+        if (! this.baseto) this.baseto = this.basecolor;
+        this.basefrom = this.baseto;
+        this.baseto = this.basecolor;
+
+        if (! this.transitionto) this.transitionto = this._gradientfill;
+        this.transitionfrom = this.transitionto;
+        this.transitionto = this._gradientfill;
+
+        if (typeof ignore == 'string') {
+            // only animate for mouse events
+            this.gradienttransition = 0;
+            if (this._oldanim) this._oldanim.setAttribute('started', false);
+            this._oldanim = this.animate('gradienttransition', 1, this.gradienttransitionspeed);
+        }
+        ]]>
+    </method>
+
+    <method name="clamp" args="value, factor">
+        return (((value) * factor) >> 0) / factor;
+    </method>
+    <method name="tweenGradient" args="from, to, position">
+        <![CDATA[
+        var position = this.clamp(position, 100);
+        var currentschema = this._gradientfill
+        var gradientschema = {startpos: currentschema.startpos,
+                              colorstops: currentschema.colorstops.slice(),
+                              css: currentschema.css};
+
+
+        if (this.transitionfrom != null) {
+            var stops = [];
+            var to = this.transitionto.colorstops;
+            var from = this.transitionfrom.colorstops;
+            for (var i = 0, l = to.length; i < l; i++) {
+                // Create a new colorstop object
+                var stop = {};
+                // Compute color between stops
+                var color = this.tweenrgb(from[i].color, to[i].color, position);
+
+                // apply tinting
+                var tintcolor = this.tweenrgb(this.basefrom, this.baseto, position);
+                //Debug.info(tintcolor);
+                color = this.tintColor(color, tintcolor);
+                
+                stop.color = color;
+
+                // Compute percentage
+                var delta = to[i].percentage - from[i].percentage;
+                //var delta = this.clamp(to[i].percentage - from[i].percentage, 10);
+                stop.percentage = from[i].percentage + (delta * position);
+                //console.log(stop.color, stop.percentage);
+                stops[i] = stop;
+            }
+            gradientschema.colorstops = stops;
+        }
+        return gradientschema;
+        ]]>
+    </method>
 
     <attribute name="_parseLinearGradientCache" value="{}"/>
     <method name="parseLinearGradient" args="css">
@@ -55,7 +129,8 @@
                 var items = tokens[i].split(' ');
                 gradientschema.colorstops[i] = {
                                     color: hextoint(items[0]),
-                                    percentage: parseInt(items[1]) * .01
+                                    // Usually a percentage, e.g. 100%
+                                    percentage: ((parseInt(items[1]) * .1) >> 0) * .1
                                 };
             }
             // save to global cache
@@ -66,25 +141,24 @@
     </method>
 
     <attribute name="__tintColor" value="{}"/>
-
     <method name="tintColor" args="color, basecolor">
         var key = color + '.' + basecolor;
         if (this.__tintColor[key]) return this.__tintColor[key];
-        if (basecolor == null) {
-            basecolor = this._basehsv;
-        } else {
+//        if (basecolor == null) {
+//            basecolor = this._basehsv;
+//        } else {
             basecolor = lz.ColorUtils.tohsv(basecolor);
-        }
-        if (! basecolor) {
-            return color;
-        } else {
+//        }
+//        if (! basecolor) {
+//            return color;
+//        } else {
             // Use v and s from the color
             var col = lz.ColorUtils.tohsv(color);
             // Use h from basecolor
             //Debug.info('tintColor', color, basecolor, col);
             this.__tintColor[key] = lz.ColorUtils.fromhsv(basecolor.h, basecolor.s, col.v);
             return this.__tintColor[key];
-        }
+//        }
     </method>
 
     <handler name="onwidth" method="__resetgradientcache"/>
@@ -139,6 +213,21 @@
 
         //cache[gradientschema.css] = g;
         return g;
+        ]]>
+    </method>
+
+    <method name="tweenrgb" args="from, to, percent">
+        <![CDATA[
+        if (from === to) return from;
+    /**
+      * Returns the color between two rgb color values, given a percentage between 0 and 1
+      */
+        var rf = (from >> 16 & 0xff), gf = (from >> 8 & 0xff), bf = (from & 0xff);
+        var rt = (to >> 16 & 0xff), gt = (to >> 8 & 0xff), bt = (to & 0xff);
+        var newr = rf + ((rt - rf) * percent); 
+        var newg = gf + ((gt - gf) * percent); 
+        var newb = bf + ((bt - bf) * percent); 
+        return (newr << 16) + (newg << 8) + (newb | 0);
         ]]>
     </method>
 </mixin>
