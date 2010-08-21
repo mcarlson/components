@@ -70,8 +70,6 @@
         context.stroke();
     </method>
 
-    <handler name="onmousestate" method="updateTransitions"/>
-    <handler name="oninit" method="updateTransitions"/>
 
     <method name="stylegradient" args="context">
         var gradientschema = this.tweenGradient(this.transitionfrom, this.transitionto, this.gradienttransition);

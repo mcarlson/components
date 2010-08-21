@@ -24,6 +24,9 @@
 
     <attribute name="gradienttransition" type="number" value="0"/>
     <attribute name="gradienttransitionspeed" type="number" style="gradient-transition-speed" value="300"/>
+
+    <handler name="onmousestate" method="updateTransitions"/>
+    <handler name="oninit" method="updateTransitions"/>
     <method name="updateTransitions" args="ignore">
         <![CDATA[
         if (! this.baseto) this.baseto = this.basecolor;
