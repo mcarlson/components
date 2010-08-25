@@ -3,6 +3,7 @@
 
     <class name="sliderbutton" extends="bsbtn" with="keyboardrepeater,virtualdrawview">
         <dragstate name="dragger" drag_axis="x" drag_max_x="${this.parent.width - this.width}" drag_min_x="0" applied="${this.parent.mouseisdown}"/>
+        <attribute name="_floater" value="null" allocation="class"/>
         <handler name="ondata" args="d">
             <![CDATA[
             var range = Math.abs(parent.max - parent.min);
@@ -28,14 +29,25 @@
             var newval = (perc * range) + parent.min;
             //Debug.info('onx', x, perc, range, newval, this.clonenumber);
             parent.updateValue(this.clonenumber, newval);
-            slider_floater.setAttribute('value', newval);
+            if (this.focused) {
+                if (! lz.sliderbutton._floater) {
+                    lz.sliderbutton._floater = new lz.slider_floater(canvas, {});
+                }
+                lz.sliderbutton._floater.setAttribute('value', newval);
+            }
             ]]>
         </handler>
         <handler name="onfocus" args="isfocused">
-            slider_floater.show(this);
+            if (! lz.sliderbutton._floater) {
+                lz.sliderbutton._floater = new lz.slider_floater(canvas, {});
+            }
+            lz.sliderbutton._floater.show(this);
         </handler>
         <handler name="onblur" args="isfocused">
-            slider_floater.hide();
+            if (! lz.sliderbutton._floater) {
+                lz.sliderbutton._floater = new lz.slider_floater(canvas, {});
+            }
+            lz.sliderbutton._floater.hide();
         </handler>
         <handler name="onkeydown" method="handleKeyDown"/>
         <handler name="onkeystilldown" method="handleKeyDown"/>
@@ -104,7 +116,7 @@
         </replicator>
     </class>
 
-    <fltr name="slider_floater" focusable="false" showbelow="false">
+    <class name="slider_floater" extends="fltr" focusable="false" showbelow="false">
         <text fgcolor="${parent.textcolor}" text="${parent.value}" shadowdistance="1" shadowangle="45" shadowcolor="${parent.textshadowcolor}" shadowblurradius=".1"/>
-    </fltr>
+    </class>
 </library>
