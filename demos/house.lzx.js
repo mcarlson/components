@@ -1,4 +1,4 @@
-var combobox_floater=null;var slider_floater=null;canvas=new LzCanvas(null,{__LZproxied:"false",appbuilddate:"2010-08-20T00:09:54Z",bgcolor:16777215,embedfonts:true,font:"Verdana,Vera,sans-serif",fontsize:11,fontstyle:"plain",height:800,lpsbuild:"17295 /Users/maxcarlson/openlaszlo/trunk-clean",lpsbuilddate:"2010-08-18T01:55:29Z",lpsrelease:"Latest",lpsversion:"5.0.x",runtime:"dhtml",width:"100%"});Mixin.make("DrawviewShared",["$lzsc$initialize",function($0,$1,$2,$3){
+var combobox_floater=null;var slider_floater=null;canvas=new LzCanvas(null,{__LZproxied:"false",appbuilddate:"2010-08-22T18:17:14Z",bgcolor:16777215,embedfonts:true,font:"Verdana,Vera,sans-serif",fontsize:11,fontstyle:"plain",height:800,lpsbuild:"17353 /Users/maxcarlson/openlaszlo/trunk-clean",lpsbuilddate:"2010-08-21T23:13:30Z",lpsrelease:"Latest",lpsversion:"5.0.x",runtime:"dhtml",width:"100%"});Mixin.make("DrawviewShared",["$lzsc$initialize",function($0,$1,$2,$3){
 switch(arguments.length){
 case 0:
 $0=null;
@@ -1195,7 +1195,7 @@ $3=false;
 }],null,["tagname","gradientfill","attributes",new LzInheritedHash(LzView.attributes)]);(function($0){
 with($0)with($0.prototype){
 {
-LzNode.mergeAttributes({$delegates:["onwidth","__resetgradientcache",null,"onheight","__resetgradientcache",null,"onbasecolor","__resetgradientcache",null],__tintColor:{},_parseLinearGradientCache:{},gradientfill:new LzStyleConstraintExpr("gradientfill","string","gradient-fill","",false),gradienttransition:0,gradienttransitionspeed:new LzStyleConstraintExpr("gradienttransitionspeed","number","gradient-transition-speed",300,false),ongradientfill:LzDeclaredEvent},$lzc$class_gradientfill.attributes)
+LzNode.mergeAttributes({$delegates:["onmousestate","updateTransitions",null,"oninit","updateTransitions",null,"onwidth","__resetgradientcache",null,"onheight","__resetgradientcache",null,"onbasecolor","__resetgradientcache",null],__tintColor:{},_parseLinearGradientCache:{},gradientfill:new LzStyleConstraintExpr("gradientfill","string","gradient-fill","",false),gradienttransition:0,gradienttransitionspeed:new LzStyleConstraintExpr("gradienttransitionspeed","number","gradient-transition-speed",300,false),ongradientfill:LzDeclaredEvent},$lzc$class_gradientfill.attributes)
 }}})($lzc$class_gradientfill)
 };{
 Mixin.make("$lzc$class_buttonevents",["mouseisover",void 0,"mouseisdown",void 0,"mousestate",void 0,"$m22",function(){
@@ -1452,7 +1452,7 @@ $3=false;
 }],null,["tagname","drawbutton","attributes",new LzInheritedHash(LzView.attributes)]);(function($0){
 with($0)with($0.prototype){
 {
-LzNode.mergeAttributes({$delegates:["onmousestate","redraw",null,"ongradienttransition","redraw",null,"onmousestate","updateTransitions",null,"oninit","updateTransitions",null],transitionfrom:null,transitionto:null},$lzc$class_drawbutton.attributes)
+LzNode.mergeAttributes({$delegates:["onmousestate","redraw",null,"ongradienttransition","redraw",null],transitionfrom:null,transitionto:null},$lzc$class_drawbutton.attributes)
 }}})($lzc$class_drawbutton)
 };{
 Class.make("$lzc$class_$m3",["transitionto",void 0,"transitionfrom",void 0,"draw",function($0){
@@ -1495,7 +1495,7 @@ $3=false;
 }],$lzc$class_basepanel,["displayName","<basepanel with='drawbutton'>","children",LzNode.mergeChildren([],$lzc$class_basepanel["children"]),"attributes",new LzInheritedHash($lzc$class_basepanel.attributes)],[$lzc$class_drawbutton]);(function($0){
 with($0)with($0.prototype){
 {
-LzNode.mergeAttributes({$delegates:["onmousestate","redraw",null,"ongradienttransition","redraw",null,"onmousestate","updateTransitions",null,"oninit","updateTransitions",null],transitionfrom:null,transitionto:null},$lzc$class_$m3.attributes)
+LzNode.mergeAttributes({$delegates:["onmousestate","redraw",null,"ongradienttransition","redraw",null],transitionfrom:null,transitionto:null},$lzc$class_$m3.attributes)
 }}})($lzc$class_$m3)
 };{
 Class.make("$lzc$class_$m4",["vertical",void 0,"bevel",void 0,"$m2u",void 0,"$m2v",void 0,"$m2w",void 0,"interiorbordercolorup",void 0,"$m2x",void 0,"$m2y",void 0,"interiorbordercolorover",void 0,"$m2z",void 0,"$m30",void 0,"interiorbordercolordown",void 0,"$m31",void 0,"$m32",void 0,"$m33",void 0,"interiorfillcolorup",void 0,"$m34",void 0,"$m35",void 0,"interiorfillcolorover",void 0,"$m36",void 0,"$m37",void 0,"interiorfillcolordown",void 0,"$lzsc$initialize",function($0,$1,$2,$3){
@@ -1752,7 +1752,7 @@ $3=false;
 }],$lzc$class_basepanel,["displayName","<basepanel with='gradientfill'>","children",LzNode.mergeChildren([],$lzc$class_basepanel["children"]),"attributes",new LzInheritedHash($lzc$class_basepanel.attributes)],[$lzc$class_gradientfill]);(function($0){
 with($0)with($0.prototype){
 {
-LzNode.mergeAttributes({$delegates:["onwidth","__resetgradientcache",null,"onheight","__resetgradientcache",null,"onbasecolor","__resetgradientcache",null],__tintColor:{},_parseLinearGradientCache:{},gradientfill:new LzStyleConstraintExpr("gradientfill","string","gradient-fill","",false),gradienttransition:0,gradienttransitionspeed:new LzStyleConstraintExpr("gradienttransitionspeed","number","gradient-transition-speed",300,false),ongradientfill:LzDeclaredEvent},$lzc$class_$m5.attributes)
+LzNode.mergeAttributes({$delegates:["onmousestate","updateTransitions",null,"oninit","updateTransitions",null,"onwidth","__resetgradientcache",null,"onheight","__resetgradientcache",null,"onbasecolor","__resetgradientcache",null],__tintColor:{},_parseLinearGradientCache:{},gradientfill:new LzStyleConstraintExpr("gradientfill","string","gradient-fill","",false),gradienttransition:0,gradienttransitionspeed:new LzStyleConstraintExpr("gradienttransitionspeed","number","gradient-transition-speed",300,false),ongradientfill:LzDeclaredEvent},$lzc$class_$m5.attributes)
 }}})($lzc$class_$m5)
 };{
 Class.make("$lzc$class_$m6",["focusanimationspeed",void 0,"focused",void 0,"$m3b",function($0){
@@ -1817,7 +1817,7 @@ $3=false;
 }],$lzc$class_$m6,["displayName","<basepanel with='drawbutton, componentfocus, gradientfill'>","children",LzNode.mergeChildren([],$lzc$class_$m6["children"]),"attributes",new LzInheritedHash($lzc$class_$m6.attributes)],[$lzc$class_drawbutton]);(function($0){
 with($0)with($0.prototype){
 {
-LzNode.mergeAttributes({$delegates:["onmousestate","redraw",null,"ongradienttransition","redraw",null,"onmousestate","updateTransitions",null,"oninit","updateTransitions",null],transitionfrom:null,transitionto:null},$lzc$class_$m7.attributes)
+LzNode.mergeAttributes({$delegates:["onmousestate","redraw",null,"ongradienttransition","redraw",null],transitionfrom:null,transitionto:null},$lzc$class_$m7.attributes)
 }}})($lzc$class_$m7)
 };{
 Class.make("$lzc$class_$m8",["$m3d",function($0){
@@ -2582,7 +2582,7 @@ $3=false;
 }],$lzc$class_$mh,["displayName","<view with='drawbutton, stylebutton'>","attributes",new LzInheritedHash($lzc$class_$mh.attributes)],[$lzc$class_drawbutton]);(function($0){
 with($0)with($0.prototype){
 {
-LzNode.mergeAttributes({$delegates:["onmousestate","redraw",null,"ongradienttransition","redraw",null,"onmousestate","updateTransitions",null,"oninit","updateTransitions",null],transitionfrom:null,transitionto:null},$lzc$class_$mi.attributes)
+LzNode.mergeAttributes({$delegates:["onmousestate","redraw",null,"ongradienttransition","redraw",null],transitionfrom:null,transitionto:null},$lzc$class_$mi.attributes)
 }}})($lzc$class_$mi)
 };{
 Class.make("$lzc$class_$mj",["drawtarget",void 0,"ondrawtarget",void 0,"createContext",function(){
