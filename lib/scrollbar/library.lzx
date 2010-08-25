@@ -6,7 +6,6 @@
 
     <include href="scrollstepbutton.lzx"/>
     <include href="scrollthumb.lzx"/>
-    <include href="scrolltrack.lzx"/>
     <include href="basescrollbar.lzx"/>
 
     <class name="scrlbr" extends="basepanel" with="buttonevents,bsscrlbr">
@@ -25,6 +24,7 @@
         </handler>
         <attribute name="activated" value="false" type="boolean"/>
         <event name="onactivated"/>
+        <!--- @keywords private -->
         <setter name="activated" args="activated">
             if (activated != this.activated) {
                 this.activated = activated;
@@ -74,10 +74,27 @@
             this.stroke();
         </method>
 
-        <view name="scrolltrack" width="100%" height="100%">
-            <scrltrk direction="-1" width="${parent.width}" height="${parent.thumb.y}"/>
-            <scrlthmb name="thumb" x="1" width="${parent.width-2}" drawtarget="${classroot}"/>
-            <scrltrk direction="1" y="${parent.thumb.y+parent.thumb.height}" width="${parent.width}" height="${parent.height - parent.thumb.y - parent.thumb.height}"/>
+        <view name="scrolltrack" width="100%" height="100%" with="buttonevents,mousedownrepeater">
+            <handler name="onmouseisover" args="isover">
+                this.classroot.setAttribute('activated', isover);
+            </handler>
+            <handler name="onmousedown" method="__gotclick"/>
+            <handler name="onmousestilldown" method="__gotclick"/>
+            <method name="__gotclick" args="ignore=null">
+                <![CDATA[
+                var mouse = this.getMouse();
+                if (mouse.y > this.thumb.y + this.thumb.height) {
+                    var direction = 1;
+                } else if (mouse.y < this.thumb.y) {
+                    var direction = -1;
+                } else {
+                    return;
+                }
+                this.classroot.page(direction);
+                this.classroot.setAttribute('activated', true);
+                ]]>
+            </method>
+            <scrlthmb name="thumb" x="1" width="${parent.width-2}" drawtarget="$once{this.classroot}"/>
         </view>
         <scrlstepbtn direction="-1" x="2" y="2" width="${parent.width - 4}"/>
         <scrlstepbtn direction="1" x="2" y="${parent.height - this.height - 2}" width="${parent.width - 4}"/>
