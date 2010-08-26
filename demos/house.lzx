@@ -9,7 +9,7 @@
         basepanel {
             border-width: 1;
             interior-border-width: 0;
-            border-radius: 20;
+            border-radius: 4;
             base-color: #e9e9e9;
             text-color: #585858;
             text-shadow-color: #ffffff;
@@ -23,8 +23,8 @@
             divider-gradient: 'top,#dddddd 0%,#dddddd 100%';
         }
         scrlbr {
-            size: 20;
-            border-radius: 20;
+            size: 16;
+            border-radius: 16;
         }
         scrlthmb {
             border-width: .5;
