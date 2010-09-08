@@ -1,4 +1,4 @@
-var combobox_floater=null;canvas=new LzCanvas(null,{__LZproxied:"false",appbuilddate:"2010-09-08T00:51:49Z",bgcolor:16777215,embedfonts:true,font:"Verdana,Vera,sans-serif",fontsize:11,fontstyle:"plain",height:800,lpsbuild:"17435 /Users/maxcarlson/openlaszlo/trunk-clean",lpsbuilddate:"2010-09-07T19:08:46Z",lpsrelease:"Latest",lpsversion:"5.0.x",runtime:"dhtml",width:"100%"});Mixin.make("DrawviewShared",["$lzsc$initialize",function($0,$1,$2,$3){
+var combobox_floater=null;canvas=new LzCanvas(null,{__LZproxied:"false",appbuilddate:"2010-09-08T01:21:45Z",bgcolor:16777215,embedfonts:true,font:"Verdana,Vera,sans-serif",fontsize:11,fontstyle:"plain",height:800,lpsbuild:"17435 /Users/maxcarlson/openlaszlo/trunk-clean",lpsbuilddate:"2010-09-07T19:08:46Z",lpsrelease:"Latest",lpsversion:"5.0.x",runtime:"dhtml",width:"100%"});Mixin.make("DrawviewShared",["$lzsc$initialize",function($0,$1,$2,$3){
 switch(arguments.length){
 case 0:
 $0=null;
@@ -1136,11 +1136,11 @@ return {startpos:$3.startpos,colorstops:$3.colorstops.slice(),css:$3.css}}else{
 var $4=$0.split(",");if($4.length<2){
 return
 };var $5=$4.shift();$3={};$3.startpos=$5;$3.colorstops=[];$3.css=$0;var $6=LzColorUtils.hextoint;for(var $7=0;$7<$4.length;$7++){
-var $8=$4[$7].split(" ");$3.colorstops[$7]={color:$6($8[0]),percentage:(parseInt($8[1])*0.1>>0)*0.1}}};return $3
+var $8=$4[$7].split(" ");$3.colorstops[$7]={color:$6($8[0]),percentage:(parseInt($8[1])*0.1|0)*0.1}}};return $3
 }},"present",function($0,$1,$2){
 with(this){
 var $3=$0.startpos;var $4=LzColorUtils.inttohex;var $5=$0.colorstops;for(var $6=0,$7=$5.length;$6<$7;$6++){
-var $8=$5[$6];$3+=","+$4($8.color)+" "+($8.percentage*100>>0)+"%"
+var $8=$5[$6];$3+=","+$4($8.color)+" "+($8.percentage*100|0)+"%"
 };return $3
 }}],$lz$class_PresentationType,["nullValue",0,"lzxtype","gradient","_cache",{}]);lz.type.addType("gradient",new $lz$class_GradientPresentationTypeClass());{
 Mixin.make("$lzc$class_gradientfill",["gradientfill",void 0,"ongradientfill",void 0,"$lzc$set_gradientfill",function($0){
@@ -1157,7 +1157,7 @@ $0=lz.Type.acceptTypeValue("gradient",$1,this,"gradientfill")
 if(!this.baseto)this.baseto=this.basecolor;this.basefrom=this.baseto;this.baseto=this.basecolor;if(!this.transitionto)this.transitionto=this.gradientfill;this.transitionfrom=this.transitionto;this.transitionto=this.gradientfill;if(typeof $0=="string"){
 this.gradienttransition=0;if(this._oldanim)this._oldanim.setAttribute("started",false);this._oldanim=this.animate("gradienttransition",1,this.gradienttransitionspeed)
 }},"clamp",function($0,$1){
-return($0*$1>>0)/$1
+return($0*$1|0)/$1
 },"_tweenGradientCache",void 0,"tweenGradient",function($0,$1,$2){
 var $2=this.clamp($2,30);if($0){
 var $3=$0.css+$1.css+$2;var $4=this._tweenGradientCache;if($4[$3]){
@@ -1708,7 +1708,7 @@ $0=lz.Type.acceptTypeValue("gradient",$1,this,"gradientfill")
 if(!this.baseto)this.baseto=this.basecolor;this.basefrom=this.baseto;this.baseto=this.basecolor;if(!this.transitionto)this.transitionto=this.gradientfill;this.transitionfrom=this.transitionto;this.transitionto=this.gradientfill;if(typeof $0=="string"){
 this.gradienttransition=0;if(this._oldanim)this._oldanim.setAttribute("started",false);this._oldanim=this.animate("gradienttransition",1,this.gradienttransitionspeed)
 }},"clamp",function($0,$1){
-return($0*$1>>0)/$1
+return($0*$1|0)/$1
 },"_tweenGradientCache",void 0,"tweenGradient",function($0,$1,$2){
 var $2=this.clamp($2,30);if($0){
 var $3=$0.css+$1.css+$2;var $4=this._tweenGradientCache;if($4[$3]){
