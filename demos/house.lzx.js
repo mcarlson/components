@@ -1,4 +1,4 @@
-var combobox_floater=null;canvas=new LzCanvas(null,{__LZproxied:"false",appbuilddate:"2010-09-08T01:21:45Z",bgcolor:16777215,embedfonts:true,font:"Verdana,Vera,sans-serif",fontsize:11,fontstyle:"plain",height:800,lpsbuild:"17435 /Users/maxcarlson/openlaszlo/trunk-clean",lpsbuilddate:"2010-09-07T19:08:46Z",lpsrelease:"Latest",lpsversion:"5.0.x",runtime:"dhtml",width:"100%"});Mixin.make("DrawviewShared",["$lzsc$initialize",function($0,$1,$2,$3){
+var combobox_floater=null;canvas=new LzCanvas(null,{__LZproxied:"false",appbuilddate:"2010-09-08T04:48:45Z",bgcolor:16777215,embedfonts:true,font:"Verdana,Vera,sans-serif",fontsize:11,fontstyle:"plain",height:800,lpsbuild:"17435 /Users/maxcarlson/openlaszlo/trunk-clean",lpsbuilddate:"2010-09-08T00:42:18Z",lpsrelease:"Latest",lpsversion:"5.0.x",runtime:"dhtml",width:"100%"});Mixin.make("DrawviewShared",["$lzsc$initialize",function($0,$1,$2,$3){
 switch(arguments.length){
 case 0:
 $0=null;
@@ -35,36 +35,19 @@ $6+=360
 };while($6>360){
 $6-=360
 }};var $9=$0+$2*Math.cos($3);var $a=$1+$2*Math.sin(2*Math.PI-$3);this.moveTo($9,$a);this._drawArc($0,$1,$2,$6,$3*this.__radtodegfactor)
-},"__getRoundRectFactors",function(){
-var $0=lz.drawview.__rrfactors;if($0==null){
-$0=this.__roundrectFactors();lz.drawview.__rrfactors=$0
-};return $0
-},"__roundrectFactors",function(){
-var $0=Math.PI/4;var $1=$0/2;var $2=Math.SQRT2/2;var $3=$2;var $4=$2;var $5=Math.sin($1);var $6=Math.cos($1);var $7=[0,$2,1,$2];var $8=[1,$2,0,-$2];var $9=[];for(var $a=0;$a<4;++$a){
-var $b=$7[$a];var $c=$8[$a];$9.push(($b*$6+$c*$5)/$6,(-$c*$6+$b*$5)/$6,$b*$4+$c*$3,-$c*$4+$b*$3)
-};for(var $a=0;$a<4*4;++$a){
-$9[4*4+$a]=-$9[$a]
-};return $9
-},"rect",function($0,$1,$2,$3,cornerRadius,$4,$5,$6){
-var $7;$7=function($0,$1,$2){
-var $3=$1+factors[4*$0+0]*cornerRadius;var $4=$2+factors[4*$0+1]*cornerRadius;var $5=$1+factors[4*$0+2]*cornerRadius;var $6=$2+factors[4*$0+3]*cornerRadius;dview.quadraticCurveTo($3,$4,$5,$6)
-};switch(arguments.length){
+},"rect",function($0,$1,$2,$3,$4,$5,$6,$7){
+switch(arguments.length){
 case 4:
-cornerRadius=0;
-case 5:
 $4=0;
+case 5:
+$5=null;
 case 6:
-$5=0;
+$6=null;
 case 7:
-$6=0;
+$7=null;
 
-};if(cornerRadius>0){
-if(cornerRadius>Math.min($2,$3)/2){
-cornerRadius=Math.min($2,$3)/2
-};var factors=this.__getRoundRectFactors();var dview=this;this.moveTo($0+cornerRadius,$1);this.lineTo($0+$2-cornerRadius,$1);$7(0,$0+$2-cornerRadius,$1+cornerRadius);$7(1,$0+$2-cornerRadius,$1+cornerRadius);this.lineTo($0+$2,$1+$3-cornerRadius);$7(2,$0+$2-cornerRadius,$1+$3-cornerRadius);$7(3,$0+$2-cornerRadius,$1+$3-cornerRadius);this.lineTo($0+cornerRadius,$1+$3);$7(4,$0+cornerRadius,$1+$3-cornerRadius);$7(5,$0+cornerRadius,$1+$3-cornerRadius);this.lineTo($0,$1+cornerRadius);$7(6,$0+cornerRadius,$1+cornerRadius);$7(7,$0+cornerRadius,$1+cornerRadius)
-}else{
-this.moveTo($0,$1);this.lineTo($0+$2,$1);this.lineTo($0+$2,$1+$3);this.lineTo($0,$1+$3);this.lineTo($0,$1)
-}},"oval",function($0,$1,$2,$3){
+};LzKernelUtils.rect(this,$0,$1,$2,$3,$4,$5,$6,$7)
+},"oval",function($0,$1,$2,$3){
 switch(arguments.length){
 case 3:
 $3=NaN;
@@ -216,13 +199,14 @@ this.fillStyle.__applyFillTo(this.context)
 }else{
 this.context.fillStyle=LzColorUtils.torgb(this.fillStyle)
 };this.__fillStyle=this.fillStyle
-}}},"__updateLineStyle",function(){
+}}},"__offset",0,"__updateLineStyle",function(){
 with(this){
 if(this.__globalAlpha!=this.globalAlpha){
 this.__globalAlpha=this.context.globalAlpha=this.globalAlpha
 };if(this.__lineWidth!=this.lineWidth){
-this.__lineWidth=this.context.lineWidth=this.lineWidth
-};if(this.__lineCap!=this.lineCap){
+this.__lineWidth=this.context.lineWidth=this.lineWidth;if(this.aliaslines){
+this.__offset=this.lineWidth%2?0.5:0
+}};if(this.__lineCap!=this.lineCap){
 this.__lineCap=this.context.lineCap=this.lineCap
 };if(this.__lineJoin!=this.lineJoin){
 this.__lineJoin=this.context.lineJoin=this.lineJoin
@@ -235,7 +219,7 @@ this.strokeStyle.__applyStrokeTo(this.context)
 this.context.strokeStyle=LzColorUtils.torgb(this.strokeStyle)
 };this.__strokeStyle=this.strokeStyle
 }}},"__playPath",function($0){
-var $1=this.__path;var $2=$1.length;if($2==0)return;var $3=$0!==true&&this.aliaslines&&this.lineWidth%2?0.5:0;if(this.__pathdrawn===$2&&this.__offset===$3)return;this.__dirty=true;this.context.beginPath();for(var $4=0;$4<$2;$4+=1){
+var $1=this.__path;var $2=$1.length;if($2==0)return;var $3=$0?0:this.__offset;if(this.__pathdrawn===$2&&this.__lastoffset===$3)return;this.__dirty=true;this.context.beginPath();for(var $4=0;$4<$2;$4+=1){
 var $5=$1[$4];var $6=$5[0];if($6===0){
 this.context.closePath()
 }else if($6===1){
@@ -248,11 +232,11 @@ this.context.quadraticCurveTo($5[1],$5[2],$5[3]+$3,$5[4]+$3)
 this.context.bezierCurveTo($5[1],$5[2],$5[3],$5[4],$5[5]+$3,$5[6]+$3)
 }else if($6===5){
 this.context.arc($5[1]+$3,$5[2]+$3,$5[3],$5[4],$5[5],$5[6])
-}};this.__pathdrawn=$2;this.__offset=$3
+}};this.__pathdrawn=$2;this.__lastoffset=$3
 },"clipPath",function(){
-this.__updateLineStyle();this.__playPath();this.context.clip()
+this.__playPath(true);this.context.clip()
 },"clipButton",function(){},"stroke",function(){
-this.__updateLineStyle();this.__playPath();this.context.stroke()
+this.__updateLineStyle();this.__playPath(false);this.context.stroke()
 },"clear",function(){
 if(this["__dirty"]==false)return;this.__pathdrawn=-1;this.__dirty=false;this.context.clearRect(0,0,this.width,this.height)
 },"clearMask",function(){},"createLinearGradient",function($0,$1,$2,$3){
