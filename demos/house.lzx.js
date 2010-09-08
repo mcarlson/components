@@ -1,4 +1,4 @@
-var combobox_floater=null;canvas=new LzCanvas(null,{__LZproxied:"false",appbuilddate:"2010-09-08T04:48:45Z",bgcolor:16777215,embedfonts:true,font:"Verdana,Vera,sans-serif",fontsize:11,fontstyle:"plain",height:800,lpsbuild:"17435 /Users/maxcarlson/openlaszlo/trunk-clean",lpsbuilddate:"2010-09-08T00:42:18Z",lpsrelease:"Latest",lpsversion:"5.0.x",runtime:"dhtml",width:"100%"});Mixin.make("DrawviewShared",["$lzsc$initialize",function($0,$1,$2,$3){
+var combobox_floater=null;canvas=new LzCanvas(null,{__LZproxied:"false",appbuilddate:"2010-09-08T05:08:46Z",bgcolor:16777215,embedfonts:true,font:"Verdana,Vera,sans-serif",fontsize:11,fontstyle:"plain",height:800,lpsbuild:"17435 /Users/maxcarlson/openlaszlo/trunk-clean",lpsbuilddate:"2010-09-08T00:42:18Z",lpsrelease:"Latest",lpsversion:"5.0.x",runtime:"dhtml",width:"100%"});Mixin.make("DrawviewShared",["$lzsc$initialize",function($0,$1,$2,$3){
 switch(arguments.length){
 case 0:
 $0=null;
@@ -35,19 +35,36 @@ $6+=360
 };while($6>360){
 $6-=360
 }};var $9=$0+$2*Math.cos($3);var $a=$1+$2*Math.sin(2*Math.PI-$3);this.moveTo($9,$a);this._drawArc($0,$1,$2,$6,$3*this.__radtodegfactor)
-},"rect",function($0,$1,$2,$3,$4,$5,$6,$7){
-switch(arguments.length){
+},"__getRoundRectFactors",function(){
+var $0=lz.drawview.__rrfactors;if($0==null){
+$0=this.__roundrectFactors();lz.drawview.__rrfactors=$0
+};return $0
+},"__roundrectFactors",function(){
+var $0=Math.PI/4;var $1=$0/2;var $2=Math.SQRT2/2;var $3=$2;var $4=$2;var $5=Math.sin($1);var $6=Math.cos($1);var $7=[0,$2,1,$2];var $8=[1,$2,0,-$2];var $9=[];for(var $a=0;$a<4;++$a){
+var $b=$7[$a];var $c=$8[$a];$9.push(($b*$6+$c*$5)/$6,(-$c*$6+$b*$5)/$6,$b*$4+$c*$3,-$c*$4+$b*$3)
+};for(var $a=0;$a<4*4;++$a){
+$9[4*4+$a]=-$9[$a]
+};return $9
+},"rect",function($0,$1,$2,$3,cornerRadius,$4,$5,$6){
+var $7;$7=function($0,$1,$2){
+var $3=$1+factors[4*$0+0]*cornerRadius;var $4=$2+factors[4*$0+1]*cornerRadius;var $5=$1+factors[4*$0+2]*cornerRadius;var $6=$2+factors[4*$0+3]*cornerRadius;dview.quadraticCurveTo($3,$4,$5,$6)
+};switch(arguments.length){
 case 4:
-$4=0;
+cornerRadius=0;
 case 5:
-$5=null;
+$4=0;
 case 6:
-$6=null;
+$5=0;
 case 7:
-$7=null;
+$6=0;
 
-};LzKernelUtils.rect(this,$0,$1,$2,$3,$4,$5,$6,$7)
-},"oval",function($0,$1,$2,$3){
+};if(cornerRadius>0){
+if(cornerRadius>Math.min($2,$3)/2){
+cornerRadius=Math.min($2,$3)/2
+};var factors=this.__getRoundRectFactors();var dview=this;this.moveTo($0+cornerRadius,$1);this.lineTo($0+$2-cornerRadius,$1);$7(0,$0+$2-cornerRadius,$1+cornerRadius);$7(1,$0+$2-cornerRadius,$1+cornerRadius);this.lineTo($0+$2,$1+$3-cornerRadius);$7(2,$0+$2-cornerRadius,$1+$3-cornerRadius);$7(3,$0+$2-cornerRadius,$1+$3-cornerRadius);this.lineTo($0+cornerRadius,$1+$3);$7(4,$0+cornerRadius,$1+$3-cornerRadius);$7(5,$0+cornerRadius,$1+$3-cornerRadius);this.lineTo($0,$1+cornerRadius);$7(6,$0+cornerRadius,$1+cornerRadius);$7(7,$0+cornerRadius,$1+cornerRadius)
+}else{
+this.moveTo($0,$1);this.lineTo($0+$2,$1);this.lineTo($0+$2,$1+$3);this.lineTo($0,$1+$3);this.lineTo($0,$1)
+}},"oval",function($0,$1,$2,$3){
 switch(arguments.length){
 case 3:
 $3=NaN;
@@ -1126,16 +1143,16 @@ with(this){
 var $3=$0.startpos;var $4=LzColorUtils.inttohex;var $5=$0.colorstops;for(var $6=0,$7=$5.length;$6<$7;$6++){
 var $8=$5[$6];$3+=","+$4($8.color)+" "+($8.percentage*100|0)+"%"
 };return $3
-}}],$lz$class_PresentationType,["nullValue",0,"lzxtype","gradient","_cache",{}]);lz.type.addType("gradient",new $lz$class_GradientPresentationTypeClass());{
+}}],$lz$class_PresentationType,["nullValue",0,"lzxtype","gradient","_cache",{}]);lz.Type.addType("gradient",new $lz$class_GradientPresentationTypeClass());{
 Mixin.make("$lzc$class_gradientfill",["gradientfill",void 0,"ongradientfill",void 0,"$lzc$set_gradientfill",function($0){
 if(this.vertical){
-var $1=lz.Type.presentTypeValue("gradient",$0,this,"gradientfill");var $2=$1.indexOf("top");if($2>-1){
+var $1=this.presentTypeValue("gradient",$0,this,"gradientfill");var $2=$1.indexOf("top");if($2>-1){
 $1="left"+$1.substring($2+3)
 }else{
 $2=$1.indexOf("bottom");if($2>-1){
 $1="right"+$1.substring($2+6)
 }};if($1!=$0.css){
-$0=lz.Type.acceptTypeValue("gradient",$1,this,"gradientfill")
+$0=this.acceptTypeValue("gradient",$1,this,"gradientfill")
 }};this.gradientfill=$0;if(this.ongradientfill.ready)this.ongradientfill.sendEvent($0)
 },"gradienttransition",void 0,"gradienttransitionspeed",void 0,"updateTransitions",function($0){
 if(!this.baseto)this.baseto=this.basecolor;this.basefrom=this.baseto;this.baseto=this.basecolor;if(!this.transitionto)this.transitionto=this.gradientfill;this.transitionfrom=this.transitionto;this.transitionto=this.gradientfill;if(typeof $0=="string"){
@@ -1155,7 +1172,7 @@ var $a={};var $b=this.tweenrgb($0[$8].color,$1[$8].color,$2);var $c=this.tweenrg
 var $2=$0+"."+$1;if(this.__tintColor[$2])return this.__tintColor[$2];$1=LzColorUtils.tohsv($1);var $3=LzColorUtils.tohsv($0);this.__tintColor[$2]=LzColorUtils.fromhsv($1.h,$1.s,$3.v);return this.__tintColor[$2]
 },"__resetgradientcache",function($0){
 this.__dirty=false;this._gradientfills={}},"cssToLinearGradient",function($0,$1){
-if(!$1||!$1.css)return;var $2=this["_gradientfills"];var $3=lz.Type.presentTypeValue("gradient",$1,this,"gradientfill");if(!$2){
+if(!$1||!$1.css)return;var $2=this["_gradientfills"];var $3=this.presentTypeValue("gradient",$1,this,"gradientfill");if(!$2){
 $2=this._gradientfills={}}else if($2[$3]!=null){
 return $2[$3]
 };var $4=0,$5=0,$6=0,$7=0,$8=$1.startpos;if($8=="top"){
@@ -1678,17 +1695,16 @@ LzNode.mergeAttributes({$delegates:["onaddsubview","_updateborders",null],axis:"
 }}})($lzc$class_buttongroup)
 };{
 Class.make("$lzc$class_$m5",["gradientfill",void 0,"ongradientfill",void 0,"$lzc$set_gradientfill",function($0){
-with(this){
 if(this.vertical){
-var $1=lz.Type.presentTypeValue("gradient",$0,this,"gradientfill");var $2=$1.indexOf("top");if($2>-1){
+var $1=this.presentTypeValue("gradient",$0,this,"gradientfill");var $2=$1.indexOf("top");if($2>-1){
 $1="left"+$1.substring($2+3)
 }else{
 $2=$1.indexOf("bottom");if($2>-1){
 $1="right"+$1.substring($2+6)
 }};if($1!=$0.css){
-$0=lz.Type.acceptTypeValue("gradient",$1,this,"gradientfill")
+$0=this.acceptTypeValue("gradient",$1,this,"gradientfill")
 }};this.gradientfill=$0;if(this.ongradientfill.ready)this.ongradientfill.sendEvent($0)
-}},"gradienttransition",void 0,"gradienttransitionspeed",void 0,"updateTransitions",function($0){
+},"gradienttransition",void 0,"gradienttransitionspeed",void 0,"updateTransitions",function($0){
 if(!this.baseto)this.baseto=this.basecolor;this.basefrom=this.baseto;this.baseto=this.basecolor;if(!this.transitionto)this.transitionto=this.gradientfill;this.transitionfrom=this.transitionto;this.transitionto=this.gradientfill;if(typeof $0=="string"){
 this.gradienttransition=0;if(this._oldanim)this._oldanim.setAttribute("started",false);this._oldanim=this.animate("gradienttransition",1,this.gradienttransitionspeed)
 }},"clamp",function($0,$1){
@@ -1707,8 +1723,7 @@ with(this){
 var $2=$0+"."+$1;if(this.__tintColor[$2])return this.__tintColor[$2];$1=LzColorUtils.tohsv($1);var $3=LzColorUtils.tohsv($0);this.__tintColor[$2]=LzColorUtils.fromhsv($1.h,$1.s,$3.v);return this.__tintColor[$2]
 }},"__resetgradientcache",function($0){
 this.__dirty=false;this._gradientfills={}},"cssToLinearGradient",function($0,$1){
-with(this){
-if(!$1||!$1.css)return;var $2=this["_gradientfills"];var $3=lz.Type.presentTypeValue("gradient",$1,this,"gradientfill");if(!$2){
+if(!$1||!$1.css)return;var $2=this["_gradientfills"];var $3=this.presentTypeValue("gradient",$1,this,"gradientfill");if(!$2){
 $2=this._gradientfills={}}else if($2[$3]!=null){
 return $2[$3]
 };var $4=0,$5=0,$6=0,$7=0,$8=$1.startpos;if($8=="top"){
@@ -1722,7 +1737,7 @@ $4=this.width
 };var $9=$0.createLinearGradient($4,$5,$6,$7);var $a=$1.colorstops;for(var $b=0,$c=$a.length;$b<$c;$b++){
 var $d=$a[$b];$9.addColorStop($d.percentage,$d.color)
 };$2[$3]=$9;return $9
-}},"tweenrgb",function($0,$1,$2){
+},"tweenrgb",function($0,$1,$2){
 if($0===$1)return $0;var $3=$0>>16&255,$4=$0>>8&255,$5=$0&255;var $6=$1>>16&255,$7=$1>>8&255,$8=$1&255;var $9=$3+($6-$3)*$2;var $a=$4+($7-$4)*$2;var $b=$5+($8-$5)*$2;return($9<<16)+($a<<8)+($b|0)
 },"$lzsc$initialize",function($0,$1,$2,$3){
 switch(arguments.length){
