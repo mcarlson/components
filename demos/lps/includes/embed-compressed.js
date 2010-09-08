@@ -28,7 +28,7 @@ $0._setSWF(url,app,swfargs,properties,minimumVersion)
 }},_setSWF:function($0,app,$1,$2,$3){
 var $4=lz.embed;var $5=$4.options;var appenddiv=$1.appenddiv;$4.dojo.addLoadedListener($4._loaded,app);$4.dojo.setSwf($1,$3);appenddiv.style.height=$4.CSSDimension($2.height);appenddiv.style.width=$4.CSSDimension($2.width);if($2.cancelmousewheel!=true){
 if($4["mousewheel"]){
-$4.mousewheel.setCallback(app,"_sendMouseWheel")
+$4.mousewheel.setCallback(app,"_sendMouseWheel");$4.mousewheel.setEnabled(!$2.cancelmousewheel)
 }};if(($1.wmode=="transparent"||$1.wmode=="opaque")&&$4.browser.OS=="Windows"&&($4.browser.isOpera||$4.browser.isFirefox)){
 appenddiv.onmouseout=function($0){
 appenddiv.mouseisoutside=true
@@ -120,7 +120,7 @@ var $9=$1[0];var $1=$1.slice(1);if($9=="")continue;switch($5){
 case $2:
 if($9==","){
 if($7!=null&&$8==0){
-$4[$7]=[true]
+$4[$7]=["true"]
 }}else if($9=="("){
 $5=$3;$6=[];$4[$7]=$6
 }else{
@@ -136,7 +136,7 @@ $6.push($9);$8++
 }break;
 
 }};if($7!=null&&$8==0){
-$4[$7]=[true]
+$4[$7]=["true"]
 };return $4
 },__getqueryurl:function($0){
 var $1=$0.split("?");$0=$1[0];if($1.length==1)return {url:$0,flashvars:"",query:"",initargs:{}};var $2=lz.embed.__parseQuery($1[1]);var $3="";var $4="";var $5={};var $6={};var $7=new RegExp("\\+","g");for(var $8 in $2){
@@ -153,7 +153,9 @@ $6[$8]=unescape($9.replace($7," "))
 $a=unescape($a.replace($7," "))
 };if($a!=null){
 var $b=lz.embed.__parselzoptions($a);for(var $c in $b){
-var $d=$b[$c];$5[$c]=$d.length==1?$d[0]:$d
+var $d=$b[$c];var $e=$d.length==1?$d[0]:$d;if($c==="usemastersprite"||$c==="skipchromeinstall"||$c==="cancelkeyboardcontrol"||$c==="cancelmousewheel"||$c==="history"||$c==="accessible"){
+$e=$e=="true"
+};$5[$c]=$e
 }};return {url:$0,flashvars:$4,query:$3,options:$5,initargs:$6}},__parseQuery:function($0){
 if($0.indexOf("=")==-1)return;var $1=$0.split("&");var $2={};for(var $3=0;$3<$1.length;$3++){
 var $4=$1[$3].split("=");if($4.length==1)continue;var $5=$4[0];var $6=$4[1];$2[$5]=$6
@@ -315,27 +317,27 @@ $0.removeEventListener($1,$5,false);return true
 return $0.detachEvent("on"+$1,$5)
 }},_handlers:{},_cleanupHandlers:function(){
 lz.embed._handlers={}},getAbsolutePosition:function($0){
-var $1=null;var $2={};var $3;var $4=lz.embed.browser;if(!($4.isFirefox&&$0==document.body)&&$0.getBoundingClientRect){
+var $1=null;if($0!==document.body&&$0.getBoundingClientRect){
 if(!$0.parentNode){
-return {x:0,y:0}};$3=$0.getBoundingClientRect();var $5=document.documentElement.scrollTop||document.body.scrollTop;var $6=document.documentElement.scrollLeft||document.body.scrollLeft;return {x:Math.floor($3.left+$6),y:Math.floor($3.top+$5)}}else if(document.getBoxObjectFor){
-$3=document.getBoxObjectFor($0);$2={x:$3.x,y:$3.y}}else{
-$2={x:$0.offsetLeft,y:$0.offsetTop};$1=$0.offsetParent;if($1!=$0){
+return {x:0,y:0}};var $2=$0.ownerDocument,$3=$0.getBoundingClientRect(),$4=$2.body,$5=$2.documentElement,$6=$5.clientTop||$4.clientTop||0,$7=$5.clientLeft||$4.clientLeft||0,$8=$5.scrollTop||$4.scrollTop,$9=$5.scrollLeft||$4.scrollLeft;return {x:Math.floor($3.left+$9-$7),y:Math.floor($3.top+$8-$6)}}else if(document.getBoxObjectFor){
+var $3=document.getBoxObjectFor($0),$a={x:$3.x,y:$3.y}}else{
+var $a={x:$0.offsetLeft,y:$0.offsetTop};$1=$0.offsetParent;if($1!=$0){
 while($1){
-$2.x+=$1.offsetLeft;$2.y+=$1.offsetTop;$1=$1.offsetParent
-}};if($4.isSafari&&document.defaultView&&document.defaultView.getComputedStyle){
-var $7=document.defaultView.getComputedStyle($0,"")
-};if($4.isOpera||$4.isSafari){
-$2.y-=document.body.offsetTop
+$a.x+=$1.offsetLeft;$a.y+=$1.offsetTop;$1=$1.offsetParent
+}};var $b=lz.embed.browser;if($b.isSafari&&document.defaultView&&document.defaultView.getComputedStyle){
+var $c=document.defaultView.getComputedStyle($0,"")
+};if($b.isOpera||$b.isSafari){
+$a.y-=document.body.offsetTop
 }};if($0.parentNode){
 $1=$0.parentNode
 }else{
-return $2
+return $a
 };while($1&&$1.tagName!="BODY"&&$1.tagName!="HTML"){
-$2.x-=$1.scrollLeft;$2.y-=$1.scrollTop;if($1.parentNode){
+$a.x-=$1.scrollLeft;$a.y-=$1.scrollTop;if($1.parentNode){
 $1=$1.parentNode
 }else{
-return $2
-}};return $2
+return $a
+}};return $a
 },CSSDimension:function($0,$1){
 var $2=$0;if(isNaN($0)){
 if($0.indexOf("%")==$0.length-1&&!isNaN($0.substring(0,$0.length-1))){
