@@ -20,6 +20,7 @@
         <attribute name="iconresource" value="" type="string"/>
         <attribute name="iconpadding" value="10" type="number" />
         <attribute name="iconposition" value="left" type="string" />
+        <attribute name="iconvalign" value="middle" type="string" />
 
         <handler name="oninit">
             <![CDATA[
@@ -88,11 +89,12 @@
                 this.setAttribute('height', height);
                 this.icon.setAttribute('x', ix);
                 this.icon.setAttribute('y', iy);
+                this.icon.setAttribute('valign', this.iconvalign);
                 this.txt.setAttribute('x', tx);
                 this.txt.setAttribute('y', ty);
             </method>
         </state>
 
-        <text name="txt" fgcolor="${parent.textcolor}" text="${classroot.text}" x="${(parent.width - this.width) * .5}" y="${(parent.height - this.height) * .5}" shadowdistance="1" shadowangle="45" shadowcolor="${parent.textshadowcolor}" shadowblurradius=".1"/>
+        <text name="txt" fgcolor="${parent.textcolor}" text="${classroot.text}" x="${(parent.width - this.width) * .5}" y="${(parent.height - this.height) * .5}" shadowdistance="1" shadowangle="45" shadowcolor="${parent.textshadowcolor}" shadowblurradius=".1" font="${parent.textfont}" fontsize="${parent.textfontsize}"/>
     </class>
 </library>

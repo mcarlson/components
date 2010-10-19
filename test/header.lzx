@@ -1,0 +1,142 @@
+<canvas height="800">
+
+    <include href="../lib/"/>
+    <include href="draw.lzx"/>
+    <resource name="mainBgSrc" src="resource/bg_main.png"/>
+    <resource name="logoSrc" src="resource/logo.jpg"/>
+    <resource name="arrowSrc" src="resource/icon_arrow_down.png"/>
+    <resource name="mirrorSrc" src="resource/icon_search.png"/>
+    <resource name="alertSrc" src="resource/icon_alert.png"/>
+    <resource name="greenDotSrc" src="resource/icon_green_dot.png"/>
+    <font name="dinMedium" src="resource/DIN Medium.ttf"/>
+    <font name="dinBold" src="resource/FF_DIN_Bold.otf"/>
+    <font name="helveticaultracomp" src="resource/helveticaultracomp.ttf"/>
+
+    <stylesheet>
+        canvas {
+            font-size: 12;
+            font-style:bold;
+            font-family: dinMedium;
+        }
+
+        basepanel[name="searchInpt"] {
+            border-width: 0;
+            interior-border-width: 0;
+            base-color: #606060;
+            text-shadow-color: #ffffff;
+          /*   border-color: #e5e5e5; 'top,#e6e6e6 0%,#c5c5c5 100%'; TODO: fix */
+        }
+
+        basepanel[name='toolbar']{
+            border-width: 0;
+            interior-border-width: 0;
+            gradient-fill: 'top,#4e4e4e 0%,#2d2d2d 100%';
+        }
+
+        text{
+            font-size: 12;
+            font-family: dinBold;
+        }
+       
+        btn[name="langBtn"], btn[name="affBtn"] {
+            text-color: #ffffff;
+            border-width: 1;
+            padding: 3;
+            border-color: #262626;
+            border-radius: "0 14 0 0";
+            gradient-transition-speed: 300;
+            gradient-fill: 'top,#b3b3b3 0%,#7a7a7a 100%';
+            text-font: dinMedium;
+            text-fontsize: 11;
+        } 
+
+        btn[name="affBtn"] {
+            border-radius: "14 0 0 0";
+        }
+
+        btn[name="termsBtn"], btn[name="privacyBtn"] {
+            text-color: #ffffff;
+            gradient-fill: 'top,#b3b3b3 0%,#7a7a7a 100%';
+        } 
+
+        btn[name="viewasBtn"], btn[name="editBtn"] {
+            border-width: 1;
+            text-color: #cccccc;
+            text-font: dinBold;
+            text-fontsize: 11;
+            border-radius: 10;
+            border-color: #262626;
+            gradient-fill: 'top,#7c7d7d 0%,#000000 100%';
+        }
+
+        btn[name="viewasBtn"][mousestate=down], btn[name="viewasBtn"][mousestate=over],
+        btn[name="editBtn"][mousestate=down], btn[name="editBtn"][mousestate=over]{
+            gradient-fill: 'top,#000000 0%,#7c7d7d 100%';
+        
+        }
+
+        btn[name="reportBtn"], btn[name="piracyBtn"], btn[name="helpBtn"] {
+            text-color: #ffffff;
+            text-font: dinMedium;
+            text-fontsize: 11;
+        }   
+        </stylesheet> 
+
+    <basepanel name="header" width="850"> 
+        <view name="bg" width="${parent.width}">
+            <view name="bg" width="${parent.width}" resource="mainBgSrc" backgroundrepeat="repeat-x"/>
+            
+            <view name="logo" x="13" valign="middle" resource="logoSrc"/>
+            <view name="dockGroup2" x="${parent.logo.x + parent.logo.width + 30}" valign="middle">
+                <simplelayout axis="x" spacing="5"/>
+                <text name="greetTxt" text="HI,SUN!" font="dinMedium" fontsize="12" fgcolor="#ffffff"/>
+                <view  bgcolor="#ffffff" width="1" height="11"/>
+                <text name="setTxt" text="SETTINGS" font="dinMedium" fontsize="11" fgcolor="#7e939e"/>
+                <view  bgcolor="#ffffff" width="1" height="11"/>
+                <text name="logoutTxt" text="LOGOUT" font="dinMedium" fontsize="11" fgcolor="#7e939e"/>
+                <view  bgcolor="#ffffff" width="1" height="11" font="dinMedium" fontsize="11" fgcolor="#7e939e"/>
+                <view resource="greenDotSrc"/>
+                <text name="newTxt" text="NEW from WB!" font="dinMedium" fontsize="11" fgcolor="#cccccc"/>
+            </view>
+            <btn name="affBtn" x="${parent.dockGroup2.x}" y="${parent.height-this.height}" iconposition="right" iconresource="arrowSrc" height="40" width="100" text="WB OFFICE,BRAZIL"/>
+            <btn name="langBtn" x="${parent.affBtn.x + parent.affBtn.width}" y="${parent.height-this.height}" iconposition="right" iconresource="arrowSrc" width="100" height="40" text="ENGLISH"/>
+            <view name="temp" y="${parent.height-this.height}" x="${parent.langBtn.x + parent.langBtn.width}">
+            <simplelayout axis="x" spacing="5"/>
+            <text name="privacyTxt" text="Privacy Policy" fgcolor="#6e6e6e" font="Arial" fontsize="11"/>
+            <view name="divider" y="2" bgcolor="#999999" width="1" height="11"/>
+            <text name="termsTxt"  text="Terms of Use" fgcolor="#6e6e6e" font="Arial" fontsize="11"/>
+            </view>
+            <view name="dockGroup" align="right" valign="middle">
+                <simplelayout axis="x" spacing="5"/>
+                <view name="divider" y="2" bgcolor="#999999" width="1" height="90"/>
+                <view resource="alertSrc" valign="middle"/>
+                <text name="alertTxt" text="ALERTS" valign="middle" font="dinBold" fontsize="12" fgcolor="#f6773f"/>
+                <view name="divider" y="2" bgcolor="#999999" width="1" height="90"/>
+                <text name="msgTxt" text="MESSAGES" valign="middle" font="dinBold" fontsize="12" fgcolor="#ffffff"/>
+                <view name="divider" y="2" bgcolor="#999999" width="1" height="90"/>
+                <text name="contactTxt" text="CONTACTS" valign="middle" font="dinBold" fontsize="12" fgcolor="#ffffff"/>
+            </view>
+        </view>
+
+        <basepanel name="toolbar" y="${parent.bg.height}" width="${parent.width}" height="40" with="DrawGradientPanel, gradientfill">
+            <btn name="viewasBtn" x="50" valign="middle" width="60" height="30" text="VIEW AS"/>
+            <btn name="editBtn" x="${parent.viewasBtn.x + parent.viewasBtn.width}" valign="middle" width="60" height="30" text="EDIT"/>
+            <view name="rightDock" x="${parent.width - this.width - 20}" valign="middle">
+                <simplelayout axis="x"/>
+                <btn name="reportBtn" valign="middle" iconposition="right" iconresource="arrowSrc" text="REPORTS"/>
+                <view name="divider" y="2" bgcolor="#999999" width="1" height="11"/>
+                <btn name="piracyBtn" valign="middle" text="ANTI PIRACY"/>
+                <view name="divider" y="2" bgcolor="#999999" width="1" height="11"/>
+                <btn name="helpBtn" valign="middle" iconposition="right" iconresource="arrowSrc"  text="HELP"/>
+                <basepanel name="searchInpt" valign="middle"> 
+                    <inpt width="100">
+                    </inpt>
+                    <text x="55" name="filmTxt"  text=":Films" font="Arial" fontsize="12"  fgcolor="#ffffff"/>
+                    <view x="90" resource="arrowSrc" valign="middle"/>
+                </basepanel>
+                <view name="searchBtn" valign="middle" resource="mirrorSrc"/> 
+            </view>
+        </basepanel>
+        
+    </basepanel>
+</canvas>
