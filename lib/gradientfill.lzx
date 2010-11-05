@@ -41,6 +41,7 @@
             // only animate for mouse events
             this.gradienttransition = 0;
             if (this._oldanim) this._oldanim.setAttribute('started', false);
+            // TODO [hqm 2010-11] reuse this animator instead of consing a new one each time
             this._oldanim = this.animate('gradienttransition', 1, this.gradienttransitionspeed);
         }
         ]]>
@@ -206,6 +207,7 @@
             }
         }
 
+        // TODO [hqm 2010-11] Can we cache the gradient object? 
         var g = context.createLinearGradient(xfrom,yfrom,xto,yto);
         var colorstops = gradientschema.colorstops;
         // Add color stops
@@ -214,6 +216,7 @@
             g.addColorStop(colorstop.percentage, colorstop.color);
         }
 
+         // TODO [2010-11] Why doesn't this caching work? 
         //cache[gradientschema.css] = g;
         return g;
         ]]>
