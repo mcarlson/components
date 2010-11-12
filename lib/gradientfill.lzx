@@ -40,8 +40,9 @@
         if (typeof ignore == 'string') {
             // only animate for mouse events
             this.gradienttransition = 0;
+
+            // reuse the existing animator if we have one
             if (this._oldanim) this._oldanim.setAttribute('started', false);
-            // TODO [hqm 2010-11] reuse this animator instead of consing a new one each time
             this._oldanim = this.animate('gradienttransition', 1, this.gradienttransitionspeed);
         }
         ]]>
