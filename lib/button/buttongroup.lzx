@@ -89,6 +89,7 @@
     </method>
     <method name="draw" args="context">
         <![CDATA[
+        context.clear();
         this._updateborders();
 
         // draw background
