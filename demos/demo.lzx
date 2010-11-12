@@ -24,7 +24,7 @@
             border-radius: 20;
         }
         bsbtn {
-            bevel-width: 1;
+            bevel-width: 2;
             gradient-fill: 'top,#f2f2f2 0%,#f2f2f2 49%,#d6d6d6 50%,#f2f2f2 100%';
         }
         bsbtn[mousestate=over]{

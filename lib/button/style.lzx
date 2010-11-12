@@ -1,6 +1,7 @@
 <mixin name="stylebutton">
     <attribute name="vertical" style="gradient-vertical" value="false" type="boolean"/>
     <attribute name="bevel" style="bevel-width" value="0" type="number"/>
+    <attribute name="gradientinset" style="gradient-inset" value="0" type="number"/>
 
     <attribute name="interiorbordercolor"    value="void(0)" style="interior-border-color" type="color"/>
     <attribute name="interiorbordercolorup"    value="${this.interiorbordercolor}" style="interior-border-color-up" type="color"/>

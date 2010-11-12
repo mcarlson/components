@@ -51,17 +51,20 @@
     </method>
     <method name="tweenGradient" args="from, to, position">
         <![CDATA[
-        var position = this.clamp(position, 100);
         var currentschema = this._gradientfill
+        if (currentschema == null) return;
+
         var gradientschema = {startpos: currentschema.startpos,
                               colorstops: currentschema.colorstops.slice(),
                               css: currentschema.css};
 
 
+        var position = this.clamp(position, 100);
         if (this.transitionfrom != null) {
             var stops = [];
             var to = this.transitionto.colorstops;
             var from = this.transitionfrom.colorstops;
+            var newcss = currentschema.startpos;
             for (var i = 0, l = to.length; i < l; i++) {
                 // Create a new colorstop object
                 var stop = {};
@@ -81,8 +84,10 @@
                 stop.percentage = from[i].percentage + (delta * position);
                 //console.log(stop.color, stop.percentage);
                 stops[i] = stop;
+                newcss += ',' + stop.color + ' ' + stop.percentage + '%';
             }
             gradientschema.colorstops = stops;
+            gradientschema.css = newcss;
         }
         return gradientschema;
         ]]>
@@ -214,7 +219,7 @@
             g.addColorStop(colorstop.percentage, colorstop.color);
         }
 
-        //cache[gradientschema.css] = g;
+        cache[gradientschema.css] = g;
         return g;
         ]]>
     </method>
