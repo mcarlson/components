@@ -1,0 +1,89 @@
+<mixin name="DrawGradientPanel">
+    <attribute name="transitionto" value="null"/>
+    <attribute name="transitionfrom" value="null"/>
+    <method name="draw" args="context">
+        <![CDATA[
+        if (this['drawtarget'] && context === this) {
+            return;
+        }
+        //Debug.info('draw', this.mousestate);
+        context.globalAlpha = this.disabled ? .5 : 1;
+
+        // drawview's internal __dirty property is true after it's been cleared
+        if (! this.__dirty) {
+            // redraw borders if we were cleared
+            this.__outlinedrawn = false;
+        }
+        if (! this.__outlinedrawn) {
+            this.__outlinedrawn = true;
+            if (this.interiorborderwidth) {
+                context.lineWidth = context.interiorborderwidth;
+                this.styleinteriorborder(context);
+                this.drawinteriorborder(context);
+            }
+
+            context.lineWidth = context.borderwidth;
+            if (this.borderwidth) {
+                this.styleborder(context);
+                this.drawborder(context);
+            }
+        }
+
+        this.stylegradient(context);
+        this.drawgradient(context);
+        ]]>
+    </method>
+
+    <handler name="onmousestate" method="redraw"/>
+    <handler name="ongradienttransition"  method="redraw"/>
+
+    <method name="styleborder" args="context">
+        if (! this.bordercolor) return;
+        context.strokeStyle = this.bordercolor;
+    </method>
+    <method name="drawborder" args="context">
+        <![CDATA[
+        if (this.borderwidth <= 0) return;
+        if (! this.bordercolor) return;
+
+        context.beginPath();
+        this.drawshape(context, 0, 0, this.width - 1, this.height - 1);
+        context.closePath();
+
+        context.stroke();
+        ]]>
+    </method>
+
+    <method name="styleinteriorborder" args="context">
+        if (! this['interiorfillcolor'] || ! this['interiorbordercolor']) return;
+        context.fillStyle = this['interiorfillcolor'];
+        context.strokeStyle = this['interiorbordercolor'];
+    </method>
+    <method name="drawinteriorborder" args="context">
+        if (! this['interiorfillcolor']) return;
+        // Draw interior border and fill
+        context.beginPath();
+        this.drawshape(context, 1, 1, this.width - 3, this.height - 3);
+        context.closePath();
+
+        context.fill();
+        context.stroke();
+    </method>
+
+
+    <method name="stylegradient" args="context">
+        var gradientschema = this.tweenGradient(this.transitionfrom, this.transitionto, this.gradienttransition);
+        context.fillStyle = this.cssToLinearGradient(context, gradientschema);
+    </method>
+
+    <method name="drawgradient" args="context">
+        var inset = this.borderwidth;
+        if (this.bevel) {
+            var inset = this.bevel + this.borderwidth;
+        }
+
+        context.beginPath();
+        this.drawshape(context, inset, inset, this.width -  (inset * 2), this.height - (inset * 2));
+        context.fill();
+    </method>
+</mixin>

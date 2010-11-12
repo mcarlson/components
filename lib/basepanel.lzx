@@ -19,6 +19,8 @@
         <attribute name="interiorborderwidth" style="interior-border-width" type="number" value="${this.borderwidth}"/>
         <attribute name="textcolor" style="text-color" value="black" type="string" />
         <attribute name="textshadowcolor" style="text-shadow-color" value="white" type="string" />
+        <attribute name="textfont" style="text-font" value="Arial" type="string" />
+        <attribute name="textfontsize" style="text-fontsize" value="11" type="number" />
 
         <handler name="onwidth" method="_forceredraw"/>
         <handler name="onheight" method="_forceredraw"/>
