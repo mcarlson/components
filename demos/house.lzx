@@ -30,8 +30,14 @@
             border-width: .5;
             border-radius: 20;
         }
+        buttongroup {
+            bevel-width: 0;
+            gradient-inset: 1;
+            padding: 8;
+        }
         bsbtn {
             bevel-width: 0;
+            gradient-inset: 1;
             padding: 8;
             gradient-transition-speed: 400;
             gradient-fill: 'top,#fdfdfd 0%,#e5e5e5 77%,#dfdfdf 77%,#dfdfdf 100%';

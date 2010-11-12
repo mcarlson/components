@@ -77,13 +77,13 @@
     </method>
 
     <method name="drawgradient" args="context">
-        var inset = 1.5;
-        if (this.bevel) {
-            var inset = this.bevel + this.borderwidth;
-        }
+        var inset = this.gradientinset +
+                    (this.borderwidth ? this.borderwidth : 0) +
+                    (this.interiorborderwidth ? this.interiorborderwidth : 0) +
+                    (this.bevel ? this.bevel : 0);
 
         context.beginPath();
-        this.drawshape(context, inset, inset, this.width - 1 - (inset * 2), this.height - 1 - (inset * 2));
+        this.drawshape(context, inset, inset, this.width - (inset * 2), this.height - (inset * 2));
         context.fill();
     </method>
 </mixin>
