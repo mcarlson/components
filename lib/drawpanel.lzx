@@ -1,4 +1,5 @@
 <class name="drawpanel" extends="drawview">
+
     <attribute name="lockredraw" value="false" type="boolean"/>
     <attribute name="aliaslines" value="true" type="boolean"/>
     <attribute name="measuresize" value="false" type="boolean"/>
