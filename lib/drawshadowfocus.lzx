@@ -5,6 +5,8 @@
             if (this.capabilities['minimize_opacity_changes']) {
                 radius = 2;
             }
+            //FIXME:diable focus shadow, should make it stylable.
+            radius = 0;
             this.setAttribute('shadowcolor', this.highlightcolor);
             this.setAttribute('shadowdistance', 0);
             this.setAttribute('shadowblurradius', 0);
