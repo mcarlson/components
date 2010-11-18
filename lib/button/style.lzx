@@ -3,12 +3,12 @@
     <attribute name="bevel" style="bevel-width" value="0" type="number"/>
     <attribute name="gradientinset" style="gradient-inset" value="0" type="number"/>
 
-    <attribute name="interiorbordercolor"    value="void(0)" style="interior-border-color" type="color"/>
+    <attribute name="interiorbordercolor"    value="${void(0)}" style="interior-border-color" type="color"/>
     <attribute name="interiorbordercolorup"    value="${this.interiorbordercolor}" style="interior-border-color-up" type="color"/>
     <attribute name="interiorbordercolorover"  value="${this.interiorbordercolor}" style="interior-border-color-over" type="color"/>
     <attribute name="interiorbordercolordown"  value="${this.interiorbordercolor}" style="interior-border-color-down" type="color"/>
 
-    <attribute name="interiorfillcolor"      value="void(0)" style="interior-fill-color" type="color"/>
+    <attribute name="interiorfillcolor"      value="${void(0)}" style="interior-fill-color" type="color"/>
     <attribute name="interiorfillcolorup"      value="${this.interiorfillcolor}" style="interior-fill-color-up" type="color"/>
     <attribute name="interiorfillcolorover"    value="${this.interiorfillcolor}" style="interior-fill-color-over" type="color"/>
     <attribute name="interiorfillcolordown"    value="${this.interiorfillcolor}" style="interior-fill-color-down" type="color"/>
