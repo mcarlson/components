@@ -3,20 +3,20 @@
     <include href="applybasecolor.lzx"/>
     <include href="drawpanel.lzx"/>
     <include href="borderradius.lzx"/>
-    
-    <class name="basepanel" extends="drawpanel" with="applybasecolor, borderradius">
+    <include href="borderwidth.lzx"/>
+
+    <class name="basepanel" extends="drawpanel" with="applybasecolor, borderradius, borderwidth">
         <attribute name="scopes" value="null"/>
         <attribute name="drawchildren" value="true" type="boolean"/>
 
         <attribute name="padding" style="padding" value="3" type="number"/>
-        <attribute name="borderwidth" style="border-width" type="number" value="0"/>
         <attribute name="bordercolor" style="border-color" type="color" value="null"/>
         <attribute name="highlightcolor" style="highlight-color" type="color" value="#0000ff"/>
         <attribute name="iconcolor" style="icon-color" type="color" value="#0000ff"/>
         <attribute name="selectioncolor" style="selection-color" type="color" value="#c2d9e7"/>
         <attribute name="interiorbordercolor" style="interior-border-color" type="color" value="null"/>
         <attribute name="interiorfillcolor" style="interior-fill-color" type="color" value="null"/>
-        <attribute name="interiorborderwidth" style="interior-border-width" type="number" value="${this.borderwidth}"/>
+        <attribute name="interiorborderwidth" style="interior-border-width" type="number" value="0"/>
         <attribute name="textcolor" style="text-color" value="black" type="string" />
         <attribute name="textshadowcolor" style="text-shadow-color" value="white" type="string" />
 
@@ -72,9 +72,36 @@
             ]]>
         </method>
 
-        <method name="drawshape" args="context,x,y,width,height">
-            context.rect(x, y, width, height, this.bordertopleftradius, this.bordertoprightradius, this.borderbottomrightradius, this.borderbottomleftradius);
-        </method>
+        <method name="drawshape" args="context,x,y,width,height,inset=false,padding=0"><![CDATA[
+          var radii = this._borderradii;
+          if (inset || padding) {
+            var borderwidths = this._borderwidths;
+            var bordermap = this._bordermap;
+            // Adjust bounding box
+            var left = borderwidths[bordermap.left];
+            x += (left + padding);
+            width -= (left + borderwidths[bordermap.right] + (2 * padding));
+            var top = borderwidths[bordermap.top];
+            y += (top + padding);
+            height -= (top + borderwidths[bordermap.bottom] + (2 * padding));
+            // Adjust corner radii
+            radii = radii.concat();
+            var cornermap = this._cornermap;
+            var axismap = this._axismap;
+            for (var v in {top: true, bottom: true}) {
+              for (var h in {left: true, right: true}) {
+                var cornerindex = cornermap[v + h];
+                radii[axismap.horizontal * 4 + cornerindex] -= (borderwidths[bordermap[h]] + padding);
+                radii[axismap.vertical * 4 + cornerindex] -= (borderwidths[bordermap[v]] + padding);
+              }
+            }
+            // Clip radii
+            for (var i = 0, l = radii.length; i < l; i++) {
+              if (radii[i] < 0) { radii[i] = 0; }
+            }
+          }
+          LzKernelUtils.roundrect.apply(LzKernelUtils, [context, x, y, width, height].concat(radii));
+        ]]></method>
 
         <!--method name="range" args="val, max, min=null">
             <![CDATA[

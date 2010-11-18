@@ -16,21 +16,22 @@
         }
         if (! this.__outlinedrawn) {
             this.__outlinedrawn = true;
-            if (this.interiorborderwidth) {
-                context.lineWidth = context.interiorborderwidth;
-                this.styleinteriorborder(context);
-                this.drawinteriorborder(context);
-            }
-
             context.lineWidth = context.borderwidth;
             if (this.borderwidth) {
                 this.styleborder(context);
                 this.drawborder(context);
             }
+            // Must be drawn second see drawborder
+            if (this.interiorborderwidth || this.interiorfillcolor) {
+                context.lineWidth = context.interiorborderwidth;
+                this.styleinteriorborder(context);
+                this.drawinteriorborder(context);
+            }
         }
-
-        this.stylegradient(context);
-        this.drawgradient(context);
+        if (this.gradientfill) {
+          this.stylegradient(context);
+          this.drawgradient(context);
+        }
         ]]>
     </method>
 
@@ -39,35 +40,46 @@
 
     <method name="styleborder" args="context">
         if (! this.bordercolor) return;
-        context.strokeStyle = this.bordercolor;
+        context.fillStyle = this.bordercolor;
     </method>
     <method name="drawborder" args="context">
         <![CDATA[
-        if (this.borderwidth <= 0) return;
+        if (! this.borderwidth) return;
         if (! this.bordercolor) return;
 
         context.beginPath();
-        this.drawshape(context, 0, 0, this.width - 1, this.height - 1);
+        this.drawshape(context, 0, 0, this.width, this.height);
         context.closePath();
-
-        context.stroke();
+        context.fill();
+        // TODO: How to clear the interior if there is no interior fillcolor
+        if (! this['interiorfillcolor']) {
+          context.beginPath();
+          this.drawshape(context, 0, 0, this.width, this.height, true);
+          context.closePath();
+          context.fillStyle = 0xffffff;
+          context.fill();
+        }
         ]]>
     </method>
 
     <method name="styleinteriorborder" args="context">
-        if (! this['interiorfillcolor'] || ! this['interiorbordercolor']) return;
+        if (! (this['interiorfillcolor'] || this['interiorbordercolor'])) return;
         context.fillStyle = this['interiorfillcolor'];
         context.strokeStyle = this['interiorbordercolor'];
     </method>
     <method name="drawinteriorborder" args="context">
-        if (! this['interiorfillcolor']) return;
+        if (! (this['interiorfillcolor'] || this['interiorbordercolor'])) return;
         // Draw interior border and fill
         context.beginPath();
-        this.drawshape(context, 1, 1, this.width - 3, this.height - 3);
+        this.drawshape(context, 0, 0, this.width, this.height, true, this.interiorborderwidth);
         context.closePath();
 
-        context.fill();
-        context.stroke();
+        if (this.interiorfillcolor) {
+          context.fill();
+        }
+        if (this.interiorborderwidth) {
+          context.stroke();
+        }
     </method>
 
 
@@ -77,13 +89,13 @@
     </method>
 
     <method name="drawgradient" args="context">
-        var inset = this.gradientinset +
-                    (this.borderwidth ? this.borderwidth : 0) +
-                    (this.interiorborderwidth ? this.interiorborderwidth : 0) +
-                    (this.bevel ? this.bevel : 0);
+        var padding = this.gradientinset +
+                       (this.interiorborderwidth ? this.interiorborderwidth : 0) +
+                       (this.bevel ? this.bevel : 0);
 
         context.beginPath();
-        this.drawshape(context, inset, inset, this.width - (inset * 2), this.height - (inset * 2));
+        this.drawshape(context, 0, 0, this.width, this.height, true, padding);
+        context.closePath();
         context.fill();
     </method>
 </mixin>
