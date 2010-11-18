@@ -1,0 +1,76 @@
+<mixin name="borderwidth">
+    <attribute name="borderwidth" style="border-width" type="string" value=""/>
+    <attribute name="_bordermap" value="{top: 0, right: 1, bottom: 2, left: 3}" />
+    <attribute name="_borderwidths" value="null" />
+    <event name="onborderwidth"/>
+
+    <method name="construct" args="parent,args">
+      super.construct(parent, args);
+      this._borderwidths = [0,0,0,0];
+    </method>
+
+    <setter name="borderwidth" args="width"><![CDATA[
+        if (this.borderwidth === width) return;
+        this.borderwidth = width;
+        var bordermap = this._bordermap;
+        // handle list of border widths per http://www.w3.org/TR/css3-background/#the-border-width
+        // The four values for each widths are given in the order top, right, bottom, left.
+        var widths = String(width).split(this._space);
+        // Compute defaults
+        var l = widths.length;
+        // If right is omitted it is the same as top.
+        if (l <= bordermap.right) widths[bordermap.right] = widths[bordermap.top];
+        // If left is omitted it is the same as right.
+        if (l <= bordermap.left) widths[bordermap.left] = widths[bordermap.right];
+        // If bottom is omitted it is the same as top.
+        if (l <= bordermap.bottom) widths[bordermap.bottom] = widths[bordermap.top];
+        // Now update individual properties
+        for (var border in bordermap) {
+          var index = bordermap[border];
+          this._setborderwidth(border, widths[index]);
+        }
+        if (this.onborderwidth.ready) this.onborderwidth.sendEvent(width);
+        //Debug.info('borderwidth', width, widths);
+    ]]></setter>
+
+    <method name="_setborderwidth" args="border,width"><![CDATA[
+      if (! width) { return; }
+      var attrname = 'border' + border + 'width';
+      if (this[attrname] === width) { return; }
+      this[attrname] = width;
+      var borderwidths = this._borderwidths;
+      var bordermap = this._bordermap;
+      var borderindex = bordermap[border];
+      var oldval = borderwidths[borderindex];
+      var newval = parseFloat(width);
+      if (oldval !== newval) {
+        borderwidths[borderindex] = newval;
+        var event = 'on' + attrname;
+        if (this[event].ready) { this[event].sendEvent(width); }
+      }
+    ]]></method>
+
+    <attribute name="bordertopwidth" style="border-top-width" type="string" value=""/>
+    <event name="onbordertopwidth"/>
+    <setter name="bordertopwidth" args="width">
+      this._setborderwidth('top', width);
+    </setter>
+
+    <attribute name="borderrightwidth" style="border-right-width" type="string" value=""/>
+    <event name="onborderrightwidth"/>
+    <setter name="borderrightwidth" args="width">
+      this._setborderwidth('right', width);
+    </setter>
+
+    <attribute name="borderbottomwidth" style="border-bottom-width" type="string" value=""/>
+    <event name="onborderbottomwidth"/>
+    <setter name="borderbottomwidth" args="width">
+      this._setborderwidth('bottom', width);
+    </setter>
+
+    <attribute name="borderleftwidth" style="border-left-width" type="string" value=""/>
+    <event name="onborderleftwidth"/>
+    <setter name="borderleftwidth" args="width">
+      this._setborderwidth('left', width);
+    </setter>
+</mixin>
